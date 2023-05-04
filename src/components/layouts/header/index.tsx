@@ -8,11 +8,12 @@ import { HeaderBottom, HeaderContainer, HeaderContent, HeaderLink, HeaderTop } f
 import Cart from "@/components/atoms/cartButton";
 import useEventListener from "@/hooks/eventListenerHooks";
 import cartSlice from "@/store/cart";
+import { customDispatchEvent } from "@/store/events/dispatchEvents";
 
 const Header = () => {
 
     // hooks
-    const { cart } = useAppSelector((state) => state.cartHeader);
+    const { cartItems } = useAppSelector((state) => state.cart);
     const dispatch = useAppDispatch();
 
     // states
@@ -67,33 +68,31 @@ const Header = () => {
     const methods = {
         initialize: () => {
           if (typeof window !== 'undefined') {
-            useEventListener(document, 'ADD_NEW_PRODUCT_IN_CART', methods.handleAddNewProductEvent);
-            useEventListener(document, 'ADD_EXISTING_PRODUCT_IN_CART', methods.handleAddExistingProductEvent);
-            useEventListener(document, 'REMOVE_PRODUCT_IN_CART', methods.handleRemoveProductEvent);
+            useEventListener(document, 'ADD_PRODUCT_IN_CART', methods.handleAddNewProductEvent);
+            useEventListener(document, 'REMOVE_PRODUCT_FROM_CART', methods.handleRemoveProductEvent);
           }
         },
         handleAddNewProductEvent: (event: Event) => {
           event.preventDefault();
           const customEvent = event as CustomEvent;
           dispatch(setAddProductInCart(customEvent.detail));
-        },  
-        handleAddExistingProductEvent: (event: Event) => {
-          event.preventDefault();
-          const customEvent = event as CustomEvent;
-          dispatch(setAddProductInCart(customEvent.detail));
-        },  
+        },
         handleRemoveProductEvent: (event: Event) => {
           event.preventDefault();
           const customEvent = event as CustomEvent;
           dispatch(setRemoveProductInCart(customEvent.detail));
+        },
+        handleOnClickCart: () => {
+            console.log('dispatch TOGGLE_CART_ASIDE')
+            customDispatchEvent({name: 'TOGGLE_CART_ASIDE', detail: { open: true }});
         }
       };
       methods.initialize();
 
     // on load cart
     useEffect(() => {
-        setQuantityOnCart(cart?.reduce((acc: number, cur: CartItemModel) => acc + (cur?.quantity || 0) || 0, 0));
-    }, [cart])
+        setQuantityOnCart(cartItems?.reduce((acc: number, cur: CartItemModel) => acc + (cur?.quantity || 0) || 0, 0));
+    }, [cartItems])
 
     return(
         <HeaderContainer>
@@ -116,7 +115,7 @@ const Header = () => {
                     <Search />
                     <div>LOGIN</div>
                     <div>
-                        <Cart quantity={quantityOnCart} />
+                        <Cart quantity={quantityOnCart} onClick={methods.handleOnClickCart} />
                     </div>
                 </nav>
             </HeaderContent>

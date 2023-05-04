@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const CartContainer = styled.div`
     display: flex;
     align-items: center;
+    cursor: pointer;
 `;
 
 export const BadgeQuantity = styled.div`
@@ -11,17 +12,18 @@ export const BadgeQuantity = styled.div`
     border-radius: 10px;
     color: #333;
     font-weight: 700;
-    padding: 2px;
+    padding: 0;
     position: relative;
-    left: 40px;
-    top: -16px;
+    left: 32px;
+    top: -10px;
     min-width: 24px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 12px;
 `;
 
 export const CartText = styled.div`
     line-height: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 14px;
     margin-left: 5px;
 `;

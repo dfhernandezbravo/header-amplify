@@ -4,12 +4,12 @@ import { CartProps } from "./cartButton.types";
 
 const Cart = (props: CartProps) => {
 
-    const { quantity } = props;
+    const { quantity, onClick } = props;
 
     return(
-        <CartContainer>
+        <CartContainer onClick={onClick}>
             {quantity && quantity !== 0 ? <BadgeQuantity>{quantity}</BadgeQuantity> : null}
-            <CgShoppingCart size={'1.8rem'} />
+            <CgShoppingCart size={'24px'} />
             <CartText>Mi carro</CartText>
         </CartContainer>
     )

@@ -77,7 +77,11 @@ export const HeaderBottom = styled.div`
     color: white;
     font: normal normal 600 16px/20px 'Open Sans';
     vertical-align: center;
-
+    
+    * {
+        color: white;
+        text-decoration: none;  
+    }
     img {
         margin-left: 10px;
     }
