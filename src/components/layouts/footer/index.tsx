@@ -1,10 +1,12 @@
+import PostFooter from "@/components/atoms/postFooter";
 import { FooterContainer } from "./footer.styles";
 
 const Footer = () => {
 
     return(
         <FooterContainer>
-            FOOTER
+            <p>Footer</p>
+            <PostFooter></PostFooter>
         </FooterContainer>
     )
 }
