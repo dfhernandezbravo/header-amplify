@@ -1,4 +1,4 @@
-import PostFooter from "@/components/atoms/postFooter";
+import PostFooter from "@/components/organisms/postFooter";
 import { FooterContainer } from "./footer.styles";
 
 const Footer = () => {
