@@ -1,13 +1,19 @@
 import { NewsletterContainer, NewsletterForm } from "./newsletterForm.styles"
 
 const Newsletter = ()=>{
+
+
+    const handleSubmit = (event: any) =>{
+        event.preventDefault();
+    }
+
     return(
         <NewsletterContainer>
             <div className="newsletter__Title">
                 <p>Suscríbete a nuestras ofertas y novedades</p>
             </div>
             <NewsletterForm>
-                <form action="">
+                <form action="submit" onSubmit={handleSubmit}>
                     <div className="newsletter__Inputs">
                         <input type="text" placeholder="Correo electrónico" />
                         <input type="text" placeholder="RUT" />

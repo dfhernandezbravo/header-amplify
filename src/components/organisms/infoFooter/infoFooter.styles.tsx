@@ -11,7 +11,6 @@ export const InfoListado = styled.div`
     justify-content: space-between;
     max-width: 70rem;
     margin: 0 auto;
-    padding: 0 1rem;
 
     h3{
         margin: 10px 0;
