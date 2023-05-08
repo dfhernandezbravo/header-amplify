@@ -8,5 +8,7 @@ export const FooterContainer = styled.div`
   align-items: center;
   color: #fff;
   width: 100%;
+  margin-top: 4rem;
+  position: relative;
 `;
 

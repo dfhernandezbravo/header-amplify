@@ -1,12 +1,15 @@
 import PostFooter from "@/components/organisms/postFooter";
 import { FooterContainer } from "./footer.styles";
+import InfoFooter from "@/components/organisms/infoFooter";
+import Newsletter from "@/components/organisms/newsletterForm";
 
 const Footer = () => {
 
     return(
         <FooterContainer>
-            <p>Footer</p>
-            <PostFooter></PostFooter>
+            <Newsletter />
+            <InfoFooter />
+            <PostFooter />
         </FooterContainer>
     )
 }

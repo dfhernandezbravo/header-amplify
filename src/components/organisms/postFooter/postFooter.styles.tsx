@@ -15,7 +15,7 @@ export const PostFooterContainer = styled.div`
     font-weight: 400;
 
     p{
-        color: #747474;
+        /* color: #747474; */ /* -> Color real de web Easy baja metrica Accesibilidad */
         padding-right: 0.4rem;
     }
 
