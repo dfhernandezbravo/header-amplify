@@ -40,15 +40,6 @@ export const NewsletterForm = styled.div`
             }
         }
 
-        button{
-            background-color: #cc1515;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 0.25rem;
-        }
     }
 
     .newsletter__CheckboxContainer{
