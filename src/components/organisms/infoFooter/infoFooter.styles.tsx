@@ -12,6 +12,12 @@ export const InfoListado = styled.div`
     max-width: 70rem;
     margin: 0 auto;
 
+    .line{
+        height: 380px;
+        width: 1px;
+        background-color: #666;
+    }
+
     h3{
         margin: 10px 0;
         font-weight: 700;
@@ -29,7 +35,7 @@ export const InfoListado = styled.div`
 
             a{
                 font-size: 0.875rem;
-                font-weight: 400;
+                font-weight: 200;
                 text-decoration: none;
                 color: #FFFFFF;
             }
@@ -40,5 +46,19 @@ export const InfoListado = styled.div`
 export const InfoSocial = styled.div`
     display: flex;
     flex-direction: column;
+
+    p{
+        margin: 10px 0;
+        font-weight: bold;
+    }
+
+    .infoSolcial_list{
+        display: flex;
+        list-style: none;
+        
+        .li{
+            list-style: none;
+        }
+    }
 
 `
