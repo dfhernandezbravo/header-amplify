@@ -22,6 +22,24 @@ export const NewsletterContainer = styled.div`
             color: #1a1a1a;
         }
     }
+
+    &:has(.subscribe){
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+
+        p{
+            font-size: 1rem;
+        }
+    }
+
+    .subscribe{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 1.8rem 1rem;
+    }
 `;
 
 export const NewsletterForm = styled.div`
