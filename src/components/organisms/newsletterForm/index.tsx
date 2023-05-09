@@ -1,3 +1,4 @@
+import Button from "@/components/atoms/footerButton";
 import { NewsletterContainer, NewsletterForm } from "./newsletterForm.styles"
 
 const Newsletter = ()=>{
@@ -17,7 +18,9 @@ const Newsletter = ()=>{
                     <div className="newsletter__Inputs">
                         <input type="text" placeholder="Correo electrónico" />
                         <input type="text" placeholder="RUT" />
-                        <button>Enviar</button>
+                        <Button
+                            onClick={handleSubmit}
+                        >Enviar</Button>
                     </div>
                     <div className="newsletter__CheckboxContainer">
                         <input type="checkbox" name="terminos" id="terminos" />
