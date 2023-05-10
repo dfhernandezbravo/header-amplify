@@ -1,0 +1,20 @@
+[
+    {
+        "image": "https://easycl.vtexassets.com/arquivos/seguimientoDeComprasHome.png",
+        "title": "Seguimiento de compras",
+        "subtitle": "Conoce el estado de tu orden",
+        "link": "https://ayuda.easy.cl/ayuda/login?servicio=transacciones"
+    },
+    {
+        "image": "https://easycl.vtexassets.com/arquivos/nuestrosLocalesHome.png",
+        "title": "Nuestros locales",
+        "subtitle": "Conoce nuestros horarios de atención",
+        "link": "https://www.easy.cl/tiendas"
+    },
+    {
+        "image": "https://www.easy.cl/arquivos/venta-telefonica.png",
+        "title": "Venta telefónica",
+        "subtitle": "Si deseas ayuda con tu compra",
+        "link": "tel:6006003279"
+    }
+]

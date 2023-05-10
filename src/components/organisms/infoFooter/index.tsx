@@ -4,6 +4,7 @@ import Link from "next/link";
 import listData from '@/mock/list-data.json'
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import Accordion from "@/components/atoms/accordion";
+import Newsletter from "../newsletterForm";
 
 const InfoFooter = () =>{
 
@@ -59,6 +60,7 @@ const InfoFooter = () =>{
 
     return (
         <InfoFooterContainer>
+            <Newsletter />
             {width !== undefined && width > breakpoint ? (
             <InfoListado>
                 {listData.map( item => (
@@ -119,39 +121,40 @@ const InfoFooter = () =>{
                         <Accordion title={item.title} links={item.links} key={item.title}/>
                     ))}
 
-                    <div>
-                        <p>Síguenos</p>
-                        <ul className="infoSolcial_list">
-                            {IconsMedia.map( item => (
-                                <li key={item.title}>
-                                    <Link href={item.link} >
+                    <InfoSocial>
+                        <div>
+                            <p>Síguenos</p>
+                            <ul className="infoSolcial_list">
+                                {IconsMedia.map( item => (
+                                    <li key={item.title}>
+                                        <Link href={item.link} >
+                                            <Image 
+                                                src={item.svg}
+                                                alt={item.title}
+                                                width={36}
+                                                height={36}
+                                            />
+                                        </Link>
+                                    </li>
+                                )) }
+                            </ul>
+                        </div>
+                        <div>
+                            <p>Medios de pago</p>
+                            <ul className="infoSolcial_list">
+                                {IconsPayment.map(item =>(
+                                    <li key={item.title}>
                                         <Image 
                                             src={item.svg}
                                             alt={item.title}
-                                            width={36}
-                                            height={36}
+                                            width={43}
+                                            height={43}
                                         />
-                                    </Link>
-                                </li>
-                            )) }
-                        </ul>
-                    </div>
-
-                    <div>
-                        <p>Medios de pago</p>
-                        <ul className="infoSolcial_list">
-                            {IconsPayment.map(item =>(
-                                <li key={item.title}>
-                                    <Image 
-                                        src={item.svg}
-                                        alt={item.title}
-                                        width={43}
-                                        height={43}
-                                    />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </InfoSocial>
                 </>
             )}
 

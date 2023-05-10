@@ -10,6 +10,8 @@ export const NewsletterContainer = styled.div`
     max-width: 70.188rem;
     display: flex;
     justify-content: space-around;
+    left: 50%;
+    transform: translateX(-50%);
 
     .newsletter__Title{
         display: flex;
