@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const InfoFooterContainer = styled.div`
     width: 100%;
     padding-top: 7.5rem;
+
+    @media (max-width: 1026px){
+        padding-top: 5rem;
+    }
 `
 
 export const InfoListado = styled.div`
@@ -47,7 +51,7 @@ export const InfoSocial = styled.div`
     display: flex;
     flex-direction: column;
 
-    p{
+    div p{
         margin: 10px 0;
         font-weight: bold;
     }
