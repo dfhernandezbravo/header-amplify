@@ -1,8 +1,8 @@
-import { Fragment, useCallback, useRef, useState } from "react";
-import { AccordionContainer, Content, Title } from "./accordion.styles";
-import listData from '@/mock/list-data.json'
+import { useCallback, useRef, useState } from "react";
+import { AccordionContainer, Content, IconContainer, Title } from "./accordion.styles";
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Links {
     text: string;
@@ -14,7 +14,8 @@ interface AccordionProps {
     links: Links[];
 }
 
-const ContentWrapper = styled.div<{ maxHeight?: number }>`
+
+const ContentWrapper:any = styled.div<{ maxHeight: number }>`
   max-height: ${(p) => `${p.maxHeight}px`};
   transition: max-height 0.25s ease-in-out;
   overflow: hidden;
@@ -35,9 +36,18 @@ const Accordion = ({ title, links }: AccordionProps) =>{
     return(
         <AccordionContainer>
 
+        <>
             <Title onClick={handleExpandToggle}>
                 <p>{title}</p>
+                <IconContainer>
+                    {isExpanded ? (
+                        <span>-</span>
+                    ) : (
+                        <span>+</span>
+                    )}
+                </IconContainer>
             </Title>
+        </>
 
                 {links.map( link =>(
                         <ContentWrapper maxHeight={contentHeight} key={link.text}>

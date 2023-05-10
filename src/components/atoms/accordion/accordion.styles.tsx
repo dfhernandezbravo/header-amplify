@@ -27,7 +27,17 @@ export const Title = styled.div`
     }
 `;
 
-export const Content = styled.div`
+export const IconContainer = styled.div`
+    height: 16px;
+    width: 16px;
+    display: flex;
+    align-items: start;
+    align-content: flex-start;
+    font-size: 20px;
+    color: red;
+`;
+
+export const Content:any = styled.div`
     padding: 0 0 1rem;
 
     a{
