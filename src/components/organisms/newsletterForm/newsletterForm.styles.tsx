@@ -27,7 +27,6 @@ export const NewsletterContainer = styled.div`
 
     &:has(.subscribe){
         border-radius: 0;
-        top: -.5rem;
         padding: 0;
         margin: 0;
 

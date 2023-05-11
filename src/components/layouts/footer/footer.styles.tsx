@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const FooterContainer = styled.footer`
-  border: 1px solid #000c24;
   background-color: #333;
   display: flex;
   flex-direction: column;
