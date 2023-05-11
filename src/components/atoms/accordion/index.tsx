@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { AccordionContainer, Content, IconContainer, Title } from "./accordion.styles";
+import { AccordionContainer, Content, Title } from "./accordion.styles";
 import styled from "styled-components";
 import Link from "next/link";
 
@@ -38,13 +38,11 @@ const Accordion = ({ title, links }: AccordionProps) =>{
         <>
             <Title onClick={handleExpandToggle}>
                 <p>{title}</p>
-                <IconContainer>
                     {isExpanded ? (
-                        <span>-</span>
+                        <span data-color="red">-</span>
                     ) : (
                         <span>+</span>
                     )}
-                </IconContainer>
             </Title>
         </>
 
