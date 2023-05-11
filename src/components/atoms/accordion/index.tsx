@@ -2,7 +2,6 @@ import { useCallback, useRef, useState } from "react";
 import { AccordionContainer, Content, IconContainer, Title } from "./accordion.styles";
 import styled from "styled-components";
 import Link from "next/link";
-import Image from "next/image";
 
 interface Links {
     text: string;

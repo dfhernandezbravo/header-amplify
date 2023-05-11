@@ -6,18 +6,21 @@ interface HelpCenterCardProps {
     image: string;
     title: string;
     subtitle: string;
-    borderer: boolean;
+    border: boolean;
     link: string;
+    width: number;
+    height: number;
+    mobile: boolean;
 }
 
-const HelpCenterCard = ({ image, title, subtitle, link, borderer } : HelpCenterCardProps) => {
+const HelpCenterCard = ({ image, title, subtitle, link, border, height, width, mobile } : HelpCenterCardProps) => {
 
     return(
-        <HelpCard data-border={borderer}>
+        <HelpCard data-border={border} data-mobile={mobile}>
             <Image 
                 src={image}
-                height={60}
-                width={60}
+                height={height}
+                width={width}
                 alt= "Help Center Image"
             />
             <Link href={link}>
