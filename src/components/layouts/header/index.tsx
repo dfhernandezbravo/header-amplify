@@ -16,11 +16,14 @@ import Cart from '@/components/atoms/cartButton';
 import useEventListener from '@/hooks/eventListenerHooks';
 import cartSlice from '@/store/cart';
 import { customDispatchEvent } from '@/store/events/dispatchEvents';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 const Header = () => {
   // hooks
   const { cartItems } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+
+  const { width } = useWindowDimensions();
 
   // states
   const [quantityOnCart, setQuantityOnCart] = useState<number>(0);
@@ -122,7 +125,9 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <HeaderTop>
+      <HeaderTop
+        data-hidden={width < 1026}
+      >
         {topBrands.map((brand) => (
           <HeaderTopItem key={brand.name}>
             <HeaderLink
