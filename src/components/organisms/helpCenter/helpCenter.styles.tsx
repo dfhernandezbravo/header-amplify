@@ -10,5 +10,6 @@ export const HelpCenterWrapper = styled.div`
 
     @media (max-width: 1026px){
         flex-direction: column;
+        padding-bottom: 3rem;
     }
 `;
