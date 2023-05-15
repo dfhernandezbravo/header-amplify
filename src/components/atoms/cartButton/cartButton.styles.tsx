@@ -23,7 +23,7 @@ export const BadgeQuantity = styled.div`
 
 export const CartText = styled.div`
     line-height: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 14px;
     margin-left: 5px;
 `;

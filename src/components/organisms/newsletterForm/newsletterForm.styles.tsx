@@ -10,6 +10,8 @@ export const NewsletterContainer = styled.div`
     max-width: 70.188rem;
     display: flex;
     justify-content: space-around;
+    left: 50%;
+    transform: translateX(-50%);
 
     .newsletter__Title{
         display: flex;
@@ -21,6 +23,24 @@ export const NewsletterContainer = styled.div`
             font-weight: 700;
             color: #1a1a1a;
         }
+    }
+
+    &:has(.subscribe){
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+
+        p{
+            font-size: 1rem;
+        }
+    }
+
+    .subscribe{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 1.8rem 1rem;
     }
 `;
 
@@ -40,15 +60,6 @@ export const NewsletterForm = styled.div`
             }
         }
 
-        button{
-            background-color: #cc1515;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 0.25rem;
-        }
     }
 
     .newsletter__CheckboxContainer{
