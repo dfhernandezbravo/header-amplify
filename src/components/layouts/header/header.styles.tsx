@@ -66,7 +66,6 @@ export const HeaderLink = styled.a<LinkProp>`
 
 export const HeaderContent = styled.header`
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   background-color: #af1212;
   height: 80px;
@@ -98,6 +97,19 @@ export const MenuCategories = styled.div`
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+
+  &[data-mobile="true"]{
+    flex-direction: column;
+    border-right: none;
+    padding-right: 0;
+    margin: 0 0 0 2rem;
+
+    .menuHamburg{
+      margin: 0;
+      margin-bottom: .5rem;
+
+    }    
+  }
   
   .menuHamburg{
     width: 25px;
@@ -150,6 +162,14 @@ export const HeaderRight = styled.div`
   justify-content: space-between;
   margin-left: auto;
   min-width: 280px;
+
+  &[data-mobile="true"]{
+    min-width: 0;
+
+    svg{
+      margin-left: 1rem;
+    }
+  }
 `;
 
 export const UserLogin = styled.div`
@@ -169,6 +189,7 @@ export const UserLogin = styled.div`
   & :nth-child(2){
     font-size: 13px;
   }
+
 `;
 
 export const HeaderCart = styled.div`

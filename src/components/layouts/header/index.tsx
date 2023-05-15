@@ -36,6 +36,8 @@ const Header = () => {
   const [quantityOnCart, setQuantityOnCart] = useState<number>(0);
 
   // constants
+  const breackpoint = 1026;
+
   const topBrands = [
     {
       name: 'Paris',
@@ -153,63 +155,105 @@ const Header = () => {
         ))}
       </HeaderTop>
       <HeaderContent>
+        {width < 1026 
+        ? 
+          <>
+            <HeaderLeft>
+              <MenuCategories data-mobile="true">
+                <div className="menuHamburg">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <p>Menú</p>
+              </MenuCategories>
+              <Link className='logo' href="https://www.easy.cl/">
+                <Image
+                  src={logoURL}
+                  alt='Easy'
+                  width={50}
+                  height={50}
+                  title='Easy Home'
+                />
+              </Link>
+            </HeaderLeft>
 
-        <HeaderLeft>
-          <Link className='logo' href="https://www.easy.cl/">
-            <Image
-              src={logoURL}
-              alt='Easy'
-              width={60}
-              height={60}
-              title='Easy Home'
-            />
-          </Link>
-          <MenuCategories>
-            <div className="menuHamburg">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <p>Categorías</p>
-          </MenuCategories>
-          <MenuLocation>
-            <Image 
-              src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
-              width={19}
-              height={25}
-              alt='Location Icon'
-            />
-            <div>
-              <p>¿Dónde entregar tu compra?</p>
-              <p onClick={HandleSelectLocation}>Ingresa tu ubicación</p>
-            </div>
-          </MenuLocation>
-        </HeaderLeft>
+            <HeaderRight data-mobile={width < breackpoint}>
+            <UserLogin>
+              <div>
+                <p>Inicia sesión</p>
+              </div>
+            </UserLogin>
+            <HeaderCart>
+              <Cart
+                quantity={quantityOnCart}
+                onClick={methods.handleOnClickCart}
+              />
+            </HeaderCart>
+            </HeaderRight>
+          </> 
+        
+        : 
+          <>
+            <HeaderLeft>
+              <Link className='logo' href="https://www.easy.cl/">
+                <Image
+                  src={logoURL}
+                  alt='Easy'
+                  width={60}
+                  height={60}
+                  title='Easy Home'
+                />
+              </Link>
+              <MenuCategories>
+                <div className="menuHamburg">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <p>Categorías</p>
+              </MenuCategories>
+              <MenuLocation>
+                <Image 
+                  src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
+                  width={19}
+                  height={25}
+                  alt='Location Icon'
+                />
+                <div>
+                  <p>¿Dónde entregar tu compra?</p>
+                  <p onClick={HandleSelectLocation}>Ingresa tu ubicación</p>
+                </div>
+              </MenuLocation>
+            </HeaderLeft>
 
-        <Search />
+            <Search />
 
-        <HeaderRight>
-          <UserLogin>
-            <Image 
-              src="https://easycl.vtexassets.com/arquivos/new-desktop-user-icon.svg"
-              width={25}
-              height={25}
-              alt='User Icon'
-            />
-            <div>
-              <p>¡Hola!</p>
-              <p>Inicia sesión</p>
-            </div>
-          </UserLogin>
-          <HeaderCart>
-            <Cart
-              quantity={quantityOnCart}
-              onClick={methods.handleOnClickCart}
-            />
-          </HeaderCart>
-        </HeaderRight>
+            <HeaderRight>
+              <UserLogin>
+                <Image 
+                  src="https://easycl.vtexassets.com/arquivos/new-desktop-user-icon.svg"
+                  width={25}
+                  height={25}
+                  alt='User Icon'
+                />
+                <div>
+                  <p>¡Hola!</p>
+                  <p>Inicia sesión</p>
+                </div>
+              </UserLogin>
+              <HeaderCart>
+                <Cart
+                  quantity={quantityOnCart}
+                  onClick={methods.handleOnClickCart}
+                />
+              </HeaderCart>
+            </HeaderRight>
+          </>
+        }
 
       </HeaderContent>
+      {width < breackpoint ? <Search /> : <></>}
       <HeaderBottom>
         <div>
           <a href='/tiendas'>Horarios y tiendas</a>
