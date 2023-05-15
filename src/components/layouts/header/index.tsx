@@ -6,17 +6,24 @@ import { CartItemModel } from '@/store/cart/cart.type';
 import { useAppDispatch, useAppSelector } from '@/hooks/storeHooks';
 import {
   HeaderBottom,
+  HeaderCart,
   HeaderContainer,
   HeaderContent,
+  HeaderLeft,
   HeaderLink,
+  HeaderRight,
   HeaderTop,
   HeaderTopItem,
+  MenuCategories,
+  MenuLocation,
+  UserLogin,
 } from './header.styles';
 import Cart from '@/components/atoms/cartButton';
 import useEventListener from '@/hooks/eventListenerHooks';
 import cartSlice from '@/store/cart';
 import { customDispatchEvent } from '@/store/events/dispatchEvents';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
+import Link from 'next/link';
 
 const Header = () => {
   // hooks
@@ -123,6 +130,10 @@ const Header = () => {
     );
   }, [cartItems]);
 
+  const HandleSelectLocation = (e: React.MouseEvent<HTMLElement>) =>{
+    e.preventDefault();
+  };
+
   return (
     <HeaderContainer>
       <HeaderTop
@@ -142,27 +153,62 @@ const Header = () => {
         ))}
       </HeaderTop>
       <HeaderContent>
-        <nav>
-          <div className='logo'>
+
+        <HeaderLeft>
+          <Link className='logo' href="https://www.easy.cl/">
             <Image
               src={logoURL}
               alt='Easy'
-              width={50}
-              height={50}
+              width={60}
+              height={60}
               title='Easy Home'
             />
-          </div>
-          <div>MENU CATEGORÍAS</div>
-          <div>UBICACIÓN</div>
-          <Search />
-          <div>LOGIN</div>
-          <div>
+          </Link>
+          <MenuCategories>
+            <div className="menuHamburg">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <p>Categorías</p>
+          </MenuCategories>
+          <MenuLocation>
+            <Image 
+              src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
+              width={19}
+              height={25}
+              alt='Location Icon'
+            />
+            <div>
+              <p>¿Dónde entregar tu compra?</p>
+              <p onClick={HandleSelectLocation}>Ingresa tu ubicación</p>
+            </div>
+          </MenuLocation>
+        </HeaderLeft>
+
+        <Search />
+
+        <HeaderRight>
+          <UserLogin>
+            <Image 
+              src="https://easycl.vtexassets.com/arquivos/new-desktop-user-icon.svg"
+              width={25}
+              height={25}
+              alt='User Icon'
+            />
+            <div>
+              <p>¡Hola!</p>
+              <p>Inicia sesión</p>
+            </div>
+          </UserLogin>
+          <HeaderCart>
             <Cart
               quantity={quantityOnCart}
               onClick={methods.handleOnClickCart}
             />
-          </div>
-        </nav>
+          </HeaderCart>
+        </HeaderRight>
+
       </HeaderContent>
       <HeaderBottom>
         <div>
