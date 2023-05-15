@@ -138,9 +138,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <HeaderTop
-        data-hidden={width < 1026}
-      >
+      <HeaderTop>
         {topBrands.map((brand) => (
           <HeaderTopItem key={brand.name}>
             <HeaderLink
@@ -159,7 +157,7 @@ const Header = () => {
         ? 
           <>
             <HeaderLeft>
-              <MenuCategories data-mobile="true">
+              <MenuCategories>
                 <div className="menuHamburg">
                   <span></span>
                   <span></span>
@@ -178,7 +176,7 @@ const Header = () => {
               </Link>
             </HeaderLeft>
 
-            <HeaderRight data-mobile={width < breackpoint}>
+            <HeaderRight>
             <UserLogin>
               <div>
                 <p>Inicia sesión</p>

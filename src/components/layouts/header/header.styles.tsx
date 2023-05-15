@@ -21,7 +21,7 @@ export const HeaderTop = styled.ul`
   justify-content: flex-end;
   align-items: flex-end;
 
-  &[data-hidden="true"]{
+  @media (max-width:1026px){
     display: none;
   }
 `;
@@ -98,7 +98,7 @@ export const MenuCategories = styled.div`
   font-weight: 500;
   cursor: pointer;
 
-  &[data-mobile="true"]{
+  @media (max-width: 1026px){
     flex-direction: column;
     border-right: none;
     padding-right: 0;
@@ -163,7 +163,7 @@ export const HeaderRight = styled.div`
   margin-left: auto;
   min-width: 280px;
 
-  &[data-mobile="true"]{
+  @media (max-width:1026px ){
     min-width: 0;
 
     svg{

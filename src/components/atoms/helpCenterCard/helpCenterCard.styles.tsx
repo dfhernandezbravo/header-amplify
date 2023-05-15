@@ -22,14 +22,14 @@ export const HelpCard = styled.div`
         }
     }
 
-    &[data-mobile="false"]{
-        &[data-border="true"]{
-            border-right: 2px solid #eaeaea;
-            border-left: 2px solid #eaeaea;
-        }
+
+    &[data-border="true"]{
+        border-right: 2px solid #eaeaea;
+        border-left: 2px solid #eaeaea;
     }
-    
-    &[data-mobile="true"]{
+
+
+    @media (max-width: 1026px){
         flex-direction: row;
         width: 100%;
         padding: 1rem;
@@ -37,6 +37,7 @@ export const HelpCard = styled.div`
         a>p{
             text-align: start;
             padding-left: 1rem;
+            font-size: 14px;
         }
 
         &[data-border="true"]{
@@ -44,4 +45,5 @@ export const HelpCard = styled.div`
             border-top: 2px solid #eaeaea;
         }
     }
+
 `;

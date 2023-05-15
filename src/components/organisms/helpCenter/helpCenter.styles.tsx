@@ -8,7 +8,7 @@ export const HelpCenterWrapper = styled.div`
     border: 1 px solid #FFF;
     padding-bottom: 6rem;
 
-    &[data-mobile="true"]{
+    @media (max-width: 1026px){
         flex-direction: column;
     }
 `;
