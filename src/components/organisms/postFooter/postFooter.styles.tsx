@@ -33,11 +33,6 @@ export const PostFooterContainer = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 0.75rem;
-    ul{
-        display: flex;
-        list-style: none;
-        flex-wrap: wrap;
-        justify-content: center;
 
     p {
       padding-bottom: 0.5rem;

@@ -45,28 +45,3 @@ export const HelpCard = styled.div`
     }
   }
 `;
-
-    &[data-border="true"]{
-        border-right: 2px solid #eaeaea;
-        border-left: 2px solid #eaeaea;
-    }
-
-
-    @media (max-width: 1026px){
-        flex-direction: row;
-        width: 100%;
-        padding: 1rem;
-
-        a>p{
-            text-align: start;
-            padding-left: 1rem;
-            font-size: 14px;
-        }
-
-        &[data-border="true"]{
-            border-bottom: 2px solid #eaeaea;
-            border-top: 2px solid #eaeaea;
-        }
-    }
-
-`;

@@ -2,10 +2,6 @@ import { useCallback, useRef, useState } from 'react';
 import { AccordionContainer, Content, Title } from './accordion.styles';
 import styled from 'styled-components';
 import Link from 'next/link';
-import React, { useCallback, useRef, useState } from "react";
-import { AccordionContainer, Content, Title } from "./accordion.styles";
-import styled from "styled-components";
-import Link from "next/link";
 
 interface Links {
   text: string;
@@ -55,25 +51,5 @@ const Accordion = ({ title, links }: AccordionProps) => {
     </AccordionContainer>
   );
 };
-        <>
-            <Title onClick={handleExpandToggle}>
-                <p>{title}</p>
-                    <div>
-                        <span></span>
-                        {!isExpanded ? <span></span> : <></>}
-                    </div>
-            </Title>
-        </>
-
-                {links.map( link =>(
-                        <ContentWrapper maxHeight={contentHeight} key={link.text}>
-                            <Content ref={contentRef}>
-                                <Link href={link.link}>{link.text}</Link>
-                            </Content>
-                        </ContentWrapper>
-                ))}
-        </AccordionContainer>
-    )
-}
 
 export default Accordion;

@@ -22,17 +22,6 @@ export const NewsletterContainer = styled.div`
       font-size: 1.125rem;
       font-weight: 700;
       color: #1a1a1a;
-    .newsletter__Title{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        p{
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            text-align: center;
-        }
     }
   }
 
