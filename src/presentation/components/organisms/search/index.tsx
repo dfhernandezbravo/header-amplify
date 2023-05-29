@@ -1,4 +1,4 @@
-import useWindowDimensions from '@/hooks/useWindowDimensions';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 import { SearchContainer, SearchInput } from './search.styles';
 
 const Search = () => {

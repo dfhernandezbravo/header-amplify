@@ -1,7 +1,7 @@
-import HelpCenterCard from '@/components/atoms/helpCenterCard';
+import HelpCenterCard from '@components/atoms/helpCenterCard';
 import { HelpCenterWrapper } from './helpCenter.styles';
-import CardsData from '@/mock/footerCard-data.json';
-import useWindowDimensions from '@/hooks/useWindowDimensions';
+import CardsData from '@mocks/footerCard-data.json';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 const HelpCenter = () => {
   const { width } = useWindowDimensions();

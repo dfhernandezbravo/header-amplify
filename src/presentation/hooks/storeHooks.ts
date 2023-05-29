@@ -1,4 +1,5 @@
-import store from '@/store';
+
+import store from '@store/index';
 import { useSelector } from 'react-redux';
 import { TypedUseSelectorHook, useDispatch } from 'react-redux';
 

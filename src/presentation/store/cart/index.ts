@@ -1,5 +1,5 @@
-import { CartItemModel } from '@/store/cart/cart.type';
 import { createSlice } from '@reduxjs/toolkit';
+import { CartItemModel } from './cart.type';
 
 const cartSlice = createSlice({
   name: 'cartHeader',

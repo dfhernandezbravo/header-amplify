@@ -5,9 +5,9 @@ import {
   InfoSocial,
 } from './infoFooter.styles';
 import Link from 'next/link';
-import listData from '@/mock/list-data.json';
-import useWindowDimensions from '@/hooks/useWindowDimensions';
-import Accordion from '@/components/atoms/accordion';
+import listData from '@mocks/list-data.json';
+import useWindowDimensions from '@hooks/useWindowDimensions';
+import Accordion from '@components/atoms/accordion';
 import Newsletter from '../newsletterForm';
 
 const InfoFooter = () => {

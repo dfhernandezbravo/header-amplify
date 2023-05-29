@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
-import store from '@/store';
+import store from '@store/index';
 import Head from 'next/head';
-import Header from '@/components/layouts/header';
+import Header from '@components/layouts/header';
 
 export default function Home() {
   return (

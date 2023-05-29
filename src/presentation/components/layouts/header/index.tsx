@@ -2,8 +2,8 @@
 import Image from 'next/image';
 import Search from '../../organisms/search';
 import { useEffect, useState } from 'react';
-import { CartItemModel } from '@/store/cart/cart.type';
-import { useAppDispatch, useAppSelector } from '@/hooks/storeHooks';
+import { CartItemModel } from '@store/cart/cart.type';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import {
   HeaderBottom,
   HeaderCart,
@@ -18,11 +18,11 @@ import {
   MenuLocation,
   UserLogin,
 } from './header.styles';
-import Cart from '@/components/atoms/cartButton';
-import useEventListener from '@/hooks/eventListenerHooks';
-import cartSlice from '@/store/cart';
-import { customDispatchEvent } from '@/store/events/dispatchEvents';
-import useWindowDimensions from '@/hooks/useWindowDimensions';
+import Cart from '@components/atoms/cartButton';
+import useEventListener from '@hooks/eventListenerHooks';
+import cartSlice from '@store/cart';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 import Link from 'next/link';
 
 const Header = () => {

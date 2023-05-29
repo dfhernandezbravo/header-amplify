@@ -18,7 +18,7 @@ const nextConfig = {
         filename: 'static/chunks/remoteEntry.js',
         exposes: {
           './header': './src/pages/header/index.tsx',
-          './footer': './src/components/layouts/footer/index.tsx',
+          './footer': './src/presentation/components/layouts/footer/index.tsx',
         },
         extraOptions: {
           exposePages: true,
