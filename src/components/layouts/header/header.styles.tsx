@@ -21,7 +21,7 @@ export const HeaderTop = styled.ul`
   justify-content: flex-end;
   align-items: flex-end;
 
-  &[data-hidden="true"]{
+  @media (max-width:1026px){
     display: none;
   }
 `;
@@ -71,6 +71,10 @@ export const HeaderContent = styled.header`
   height: 80px;
   width: 100%;
   color: white;
+
+  @media (max-width: 1026px){
+    height: 60px;
+  }
 `;
 
 export const HeaderLeft = styled.div`
@@ -86,6 +90,14 @@ export const HeaderLeft = styled.div`
     margin-left: 30px;
   }
 
+  @media (max-width: 1026px){
+    min-width: 0;
+
+    .logo{
+      margin-left: 1rem;
+    }
+  }
+
 `;
 
 export const MenuCategories = styled.div`
@@ -97,19 +109,6 @@ export const MenuCategories = styled.div`
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-
-  &[data-mobile="true"]{
-    flex-direction: column;
-    border-right: none;
-    padding-right: 0;
-    margin: 0 0 0 2rem;
-
-    .menuHamburg{
-      margin: 0;
-      margin-bottom: .5rem;
-
-    }    
-  }
   
   .menuHamburg{
     width: 25px;
@@ -128,6 +127,19 @@ export const MenuCategories = styled.div`
       margin-top: 3px;
     }
 
+  }
+
+  @media (max-width: 1026px){
+    flex-direction: column;
+    border-right: none;
+    padding-right: 0;
+    margin: 0 0 0 1rem;
+
+    .menuHamburg{
+      margin: 0;
+      margin-bottom: .5rem;
+
+    }    
   }
 
 `;
@@ -163,7 +175,7 @@ export const HeaderRight = styled.div`
   margin-left: auto;
   min-width: 280px;
 
-  &[data-mobile="true"]{
+  @media (max-width:1026px ){
     min-width: 0;
 
     svg{
@@ -190,10 +202,20 @@ export const UserLogin = styled.div`
     font-size: 13px;
   }
 
+  @media (max-width: 1026px){
+    p{
+      text-decoration: underline;
+    }
+  }
+
 `;
 
 export const HeaderCart = styled.div`
   margin-right: 40px;
+
+  @media (max-width: 1026px){
+    margin-right: 20px;
+  }
 `;
 
 export const HeaderBottom = styled.div`

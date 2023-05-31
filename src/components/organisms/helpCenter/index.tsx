@@ -9,7 +9,7 @@ const HelpCenter = ()=>{
     const breakpoint = 1026;
 
     return(
-        <HelpCenterWrapper data-mobile={width < breakpoint}>
+        <HelpCenterWrapper>
         {CardsData.map(item => (
                 <HelpCenterCard 
                     key={item.title}
@@ -20,7 +20,6 @@ const HelpCenter = ()=>{
                     link= {item.link}
                     width= {item.width}
                     height= {item.height}
-                    mobile= {width < breakpoint}
                 />
         ))}
         </HelpCenterWrapper>

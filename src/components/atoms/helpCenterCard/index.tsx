@@ -10,13 +10,12 @@ interface HelpCenterCardProps {
     link: string;
     width: number;
     height: number;
-    mobile: boolean;
 }
 
-const HelpCenterCard = ({ image, title, subtitle, link, border, height, width, mobile } : HelpCenterCardProps) => {
+const HelpCenterCard = ({ image, title, subtitle, link, border, height, width } : HelpCenterCardProps) => {
 
     return(
-        <HelpCard data-border={border} data-mobile={mobile}>
+        <HelpCard data-border={border}>
             <Image 
                 src={image}
                 height={height}
