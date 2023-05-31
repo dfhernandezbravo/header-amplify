@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const SearchContainer = styled.div`
   width: 100%;
@@ -6,7 +6,7 @@ export const SearchContainer = styled.div`
   background-color: #af1212;
   text-align: center;
 
-  &[data-mobile='true'] {
+  @media (max-width: 1026px) {
     padding: 1rem 0;
     border-top: 1px solid hsla(0, 0%, 100%, 0.5);
   }

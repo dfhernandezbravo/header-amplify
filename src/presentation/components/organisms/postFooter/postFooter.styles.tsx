@@ -22,6 +22,8 @@ export const PostFooterContainer = styled.div`
   ul {
     display: flex;
     list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
 
     a {
       text-decoration: none;
