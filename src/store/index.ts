@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
-import { configureStore } from "@reduxjs/toolkit";
-import cartSlice from "./cart";
+import { configureStore } from '@reduxjs/toolkit';
+import cartSlice from './cart';
 
 const store = configureStore({
   reducer: {
-    cart: cartSlice.reducer
-  }
+    cart: cartSlice.reducer,
+  },
 });
 export default store;
