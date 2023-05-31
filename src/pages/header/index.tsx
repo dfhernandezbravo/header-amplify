@@ -6,8 +6,10 @@ import Header from '@/components/layouts/header';
 export default function Home() {
   return (
     <Provider store={store}>
-      <Head><></></Head>
+      <Head>
+        <></>
+      </Head>
       <Header />
     </Provider>
-  )
+  );
 }

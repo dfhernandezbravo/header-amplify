@@ -1,4 +1,4 @@
-type RatingModel = { rate: number, count: number };
+type RatingModel = { rate: number; count: number };
 
 export interface CartItemModel {
   category: string;
@@ -9,4 +9,4 @@ export interface CartItemModel {
   rating: RatingModel;
   title: string;
   quantity?: number;
-};
+}

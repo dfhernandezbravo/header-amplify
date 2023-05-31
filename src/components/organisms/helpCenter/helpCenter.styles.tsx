@@ -1,13 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HelpCenterWrapper = styled.div`
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    background-color: #FFF;
-    border: 1 px solid #FFF;
-    padding-bottom: 6rem;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border: 1 px solid #fff;
+  padding-bottom: 6rem;
 
+  &[data-mobile='true'] {
+    flex-direction: column;
+  }
+`;
     @media (max-width: 1026px){
         flex-direction: column;
         padding-bottom: 3rem;

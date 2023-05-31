@@ -1,4 +1,4 @@
 export type CartProps = {
-    quantity: number;
-    onClick: () => void;
+  quantity: number;
+  onClick: () => void;
 };
