@@ -28,9 +28,6 @@ const Accordion = ({ title, links }: AccordionProps) => {
   const handleExpandToggle = useCallback(() => {
     setExpanded(!isExpanded);
   }, [isExpanded]);
-    const handleExpandToggle = useCallback(()=>{
-        setExpanded(!isExpanded);        
-    },[isExpanded]);
 
   return (
     <AccordionContainer>
