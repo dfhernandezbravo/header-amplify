@@ -1,11 +1,7 @@
-import { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { AccordionContainer, Content, Title } from './accordion.styles';
 import styled from 'styled-components';
 import Link from 'next/link';
-import React, { useCallback, useRef, useState } from "react";
-import { AccordionContainer, Content, Title } from "./accordion.styles";
-import styled from "styled-components";
-import Link from "next/link";
 
 interface Links {
   text: string;
@@ -32,16 +28,16 @@ const Accordion = ({ title, links }: AccordionProps) => {
   const handleExpandToggle = useCallback(() => {
     setExpanded(!isExpanded);
   }, [isExpanded]);
-    const handleExpandToggle = useCallback(()=>{
-        setExpanded(!isExpanded);        
-    },[isExpanded]);
 
   return (
     <AccordionContainer>
       <>
         <Title onClick={handleExpandToggle}>
           <p>{title}</p>
-          {isExpanded ? <span data-color="red">-</span> : <span>+</span>}
+          <div>
+            <span></span>
+            {!isExpanded ? <span></span> : <></>}
+          </div>
         </Title>
       </>
 
@@ -55,25 +51,5 @@ const Accordion = ({ title, links }: AccordionProps) => {
     </AccordionContainer>
   );
 };
-        <>
-            <Title onClick={handleExpandToggle}>
-                <p>{title}</p>
-                    <div>
-                        <span></span>
-                        {!isExpanded ? <span></span> : <></>}
-                    </div>
-            </Title>
-        </>
-
-                {links.map( link =>(
-                        <ContentWrapper maxHeight={contentHeight} key={link.text}>
-                            <Content ref={contentRef}>
-                                <Link href={link.link}>{link.text}</Link>
-                            </Content>
-                        </ContentWrapper>
-                ))}
-        </AccordionContainer>
-    )
-}
 
 export default Accordion;

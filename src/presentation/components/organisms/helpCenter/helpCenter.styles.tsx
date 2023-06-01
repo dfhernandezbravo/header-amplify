@@ -8,12 +8,8 @@ export const HelpCenterWrapper = styled.div`
   border: 1 px solid #fff;
   padding-bottom: 6rem;
 
-  &[data-mobile='true'] {
+  @media (max-width: 1026px) {
     flex-direction: column;
+    padding-bottom: 3rem;
   }
-`;
-    @media (max-width: 1026px){
-        flex-direction: column;
-        padding-bottom: 3rem;
-    }
 `;

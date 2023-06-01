@@ -1,6 +1,6 @@
-import Button from '@/components/atoms/footerButton';
+import Button from '@components/atoms/footerButton';
 import { NewsletterContainer, NewsletterForm } from './newsletterForm.styles';
-import useWindowDimensions from '@/hooks/useWindowDimensions';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 const Newsletter = () => {
   const { width } = useWindowDimensions();

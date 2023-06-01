@@ -24,16 +24,28 @@ export const Title = styled.div`
     margin-bottom: 1.5rem;
   }
 
-  span {
-    font-weight: 200;
-    font-size: 2rem;
+  & > div {
+    position: relative;
+    width: 16px;
+    height: 16px;
 
-    &[data-color='red'] {
-      color: red;
+    & :nth-child(1) {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+    }
+
+    & :nth-child(2) {
+      display: block;
+      max-width: 16px;
+      height: 2px;
+      background-color: #fff;
+      transform: rotate(90deg);
     }
   }
 `;
-
 
 export const Content: any = styled.div`
   padding: 0 0 1rem;
