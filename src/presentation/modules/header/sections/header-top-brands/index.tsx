@@ -1,6 +1,5 @@
 import React from 'react';
-import { HeaderLink, HeaderTop, HeaderTopItem } from './header-top.styles';
-import useWindowDimensions from '@hooks/useWindowDimensions';
+import { HeaderLink, HeaderTop, HeaderTopItem } from './styles';
 
 const topBrands = [
   {
@@ -47,11 +46,9 @@ const topBrands = [
   },
 ];
 
-function HeaderTopSection() {
-  const { width } = useWindowDimensions();
-
+function HeaderTopBrands() {
   return (
-    <HeaderTop data-hidden={width < 1026}>
+    <HeaderTop>
       {topBrands.map((brand) => (
         <HeaderTopItem key={brand.name}>
           <HeaderLink
@@ -68,4 +65,4 @@ function HeaderTopSection() {
   );
 }
 
-export default HeaderTopSection;
+export default HeaderTopBrands;

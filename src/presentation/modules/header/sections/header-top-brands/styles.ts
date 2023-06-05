@@ -13,7 +13,7 @@ export const HeaderTop = styled.ul`
   justify-content: flex-end;
   align-items: flex-end;
 
-  &[data-hidden='true'] {
+  @media (max-width: 1023px) {
     display: none;
   }
 `;

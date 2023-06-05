@@ -101,7 +101,6 @@ export const HeaderLeft = styled.div`
 export const MenuCategories = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 1rem 0 2rem;
   padding-right: 1rem;
   border-right: 1px solid hsla(0, 0%, 100%, 0.5);
   font-size: 14px;
@@ -204,7 +203,7 @@ export const UserLogin = styled.div`
   }
 `;
 
-export const HeaderCart = styled.div`
+export const HeaderCartSection = styled.div`
   margin-right: 40px;
 
   @media (max-width: 1026px) {
