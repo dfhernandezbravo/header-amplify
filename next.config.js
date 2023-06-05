@@ -11,13 +11,17 @@ const nextConfig = {
       },
     ],
   },
+  compiler: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
   webpack(config, options) {
     config.plugins.push(
       new NextFederationPlugin({
         name: 'headerFooter',
         filename: 'static/chunks/remoteEntry.js',
         exposes: {
-          './header': './src/pages/header/index.tsx',
+          './header': './src/presentation/modules/header/index.tsx',
           './footer': './src/presentation/modules/footer/index.tsx',
         },
         extraOptions: {
