@@ -2,6 +2,7 @@
   "name": "header-footer",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://easyheadless.easy.cl:3000",
   "scripts": {
     "dev": "next dev --port 3001",
     "build": "next build",

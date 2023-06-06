@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const { NextFederationPlugin } = require('@module-federation/nextjs-mf');
+const remotes = (isServer) => {
+  const location = isServer ? 'ssr' : 'chunks';
+  const popularURI = `headerFooter@http://localhost:3001/_next/static/${location}/remoteEntry.js`;
+  return {
+    popularURI,
+  }
+};
 
 const nextConfig = {
   reactStrictMode: true,
@@ -20,9 +27,11 @@ const nextConfig = {
       new NextFederationPlugin({
         name: 'headerFooter',
         filename: 'static/chunks/remoteEntry.js',
+        remotes: remotes(options.isServer),
         exposes: {
           './header': './src/presentation/modules/header/index.tsx',
           './footer': './src/presentation/modules/footer/index.tsx',
+          './popular': './src/pages/api/products/search/popular.ts' 
         },
         extraOptions: {
           exposePages: true,
