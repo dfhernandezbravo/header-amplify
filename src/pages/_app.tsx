@@ -5,10 +5,6 @@ import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 
 function App({ Component, pageProps }: AppProps) {
-  return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  );
+  return <Component {...pageProps} />;
 }
 export default App;
