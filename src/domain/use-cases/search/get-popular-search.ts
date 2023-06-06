@@ -21,7 +21,7 @@ const searchSlice = createSlice({
   name: 'search',
   initialState: {
     isLoading: false,
-    popularSearches: [] as PopularSearch[],
+    popularSearches: [] as PopularSearch[] | undefined,
     // error: unknown;
   },
   reducers: {},

@@ -1,4 +1,4 @@
-import GetPopularSearchesResponse from '@entities/responses/get-popular-searches.response';
+import GetPopularSearchesResponse from '@entities/requests/search/get/get-popular-searches.response';
 import { AxiosResponse } from 'axios';
 
 interface SearchRepository {
