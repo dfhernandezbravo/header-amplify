@@ -1,11 +1,11 @@
-import GetSearchesPopularResponse from '@entities/responses/get-searches-popular.response';
+import GetPopularSearchesResponse from '@entities/requests/search/get/get-popular-searches.response';
 import SearchRepository from '@interfaces/search-repository.interface';
 import { AxiosInstance } from 'axios';
 
 function searchRepository(httpInstance: AxiosInstance): SearchRepository {
   return {
-    getSearchesPopulars() {
-      return httpInstance.get<GetSearchesPopularResponse>(
+    getPopularSearches() {
+      return httpInstance.get<GetPopularSearchesResponse>(
         'products/search/popular',
       );
     },
