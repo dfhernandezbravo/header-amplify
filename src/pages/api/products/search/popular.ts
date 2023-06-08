@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BFF_MOBILE_URL}/products/search/popular`,
+      `https://cl-ccom-easy-bff-mobile.ecomm-stg.cencosud.com/products/search/popular`,
     );
     res.json(data);
   } catch (error) {

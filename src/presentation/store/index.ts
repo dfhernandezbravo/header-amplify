@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { configureStore } from '@reduxjs/toolkit';
 import cartSlice from './cart';
-import searchSlice from '@use-cases/search/get-popular-search';
+import searchSlice from './search/slices/search-slice';
 
 const store = configureStore({
   reducer: {
