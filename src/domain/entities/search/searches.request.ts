@@ -1,0 +1,3 @@
+type GetSearchesRequest = {
+  query: string;
+};
