@@ -1,9 +1,8 @@
 import axios from "axios"
 
 const searchService = {
-    getPopularSearch: async () => {
-        const response = await axios.get('/api/products/search/popular');
-        return response?.data;
+    getPopularSearch: () => {
+        return axios.get('/api/products/search/popular');
     }
 }
 export default searchService;
