@@ -1,4 +1,4 @@
-import PopularSearch from '@entities/business/search/popular-search.entity';
+import PopularSearch from '@entities/search/popular-search.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
 
