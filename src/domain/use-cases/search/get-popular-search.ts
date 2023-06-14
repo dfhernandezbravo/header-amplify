@@ -1,14 +1,13 @@
-import easyBffMobileInstance from '@data-sources/http-instances/easy-bff-mobile-instance';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import searchRepository from '@repositories/search/search-repository';
+import PopularSearch from '@entities/search/popular-search.entity';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import searchService from '../../../application/services/search';
 
-const repository = searchRepository(easyBffMobileInstance);
 
 export const getPopularSearch = createAsyncThunk(
   'get/products/search/popular',
   async () => {
     try {
-      const { data } = await repository.getPopularSearches();
+      const { data } = await searchService.getPopularSearch();
       return data.data.searches;
     } catch (error) {
       console.error(error);
