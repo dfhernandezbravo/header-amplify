@@ -9,6 +9,7 @@ import HeaderSearch from '@modules/header/sections/header-search';
 import HeaderTopBrands from '@modules/header/sections/header-top-brands';
 import React from 'react';
 import { HeaderDesktopContainer, HeaderDesktopSearchSection } from './styles';
+import HeaderResults from '@modules/header/sections/header-results';
 
 const HeaderDesktop = () => {
   return (
@@ -20,6 +21,7 @@ const HeaderDesktop = () => {
         <HeaderLocation />
         <HeaderDesktopSearchSection>
           <HeaderSearch />
+          <HeaderResults />
         </HeaderDesktopSearchSection>
         <HeaderLogin />
         <HeaderCart />

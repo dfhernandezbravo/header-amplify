@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import { SearchContainer, SearchInput } from './styles';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch } from '@hooks/storeHooks';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
+import { closeResults, openResults } from '@store/search/slices/search-slice';
 
 const HeaderSearch = React.memo(function Search() {
   const dispacth = useAppDispatch();
-  const { isLoading, popularSearches } = useAppSelector(
-    (state) => state.search,
-  );
-  console.log(isLoading);
-  console.log(popularSearches);
 
   useEffect(() => {
     dispacth(getPopularSearch());
@@ -20,8 +16,8 @@ const HeaderSearch = React.memo(function Search() {
       <SearchInput
         type="search"
         placeholder="¡Hola! ¿Qué estás buscando?"
-        // onFocus={() => setIsOpenMenu(true)}
-        // onBlur={() => setIsOpenMenu(false)}
+        onFocus={() => dispacth(openResults())}
+        onBlur={() => dispacth(closeResults())}
       />
     </SearchContainer>
   );

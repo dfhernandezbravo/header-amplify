@@ -14,26 +14,3 @@ export const getPopularSearch = createAsyncThunk(
     }
   },
 );
-
-const searchSlice = createSlice({
-  name: 'search',
-  initialState: {
-    isLoading: false,
-    popularSearches: [] as PopularSearch[] | undefined,
-    // error: unknown;
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(getPopularSearch.fulfilled, (state, { payload }) => {
-        state.popularSearches = payload;
-        state.isLoading = false;
-      })
-      .addCase(getPopularSearch.pending, (state) => {
-        state.isLoading = true;
-      });
-    // .addCase(getPopularSearch.rejected, (state) )
-  },
-});
-
-export default searchSlice;
