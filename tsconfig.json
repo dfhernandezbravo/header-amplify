@@ -21,11 +21,12 @@
       "@components/*": ["./src/presentation/components/*"],
       "@hooks/*": ["./src/presentation/hooks/*"],
       "@mocks/*": ["./src/presentation/mocks/*"],
+      "@env/*": ["./src/domain/env/*"],
       "@entities/*": ["./src/domain/entities/*"],
       "@interfaces/*": ["./src/domain/interfaces/*"],
       "@use-cases/*": ["./src/domain/use-cases/*"],
       "@data-sources/*": ["./src/application/data-sources/*"],
-      "@repositories/*": ["./src/application/repositories/*"],
+      "@services/*": ["./src/application/services/*"],
       "@modules/*": ["./src/presentation/modules/*"]
     }
   },

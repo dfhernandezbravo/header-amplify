@@ -13,6 +13,7 @@ import {
   HeaderMobileOptionSectionElement,
   HeaderMobileSearchSection,
 } from './styles';
+import HeaderCategory from '@modules/header/sections/header-category';
 
 const HeaderMobile = () => {
   return (
@@ -29,6 +30,7 @@ const HeaderMobile = () => {
             <HeaderCart />
           </HeaderMobileOptionSectionElement>
         </HeaderMobileOptionSection>
+        <HeaderCategory />
 
         <HeaderMobileSearchSection>
           <HeaderSearch />
