@@ -98,46 +98,6 @@ export const HeaderLeft = styled.div`
   }
 `;
 
-export const MenuCategories = styled.div`
-  display: flex;
-  align-items: center;
-  padding-right: 1rem;
-  border-right: 1px solid hsla(0, 0%, 100%, 0.5);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-
-  .menuHamburg {
-    width: 25px;
-    height: 25px;
-    margin-right: 0.85rem;
-
-    & > span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      margin: 6px 0 0 0;
-      background-color: #fff;
-    }
-
-    & :first-child {
-      margin-top: 3px;
-    }
-  }
-
-  @media (max-width: 1026px) {
-    flex-direction: column;
-    border-right: none;
-    padding-right: 0;
-    margin: 0 0 0 1rem;
-
-    .menuHamburg {
-      margin: 0;
-      margin-bottom: 0.5rem;
-    }
-  }
-`;
-
 export const MenuLocation = styled.div`
   display: flex;
   align-items: center;

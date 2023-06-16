@@ -8,7 +8,7 @@ export const HeaderDesktopContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   color: white;
-  gap: 16px;
+  gap: 32px;
 `;
 
 export const HeaderDesktopSearchSection = styled.div`

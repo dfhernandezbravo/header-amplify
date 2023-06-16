@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import searchService from '../../../application/services/search';
+import searchService from '@services/search';
 
 export const getSearches = createAsyncThunk(
   'get/products/search',
