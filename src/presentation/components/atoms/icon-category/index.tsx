@@ -8,12 +8,18 @@ interface Props {
 
 const CategoryIcon = ({ subname }: Props) => {
   const icon = iconsCategory[subname];
-  const iconPath =
-    require(`../../../assets/icons/categories/${icon}.svg`).default;
 
   const size = 20;
 
-  return <Image src={iconPath} width={size} height={size} alt="" priority />;
+  return (
+    <Image
+      src={`/icons/categories/${icon}.svg`}
+      width={size}
+      height={size}
+      alt=""
+      priority
+    />
+  );
 };
 
 export default CategoryIcon;
