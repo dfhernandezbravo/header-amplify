@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
 export const ModalCategory = styled.div`
-  position: fixed;
   left: 0;
   width: 100%;
   height: 100%;
@@ -9,6 +8,8 @@ export const ModalCategory = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  z-index: 1;
+  position: absolute;
 `;
 
 const animationModal = keyframes`
