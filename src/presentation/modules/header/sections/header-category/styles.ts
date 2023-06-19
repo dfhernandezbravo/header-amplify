@@ -8,7 +8,8 @@ export const ModalCategory = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  z-index: 1;
+  z-index: 999;
+  overflow: hidden;
   position: absolute;
 `;
 
