@@ -5,10 +5,11 @@ const SearchListContainer = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
+  min-width: 150px;
+  max-width: 150px;
 `;
 
 const SearchItem = styled(Link)`
-  height: 35px;
   font-size: 13px;
   text-decoration: none;
   width: 100%;
@@ -16,6 +17,27 @@ const SearchItem = styled(Link)`
   display: flex;
   align-items: center;
   text-transform: capitalize;
+  padding: 8px;
+
+  &:hover {
+    background-color: #eee;
+  }
 `;
 
-export { SearchListContainer, SearchItem };
+const SearchItemCategory = styled(SearchItem)`
+  font-weight: 700;
+`;
+
+const SearchCategoriesTitle = styled.div`
+  color: #aaa;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 8px;
+`;
+
+export {
+  SearchListContainer,
+  SearchItem,
+  SearchCategoriesTitle,
+  SearchItemCategory,
+};

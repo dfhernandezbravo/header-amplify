@@ -9,6 +9,7 @@ import {
 } from '@store/search/slices/search-slice';
 import useDebounce from '@hooks/useDebounce';
 import { getSearches } from '@use-cases/search/get-searches';
+import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 
 const HeaderSearch = React.memo(function Search() {
   const [search, setSearch] = useState('');
@@ -17,6 +18,9 @@ const HeaderSearch = React.memo(function Search() {
 
   const sendQuery = useCallback(() => {
     dispacth(getSearches(search));
+    dispacth(
+      getProductsSuggestions({ fullText: search, selectedFacets: null }),
+    );
   }, [dispacth, search]);
 
   useEffect(() => {

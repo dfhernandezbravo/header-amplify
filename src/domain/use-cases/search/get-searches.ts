@@ -6,7 +6,7 @@ export const getSearches = createAsyncThunk(
   async (query: string) => {
     try {
       const { data } = await searchService.getSearches({ query });
-      return data.data.searches;
+      return data;
     } catch (error) {
       console.error(error);
     }
