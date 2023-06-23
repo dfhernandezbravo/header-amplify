@@ -1,9 +1,8 @@
 import PopularSearch from './popular-search.entity';
 
 type GetSearchesResponse = {
-  data: {
-    searches: Search[];
-  };
+  searches: Search[];
+  categories: CategoriesSearch[];
 };
 
 type GetPopularSearchesResponse = {
@@ -12,4 +11,12 @@ type GetPopularSearchesResponse = {
   };
 };
 
-export type { GetSearchesResponse, GetPopularSearchesResponse };
+type ProductSuggestionsResponse = {
+  products: Product[];
+};
+
+export type {
+  GetSearchesResponse,
+  GetPopularSearchesResponse,
+  ProductSuggestionsResponse,
+};

@@ -1,26 +1,34 @@
 import PopularSearch from '@entities/search/popular-search.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
+import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import { getSearches } from '@use-cases/search/get-searches';
 
 type SearchState = {
   isLoading: boolean;
-  popularSearches: PopularSearch[];
   isOpenResults: boolean;
-  searches: Search[];
   isEmptySearch: boolean;
+  isLoadingSuggestions: boolean;
+  popularSearches: PopularSearch[];
+  searches: Search[];
+  categories: CategoriesSearch[];
+  productSuggestions: Product[];
+};
+
+const initialState: SearchState = {
+  popularSearches: [],
+  searches: [],
+  categories: [],
+  productSuggestions: [],
+  isLoading: false,
+  isOpenResults: false,
+  isEmptySearch: false,
+  isLoadingSuggestions: false,
 };
 
 const searchSlice = createSlice({
   name: 'search',
-  initialState: {
-    isLoading: false,
-    popularSearches: [],
-    searches: [],
-    isOpenResults: false,
-    isEmptySearch: false,
-    // error: unknown;
-  } as SearchState,
+  initialState,
   reducers: {
     openResults: (state) => {
       state.isOpenResults = true;
@@ -45,17 +53,33 @@ const searchSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getSearches.fulfilled, (state, { payload }) => {
-        if (!payload || !payload.length) {
+        state.isLoading = false;
+
+        if (!payload) {
           state.isEmptySearch = true;
           state.searches = [];
+          state.categories = [];
+          state.productSuggestions = [];
         } else {
-          state.searches = payload;
+          state.searches = payload.searches;
+          state.categories = payload.categories;
           state.isEmptySearch = false;
         }
-        state.isLoading = false;
       })
       .addCase(getSearches.pending, (state) => {
         state.isLoading = true;
+        state.categories = [];
+        state.searches = [];
+        state.productSuggestions = [];
+        state.isEmptySearch = false;
+      })
+      .addCase(getProductsSuggestions.fulfilled, (state, { payload }) => {
+        state.isLoadingSuggestions = false;
+        state.productSuggestions = payload || [];
+      })
+      .addCase(getProductsSuggestions.pending, (state) => {
+        state.isLoadingSuggestions = true;
+        state.productSuggestions = [];
       });
     // .addCase(getPopularSearch.rejected, (state) )
   },

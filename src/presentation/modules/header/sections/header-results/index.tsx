@@ -1,10 +1,11 @@
 import Spinner from '@components/atoms/spinner';
 import { useAppSelector } from '@hooks/storeHooks';
+import EmptySearch from '@modules/header/components/empty-searches-list';
 import PopularSearchesList from '@modules/header/components/popular-searches-list';
 import SearchList from '@modules/header/components/searches-list';
 import React from 'react';
-import { HeaderResultsContainer } from './styles';
-import EmptySearch from '@modules/header/components/empty-searches-list';
+import HeaderSuggestions from '../header-suggestions';
+import { HeaderResultSpinnerContainer, HeaderResultsContainer } from './styles';
 
 const HeaderResults = () => {
   const { isOpenResults, isLoading, isEmptySearch, popularSearches, searches } =
@@ -13,7 +14,9 @@ const HeaderResults = () => {
   if (isOpenResults && isLoading) {
     return (
       <HeaderResultsContainer>
-        <Spinner />
+        <HeaderResultSpinnerContainer>
+          <Spinner />
+        </HeaderResultSpinnerContainer>
       </HeaderResultsContainer>
     );
   }
@@ -22,6 +25,7 @@ const HeaderResults = () => {
     return (
       <HeaderResultsContainer>
         <SearchList />
+        <HeaderSuggestions />
       </HeaderResultsContainer>
     );
   }

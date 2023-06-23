@@ -5,10 +5,11 @@ const PopularSearchListContainer = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
+  padding: 12px;
+  width: 100%;
 `;
 
 const PopularSearchItem = styled(Link)`
-  height: 35px;
   font-size: 13px;
   text-decoration: none;
   width: 100%;
@@ -16,6 +17,11 @@ const PopularSearchItem = styled(Link)`
   display: flex;
   align-items: center;
   text-transform: capitalize;
+  padding: 8px 0px;
+
+  &:hover {
+    background-color: #eee;
+  }
 `;
 
 export { PopularSearchListContainer, PopularSearchItem };
