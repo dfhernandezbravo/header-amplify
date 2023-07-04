@@ -36,4 +36,5 @@ type Product = {
   brand: string;
   description: string;
   items: ProductItems[];
+  link: string;
 };

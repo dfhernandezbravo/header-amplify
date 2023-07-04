@@ -11,6 +11,7 @@ import { HeaderDesktopContainer, HeaderDesktopSearchSection } from './styles';
 import HeaderResults from '@modules/header/sections/header-results';
 import HeaderMenu from '@modules/header/sections/header-menu';
 import HeaderCategory from '@modules/header/sections/header-category';
+import HeaderModalLogin from '@modules/header/sections/header-modal-login';
 
 const HeaderDesktop = () => {
   return (
@@ -27,6 +28,7 @@ const HeaderDesktop = () => {
         <HeaderLogin />
         <HeaderCart />
       </HeaderDesktopContainer>
+      <HeaderModalLogin />
       <HeaderCategory />
       <HeaderFooter />
     </Desktop>

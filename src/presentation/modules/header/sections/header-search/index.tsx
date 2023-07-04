@@ -6,6 +6,7 @@ import {
   cleanResults,
   closeResults,
   openResults,
+  setTerm,
 } from '@store/search/slices/search-slice';
 import useDebounce from '@hooks/useDebounce';
 import { getSearches } from '@use-cases/search/get-searches';
@@ -14,18 +15,19 @@ import { getProductsSuggestions } from '@use-cases/search/get-products-suggestio
 const HeaderSearch = React.memo(function Search() {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
-  const dispacth = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const sendQuery = useCallback(() => {
-    dispacth(getSearches(search));
-    dispacth(
+    dispatch(setTerm(search));
+    dispatch(getSearches(search));
+    dispatch(
       getProductsSuggestions({ fullText: search, selectedFacets: null }),
     );
-  }, [dispacth, search]);
+  }, [dispatch, search]);
 
   useEffect(() => {
-    dispacth(getPopularSearch());
-  }, [dispacth]);
+    dispatch(getPopularSearch());
+  }, [dispatch]);
 
   useEffect(() => {
     if (debouncedSearch) {
@@ -38,11 +40,15 @@ const HeaderSearch = React.memo(function Search() {
       <SearchInput
         type="search"
         placeholder="¡Hola! ¿Qué estás buscando?"
-        onFocus={() => dispacth(openResults())}
-        onBlur={() => dispacth(closeResults())}
+        onFocus={() => dispatch(openResults())}
+        onBlur={() =>
+          setTimeout(() => {
+            dispatch(closeResults());
+          }, 100)
+        }
         onChange={(e) => {
           if (e.target.value === '') {
-            dispacth(cleanResults());
+            dispatch(cleanResults());
           }
           setSearch(e.target.value);
         }}

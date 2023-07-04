@@ -63,6 +63,7 @@ export default async function handler(
                 productId
                 productName
                 brand
+                link
                 description
                 items {
                   name

@@ -1,7 +1,24 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const animationInMenu = keyframes`
+  0% {
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+    opacity: 1;
+  }
+`;
 
 const HeaderResultsContainer = styled.div`
-  z-index: 1;
+  z-index: 999;
   position: absolute;
   background-color: white;
   margin-top: 50px;
@@ -13,6 +30,8 @@ const HeaderResultsContainer = styled.div`
   color: black;
   display: flex;
   flex-direction: row;
+  animation-name: ${animationInMenu};
+  animation-duration: 0.5s;
 `;
 
 export const HeaderResultSpinnerContainer = styled.div`
