@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonBackContainer } from './styles';
-import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 interface Props {
   onClick: () => void;
@@ -9,8 +9,7 @@ interface Props {
 const ButtonBack = ({ onClick }: Props) => {
   return (
     <ButtonBackContainer onClick={onClick}>
-      <MdOutlineKeyboardArrowLeft size={30} />
-      <span>Volver</span>
+      <AiOutlineArrowLeft size={24} />
     </ButtonBackContainer>
   );
 };

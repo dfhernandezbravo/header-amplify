@@ -19,7 +19,9 @@ const CategoriesMobile = () => {
               <CategoryItem
                 key={item.id}
                 category={item}
-                onClick={(category) => setCategory(category)}
+                onClick={(category) => {
+                  setCategory(category);
+                }}
               />
             ))}
           </CategoriesMobileList>
