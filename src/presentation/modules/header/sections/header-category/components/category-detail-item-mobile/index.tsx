@@ -5,6 +5,7 @@ import {
   CategoriesDetailTitleMobileLink,
   CategoryContent,
   CategoryHeader,
+  CategoryHeaderTitle,
   CategoryLink,
   CategoryLinkAll,
   ChildrenAccordionCategory,
@@ -16,12 +17,15 @@ interface Props {
 }
 
 const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
+  console.log(category);
   return (
     <div>
       <CategoryHeader>
-        <ButtonBack onClick={onBack} />
+        <CategoryHeaderTitle>
+          <ButtonBack onClick={onBack} />
 
-        <h3>{category.name}</h3>
+          <h3>{category.name}</h3>
+        </CategoryHeaderTitle>
         <CategoriesDetailTitleMobileLink href={category.url}>
           Mostrar Todo
         </CategoriesDetailTitleMobileLink>

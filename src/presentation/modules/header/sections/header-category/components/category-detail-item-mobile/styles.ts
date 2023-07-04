@@ -29,11 +29,18 @@ export const CategoryLinkAll = styled(Link)`
 `;
 
 export const CategoryHeader = styled.div`
-  padding: 20px;
+  padding: 12px;
   border-bottom: 1px solid #acacac;
   display: flex;
   flex-direction: column;
   gap: 12px;
+`;
+
+export const CategoryHeaderTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
 `;
 
 export const CategoryContent = styled.div`

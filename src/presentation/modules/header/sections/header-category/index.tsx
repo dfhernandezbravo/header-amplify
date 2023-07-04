@@ -25,7 +25,7 @@ const HeaderCategory = () => {
     }
 
     return () => {
-      document.body.classList.remove('modal-open');
+      document.body.classList.remove('header-footer-open-modal');
       document.removeEventListener('keydown', handleKeyPress);
     };
   }, [isOpenCategories, dispatch]);
@@ -34,9 +34,15 @@ const HeaderCategory = () => {
     return null;
   }
 
+  const handleContentClick = (
+    event: React.MouseEvent<HTMLDivElement | MouseEvent>,
+  ) => {
+    event.stopPropagation();
+  };
+
   return (
     <ModalCategory onClick={() => dispatch(openCategories(!isOpenCategories))}>
-      <ModalContent>
+      <ModalContent onClick={handleContentClick}>
         <CategoriesDesktop />
         <CategoriesMobile />
       </ModalContent>

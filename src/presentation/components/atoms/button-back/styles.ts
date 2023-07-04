@@ -7,4 +7,5 @@ export const ButtonBackContainer = styled.button`
   flex-direction: row;
   align-items: center;
   font-size: 15px;
+  color: inherit;
 `;

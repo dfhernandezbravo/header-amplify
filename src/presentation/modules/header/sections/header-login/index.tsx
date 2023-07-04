@@ -7,6 +7,7 @@ import {
   LoginContainerDesktop,
   LoginInformation,
   LoginMenu,
+  LoginMobileButton,
   LoginUser,
   MenuItem,
 } from './styles';
@@ -27,7 +28,9 @@ const HeaderLogin = () => {
       onMouseLeave={() => setIsMenuOpen(false)}
     >
       <Mobile>
-        <button onClick={handleClickItem}>Inicia Sesión</button>
+        <LoginMobileButton onClick={handleClickItem}>
+          Inicia Sesión
+        </LoginMobileButton>
       </Mobile>
       <Desktop>
         <LoginContainerDesktop>

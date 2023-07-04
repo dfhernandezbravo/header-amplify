@@ -40,3 +40,15 @@ export const HeaderMobileLocationSection = styled.div`
   background-color: #990707;
   padding: 8px 16px;
 `;
+
+export const SearchInputContainer = styled.input`
+  border-radius: 8px;
+  height: 40px;
+  padding: 1rem;
+  border: none;
+  width: 100%;
+  color: #4d4d4d;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: white;
+`;

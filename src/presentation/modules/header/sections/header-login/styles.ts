@@ -90,3 +90,10 @@ export const MenuItem = styled.a`
     background-color: #f0f0f0;
   }
 `;
+
+export const LoginMobileButton = styled.button`
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font-size: 16px;
+`;
