@@ -9,6 +9,7 @@ type SearchState = {
   isOpenResults: boolean;
   isEmptySearch: boolean;
   isLoadingSuggestions: boolean;
+  term: string;
   popularSearches: PopularSearch[];
   searches: Search[];
   categories: CategoriesSearch[];
@@ -20,6 +21,7 @@ const initialState: SearchState = {
   searches: [],
   categories: [],
   productSuggestions: [],
+  term: '',
   isLoading: false,
   isOpenResults: false,
   isEmptySearch: false,
@@ -41,6 +43,9 @@ const searchSlice = createSlice({
     cleanResults: (state) => {
       state.isEmptySearch = false;
       state.searches = [];
+    },
+    setTerm: (state, { payload }: { payload: string }) => {
+      state.term = payload;
     },
   },
   extraReducers: (builder) => {
@@ -85,5 +90,6 @@ const searchSlice = createSlice({
   },
 });
 
-export const { openResults, closeResults, cleanResults } = searchSlice.actions;
+export const { openResults, closeResults, cleanResults, setTerm } =
+  searchSlice.actions;
 export default searchSlice;

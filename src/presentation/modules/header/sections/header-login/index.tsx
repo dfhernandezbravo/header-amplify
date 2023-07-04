@@ -1,30 +1,58 @@
-import { UserLogin } from '@modules/header/styles/header.styles';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Mobile from '@components/layout/mobile';
 import Desktop from '@components/layout/desktop';
+import {
+  LoginContainer,
+  LoginContainerDesktop,
+  LoginInformation,
+  LoginMenu,
+  LoginUser,
+  MenuItem,
+} from './styles';
+import { useAppDispatch } from '@hooks/storeHooks';
+import { openModalLogin } from '@store/login/slices/login-slice';
 
 const HeaderLogin = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const handleClickItem = () => {
+    dispatch(openModalLogin());
+  };
+
   return (
-    <>
+    <LoginContainer
+      onMouseOver={() => setIsMenuOpen(true)}
+      onMouseLeave={() => setIsMenuOpen(false)}
+    >
       <Mobile>
-        <p>Inicia Sesión</p>
+        <button onClick={handleClickItem}>Inicia Sesión</button>
       </Mobile>
       <Desktop>
-        <UserLogin>
-          <Image
-            src="https://easycl.vtexassets.com/arquivos/new-desktop-user-icon.svg"
-            width={25}
-            height={25}
-            alt="User Icon"
-          />
-          <div>
-            <p>¡Hola!</p>
-            <p>Inicia sesión</p>
-          </div>
-        </UserLogin>
+        <LoginContainerDesktop>
+          <LoginInformation>
+            <Image
+              src="https://easycl.vtexassets.com/arquivos/new-desktop-user-icon.svg"
+              width={25}
+              height={25}
+              alt="User Icon"
+            />
+
+            <LoginUser>
+              <span>¡Hola!</span>
+              <strong>Inicia sesión</strong>
+            </LoginUser>
+          </LoginInformation>
+
+          {isMenuOpen && (
+            <LoginMenu isVisible={isMenuOpen}>
+              <MenuItem onClick={handleClickItem}>Crear / Ingresar</MenuItem>
+            </LoginMenu>
+          )}
+        </LoginContainerDesktop>
       </Desktop>
-    </>
+    </LoginContainer>
   );
 };
 

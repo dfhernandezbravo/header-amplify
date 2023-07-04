@@ -14,10 +14,10 @@ const SearchItem = styled(Link)`
   text-decoration: none;
   width: 100%;
   color: #4d4d4d;
-  display: flex;
   align-items: center;
   text-transform: capitalize;
   padding: 8px;
+  display: block;
 
   &:hover {
     background-color: #eee;

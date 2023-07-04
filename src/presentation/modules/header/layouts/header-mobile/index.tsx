@@ -14,6 +14,7 @@ import {
   HeaderMobileSearchSection,
 } from './styles';
 import HeaderCategory from '@modules/header/sections/header-category';
+import HeaderModalLogin from '@modules/header/sections/header-modal-login';
 
 const HeaderMobile = () => {
   return (
@@ -40,6 +41,7 @@ const HeaderMobile = () => {
           <HeaderLocation />
         </HeaderMobileLocationSection>
       </HeaderMobileContainer>
+      <HeaderModalLogin />
     </Mobile>
   );
 };

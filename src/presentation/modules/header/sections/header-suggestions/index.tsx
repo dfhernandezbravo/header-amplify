@@ -1,5 +1,10 @@
+import Spinner from '@components/atoms/spinner';
 import Desktop from '@components/layout/desktop';
+import { environments } from '@env/environments';
+import { useAppSelector } from '@hooks/storeHooks';
 import React from 'react';
+import SuggestionPrice from './components/suggestion-price';
+import SuggestionImage from './components/suggestions-image';
 import {
   SuggestionBrand,
   SuggestionName,
@@ -8,15 +13,12 @@ import {
   SuggestionsItemContainer,
   SuggestionsListContainer,
 } from './styles';
-import { useAppSelector } from '@hooks/storeHooks';
-import Spinner from '@components/atoms/spinner';
-import SuggestionImage from './components/suggestions-image';
-import SuggestionPrice from './components/suggestion-price';
 
 const HeaderSuggestions = () => {
   const { productSuggestions, isLoadingSuggestions } = useAppSelector(
     (state) => state.search,
   );
+  const { hostURL } = environments();
 
   if (isLoadingSuggestions) {
     return (
@@ -35,7 +37,10 @@ const HeaderSuggestions = () => {
 
         <SuggestionsListContainer>
           {productSuggestions.map((product) => (
-            <SuggestionsItemContainer key={product.productId} href="">
+            <SuggestionsItemContainer
+              key={product.productId}
+              href={`${hostURL}${product.link}`}
+            >
               <SuggestionImage images={product.items[0].images} />
 
               <SuggestionBrand>{product.brand} </SuggestionBrand>

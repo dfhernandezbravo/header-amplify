@@ -7,13 +7,18 @@ import {
   SearchListContainer,
 } from './styles';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
+import { environments } from '@env/environments';
 
 // TODO: Redirigir a la plp de cada producto
 
 const SearchList = () => {
-  const { searches, categories } = useAppSelector((state) => state.search);
+  const { searches, categories, term } = useAppSelector(
+    (state) => state.search,
+  );
 
   const dispatch = useAppDispatch();
+
+  const { hostURL } = environments();
 
   const onMouseOverSearch = (searchSelected: Search) => {
     dispatch(
@@ -40,7 +45,7 @@ const SearchList = () => {
     <SearchListContainer>
       {searches.map((search) => (
         <SearchItem
-          href=""
+          href={`${hostURL}/${search.value}?map=ft`}
           key={search.value}
           onMouseOver={() => onMouseOverSearch(search)}
         >
@@ -52,7 +57,8 @@ const SearchList = () => {
 
       {categories.map((category) => (
         <SearchItemCategory
-          href=""
+          onClick={(e) => e.stopPropagation()}
+          href={`${hostURL}/${category.value}/${term}?map=${category.key},ft`}
           key={category.key}
           onMouseOver={() => onMouseOverCategory(category)}
         >
