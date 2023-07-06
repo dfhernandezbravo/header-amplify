@@ -8,7 +8,7 @@ import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { ModalForm } from '../../styles';
 import { useAppDispatch } from '@hooks/storeHooks';
 import login from '@use-cases/login/login';
-import { navigateTo } from '@store/login/slices/login-slice';
+import { navigateTo, setEmail } from '@store/login/slices/login-slice';
 import {
   ButtonNewAccount,
   ButtonResetPassword,
@@ -43,6 +43,7 @@ const LoginUserPassword = () => {
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     try {
+      dispatch(setEmail(data.user));
       dispatch(login(data));
     } catch (error) {
       console.log(error);
