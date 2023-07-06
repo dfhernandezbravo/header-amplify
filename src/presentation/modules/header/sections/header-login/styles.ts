@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 
 export const LoginContainer = styled.button`
@@ -66,10 +67,9 @@ const animationOutMenu = keyframes`
 export const LoginMenu = styled.div<{ isVisible: boolean }>`
   position: absolute;
   top: 100%;
-  left: 0;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  z-index: 999;
   border-radius: 4px;
   padding: 2px;
   animation-name: ${({ isVisible }) =>
@@ -77,7 +77,7 @@ export const LoginMenu = styled.div<{ isVisible: boolean }>`
   animation-duration: 0.2s;
 `;
 
-export const MenuItem = styled.a`
+export const MenuItem = styled(Link)`
   display: block;
   color: #333;
   text-decoration: none;
@@ -91,9 +91,10 @@ export const MenuItem = styled.a`
   }
 `;
 
-export const LoginMobileButton = styled.button`
+export const LoginMobileButton = styled(Link)`
   border: none;
   background-color: transparent;
   color: inherit;
   font-size: 16px;
+  text-decoration: none;
 `;

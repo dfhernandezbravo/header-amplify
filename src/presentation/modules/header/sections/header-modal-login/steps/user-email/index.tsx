@@ -37,8 +37,9 @@ const LoginUserEmail = ({ nextStep }: Props) => {
 
   const onSubmit: SubmitHandler<EmailForm> = async (data) => {
     try {
-      await generateAccessKey({ userEmail: data.email });
       dispatch(setEmail(data.email));
+
+      await generateAccessKey({ userEmail: data.email });
       dispatch(navigateTo(nextStep));
     } catch (error) {
       console.log(error);

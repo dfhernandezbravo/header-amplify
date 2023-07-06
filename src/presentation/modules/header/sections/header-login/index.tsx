@@ -11,11 +11,14 @@ import {
   LoginUser,
   MenuItem,
 } from './styles';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { openModalLogin } from '@store/login/slices/login-slice';
+import logout from '@use-cases/login/logout';
 
 const HeaderLogin = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { customer } = useAppSelector((state) => state.customer);
+  const { authCookies } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
 
   const handleClickItem = () => {
@@ -28,10 +31,17 @@ const HeaderLogin = () => {
       onMouseLeave={() => setIsMenuOpen(false)}
     >
       <Mobile>
-        <LoginMobileButton onClick={handleClickItem}>
-          Inicia Sesión
+        <LoginMobileButton href="https://www.easy.cl/micuenta#/">
+          {customer ? (
+            <span>
+              Hola <br /> {customer.firstName}
+            </span>
+          ) : (
+            <span>Inicia Sesión</span>
+          )}
         </LoginMobileButton>
       </Mobile>
+
       <Desktop>
         <LoginContainerDesktop>
           <LoginInformation>
@@ -44,13 +54,35 @@ const HeaderLogin = () => {
 
             <LoginUser>
               <span>¡Hola!</span>
-              <strong>Inicia sesión</strong>
+              <strong>{customer ? customer.firstName : 'Inicia Sesión'}</strong>
             </LoginUser>
           </LoginInformation>
 
-          {isMenuOpen && (
+          {isMenuOpen && !customer && (
             <LoginMenu isVisible={isMenuOpen}>
-              <MenuItem onClick={handleClickItem}>Crear / Ingresar</MenuItem>
+              <MenuItem href="" onClick={handleClickItem}>
+                Crear / Ingresar
+              </MenuItem>
+            </LoginMenu>
+          )}
+
+          {isMenuOpen && customer && (
+            <LoginMenu isVisible={isMenuOpen}>
+              <MenuItem href="https://www.easy.cl/micuenta#/profile">
+                Mis Datos
+              </MenuItem>
+              <MenuItem href="https://www.easy.cl/micuenta#/cards">
+                Mis Tarjetas
+              </MenuItem>
+              <MenuItem href="https://www.easy.cl/micuenta#/addresses">
+                Mis Direcciones
+              </MenuItem>
+              <MenuItem href="https://ayuda.easy.cl/mis-compras?">
+                Mis Favoritos
+              </MenuItem>
+              <MenuItem href="" onClick={() => dispatch(logout(authCookies))}>
+                Salir
+              </MenuItem>
             </LoginMenu>
           )}
         </LoginContainerDesktop>

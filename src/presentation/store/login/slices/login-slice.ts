@@ -5,8 +5,8 @@ import {
   LoginStep,
 } from '@entities/login/login.entity';
 import { createSlice } from '@reduxjs/toolkit';
-import generateToken from '@use-cases/login/generate-token';
 import login from '@use-cases/login/login';
+import logout from '@use-cases/login/logout';
 import setPassword from '@use-cases/login/set-password';
 import validateAccessKey from '@use-cases/login/validate-access-key';
 
@@ -17,7 +17,6 @@ type LoginState = {
   loginStep: keyof LoginStep;
   loginMethods: LoginMethods[];
   authCookies: AuthCookie[];
-  authToken: AuthCookie | null;
   userEmail: string;
 };
 
@@ -28,7 +27,6 @@ const initialState: LoginState = {
   loginStep: 'Methods',
   authCookies: [],
   userEmail: '',
-  authToken: null,
   loginMethods: [
     {
       provider: LoginProviders.EMAIL,
@@ -85,9 +83,8 @@ const loginSlice = createSlice({
       .addCase(validateAccessKey.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(generateToken.fulfilled, (state, { payload }) => {
-        state.isLogged = true;
-        state.authToken = payload || null;
+      .addCase(logout.fulfilled, (state, { payload }) => {
+        state.authCookies = payload;
       });
   },
 });
