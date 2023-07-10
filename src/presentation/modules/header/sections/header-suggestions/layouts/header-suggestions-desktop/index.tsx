@@ -25,7 +25,7 @@ const HeaderSuggestionsDesktop = () => {
           {productSuggestions.map((product) => (
             <SuggestionsItemContainer
               key={product.productId}
-              href={`${hostURL}/${product.link}`}
+              href={`${hostURL}${product.link}`}
             >
               <SuggestionImage images={product.items[0].images} />
 

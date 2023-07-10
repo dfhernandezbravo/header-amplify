@@ -2,12 +2,21 @@ import { useAppSelector } from '@hooks/storeHooks';
 import React from 'react';
 import { PopularSearchItem, PopularSearchListContainer } from './styles';
 import { environments } from '@env/environments';
-
-// TODO: Redirigir a un href devuelto por backend
+import useAnalytics from '@hooks/useAnalytics';
 
 const PopularSearchesList = () => {
   const { popularSearches } = useAppSelector((state) => state.search);
   const { hostURL } = environments();
+  const { sendEventAnalytics } = useAnalytics();
+
+  const handleOnClick = (term: string) => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Búsqueda',
+      action: 'Click Término Sugerido',
+      tag: term,
+    });
+  };
 
   return (
     <PopularSearchListContainer>
@@ -17,6 +26,10 @@ const PopularSearchesList = () => {
         <PopularSearchItem
           key={search.term}
           href={`${hostURL}/${search.term}?map=ft`}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOnClick(search.term);
+          }}
         >
           {search.term}
         </PopularSearchItem>

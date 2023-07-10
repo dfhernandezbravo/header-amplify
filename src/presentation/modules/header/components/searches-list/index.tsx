@@ -8,8 +8,7 @@ import {
 } from './styles';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import { environments } from '@env/environments';
-
-// TODO: Redirigir a la plp de cada producto
+import useAnalytics from '@hooks/useAnalytics';
 
 const SearchList = () => {
   const { searches, categories, term } = useAppSelector(
@@ -19,6 +18,8 @@ const SearchList = () => {
   const dispatch = useAppDispatch();
 
   const { hostURL } = environments();
+
+  const { sendEventAnalytics } = useAnalytics();
 
   const onMouseOverSearch = (searchSelected: Search) => {
     dispatch(
@@ -41,6 +42,24 @@ const SearchList = () => {
     );
   };
 
+  const handleOnClickSearch = (search: string) => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Búsqueda',
+      action: 'Click Término Sugerido',
+      tag: search,
+    });
+  };
+
+  const handleOnClickCategory = (category: string) => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Búsqueda',
+      action: 'Click Categoria Sugerida',
+      tag: category,
+    });
+  };
+
   return (
     <SearchListContainer>
       {searches.map((search) => (
@@ -48,6 +67,10 @@ const SearchList = () => {
           href={`${hostURL}/${search.value}?map=ft`}
           key={search.value}
           onMouseOver={() => onMouseOverSearch(search)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOnClickSearch(search.value);
+          }}
         >
           {search.value}
         </SearchItem>
@@ -57,7 +80,10 @@ const SearchList = () => {
 
       {categories.map((category) => (
         <SearchItemCategory
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOnClickCategory(category.labelValue);
+          }}
           href={`${hostURL}/${category.value}/${term}?map=${category.key},ft`}
           key={category.key}
           onMouseOver={() => onMouseOverCategory(category)}
