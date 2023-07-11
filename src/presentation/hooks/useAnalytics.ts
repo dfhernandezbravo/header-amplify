@@ -12,7 +12,8 @@ type ActionsAnalytics =
   | 'Click Marca Sugerida'
   | 'Click Producto Sugerido'
   | 'Click Término Sugerido Reciente'
-  | 'Sin resultados';
+  | 'Sin resultados'
+  | 'Click Término Búsqueda populares';
 
 type DataAnalytics = {
   event: EventsAnalytics;
