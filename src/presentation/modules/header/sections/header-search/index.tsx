@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchContainer, SearchInput } from './styles';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
 import {
   cleanResults,
@@ -11,11 +11,14 @@ import {
 import useDebounce from '@hooks/useDebounce';
 import { getSearches } from '@use-cases/search/get-searches';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
+import useAnalytics from '@hooks/useAnalytics';
 
 const HeaderSearch = React.memo(function Search() {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
   const dispatch = useAppDispatch();
+  const { sendEventAnalytics } = useAnalytics();
+  const { searches } = useAppSelector((state) => state.search);
 
   const sendQuery = useCallback(() => {
     dispatch(setTerm(search));
@@ -35,6 +38,35 @@ const HeaderSearch = React.memo(function Search() {
     }
   }, [debouncedSearch, sendQuery]);
 
+  useEffect(() => {
+    if (searches.length && search !== '') {
+      sendEventAnalytics({
+        event: 'interaccion',
+        category: 'Búsqueda',
+        action: 'Con resultados',
+        tag: search,
+      });
+    }
+
+    if (!searches.length && search !== '') {
+      sendEventAnalytics({
+        event: 'interaccion',
+        category: 'Búsqueda',
+        action: 'Sin resultados',
+        tag: search,
+      });
+    }
+  }, [searches, sendEventAnalytics, search]);
+
+  const handleOnClickSearch = () => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Header',
+      action: 'Click',
+      tag: 'Contenedor Buscador',
+    });
+  };
+
   return (
     <SearchContainer>
       <SearchInput
@@ -52,6 +84,7 @@ const HeaderSearch = React.memo(function Search() {
           }
           setSearch(e.target.value);
         }}
+        onClick={handleOnClickSearch}
       />
     </SearchContainer>
   );

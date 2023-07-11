@@ -1,5 +1,4 @@
 import Spinner from '@components/atoms/spinner';
-import { environments } from '@env/environments';
 import { useAppSelector } from '@hooks/storeHooks';
 import React from 'react';
 import { SuggestionSpinnerContainer } from './styles';
