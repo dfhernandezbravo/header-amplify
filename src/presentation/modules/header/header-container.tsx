@@ -7,6 +7,7 @@ import { HeaderContainerWrapper } from './styles';
 import getCustomer from '@use-cases/customer/get-customer';
 import { setEmail } from '@store/login/slices/login-slice';
 import { setCustomer } from '@store/customer/slices/customer-slice';
+import { closeResults } from '@store/search/slices/search-slice';
 
 const HeaderContainer = () => {
   const { authCookies, userEmail } = useAppSelector((state) => state.login);
@@ -59,6 +60,12 @@ const HeaderContainer = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [prevScrollPos]);
+
+  useEffect(() => {
+    if (!visible) {
+      dispatch(closeResults());
+    }
+  }, [visible, dispatch]);
 
   return (
     <HeaderContainerWrapper visible={visible}>
