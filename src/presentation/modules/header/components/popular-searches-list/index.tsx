@@ -13,7 +13,7 @@ const PopularSearchesList = () => {
     sendEventAnalytics({
       event: 'interaccion',
       category: 'Búsqueda',
-      action: 'Click Término Sugerido',
+      action: 'Click Término Búsqueda populares',
       tag: term,
     });
   };
