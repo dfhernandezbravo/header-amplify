@@ -1,6 +1,7 @@
 export type LoginRequest = {
   user: string;
   password: string;
+  orderFormId?: string;
 };
 
 export type GenerateAccessKeyRequest = {
@@ -10,12 +11,14 @@ export type GenerateAccessKeyRequest = {
 export type ValidateAccessKeyRequest = {
   userEmail: string;
   accessKey: string;
+  orderFormId?: string;
 };
 
 export type SetPasswordRequest = {
   user: string;
   newPassword: string;
   accessKey: string;
+  orderFormId?: string;
 };
 
 export type GenerateTokenRequest = {

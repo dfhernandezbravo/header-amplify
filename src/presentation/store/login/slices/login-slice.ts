@@ -1,3 +1,4 @@
+import { AppError } from '@entities/errors';
 import {
   AuthCookie,
   LoginMethods,
@@ -14,19 +15,23 @@ type LoginState = {
   isOpenModalLogin: boolean;
   isLoading: boolean;
   isLogged: boolean;
+  isUnauthorized: boolean;
   loginStep: keyof LoginStep;
   loginMethods: LoginMethods[];
   authCookies: AuthCookie[];
   userEmail: string;
+  error: AppError | null;
 };
 
 const initialState: LoginState = {
   isOpenModalLogin: false,
   isLoading: false,
   isLogged: false,
+  isUnauthorized: false,
   loginStep: 'Methods',
   authCookies: [],
   userEmail: '',
+  error: null,
   loginMethods: [
     {
       provider: LoginProviders.EMAIL,
@@ -56,6 +61,9 @@ const loginSlice = createSlice({
     setEmail: (state, { payload }: { payload: string }) => {
       state.userEmail = payload;
     },
+    setAuthCookies: (state, { payload }: { payload: AuthCookie[] }) => {
+      state.authCookies = [...state.authCookies, ...payload];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -70,7 +78,7 @@ const loginSlice = createSlice({
       .addCase(login.fulfilled, (state, { payload }) => {
         state.isOpenModalLogin = false;
         state.loginStep = 'Methods';
-        state.authCookies = payload || [];
+        state.authCookies = [...state.authCookies, ...payload] || [];
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -78,7 +86,7 @@ const loginSlice = createSlice({
       .addCase(validateAccessKey.fulfilled, (state, { payload }) => {
         state.isOpenModalLogin = false;
         state.loginStep = 'Methods';
-        state.authCookies = payload || [];
+        state.authCookies = [...state.authCookies, ...payload] || [];
       })
       .addCase(validateAccessKey.pending, (state) => {
         state.isLoading = true;
@@ -89,7 +97,12 @@ const loginSlice = createSlice({
   },
 });
 
-export const { openModalLogin, closeModalLogin, navigateTo, setEmail } =
-  loginSlice.actions;
+export const {
+  openModalLogin,
+  closeModalLogin,
+  navigateTo,
+  setEmail,
+  setAuthCookies,
+} = loginSlice.actions;
 
 export default loginSlice;
