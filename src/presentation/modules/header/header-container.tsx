@@ -10,12 +10,12 @@ import { setCustomer } from '@store/customer/slices/customer-slice';
 import { closeResults } from '@store/search/slices/search-slice';
 import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
-import { setShoppingCartUse } from '@store/shopping-cart/slices/shopping-cart-slice';
+import { setShoppingCartUse, setQuantity } from '@store/shopping-cart/slices/shopping-cart-slice';
 import { WindowsEvents } from '../../events';
 
 const HeaderContainer = () => {
   const { authCookies, userEmail } = useAppSelector((state) => state.login);
-  const { orderFormId } = useAppSelector((state) => state.shoppingCart);
+  const { orderFormId, quantity } = useAppSelector((state) => state.shoppingCart);
   const [cookies, setCookie] = useCookies();
   const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(true);
@@ -63,10 +63,13 @@ const HeaderContainer = () => {
 
   const handleAddProductInCartEvent = useCallback(
     (event: Event) => {
+      console.log("ESCUCHANDO EVENTO:::", event)
       event.preventDefault();
-      const customEvent = event as CustomEvent<{ isShoppingCartUsed: boolean }>;
+      const customEvent = event as CustomEvent<{ isShoppingCartUsed: boolean, quantityItems: number }>;
       console.log(customEvent.detail);
       dispatch(setShoppingCartUse(customEvent.detail.isShoppingCartUsed));
+      dispatch(setQuantity(customEvent.detail.quantityItems))
+      
     },
     [dispatch],
   );
@@ -77,6 +80,8 @@ const HeaderContainer = () => {
       handleAddProductInCartEvent,
     );
   }, [handleAddProductInCartEvent]);
+
+  console.log("cantidad:", quantity)
 
   useEffect(() => {
     const handleScroll = () => {

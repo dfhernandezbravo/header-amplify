@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 
 const HeaderCart = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
+  const { quantity } = useAppSelector((state) => state.shoppingCart);
   const dispatch = useAppDispatch();
   const [quantityOnCart, setQuantityOnCart] = useState<number>(0);
   const { setAddProductInCart, setRemoveProductInCart } = cartSlice.actions;
@@ -61,7 +62,7 @@ const HeaderCart = () => {
 
   return (
     <HeaderCartSection>
-      <Cart quantity={quantityOnCart} onClick={methods.handleOnClickCart} />
+      <Cart quantity={quantity} onClick={methods.handleOnClickCart} />
     </HeaderCartSection>
   );
 };
