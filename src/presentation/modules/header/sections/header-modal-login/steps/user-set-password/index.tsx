@@ -11,6 +11,7 @@ import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { error } from 'console';
 import InputCheckbox from '@components/atoms/inputs/input-checkbox';
 import Link from 'next/link';
+import { SetPasswordRequest } from '@entities/login/login.request';
 
 type SetPasswordForm = {
   accessKey: string;
@@ -40,6 +41,9 @@ const schema = yup.object({
 });
 
 const LoginSetPassword = () => {
+  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
+    (state) => state.shoppingCart,
+  );
   const { userEmail } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
 
@@ -55,17 +59,17 @@ const LoginSetPassword = () => {
   });
 
   const onSubmit: SubmitHandler<SetPasswordForm> = async (data) => {
-    try {
-      dispatch(
-        setPassword({
-          user: userEmail,
-          newPassword: data.password,
-          accessKey: data.accessKey,
-        }),
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    const dataSetPassword: SetPasswordRequest = {
+      user: userEmail,
+      newPassword: data.password,
+      accessKey: data.accessKey,
+    };
+
+    const dataSend = isShoppingCartUse
+      ? { ...dataSetPassword, orderFormId }
+      : dataSetPassword;
+
+    dispatch(setPassword(dataSend));
   };
 
   return (

@@ -7,7 +7,7 @@ import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { ModalForm } from '../../styles';
-import { navigateTo } from '@store/login/slices/login-slice';
+import { ValidateAccessKeyRequest } from '@entities/login/login.request';
 
 type ValidateForm = {
   accessKey: string;
@@ -25,11 +25,19 @@ const LoginUserEmailCode = () => {
   } = useForm<ValidateForm>({
     resolver: yupResolver(schema),
   });
+
   const dispatch = useAppDispatch();
+  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
+    (state) => state.shoppingCart,
+  );
   const { userEmail } = useAppSelector((state) => state.login);
 
   const onSubmit: SubmitHandler<ValidateForm> = async (data) => {
-    dispatch(validateAccessKey({ userEmail, accessKey: data.accessKey }));
+    const dataForm: ValidateAccessKeyRequest = isShoppingCartUse
+      ? { userEmail, accessKey: data.accessKey, orderFormId }
+      : { userEmail, accessKey: data.accessKey };
+
+    dispatch(validateAccessKey(dataForm));
   };
 
   return (

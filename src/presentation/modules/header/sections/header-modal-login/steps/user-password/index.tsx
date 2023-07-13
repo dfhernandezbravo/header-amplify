@@ -6,7 +6,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { ModalForm } from '../../styles';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import login from '@use-cases/login/login';
 import { navigateTo, setEmail } from '@store/login/slices/login-slice';
 import {
@@ -40,14 +40,16 @@ const LoginUserPassword = () => {
   });
 
   const dispatch = useAppDispatch();
+  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
+    (state) => state.shoppingCart,
+  );
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
-    try {
-      dispatch(setEmail(data.user));
-      dispatch(login(data));
-    } catch (error) {
-      console.log(error);
-    }
+    const dataForm = isShoppingCartUse ? { ...data, orderFormId } : data;
+
+    dispatch(setEmail(data.user));
+
+    dispatch(login(dataForm));
   };
 
   return (

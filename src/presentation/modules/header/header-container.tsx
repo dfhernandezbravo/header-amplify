@@ -8,9 +8,14 @@ import getCustomer from '@use-cases/customer/get-customer';
 import { setEmail } from '@store/login/slices/login-slice';
 import { setCustomer } from '@store/customer/slices/customer-slice';
 import { closeResults } from '@store/search/slices/search-slice';
+import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { setShoppingCartUse } from '@store/shopping-cart/slices/shopping-cart-slice';
+import { WindowsEvents } from '../../events';
 
 const HeaderContainer = () => {
   const { authCookies, userEmail } = useAppSelector((state) => state.login);
+  const { orderFormId } = useAppSelector((state) => state.shoppingCart);
   const [cookies, setCookie] = useCookies();
   const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(true);
@@ -45,6 +50,33 @@ const HeaderContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!orderFormId) {
+      dispatch(getShoppingCart());
+    }
+    customDispatchEvent({
+      name: WindowsEvents.CART_HEADER,
+      detail: { cartId: orderFormId },
+    });
+  }, [orderFormId, dispatch]);
+
+  const handleAddProductInCartEvent = useCallback(
+    (event: Event) => {
+      event.preventDefault();
+      const customEvent = event as CustomEvent<{ isShoppingCartUsed: boolean }>;
+      console.log(customEvent.detail);
+      dispatch(setShoppingCartUse(customEvent.detail.isShoppingCartUsed));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    document.addEventListener(
+      WindowsEvents.CART_HEADER,
+      handleAddProductInCartEvent,
+    );
+  }, [handleAddProductInCartEvent]);
 
   useEffect(() => {
     const handleScroll = () => {

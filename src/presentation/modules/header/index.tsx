@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Provider } from 'react-redux';
-import store from '@store/index';
+import store, { persistor } from '@store/index';
 import { CookiesProvider } from 'react-cookie';
 import HeaderContainer from './header-container';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Header = () => {
   return (
     <Provider store={store}>
-      <CookiesProvider>
-        <HeaderContainer />
-      </CookiesProvider>
+      <PersistGate persistor={persistor} loading={null}>
+        <CookiesProvider>
+          <HeaderContainer />
+        </CookiesProvider>
+      </PersistGate>
     </Provider>
   );
 };
