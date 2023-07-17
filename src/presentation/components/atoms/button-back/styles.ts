@@ -8,4 +8,5 @@ export const ButtonBackContainer = styled.button`
   align-items: center;
   font-size: 15px;
   color: inherit;
+  cursor: pointer;
 `;

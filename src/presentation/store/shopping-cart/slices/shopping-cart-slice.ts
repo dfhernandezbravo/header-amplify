@@ -3,25 +3,25 @@ import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
 
 type ShoppingCartState = ShoppingCart & {
   isShoppingCartUsed: boolean;
-  quantity: number
+  quantity: number;
 };
 
 const initialState: ShoppingCartState = {
   orderFormId: undefined,
   isShoppingCartUsed: false,
-  quantity: 0
+  quantity: 0,
 };
 
 const shoppingCartSlice = createSlice({
-  name: 'shopping-cart',
+  name: 'shopping-cart-header',
   initialState,
   reducers: {
     setShoppingCartUse: (state, { payload }: { payload: boolean }) => {
       state.isShoppingCartUsed = payload;
     },
     setQuantity: (state, { payload }) => {
-      state.quantity = payload
-    }
+      state.quantity = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getShoppingCart.fulfilled, (state, { payload }) => {

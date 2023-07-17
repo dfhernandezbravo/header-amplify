@@ -14,6 +14,7 @@ const customerService: CustomerService = {
   getCustomer(email) {
     return httpInstance.get(`/customer/${email}`);
   },
+  getAddressCustomer: (email) => httpInstance.get(`/customer/${email}/address`),
 };
 
 export default customerService;

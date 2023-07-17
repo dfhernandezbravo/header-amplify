@@ -1,10 +1,19 @@
-import { MenuLocation } from '@modules/header/styles/header.styles';
 import React from 'react';
 import Image from 'next/image';
+import { RegionalizerContainer } from './styles';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
 
 const HeaderLocation = () => {
+  const { addressSelected } = useAppSelector((state) => state.regionalizer);
+  const dispatch = useAppDispatch();
+
+  const handleOnClick = () => {
+    dispatch(setOpenModalRegionalizer(true));
+  };
+
   return (
-    <MenuLocation>
+    <RegionalizerContainer onClick={handleOnClick}>
       <Image
         src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
         width={19}
@@ -13,9 +22,13 @@ const HeaderLocation = () => {
       />
       <div>
         <p>¿Dónde entregar tu compra?</p>
-        <p>Ingresa tu ubicación</p>
+        {addressSelected ? (
+          <strong>{addressSelected.city}</strong>
+        ) : (
+          <p>Ingresa tu ubicación</p>
+        )}
       </div>
-    </MenuLocation>
+    </RegionalizerContainer>
   );
 };
 

@@ -72,13 +72,11 @@ const HeaderContainer = () => {
 
   const handleAddProductInCartEvent = useCallback(
     (event: Event) => {
-      console.log('ESCUCHANDO EVENTO:::', event);
       event.preventDefault();
       const customEvent = event as CustomEvent<{
         isShoppingCartUsed: boolean;
         quantityItems: number;
       }>;
-      console.log(customEvent.detail);
       dispatch(setShoppingCartUse(customEvent.detail.isShoppingCartUsed));
       dispatch(setQuantity(customEvent.detail.quantityItems));
     },
