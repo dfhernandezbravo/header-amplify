@@ -5,4 +5,5 @@ export const RegionalizerContainer = styled.div`
   flex-direction: row;
   gap: 12px;
   font-size: 12px;
+  cursor: pointer;
 `;

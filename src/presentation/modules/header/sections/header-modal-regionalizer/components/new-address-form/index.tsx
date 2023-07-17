@@ -21,7 +21,7 @@ const NewAddressForm = ({ header }: Props) => {
   >();
   const [communeSelected, setCommuneSelected] = useState<Commune | undefined>();
   const { orderFormId } = useAppSelector((state) => state.shoppingCart);
-  const { isLoadingRegionalizer } = useAppSelector(
+  const { isLoadingRegionalizer, addressSelected } = useAppSelector(
     (state) => state.regionalizer,
   );
 
@@ -49,6 +49,22 @@ const NewAddressForm = ({ header }: Props) => {
     dispatch(addNewAddress({ data: formData, cartId: orderFormId! }));
   };
 
+  useEffect(() => {
+    if (!regions.length) return;
+
+    setRegionSelected(
+      regions.find((region) => region.name === addressSelected?.state),
+    );
+  }, [regions, addressSelected]);
+
+  useEffect(() => {
+    setCommuneSelected(
+      regionSelected?.comunas.find(
+        (commune) => commune.name === addressSelected?.city,
+      ),
+    );
+  }, [regionSelected, addressSelected]);
+
   return (
     <NewAddressFormContainer>
       {header}
@@ -62,6 +78,7 @@ const NewAddressForm = ({ header }: Props) => {
         <label htmlFor="select-regions">Regiones</label>
         <SelectNewAddressForm
           id="select-regions"
+          value={regionSelected?.id}
           onChange={(event) =>
             setRegionSelected(
               regions.find((region) => region.id === event.target.value),
@@ -81,6 +98,7 @@ const NewAddressForm = ({ header }: Props) => {
 
         <SelectNewAddressForm
           id="select-communes"
+          value={communeSelected?.id}
           onChange={(event) =>
             setCommuneSelected(
               regionSelected?.comunas.find(
