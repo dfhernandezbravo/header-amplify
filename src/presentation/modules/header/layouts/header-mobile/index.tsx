@@ -18,6 +18,7 @@ import {
   SearchInputContainer,
 } from './styles';
 import HeaderModalLogin from '@modules/header/sections/header-modal-login';
+import ModalRegionalizer from '@modules/header/sections/header-modal-regionalizer';
 
 const HeaderMobile = () => {
   const { isOpenResults } = useAppSelector((state) => state.search);
@@ -52,6 +53,7 @@ const HeaderMobile = () => {
           <HeaderLocation />
         </HeaderMobileLocationSection>
       </HeaderMobileContainer>
+      <ModalRegionalizer />
       <HeaderModalLogin />
     </Mobile>
   );

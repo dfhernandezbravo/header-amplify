@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { ModalContent, ModalWrapper } from './style';
-import { useAppDispatch } from '@hooks/storeHooks';
-import { closeModalLogin } from '@store/login/slices/login-slice';
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,8 +8,6 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -38,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   }
 
   return (
-    <ModalWrapper onClick={() => dispatch(closeModalLogin())}>
+    <ModalWrapper onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         {children}
       </ModalContent>

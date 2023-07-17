@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import getAddressCustomer from '@use-cases/customer/get-address-customer';
 import getCustomer from '@use-cases/customer/get-customer';
 
 type CustomerState = {
   customer: Customer | null;
+  addresses: CustomerAddress[];
 };
 
 const initialState: CustomerState = {
   customer: null,
+  addresses: [],
 };
 
 const customerSlice = createSlice({
@@ -18,9 +21,13 @@ const customerSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getCustomer.fulfilled, (state, { payload }) => {
-      state.customer = payload;
-    });
+    builder
+      .addCase(getCustomer.fulfilled, (state, { payload }) => {
+        state.customer = payload;
+      })
+      .addCase(getAddressCustomer.fulfilled, (state, { payload }) => {
+        state.addresses = payload;
+      });
   },
 });
 export const { setCustomer } = customerSlice.actions;

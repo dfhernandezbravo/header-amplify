@@ -15,7 +15,6 @@ type LoginState = {
   isOpenModalLogin: boolean;
   isLoading: boolean;
   isLogged: boolean;
-  isUnauthorized: boolean;
   loginStep: keyof LoginStep;
   loginMethods: LoginMethods[];
   authCookies: AuthCookie[];
@@ -27,7 +26,6 @@ const initialState: LoginState = {
   isOpenModalLogin: false,
   isLoading: false,
   isLogged: false,
-  isUnauthorized: false,
   loginStep: 'Methods',
   authCookies: [],
   userEmail: '',
@@ -68,9 +66,10 @@ const loginSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(setPassword.fulfilled, (state, { payload }) => {
-        state.authCookies = payload || [];
+        state.authCookies = [...state.authCookies, ...payload] || [];
         state.isOpenModalLogin = false;
         state.loginStep = 'Methods';
+        state.isLogged = true;
       })
       .addCase(setPassword.pending, (state) => {
         state.isLoading = true;
@@ -79,6 +78,7 @@ const loginSlice = createSlice({
         state.isOpenModalLogin = false;
         state.loginStep = 'Methods';
         state.authCookies = [...state.authCookies, ...payload] || [];
+        state.isLogged = true;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -87,12 +87,14 @@ const loginSlice = createSlice({
         state.isOpenModalLogin = false;
         state.loginStep = 'Methods';
         state.authCookies = [...state.authCookies, ...payload] || [];
+        state.isLogged = true;
       })
       .addCase(validateAccessKey.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(logout.fulfilled, (state, { payload }) => {
         state.authCookies = payload;
+        state.isLogged = false;
       });
   },
 });

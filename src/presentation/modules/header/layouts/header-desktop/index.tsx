@@ -12,6 +12,7 @@ import HeaderResults from '@modules/header/sections/header-results';
 import HeaderMenu from '@modules/header/sections/header-menu';
 import HeaderCategory from '@modules/header/sections/header-category';
 import HeaderModalLogin from '@modules/header/sections/header-modal-login';
+import ModalRegionalizer from '@modules/header/sections/header-modal-regionalizer';
 
 const HeaderDesktop = () => {
   return (
@@ -29,6 +30,7 @@ const HeaderDesktop = () => {
         <HeaderCart />
       </HeaderDesktopContainer>
       <HeaderModalLogin />
+      <ModalRegionalizer />
       <HeaderCategory />
       <HeaderFooter />
     </Desktop>

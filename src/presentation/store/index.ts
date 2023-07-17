@@ -10,9 +10,20 @@ import loginSlice from './login/slices/login-slice';
 import customerSlice from './customer/slices/customer-slice';
 import errorSlice from './error/slices/error-slice';
 import shoppingCartSlice from './shopping-cart/slices/shopping-cart-slice';
+import regionalizerSlice from './regionalizer/slices/regionalizer-slice';
 
 const persistShoppingCartConfig = {
-  key: 'shopping-cart-header',
+  key: 'shopping-cart-root',
+  storage,
+};
+
+const persistRegionalizerConfig = {
+  key: 'regionalizer',
+  storage,
+};
+
+const persistLoginConfig = {
+  key: 'login',
   storage,
 };
 
@@ -21,15 +32,23 @@ const shoppingCartReducer = persistReducer(
   shoppingCartSlice.reducer,
 );
 
+const regionalizerReducer = persistReducer(
+  persistRegionalizerConfig,
+  regionalizerSlice.reducer,
+);
+
+const loginReducer = persistReducer(persistLoginConfig, loginSlice.reducer);
+
 const store = configureStore({
   reducer: {
     cart: cartSlice.reducer,
     search: searchSlice.reducer,
     category: categorySlice.reducer,
-    login: loginSlice.reducer,
+    login: loginReducer,
     customer: customerSlice.reducer,
     error: errorSlice.reducer,
     shoppingCart: shoppingCartReducer,
+    regionalizer: regionalizerReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
