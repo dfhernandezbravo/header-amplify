@@ -5,7 +5,7 @@ import { openCategories } from '@store/category/slices/category-slice';
 import getCategories from '@use-cases/category/get-categories';
 import React, { useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { MenuContainer } from './styles';
+import { IconCloseContainer, IconMenuContainer, MenuContainer } from './styles';
 
 const HeaderMenu = () => {
   const dispatch = useAppDispatch();
@@ -18,9 +18,13 @@ const HeaderMenu = () => {
   return (
     <MenuContainer onClick={() => dispatch(openCategories(!isOpenCategories))}>
       {isOpenCategories ? (
-        <AiOutlineClose size={30} />
+        <IconMenuContainer>
+          <AiOutlineClose size={30} />
+        </IconMenuContainer>
       ) : (
-        <AiOutlineMenu size={30} />
+        <IconCloseContainer>
+          <AiOutlineMenu size={30} />
+        </IconCloseContainer>
       )}
 
       <Mobile>
