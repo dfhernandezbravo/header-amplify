@@ -3,12 +3,14 @@ import Image from 'next/image';
 import { RegionalizerContainer } from './styles';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
+import { openCategories } from '@store/category/slices/category-slice';
 
 const HeaderLocation = () => {
   const { addressSelected } = useAppSelector((state) => state.regionalizer);
   const dispatch = useAppDispatch();
 
   const handleOnClick = () => {
+    dispatch(openCategories(false));
     dispatch(setOpenModalRegionalizer(true));
   };
 

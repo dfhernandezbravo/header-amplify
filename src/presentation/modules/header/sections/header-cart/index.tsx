@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { HeaderCartSection } from '@modules/header/styles/header.styles';
 import cartSlice from '@store/cart';
 import { CartItemModel } from '@store/cart/cart.type';
+import { openCategories } from '@store/category/slices/category-slice';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import React, { useEffect, useState } from 'react';
 
@@ -41,7 +42,7 @@ const HeaderCart = () => {
       dispatch(setRemoveProductInCart(customEvent.detail));
     },
     handleOnClickCart: () => {
-      console.log('dispatch TOGGLE_CART_ASIDE');
+      dispatch(openCategories(false));
       customDispatchEvent({
         name: 'TOGGLE_CART_ASIDE',
         detail: { open: true },
