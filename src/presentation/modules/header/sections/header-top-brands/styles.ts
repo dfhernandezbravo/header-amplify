@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 type LinkProp = {
   image?: string;
+  hasTooltip: boolean
 };
 
 export const HeaderTop = styled.ul`
@@ -43,6 +44,10 @@ export const HeaderLink = styled.a<LinkProp>`
   margin: 0 !important;
   margin-right: 10px;
   padding: 7px 15px !important;
+  position: relative;
+  &:hover {
+    background-color: #000;
+  }
   ${(props) => {
     if (props.image) {
       return css`
@@ -50,7 +55,102 @@ export const HeaderLink = styled.a<LinkProp>`
       `;
     }
   }}
-  &:hover {
-    background-color: #000;
-  }
+  
+  ${(props) => {
+    if(props.hasTooltip) {
+      return css `
+        &:after {
+          content: '';
+          position: absolute;
+          background-image: url('/icons/header-top-brands/chevron-down-small.svg');
+          width: 10px;
+          height: 10px;
+          right: 0;
+          top: 12px;
+          background-repeat: no-repeat;
+        }
+      
+        &:hover div {
+          display:block
+        }
+      `
+    }
+  }}
+
 `;
+
+export const HeaderCencosudCardModal = styled.div `
+  display: none;
+  position: absolute;
+  width: 1000px;
+  left: -600px;
+  background-color: #ffffff;
+  padding: 33px 50px;
+  border-radius: 10px;
+  top: 31px;
+  z-index: 9;
+
+  & a {
+    text-decoration: none;
+    color: #1a1a1a;
+  }
+
+  & :after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 66%;
+    margin-left: -5px;
+    border: 10px solid transparent;
+    border-bottom-color: #fff;
+  }
+
+  & ul {
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  & ul li {
+    color: #1a1a1a;
+    font-family: OpenSans,sans-serif;
+    font-size: 14px;
+    position: relative;
+    list-style: none;
+  }
+
+  & ul li span{
+    font-weight: 600;
+  }
+
+  & ul li:before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    top: -8px;
+    left: -32px;
+  }
+
+  & ul .wallet:before {
+    background-image: url('/icons/header-top-brands/wallet.svg');
+  }
+
+  & ul .advance-simulation:before {
+    background-image: url('/icons/header-top-brands/cash.svg');
+  }
+
+  & ul .bag:before {
+    background-image: url('/icons/header-top-brands/bag.svg');
+  }
+
+  & ul .hand:before {
+    background-image: url('/icons/header-top-brands/hand.svg');
+  }
+
+  & ul .card:before {
+    background-image: url('/icons/header-top-brands/card-1.svg');
+  }
+  
+`
