@@ -161,7 +161,7 @@ const NewAddressForm = ({ header }: Props) => {
             )
           }
         >
-          {ordereredCommune?.map((commune: any) => (
+          {ordereredCommune?.map((commune: Commune) => (
             <option key={commune.id} value={commune.id}>
               {commune.name}
             </option>

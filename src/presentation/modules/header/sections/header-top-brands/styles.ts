@@ -39,6 +39,7 @@ const hasTooltip = css`
     right: 0;
     top: 12px;
     background-repeat: no-repeat;
+    cursor:pointer;
   }
 
   &:hover div {
