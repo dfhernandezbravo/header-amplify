@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Mobile from '@components/layout/mobile';
 import Desktop from '@components/layout/desktop';
 import {
+  LoginButtonContainerDesktop,
   LoginContainer,
   LoginContainerDesktop,
   LoginInformation,
@@ -14,6 +15,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { openModalLogin } from '@store/login/slices/login-slice';
 import logout from '@use-cases/login/logout';
+import { IoIosArrowDown } from 'react-icons/io';
 import { openCategories } from '@store/category/slices/category-slice';
 
 const HeaderLogin = () => {
@@ -55,8 +57,11 @@ const HeaderLogin = () => {
             />
 
             <LoginUser>
-              <span>¡Hola!</span>
-              <strong>{customer ? customer.firstName : 'Inicia Sesión'}</strong>
+              <span>¡Hola{customer ? ` ${customer?.firstName}` : ''}!</span>
+              <LoginButtonContainerDesktop>
+                <strong>{customer ? 'Mi cuenta' : 'Inicia Sesión'}</strong>
+                {customer && <IoIosArrowDown />}
+              </LoginButtonContainerDesktop>
             </LoginUser>
           </LoginInformation>
 
