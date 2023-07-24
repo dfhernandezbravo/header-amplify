@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import addNewAddress from '@use-cases/shopping-cart/add-new-address';
 
 type RegionalizerState = {
   regions: RegionalizerRegions | null;
@@ -22,20 +21,24 @@ const regionalizerSlice = createSlice({
     setOpenModalRegionalizer: (state, { payload }: { payload: boolean }) => {
       state.isOpenModalRegionalizer = payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(addNewAddress.pending, (state) => {
-        state.isLoadingRegionalizer = true;
-      })
-      .addCase(addNewAddress.fulfilled, (state, { payload }) => {
-        state.isLoadingRegionalizer = false;
-        state.addressSelected = payload || null;
-        state.isOpenModalRegionalizer = false;
-      });
+    pendingAddNewAddress: (state, { payload }: { payload: boolean }) => {
+      state.isLoadingRegionalizer = payload;
+    },
+    successAddNewAddress: (
+      state,
+      { payload }: { payload: AddressShoppingCart },
+    ) => {
+      state.isLoadingRegionalizer = false;
+      state.addressSelected = payload;
+      state.isOpenModalRegionalizer = false;
+    },
   },
 });
 
-export const { setOpenModalRegionalizer } = regionalizerSlice.actions;
+export const {
+  setOpenModalRegionalizer,
+  pendingAddNewAddress,
+  successAddNewAddress,
+} = regionalizerSlice.actions;
 
 export default regionalizerSlice;

@@ -1,14 +1,19 @@
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { AddNewAddressRequest } from '@entities/shopping-cart/shopping-cart-request';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import useAnalytics from '@hooks/useAnalytics';
+import {
+  pendingAddNewAddress,
+  successAddNewAddress,
+} from '@store/regionalizer/slices/regionalizer-slice';
 import getRegionalizerRegions from '@use-cases/regionalizer/get-regions';
+import addNewAddress from '@use-cases/shopping-cart/add-new-address';
 import React, { useEffect, useState } from 'react';
 import {
   NewAddressFormContainer,
   SelectNewAddressForm,
   SelectWrapper,
 } from './styles';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import addNewAddress from '@use-cases/shopping-cart/add-new-address';
 
 
 interface Props {
@@ -30,6 +35,9 @@ const NewAddressForm = ({ header }: Props) => {
   const { isLoadingRegionalizer, addressSelected } = useAppSelector(
     (state) => state.regionalizer,
   );
+  const { isLogged } = useAppSelector((state) => state.login);
+
+  const { sendEventAnalytics } = useAnalytics();
 
   const dispatch = useAppDispatch();
 
@@ -53,7 +61,7 @@ const NewAddressForm = ({ header }: Props) => {
     })();
   }, []);
 
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
     const formData: AddNewAddressRequest = {
       selectedAddresses: [
         {
@@ -66,7 +74,23 @@ const NewAddressForm = ({ header }: Props) => {
       ],
     };
 
-    dispatch(addNewAddress({ data: formData, cartId: orderFormId! }));
+    try {
+      dispatch(pendingAddNewAddress(true));
+      await addNewAddress({ data: formData, cartId: orderFormId! });
+      dispatch(successAddNewAddress(formData.selectedAddresses[0]));
+      sendEventAnalytics({
+        event: 'interaccion',
+        category: 'Interacciones componente regionalizador',
+        action: 'Click selección ingresa tu ubicación',
+        tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
+        region: regionSelected?.name,
+        comuna: communeSelected?.name,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(pendingAddNewAddress(false));
+    }
   };
 
   const ordereredCommune = regionSelected &&  orderByAlphabeticCommune(regionSelected?.comunas)

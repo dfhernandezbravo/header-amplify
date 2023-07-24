@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Mobile from '@components/layout/mobile';
 import Desktop from '@components/layout/desktop';
 import {
+  LoginButtonContainerDesktop,
   LoginContainer,
   LoginContainerDesktop,
   LoginInformation,
@@ -14,6 +15,8 @@ import {
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { openModalLogin } from '@store/login/slices/login-slice';
 import logout from '@use-cases/login/logout';
+import { IoIosArrowDown } from 'react-icons/io';
+import { openCategories } from '@store/category/slices/category-slice';
 
 const HeaderLogin = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,6 +25,7 @@ const HeaderLogin = () => {
   const dispatch = useAppDispatch();
 
   const handleClickItem = () => {
+    dispatch(openCategories(false));
     dispatch(openModalLogin());
   };
 
@@ -53,8 +57,11 @@ const HeaderLogin = () => {
             />
 
             <LoginUser>
-              <span>¡Hola!</span>
-              <strong>{customer ? customer.firstName : 'Inicia Sesión'}</strong>
+              <span>¡Hola{customer ? ` ${customer?.firstName}` : ''}!</span>
+              <LoginButtonContainerDesktop>
+                <strong>{customer ? 'Mi cuenta' : 'Inicia Sesión'}</strong>
+                {customer && <IoIosArrowDown />}
+              </LoginButtonContainerDesktop>
             </LoginUser>
           </LoginInformation>
 
@@ -78,9 +85,16 @@ const HeaderLogin = () => {
                 Mis Direcciones
               </MenuItem>
               <MenuItem href="https://ayuda.easy.cl/mis-compras?">
+                Mis Compras
+              </MenuItem>
+              <MenuItem href="https://www.easy.cl/micuenta#/wishlist">
                 Mis Favoritos
               </MenuItem>
-              <MenuItem href="" onClick={() => dispatch(logout(authCookies))}>
+              <MenuItem
+                last
+                href=""
+                onClick={() => dispatch(logout(authCookies))}
+              >
                 Salir
               </MenuItem>
             </LoginMenu>
