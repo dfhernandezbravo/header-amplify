@@ -1,26 +1,24 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import HeaderMobile from './layouts/header-mobile';
-import HeaderDesktop from './layouts/header-desktop';
+import { WindowsEvents } from '@events/index';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import { useCookies } from 'react-cookie';
-import { HeaderContainerWrapper } from './styles';
-import getCustomer from '@use-cases/customer/get-customer';
-import { setEmail } from '@store/login/slices/login-slice';
 import { setCustomer } from '@store/customer/slices/customer-slice';
-import { closeResults } from '@store/search/slices/search-slice';
-import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { setEmail } from '@store/login/slices/login-slice';
+import { closeResults } from '@store/search/slices/search-slice';
 import {
-  setShoppingCartUse,
   setQuantity,
+  setShoppingCartUse,
 } from '@store/shopping-cart/slices/shopping-cart-slice';
-import { WindowsEvents } from '../../events';
+import getCustomer from '@use-cases/customer/get-customer';
+import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import HeaderDesktop from './layouts/header-desktop';
+import HeaderMobile from './layouts/header-mobile';
+import { HeaderContainerWrapper } from './styles';
 
 const HeaderContainer = () => {
   const { authCookies, userEmail } = useAppSelector((state) => state.login);
-  const { orderFormId, quantity } = useAppSelector(
-    (state) => state.shoppingCart,
-  );
+  const { orderFormId } = useAppSelector((state) => state.shoppingCart);
   const [cookies, setCookie] = useCookies();
   const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(true);

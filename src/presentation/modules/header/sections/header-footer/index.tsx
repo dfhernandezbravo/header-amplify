@@ -1,12 +1,29 @@
+import { useAppSelector } from '@hooks/storeHooks';
+import useAnalytics from '@hooks/useAnalytics';
 import { HeaderBottom } from '@modules/header/styles/header.styles';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const HeaderFooter = () => {
+  const { sendEventAnalytics } = useAnalytics();
+  const { isLogged } = useAppSelector((state) => state.login);
   return (
     <HeaderBottom>
       <div>
-        <a href="/tiendas">Horarios y tiendas</a>
+        <Link
+          href="https://easy.cl/tiendas"
+          onClick={() =>
+            sendEventAnalytics({
+              event: 'interaccion',
+              category: 'Interacciones Header',
+              action: 'Click horarios y tiendas',
+              tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
+            })
+          }
+        >
+          Horarios y tiendas
+        </Link>
       </div>
       <div>
         <span>

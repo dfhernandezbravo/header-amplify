@@ -12,18 +12,35 @@ import {
   CategoriesDetailTitleLink,
   CategoriesItemsContainer,
 } from './styles';
+import useAnalytics from '@hooks/useAnalytics';
 
 const CategoriesDesktop = () => {
   const { categories } = useAppSelector((state) => state.category);
   const router = useRouter();
   const [category, setCategory] = useState<Category | null>(null);
+  const { sendEventAnalytics } = useAnalytics();
 
   const handleHover = (categorySelected: Category) => {
     setCategory(categorySelected);
   };
 
   const handleClick = (categorySelected: Category) => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Interacciones Header',
+      action: 'Clic Menu N1',
+      tag: categorySelected.name,
+    });
     router.push(categorySelected.url);
+  };
+
+  const handleOnClickShowAll = (category: Category) => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Interacciones Header',
+      action: 'Click mostrar todo menu',
+      tag: category.name,
+    });
   };
 
   return (
@@ -45,7 +62,10 @@ const CategoriesDesktop = () => {
             <CategoriesDetailTitle>
               <h2>{category.name}</h2>
 
-              <CategoriesDetailTitleLink href={category.url}>
+              <CategoriesDetailTitleLink
+                href={category.url}
+                onClick={() => handleOnClickShowAll(category)}
+              >
                 Mostrar todo
               </CategoriesDetailTitleLink>
             </CategoriesDetailTitle>
