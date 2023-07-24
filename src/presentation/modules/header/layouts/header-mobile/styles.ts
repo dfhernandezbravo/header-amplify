@@ -33,6 +33,7 @@ export const HeaderMobileSearchSection = styled.div`
   width: 100%;
   padding: 12px 16px;
   height: 65px;
+  position:relative;
 `;
 
 export const HeaderMobileLocationSection = styled.div`
@@ -51,4 +52,17 @@ export const SearchInputContainer = styled.input`
   font-size: 14px;
   font-weight: 400;
   background-color: white;
+`;
+
+export const IconSearchContainer = styled.div`
+  color: #000;
+  fill: #000;
+  position: absolute;
+  right:0;
+  top:50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding: 0 8px;
+  background-color: #fff;
+  border-left: 1px solid #d2d2d2;
 `;

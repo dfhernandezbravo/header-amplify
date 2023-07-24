@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { SearchContainer, SearchInput } from './styles';
+import { SearchContainer, SearchInput, IconSearchContainer } from './styles';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
 import {
@@ -12,6 +12,8 @@ import useDebounce from '@hooks/useDebounce';
 import { getSearches } from '@use-cases/search/get-searches';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import useAnalytics from '@hooks/useAnalytics';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { useRouter } from "next/router";
 import { openCategories } from '@store/category/slices/category-slice';
 
 const HeaderSearch = React.memo(function Search() {
@@ -20,6 +22,7 @@ const HeaderSearch = React.memo(function Search() {
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
   const { searches } = useAppSelector((state) => state.search);
+  const router = useRouter();
 
   const sendQuery = useCallback(() => {
     dispatch(setTerm(search));
@@ -69,6 +72,10 @@ const HeaderSearch = React.memo(function Search() {
     });
   };
 
+  const handleOnClickSearchIcon = () => {
+    router.push(`${search}?_q=${search}&map=ft`);
+  };
+
   return (
     <SearchContainer>
       <SearchInput
@@ -88,6 +95,9 @@ const HeaderSearch = React.memo(function Search() {
         }}
         onClick={handleOnClickSearch}
       />
+      <IconSearchContainer onClick={handleOnClickSearchIcon}>
+        <AiOutlineSearch size={24} />
+      </IconSearchContainer>
     </SearchContainer>
   );
 });
