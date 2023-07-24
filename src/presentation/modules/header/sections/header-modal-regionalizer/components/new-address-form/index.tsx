@@ -20,11 +20,6 @@ interface Props {
   header: React.ReactNode;
 }
 
-
-type OrderAlphabet = {
-  name: string
-}
-
 const NewAddressForm = ({ header }: Props) => {
   const [regions, setRegions] = useState<RegionalizerRegions[]>([]);
   const [regionSelected, setRegionSelected] = useState<
