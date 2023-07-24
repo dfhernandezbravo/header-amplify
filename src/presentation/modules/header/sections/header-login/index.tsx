@@ -78,9 +78,16 @@ const HeaderLogin = () => {
                 Mis Direcciones
               </MenuItem>
               <MenuItem href="https://ayuda.easy.cl/mis-compras?">
+                Mis Compras
+              </MenuItem>
+              <MenuItem href="https://www.easy.cl/micuenta#/wishlist">
                 Mis Favoritos
               </MenuItem>
-              <MenuItem href="" onClick={() => dispatch(logout(authCookies))}>
+              <MenuItem
+                last
+                href=""
+                onClick={() => dispatch(logout(authCookies))}
+              >
                 Salir
               </MenuItem>
             </LoginMenu>
