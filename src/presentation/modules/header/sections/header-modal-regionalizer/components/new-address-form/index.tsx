@@ -15,6 +15,11 @@ interface Props {
   header: React.ReactNode;
 }
 
+
+type OrderAlphabet = {
+  name: string
+}
+
 const NewAddressForm = ({ header }: Props) => {
   const [regions, setRegions] = useState<RegionalizerRegions[]>([]);
   const [regionSelected, setRegionSelected] = useState<
@@ -28,7 +33,11 @@ const NewAddressForm = ({ header }: Props) => {
 
   const dispatch = useAppDispatch();
 
-  const orderByAlphabetic = (arr: any) => {
+  const orderByAlphabeticRegions = (arr: RegionalizerRegions[]) => {
+    return arr.sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  const orderByAlphabeticCommune= (arr: Commune[]) => {
     return arr.sort((a, b) => a.name.localeCompare(b.name))
   }
 
@@ -37,14 +46,14 @@ const NewAddressForm = ({ header }: Props) => {
       const response = await getRegionalizerRegions();
       const indexOfPreselectedRegion = response?.findIndex(region => region.name === 'Metropolitana')
       let highlightedRegion = response.splice(indexOfPreselectedRegion, 1)[0]
-      let regionOrdered = orderByAlphabetic(response)
+      let regionOrdered = orderByAlphabeticRegions(response)
       regionOrdered.unshift(highlightedRegion)
       setRegions(regionOrdered);
       setRegionSelected(highlightedRegion)
     })();
   }, []);
 
-  const handleOnClick = async () => {
+  const handleOnClick = () => {
     const formData: AddNewAddressRequest = {
       selectedAddresses: [
         {
@@ -57,23 +66,34 @@ const NewAddressForm = ({ header }: Props) => {
       ],
     };
 
-    // if(!orderFormId) {
-    //   await dispatch(getShoppingCart())
-    // }
-
     dispatch(addNewAddress({ data: formData, cartId: orderFormId! }));
   };
 
-  const ordereredCommune = regionSelected && orderByAlphabetic(regionSelected?.comunas)
+  const ordereredCommune = regionSelected &&  orderByAlphabeticCommune(regionSelected?.comunas)
   useEffect(() => {
     if (!regions.length) return;
+
+    if (addressSelected?.state) {
+      return setRegionSelected(
+        regions.find((region) => region.name === addressSelected?.state),
+      );
+
+    }
+
     setRegionSelected(
       regions.find((region) => region.name === 'Metropolitana'));
   }, [regions, addressSelected]);
 
   useEffect(() => {
-    if (communeSelected) return;
-    if(regionSelected) {
+    if (communeSelected) {
+      return setCommuneSelected(
+        regionSelected?.comunas.find(
+          (commune) => commune.name === addressSelected?.city,
+        ),
+      );
+    };
+
+    if (regionSelected) {
       setCommuneSelected(regionSelected?.comunas[0])
     }
 
@@ -99,7 +119,7 @@ const NewAddressForm = ({ header }: Props) => {
             )
           }
         >
-          
+
           {regions?.map((region) => (
             <option key={region?.id} value={region?.id}>
               {region.name}
@@ -122,7 +142,7 @@ const NewAddressForm = ({ header }: Props) => {
             )
           }
         >
-          {ordereredCommune?.map((commune:any) => (
+          {ordereredCommune?.map((commune: any) => (
             <option key={commune.id} value={commune.id}>
               {commune.name}
             </option>

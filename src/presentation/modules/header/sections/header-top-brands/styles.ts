@@ -29,6 +29,23 @@ export const HeaderTopItem = styled.li`
   }
 `;
 
+const hasTooltip = css`
+  &:after {
+    content: '';
+    position: absolute;
+    background-image: url('/icons/header-top-brands/chevron-down-small.svg');
+    width: 10px;
+    height: 10px;
+    right: 0;
+    top: 12px;
+    background-repeat: no-repeat;
+  }
+
+  &:hover div {
+    display:block
+  }
+`
+
 export const HeaderLink = styled.a<LinkProp>`
   display: block;
   font-size: 0.75rem;
@@ -48,38 +65,12 @@ export const HeaderLink = styled.a<LinkProp>`
   &:hover {
     background-color: #000;
   }
-  ${(props) => {
-    if (props.image) {
-      return css`
-        background: url(${props.image}) center 9px no-repeat;
-      `;
-    }
-  }}
-  
-  ${(props) => {
-    if(props.hasTooltip) {
-      return css `
-        &:after {
-          content: '';
-          position: absolute;
-          background-image: url('/icons/header-top-brands/chevron-down-small.svg');
-          width: 10px;
-          height: 10px;
-          right: 0;
-          top: 12px;
-          background-repeat: no-repeat;
-        }
-      
-        &:hover div {
-          display:block
-        }
-      `
-    }
-  }}
-
+  ${(props) => props.image ? `background: url(${props.image}) center 9px no-repeat;` : null  }
+  ${(props) => props.hasTooltip ? hasTooltip : null }
 `;
 
-export const HeaderCencosudCardModal = styled.div `
+
+export const HeaderCencosudCardModal = styled.div`
   display: none;
   position: absolute;
   width: 1000px;
