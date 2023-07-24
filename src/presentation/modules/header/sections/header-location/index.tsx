@@ -1,16 +1,24 @@
-import React from 'react';
 import Image from 'next/image';
-import { RegionalizerContainer } from './styles';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import useAnalytics from '@hooks/useAnalytics';
 import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
 import { openCategories } from '@store/category/slices/category-slice';
+import { RegionalizerContainer } from './styles';
 
 const HeaderLocation = () => {
   const { addressSelected } = useAppSelector((state) => state.regionalizer);
+  const { isLogged } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
+  const { sendEventAnalytics } = useAnalytics();
 
   const handleOnClick = () => {
     dispatch(openCategories(false));
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Interacciones componente regionalizador',
+      action: 'Click selección ingresa tu ubicación',
+      tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
+    });
     dispatch(setOpenModalRegionalizer(true));
   };
 
