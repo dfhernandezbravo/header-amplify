@@ -5,6 +5,7 @@ import {
   CategoryDetailItemLinkAll,
   CategoryDetailItemTitle,
 } from './styles';
+import useAnalytics from '@hooks/useAnalytics';
 
 interface Props {
   category: Category;
@@ -12,13 +13,38 @@ interface Props {
 
 const CategoryDetailItem = ({ category }: Props) => {
   const { name, children, url } = category;
+  const { sendEventAnalytics } = useAnalytics();
+
+  const handleOnClickTitle = () => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Interacciones Header',
+      action: 'Clic Menu N2',
+      tag: category.name,
+    });
+  };
+
+  const handleOnClickSubcategory = (subcategory: Category) => {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Interacciones Header',
+      action: 'Clic Menu N3',
+      tag: subcategory.name,
+    });
+  };
 
   return (
     <CategoryDetailItemContainer>
-      <CategoryDetailItemTitle href={url}>{name}</CategoryDetailItemTitle>
+      <CategoryDetailItemTitle href={url} onClick={handleOnClickTitle}>
+        {name}
+      </CategoryDetailItemTitle>
 
       {children.map((item) => (
-        <CategoryDetailItemLink href={item.url} key={item.id}>
+        <CategoryDetailItemLink
+          href={item.url}
+          key={item.id}
+          onClick={() => handleOnClickSubcategory(item)}
+        >
           {item.name}
         </CategoryDetailItemLink>
       ))}

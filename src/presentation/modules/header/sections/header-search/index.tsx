@@ -14,6 +14,7 @@ import { getProductsSuggestions } from '@use-cases/search/get-products-suggestio
 import useAnalytics from '@hooks/useAnalytics';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useRouter } from "next/router";
+import { openCategories } from '@store/category/slices/category-slice';
 
 const HeaderSearch = React.memo(function Search() {
   const [search, setSearch] = useState('');
@@ -62,6 +63,7 @@ const HeaderSearch = React.memo(function Search() {
   }, [searches, sendEventAnalytics, search]);
 
   const handleOnClickSearch = () => {
+    dispatch(openCategories(false));
     sendEventAnalytics({
       event: 'interaccion',
       category: 'Header',
