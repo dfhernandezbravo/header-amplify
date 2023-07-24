@@ -14,6 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { openModalLogin } from '@store/login/slices/login-slice';
 import logout from '@use-cases/login/logout';
+import { openCategories } from '@store/category/slices/category-slice';
 
 const HeaderLogin = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,6 +23,7 @@ const HeaderLogin = () => {
   const dispatch = useAppDispatch();
 
   const handleClickItem = () => {
+    dispatch(openCategories(false));
     dispatch(openModalLogin());
   };
 

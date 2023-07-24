@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
 import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
-import Image from 'next/image';
-import React from 'react';
+import { openCategories } from '@store/category/slices/category-slice';
 import { RegionalizerContainer } from './styles';
 
 const HeaderLocation = () => {
@@ -12,6 +12,7 @@ const HeaderLocation = () => {
   const { sendEventAnalytics } = useAnalytics();
 
   const handleOnClick = () => {
+    dispatch(openCategories(false));
     sendEventAnalytics({
       event: 'interaccion',
       category: 'Interacciones componente regionalizador',
