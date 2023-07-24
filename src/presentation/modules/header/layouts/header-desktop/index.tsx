@@ -7,7 +7,12 @@ import HeaderLogo from '@modules/header/sections/header-logo';
 import HeaderSearch from '@modules/header/sections/header-search';
 import HeaderTopBrands from '@modules/header/sections/header-top-brands';
 import React from 'react';
-import { HeaderDesktopContainer, HeaderDesktopSearchSection } from './styles';
+import {
+  Container,
+  Divider,
+  HeaderDesktopContainer,
+  HeaderDesktopSearchSection,
+} from './styles';
 import HeaderResults from '@modules/header/sections/header-results';
 import HeaderMenu from '@modules/header/sections/header-menu';
 import HeaderCategory from '@modules/header/sections/header-category';
@@ -26,8 +31,11 @@ const HeaderDesktop = () => {
           <HeaderSearch />
           <HeaderResults />
         </HeaderDesktopSearchSection>
-        <HeaderLogin />
-        <HeaderCart />
+        <Container>
+          <HeaderLogin />
+          <Divider />
+          <HeaderCart />
+        </Container>
       </HeaderDesktopContainer>
       <HeaderModalLogin />
       <ModalRegionalizer />
