@@ -15,3 +15,14 @@ export const HeaderDesktopSearchSection = styled.div`
   display: flex;
   flex: 1;
 `;
+
+export const Divider = styled.div`
+  height: 50px;
+  border-left: 0.5px solid white;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;

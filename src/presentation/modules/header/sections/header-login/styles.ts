@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 
+type MenuItemProps = {
+  last?: boolean;
+};
+
 export const LoginContainer = styled.button`
   cursor: pointer;
   font-size: 13px;
@@ -28,6 +32,10 @@ export const LoginUser = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  span {
+    font-size: 12px;
+  }
 `;
 
 const animationInMenu = keyframes`
@@ -77,17 +85,29 @@ export const LoginMenu = styled.div<{ isVisible: boolean }>`
   animation-duration: 0.2s;
 `;
 
-export const MenuItem = styled(Link)`
+export const MenuItem = styled(Link)<MenuItemProps>`
   display: block;
   color: #333;
   text-decoration: none;
   cursor: pointer;
   min-width: 150px;
+  font-size: 15px;
   padding: 12px;
   text-align: left;
+  border-bottom: ${(props) => (!props.last ? '1px solid #f2f2f2' : 'none')};
 
   &:hover {
     background-color: #f0f0f0;
+  }
+`;
+
+export const LoginButtonContainerDesktop = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  strong {
+    min-width: 60px;
   }
 `;
 
