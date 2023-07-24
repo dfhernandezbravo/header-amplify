@@ -12,7 +12,7 @@ const HeaderFooter = () => {
     <HeaderBottom>
       <div>
         <Link
-          href="https://easy.cl/tiendas"
+          href="https://www.easy.cl/tiendas"
           onClick={() =>
             sendEventAnalytics({
               event: 'interaccion',
