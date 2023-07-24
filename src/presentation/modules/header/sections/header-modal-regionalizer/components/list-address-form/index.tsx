@@ -47,6 +47,16 @@ const ListAddressForm = () => {
     </HeaderNewAddressContainer>
   );
 
+  const filterRepeatedAddress = addresses.reduceRight((acc: CustomerAddress[], address) => {
+    if (!acc.some((item) => (
+      item.geoCoordinate[0] === address.geoCoordinate[0] &&
+      item.geoCoordinate[1] === address.geoCoordinate[1]
+    ))) {
+      acc.push(address);
+    }
+    return acc;
+  }, [])
+
   const handleOnClick = async () => {
     if (!selectedAddress) return;
 
@@ -91,6 +101,7 @@ const ListAddressForm = () => {
     }
   };
 
+  
   return step === 'list-address' ? (
     <ListAddressFormContainer>
       <h3>Ingresa tu ubicación</h3>
@@ -100,7 +111,7 @@ const ListAddressForm = () => {
       <h3>Tus direcciones</h3>
 
       <ListAddressContainer>
-        {addresses.map((address) => (
+        {filterRepeatedAddress.map((address) => (
           <RadioButtonAddress
             checked={selectedAddress?.id === address.id}
             text={`${address.street}, ${address.number}, ${address.neighborhood}, ${address.state}`}

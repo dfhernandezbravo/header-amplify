@@ -15,6 +15,7 @@ import {
   SelectWrapper,
 } from './styles';
 
+
 interface Props {
   header: React.ReactNode;
 }
@@ -35,10 +36,23 @@ const NewAddressForm = ({ header }: Props) => {
 
   const dispatch = useAppDispatch();
 
+  const orderByAlphabeticRegions = (arr: RegionalizerRegions[]) => {
+    return arr.sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  const orderByAlphabeticCommune= (arr: Commune[]) => {
+    return arr.sort((a, b) => a.name.localeCompare(b.name))
+  }
+
   useEffect(() => {
     (async () => {
       const response = await getRegionalizerRegions();
-      setRegions(response);
+      const indexOfPreselectedRegion = response?.findIndex(region => region.name === 'Metropolitana')
+      let highlightedRegion = response.splice(indexOfPreselectedRegion, 1)[0]
+      let regionOrdered = orderByAlphabeticRegions(response)
+      regionOrdered.unshift(highlightedRegion)
+      setRegions(regionOrdered);
+      setRegionSelected(highlightedRegion)
     })();
   }, []);
 
@@ -54,6 +68,7 @@ const NewAddressForm = ({ header }: Props) => {
         },
       ],
     };
+
     try {
       dispatch(pendingAddNewAddress(true));
       await addNewAddress({ data: formData, cartId: orderFormId! });
@@ -73,20 +88,34 @@ const NewAddressForm = ({ header }: Props) => {
     }
   };
 
+  const ordereredCommune = regionSelected &&  orderByAlphabeticCommune(regionSelected?.comunas)
   useEffect(() => {
     if (!regions.length) return;
 
+    if (addressSelected?.state) {
+      return setRegionSelected(
+        regions.find((region) => region.name === addressSelected?.state),
+      );
+
+    }
+
     setRegionSelected(
-      regions.find((region) => region.name === addressSelected?.state),
-    );
+      regions.find((region) => region.name === 'Metropolitana'));
   }, [regions, addressSelected]);
 
   useEffect(() => {
-    setCommuneSelected(
-      regionSelected?.comunas.find(
-        (commune) => commune.name === addressSelected?.city,
-      ),
-    );
+    if (communeSelected) {
+      return setCommuneSelected(
+        regionSelected?.comunas.find(
+          (commune) => commune.name === addressSelected?.city,
+        ),
+      );
+    };
+
+    if (regionSelected) {
+      setCommuneSelected(regionSelected?.comunas[0])
+    }
+
   }, [regionSelected, addressSelected]);
 
   return (
@@ -109,8 +138,9 @@ const NewAddressForm = ({ header }: Props) => {
             )
           }
         >
-          {regions.map((region) => (
-            <option key={region.id} value={region.id}>
+
+          {regions?.map((region) => (
+            <option key={region?.id} value={region?.id}>
               {region.name}
             </option>
           ))}
@@ -131,7 +161,7 @@ const NewAddressForm = ({ header }: Props) => {
             )
           }
         >
-          {regionSelected?.comunas.map((commune) => (
+          {ordereredCommune?.map((commune: Commune) => (
             <option key={commune.id} value={commune.id}>
               {commune.name}
             </option>

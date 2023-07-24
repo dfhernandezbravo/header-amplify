@@ -1,4 +1,5 @@
 import React from 'react';
+import HeaderCencosuTooltip from './modal-cencosud'
 import { HeaderLink, HeaderTop, HeaderTopItem } from './styles';
 
 const topBrands = [
@@ -30,7 +31,7 @@ const topBrands = [
   },
   {
     name: 'Tarjeta Cencosud',
-    link: 'https://www.santaisabel.cl/',
+    link: 'https://www.puntoscencosud.cl/puntos/',
   },
   {
     name: 'Centro de ayuda',
@@ -46,6 +47,7 @@ const topBrands = [
   },
 ];
 
+
 function HeaderTopBrands() {
   return (
     <HeaderTop>
@@ -56,8 +58,12 @@ function HeaderTopBrands() {
             href={brand.link}
             target="_blank"
             image={brand.image}
+            hasTooltip={brand.name === 'Tarjeta Cencosud' ? true : false}
           >
             {!brand.image && brand.name}
+            {
+              brand.name === 'Tarjeta Cencosud' && <HeaderCencosuTooltip />
+            }
           </HeaderLink>
         </HeaderTopItem>
       ))}
