@@ -2,16 +2,16 @@ import styled from 'styled-components';
 
 export const NewsletterContainer = styled.div`
   width: 100%;
+  height: 120px;
   background-color: #f2f2f2;
   border-radius: 0.5rem;
   padding: 1.5rem 1rem;
-  position: absolute;
-  top: -3rem;
+  top: -40px;
   max-width: 70.188rem;
   display: flex;
   justify-content: space-around;
-  left: 50%;
-  transform: translateX(-50%);
+  align-items: center;
+  transform: translateY(-50%);
 
   .newsletter__Title {
     display: flex;
@@ -27,7 +27,6 @@ export const NewsletterContainer = styled.div`
   }
 
   &:has(.subscribe) {
-    border-radius: 0;
     padding: 0;
     margin: 0;
 
