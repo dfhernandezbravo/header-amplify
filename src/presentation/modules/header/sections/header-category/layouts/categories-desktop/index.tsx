@@ -31,7 +31,8 @@ const CategoriesDesktop = () => {
       action: 'Clic Menu N1',
       tag: categorySelected.name,
     });
-    router.push(categorySelected.url);
+    
+    router.push(`/${categorySelected.subname}`);
   };
 
   const handleOnClickShowAll = (category: Category) => {
