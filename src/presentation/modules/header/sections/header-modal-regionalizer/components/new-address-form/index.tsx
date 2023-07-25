@@ -15,7 +15,6 @@ import {
   SelectWrapper,
 } from './styles';
 
-
 interface Props {
   header: React.ReactNode;
 }
@@ -37,22 +36,24 @@ const NewAddressForm = ({ header }: Props) => {
   const dispatch = useAppDispatch();
 
   const orderByAlphabeticRegions = (arr: RegionalizerRegions[]) => {
-    return arr.sort((a, b) => a.name.localeCompare(b.name))
-  }
+    return arr.sort((a, b) => a.name.localeCompare(b.name));
+  };
 
-  const orderByAlphabeticCommune= (arr: Commune[]) => {
-    return arr.sort((a, b) => a.name.localeCompare(b.name))
-  }
+  const orderByAlphabeticCommune = (arr: Commune[]) => {
+    return arr.sort((a, b) => a.name.localeCompare(b.name));
+  };
 
   useEffect(() => {
     (async () => {
       const response = await getRegionalizerRegions();
-      const indexOfPreselectedRegion = response?.findIndex(region => region.name === 'Metropolitana')
-      let highlightedRegion = response.splice(indexOfPreselectedRegion, 1)[0]
-      let regionOrdered = orderByAlphabeticRegions(response)
-      regionOrdered.unshift(highlightedRegion)
+      const indexOfPreselectedRegion = response?.findIndex(
+        (region) => region.name === 'Metropolitana',
+      );
+      let highlightedRegion = response.splice(indexOfPreselectedRegion, 1)[0];
+      let regionOrdered = orderByAlphabeticRegions(response);
+      regionOrdered.unshift(highlightedRegion);
       setRegions(regionOrdered);
-      setRegionSelected(highlightedRegion)
+      setRegionSelected(highlightedRegion);
     })();
   }, []);
 
@@ -88,7 +89,8 @@ const NewAddressForm = ({ header }: Props) => {
     }
   };
 
-  const ordereredCommune = regionSelected &&  orderByAlphabeticCommune(regionSelected?.comunas)
+  const ordereredCommune =
+    regionSelected && orderByAlphabeticCommune(regionSelected?.comunas);
   useEffect(() => {
     if (!regions.length) return;
 
@@ -96,11 +98,11 @@ const NewAddressForm = ({ header }: Props) => {
       return setRegionSelected(
         regions.find((region) => region.name === addressSelected?.state),
       );
-
     }
 
     setRegionSelected(
-      regions.find((region) => region.name === 'Metropolitana'));
+      regions.find((region) => region.name === 'Metropolitana'),
+    );
   }, [regions, addressSelected]);
 
   useEffect(() => {
@@ -110,12 +112,12 @@ const NewAddressForm = ({ header }: Props) => {
           (commune) => commune.name === addressSelected?.city,
         ),
       );
-    };
-
-    if (regionSelected) {
-      setCommuneSelected(regionSelected?.comunas[0])
     }
 
+    if (regionSelected) {
+      setCommuneSelected(regionSelected?.comunas[0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [regionSelected, addressSelected]);
 
   return (
@@ -138,7 +140,6 @@ const NewAddressForm = ({ header }: Props) => {
             )
           }
         >
-
           {regions?.map((region) => (
             <option key={region?.id} value={region?.id}>
               {region.name}

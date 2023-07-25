@@ -3,14 +3,9 @@ import { AccordionContainer, Content, Title } from './accordion.styles';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-interface Links {
-  text: string;
-  link: string;
-}
-
 interface AccordionProps {
   title: string;
-  links: Links[];
+  links: FooterLink[];
 }
 
 const ContentWrapper: any = styled.div<{ maxHeight: number }>`
@@ -42,9 +37,9 @@ const Accordion = ({ title, links }: AccordionProps) => {
       </>
 
       {links.map((link) => (
-        <ContentWrapper maxHeight={contentHeight} key={link.text}>
+        <ContentWrapper maxHeight={contentHeight} key={link.title}>
           <Content ref={contentRef}>
-            <Link href={link.link}>{link.text}</Link>
+            <Link href={link.link}>{link.title}</Link>
           </Content>
         </ContentWrapper>
       ))}
