@@ -30,6 +30,7 @@ const HeaderContainer = () => {
     });
   }, [authCookies, setCookie]);
 
+  // Agregar Cookies
   useEffect(() => {
     if (authCookies.length) {
       addCookies();
@@ -39,13 +40,15 @@ const HeaderContainer = () => {
     }
   }, [authCookies, addCookies, dispatch]);
 
+  // Obtener datos del cliente
   useEffect(() => {
     if (userEmail !== '' && cookies.token) {
       dispatch(getCustomer(userEmail));
       setCookie('user', userEmail);
     }
-  }, [dispatch, userEmail, setCookie, cookies.token]);
+  }, [userEmail, cookies.token, dispatch, setCookie]);
 
+  // Validar cookies al iniciar la app
   useEffect(() => {
     const email = cookies.user;
     if (email) {
@@ -54,6 +57,7 @@ const HeaderContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Scroll del Header
   useEffect(() => {
     if (!orderFormId) {
       dispatch(getShoppingCart());

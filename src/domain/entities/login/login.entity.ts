@@ -12,6 +12,9 @@ export type LoginStep = {
 export enum LoginProviders {
   USER_PASSWORD = 'UserPassword',
   EMAIL = 'Email',
+}
+
+export enum SocialProviders {
   GOOGLE = 'Google',
   FACEBOOK = 'Facebook',
 }
@@ -19,7 +22,11 @@ export enum LoginProviders {
 export type LoginMethods = {
   provider: LoginProviders;
   step: keyof LoginStep;
-  url?: string;
+};
+
+export type SocialLogin = {
+  providerName: SocialProviders;
+  url: string;
 };
 
 export type AuthCookie = {

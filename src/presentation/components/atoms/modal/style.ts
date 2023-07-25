@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ModalWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -10,6 +10,7 @@ export const ModalWrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
   z-index: 9999;
 `;
 

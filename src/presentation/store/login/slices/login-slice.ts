@@ -4,8 +4,10 @@ import {
   LoginMethods,
   LoginProviders,
   LoginStep,
+  SocialLogin,
 } from '@entities/login/login.entity';
 import { createSlice } from '@reduxjs/toolkit';
+import getLoginMethods from '@use-cases/login/get-login-methods';
 import login from '@use-cases/login/login';
 import logout from '@use-cases/login/logout';
 import setPassword from '@use-cases/login/set-password';
@@ -17,6 +19,7 @@ type LoginState = {
   isLogged: boolean;
   loginStep: keyof LoginStep;
   loginMethods: LoginMethods[];
+  socialMethods: SocialLogin[];
   authCookies: AuthCookie[];
   userEmail: string;
   error: AppError | null;
@@ -40,6 +43,7 @@ const initialState: LoginState = {
       step: 'UserPassword',
     },
   ],
+  socialMethods: [],
 };
 
 const loginSlice = createSlice({
@@ -63,6 +67,7 @@ const loginSlice = createSlice({
       state.authCookies = [...state.authCookies, ...payload];
     },
   },
+  // use cases
   extraReducers: (builder) => {
     builder
       .addCase(setPassword.fulfilled, (state, { payload }) => {
@@ -70,6 +75,7 @@ const loginSlice = createSlice({
         state.isOpenModalLogin = false;
         state.loginStep = 'Methods';
         state.isLogged = true;
+        state.isLoading = false;
       })
       .addCase(setPassword.pending, (state) => {
         state.isLoading = true;
@@ -79,6 +85,7 @@ const loginSlice = createSlice({
         state.loginStep = 'Methods';
         state.authCookies = [...state.authCookies, ...payload] || [];
         state.isLogged = true;
+        state.isLoading = false;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -88,6 +95,7 @@ const loginSlice = createSlice({
         state.loginStep = 'Methods';
         state.authCookies = [...state.authCookies, ...payload] || [];
         state.isLogged = true;
+        state.isLoading = false;
       })
       .addCase(validateAccessKey.pending, (state) => {
         state.isLoading = true;
@@ -95,6 +103,9 @@ const loginSlice = createSlice({
       .addCase(logout.fulfilled, (state, { payload }) => {
         state.authCookies = payload;
         state.isLogged = false;
+      })
+      .addCase(getLoginMethods.fulfilled, (state, { payload }) => {
+        state.socialMethods = payload;
       });
   },
 });

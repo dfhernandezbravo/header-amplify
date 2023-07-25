@@ -1,3 +1,4 @@
+import { SocialLogin } from '@entities/login/login.entity';
 import {
   GenerateAccessKeyRequest,
   GenerateTokenRequest,
@@ -13,14 +14,20 @@ import { AxiosResponse } from 'axios';
 
 export default interface LoginService {
   login(data: LoginRequest): Promise<AxiosResponse<LoginResponse>>;
+
   generateAccessKey(
     data: GenerateAccessKeyRequest,
   ): Promise<AxiosResponse<void>>;
+
   validateAccessKey(
     data: ValidateAccessKeyRequest,
   ): Promise<AxiosResponse<LoginResponse>>;
+
   setPassword(data: SetPasswordRequest): Promise<AxiosResponse<LoginResponse>>;
+
   generateToken(
     data: GenerateTokenRequest,
   ): Promise<AxiosResponse<GenerateTokenResponse>>;
+
+  getLoginMethods(): Promise<AxiosResponse<SocialLogin[]>>;
 }
