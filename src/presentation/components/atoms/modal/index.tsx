@@ -16,6 +16,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     };
 
     if (isOpen) {
+      console.log('Open modal');
       document.body.classList.add('header-footer-open-modal');
       document.addEventListener('keydown', handleKeyPress);
     } else {
@@ -27,7 +28,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       document.body.classList.remove('header-footer-open-modal');
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [isOpen, onClose]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   if (!isOpen) {
     return null;

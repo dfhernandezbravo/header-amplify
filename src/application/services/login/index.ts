@@ -16,6 +16,8 @@ const loginService: LoginService = {
     bffWebInstance.get('/auth/jwt', {
       headers: { checkoutAuth: data.checkoutAuth },
     }),
+
+  getLoginMethods: () => bffWebInstance.get('/auth/loginMethods'),
 };
 
 export default loginService;

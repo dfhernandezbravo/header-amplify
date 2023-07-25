@@ -5,4 +5,5 @@ export const MethodsContainer = styled.div`
   flex-direction: column;
   gap: 12px;
   padding-top: 12px;
+  max-width: 400px;
 `;
