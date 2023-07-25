@@ -47,7 +47,7 @@ const hasTooltip = css`
   }
 `
 
-export const HeaderLink = styled.a<LinkProp>`
+export const HeaderLink = styled.div<LinkProp>`
   display: block;
   font-size: 0.75rem;
   font-weight: 400;
@@ -113,6 +113,9 @@ export const HeaderCencosudCardModal = styled.div`
 
   & ul li span{
     font-weight: 600;
+    &:hover{
+      cursor: pointer
+    }
   }
 
   & ul li:before {
@@ -142,7 +145,7 @@ export const HeaderCencosudCardModal = styled.div`
   }
 
   & ul .card:before {
-    background-image: url('/icons/header-top-brands/card-1.svg');
+    background-image: url('/icons/header-top-brands/card.svg');
   }
   
 `
