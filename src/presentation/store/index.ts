@@ -13,7 +13,7 @@ import shoppingCartSlice from './shopping-cart/slices/shopping-cart-slice';
 import regionalizerSlice from './regionalizer/slices/regionalizer-slice';
 
 const persistShoppingCartConfig = {
-  key: 'shopping-cart-root',
+  key: 'shopping-cart-header',
   storage,
 };
 
@@ -47,7 +47,7 @@ const store = configureStore({
     login: loginReducer,
     customer: customerSlice.reducer,
     error: errorSlice.reducer,
-    shoppingCart: shoppingCartReducer,
+    shoppingCartHeader: shoppingCartReducer,
     regionalizer: regionalizerReducer,
   },
   middleware: (getDefaultMiddleware) =>

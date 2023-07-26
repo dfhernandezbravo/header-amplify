@@ -17,7 +17,6 @@ interface Props {
 }
 
 const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
-  console.log(category);
   return (
     <div>
       <CategoryHeader>

@@ -2,7 +2,6 @@ import { AppError } from '@entities/errors';
 import { AxiosResponse } from 'axios';
 
 const handleHttpError = (error: AxiosResponse): AppError => {
-  console.log(error.status);
   switch (error.status) {
     case 401:
       return {

@@ -16,7 +16,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     };
 
     if (isOpen) {
-      console.log('Open modal');
       document.body.classList.add('header-footer-open-modal');
       document.addEventListener('keydown', handleKeyPress);
     } else {
