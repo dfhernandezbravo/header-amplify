@@ -25,7 +25,7 @@ const NewAddressForm = ({ header }: Props) => {
     RegionalizerRegions | undefined
   >();
   const [communeSelected, setCommuneSelected] = useState<Commune | undefined>();
-  const { orderFormId } = useAppSelector((state) => state.shoppingCart);
+  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer, addressSelected } = useAppSelector(
     (state) => state.regionalizer,
   );

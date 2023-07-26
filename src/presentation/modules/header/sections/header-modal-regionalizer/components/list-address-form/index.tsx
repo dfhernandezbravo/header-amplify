@@ -22,7 +22,7 @@ import HeaderModalRegionalizer from '../header-modal-regionalizer';
 
 const ListAddressForm = () => {
   const { addresses, customer } = useAppSelector((state) => state.customer);
-  const { orderFormId } = useAppSelector((state) => state.shoppingCart);
+  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );

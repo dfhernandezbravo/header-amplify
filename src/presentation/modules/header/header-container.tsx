@@ -18,7 +18,7 @@ import { HeaderContainerWrapper } from './styles';
 
 const HeaderContainer = () => {
   const { authCookies, userEmail } = useAppSelector((state) => state.login);
-  const { orderFormId } = useAppSelector((state) => state.shoppingCart);
+  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
   const [cookies, setCookie] = useCookies();
   const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(true);
@@ -72,25 +72,21 @@ const HeaderContainer = () => {
     });
   }, [orderFormId, dispatch]);
 
-  const handleAddProductInCartEvent = useCallback(
-    (event: Event) => {
+  useEffect(() => {
+    document.addEventListener(WindowsEvents.CART_HEADER, (event) => {
       event.preventDefault();
       const customEvent = event as CustomEvent<{
-        isShoppingCartUsed: boolean;
-        quantityItems: number;
+        isShoppingCartUsed?: boolean;
+        quantityItems?: number;
       }>;
-      dispatch(setShoppingCartUse(customEvent.detail.isShoppingCartUsed));
-      dispatch(setQuantity(customEvent.detail.quantityItems));
-    },
-    [dispatch],
-  );
-
-  useEffect(() => {
-    document.addEventListener(
-      WindowsEvents.CART_HEADER,
-      handleAddProductInCartEvent,
-    );
-  }, [handleAddProductInCartEvent]);
+      if (customEvent.detail.quantityItems) {
+        dispatch(setQuantity(customEvent.detail.quantityItems));
+      }
+      if (customEvent.detail.isShoppingCartUsed) {
+        dispatch(setShoppingCartUse(customEvent.detail.isShoppingCartUsed));
+      }
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -7,7 +7,7 @@ import { openCategories } from '@store/category/slices/category-slice';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 
 const HeaderCart = () => {
-  const { quantity } = useAppSelector((state) => state.shoppingCart);
+  const { quantity } = useAppSelector((state) => state.shoppingCartHeader);
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
 

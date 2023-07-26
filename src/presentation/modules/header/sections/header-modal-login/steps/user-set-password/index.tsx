@@ -8,7 +8,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputText from '@components/atoms/inputs/input-text';
 import InputPassword from '@components/atoms/inputs/input-password';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import { error } from 'console';
 import InputCheckbox from '@components/atoms/inputs/input-checkbox';
 import Link from 'next/link';
 import { SetPasswordRequest } from '@entities/login/login.request';
@@ -42,7 +41,7 @@ const schema = yup.object({
 
 const LoginSetPassword = () => {
   const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
-    (state) => state.shoppingCart,
+    (state) => state.shoppingCartHeader,
   );
   const { userEmail } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();

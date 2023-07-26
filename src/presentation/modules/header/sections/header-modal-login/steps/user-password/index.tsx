@@ -41,7 +41,7 @@ const LoginUserPassword = () => {
 
   const dispatch = useAppDispatch();
   const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
-    (state) => state.shoppingCart,
+    (state) => state.shoppingCartHeader,
   );
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
