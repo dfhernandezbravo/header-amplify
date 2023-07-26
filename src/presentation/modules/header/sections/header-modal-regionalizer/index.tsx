@@ -18,16 +18,11 @@ const ModalRegionalizer = () => {
       onClose={() => dispatch(setOpenModalRegionalizer(false))}
       isOpen={isOpenModalRegionalizer}
     >
-      <HeaderModalRegionalizer />
       {isLogged ? (
         <ListAddressForm />
       ) : (
         <NewAddressForm
-          header={
-            <div>
-              <h4>Ingresa tu ubicación</h4>
-            </div>
-          }
+          header={<HeaderModalRegionalizer title="Ingresa tu ubicación" />}
         />
       )}
     </Modal>

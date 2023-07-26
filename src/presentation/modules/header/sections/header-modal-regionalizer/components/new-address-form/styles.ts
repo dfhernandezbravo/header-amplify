@@ -4,7 +4,7 @@ export const NewAddressFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 12px 0;
+  padding: 12px;
   max-width: 450px;
 `;
 
