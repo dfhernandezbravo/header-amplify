@@ -1,5 +1,5 @@
 import Desktop from '@components/layout/desktop';
-import { useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import CategoryDetailItem from '../../components/category-detail-item-desktop';
@@ -13,10 +13,12 @@ import {
   CategoriesItemsContainer,
 } from './styles';
 import useAnalytics from '@hooks/useAnalytics';
+import { openCategories } from '@store/category/slices/category-slice';
 
 const CategoriesDesktop = () => {
-  const { categories } = useAppSelector((state) => state.category);
+  const { categories, isOpenCategories } = useAppSelector((state) => state.category); 
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [category, setCategory] = useState<Category | null>(null);
   const { sendEventAnalytics } = useAnalytics();
 
@@ -31,7 +33,7 @@ const CategoriesDesktop = () => {
       action: 'Clic Menu N1',
       tag: categorySelected.name,
     });
-    
+    dispatch(openCategories(!isOpenCategories));
     router.push(`/${categorySelected.subname}`);
   };
 
