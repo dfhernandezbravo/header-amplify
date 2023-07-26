@@ -16,7 +16,7 @@ import {
 } from './styles';
 
 interface Props {
-  header: React.ReactNode;
+  header?: React.ReactNode;
 }
 
 const NewAddressForm = ({ header }: Props) => {
