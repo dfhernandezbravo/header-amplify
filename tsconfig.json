@@ -28,7 +28,8 @@
       "@data-sources/*": ["./src/application/data-sources/*"],
       "@services/*": ["./src/application/services/*"],
       "@modules/*": ["./src/presentation/modules/*"],
-      "@events/*": ["./src/presentation/events/*"]
+      "@events/*": ["./src/presentation/events/*"],
+      "@theme/*": ["./src/presentation/theme/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
