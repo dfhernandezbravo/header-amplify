@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const cmsInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_CMS_URL,
+  baseURL: process.env.NEXT_PUBLIC_BFF_WEB_URL,
   headers: {
-    apikey: process.env.NEXT_PUBLIC_CMS_API_KEY,
+    'x-api-key': process.env.NEXT_PUBLIC_API_KEY_BFF_WEB,
   },
 });
 

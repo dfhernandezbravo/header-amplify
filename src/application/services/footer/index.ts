@@ -1,8 +1,8 @@
-import cmsInstance from '@data-sources/cms-instance';
+import { bffWebInstance } from '@data-sources/bbf-web-instance';
 import FooterService from '@interfaces/footer-service.interface';
 
 const footerService: FooterService = {
-  getFooterData: () => cmsInstance.get('footer-headless'),
+  getFooterData: () => bffWebInstance.get('cms/group/footer-headless'),
 };
 
 export default footerService;
