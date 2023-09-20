@@ -31,7 +31,8 @@ const nextConfig = {
         exposes: {
           './header': './src/presentation/modules/header/index.tsx',
           './footer': './src/presentation/modules/footer/index.tsx',
-          './popular': './src/pages/api/products/search/popular.ts' 
+          './popular': './src/pages/api/products/search/popular.ts',
+          './location': './src/presentation/modules/header/sections/header-location/index.tsx',
         },
         extraOptions: {
           exposePages: true,

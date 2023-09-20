@@ -3,13 +3,15 @@ import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { AddNewAddressRequest } from '@entities/shopping-cart/shopping-cart-request';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
+import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
 import {
   pendingAddNewAddress,
   successAddNewAddress,
 } from '@store/regionalizer/slices/regionalizer-slice';
 import getAddressCustomer from '@use-cases/customer/get-address-customer';
 import addNewAddress from '@use-cases/shopping-cart/add-new-address';
-import React, { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import HeaderModalRegionalizer from '../header-modal-regionalizer';
 import NewAddressForm from '../new-address-form';
 import RadioButtonAddress from '../radio-input-address';
 import {
@@ -18,18 +20,18 @@ import {
   ListAddressContainer,
   ListAddressFormContainer,
 } from './styles';
-import HeaderModalRegionalizer from '../header-modal-regionalizer';
 
 const ListAddressForm = () => {
-  const { addresses, customer } = useAppSelector((state) => state.customer);
-  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
+  const dispatch = useAppDispatch();
+  const { addresses } = useAppSelector((state) => state.customer);
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );
-  const { isLogged } = useAppSelector((state) => state.login);
-  const { sendEventAnalytics } = useAnalytics();
 
-  const dispatch = useAppDispatch();
+  const { sendEventAnalytics } = useAnalytics();
+  const { orderFormId, isUserLogged, customer, onCloseModal } = useContext(
+    HeaderLocationContext,
+  );
 
   const [selectedAddress, setSelectedAddress] =
     useState<CustomerAddress | null>(null);
@@ -97,10 +99,12 @@ const ListAddressForm = () => {
         event: 'interaccion',
         category: 'Interacciones componente regionalizador',
         action: 'Click selección ingresa tu ubicación',
-        tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
+        tag: isUserLogged ? 'Usuario Logeado' : 'Usuario Guest',
         region: selectedAddress.state,
         comuna: selectedAddress.city,
       });
+
+      onCloseModal()
     } catch (error) {
       console.log();
     } finally {

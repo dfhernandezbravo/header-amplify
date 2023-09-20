@@ -57,13 +57,7 @@ const HeaderContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-  const getCartId = async () => {
-   await dispatch(getShoppingCart());
-   return
-  }
-
-  // Scroll del Header
+  // Get OrderFormID
   useEffect(() => {
     if (!orderFormId) {
      const retrieveCartId = async () => {

@@ -2,13 +2,14 @@ import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { AddNewAddressRequest } from '@entities/shopping-cart/shopping-cart-request';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
+import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
 import {
   pendingAddNewAddress,
   successAddNewAddress,
 } from '@store/regionalizer/slices/regionalizer-slice';
 import getRegionalizerRegions from '@use-cases/regionalizer/get-regions';
 import addNewAddress from '@use-cases/shopping-cart/add-new-address';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   NewAddressFormContainer,
   SelectNewAddressForm,
@@ -25,15 +26,16 @@ const NewAddressForm = ({ header }: Props) => {
     RegionalizerRegions | undefined
   >();
   const [communeSelected, setCommuneSelected] = useState<Commune | undefined>();
-  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
+
+  const dispatch = useAppDispatch();
   const { isLoadingRegionalizer, addressSelected } = useAppSelector(
     (state) => state.regionalizer,
   );
-  const { isLogged } = useAppSelector((state) => state.login);
 
+  const { orderFormId, isUserLogged, onCloseModal } = useContext(
+    HeaderLocationContext,
+  );
   const { sendEventAnalytics } = useAnalytics();
-
-  const dispatch = useAppDispatch();
 
   const orderByAlphabeticRegions = (arr: RegionalizerRegions[]) => {
     return arr.sort((a, b) => a.name.localeCompare(b.name));
@@ -78,10 +80,11 @@ const NewAddressForm = ({ header }: Props) => {
         event: 'interaccion',
         category: 'Interacciones componente regionalizador',
         action: 'Click selección ingresa tu ubicación',
-        tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
+        tag: isUserLogged ? 'Usuario Logeado' : 'Usuario Guest',
         region: regionSelected?.name,
         comuna: communeSelected?.name,
       });
+      onCloseModal();
     } catch (error) {
       console.error(error);
     } finally {

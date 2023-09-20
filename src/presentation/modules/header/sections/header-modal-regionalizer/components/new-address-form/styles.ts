@@ -6,6 +6,7 @@ export const NewAddressFormContainer = styled.div`
   gap: 12px;
   padding: 12px;
   max-width: 450px;
+  color: black;
 `;
 
 export const SelectWrapper = styled.div`

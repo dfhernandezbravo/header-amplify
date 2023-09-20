@@ -1,24 +1,21 @@
 import Modal from '@components/atoms/modal';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import React from 'react';
 import HeaderModalRegionalizer from './components/header-modal-regionalizer';
 import ListAddressForm from './components/list-address-form';
 import NewAddressForm from './components/new-address-form';
-import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
+import { useContext } from 'react';
+import HeaderLocationContext from '../header-location/context/header-location-context';
 
-const ModalRegionalizer = () => {
-  const { isOpenModalRegionalizer } = useAppSelector(
-    (state) => state.regionalizer,
-  );
-  const { isLogged } = useAppSelector((state) => state.login);
-  const dispatch = useAppDispatch();
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
+const ModalRegionalizer = ({ isOpen, onClose }: Props) => {
+  const { isUserLogged } = useContext(HeaderLocationContext);
+  
   return (
-    <Modal
-      onClose={() => dispatch(setOpenModalRegionalizer(false))}
-      isOpen={isOpenModalRegionalizer}
-    >
-      {isLogged ? (
+    <Modal onClose={onClose} isOpen={isOpen}>
+      {isUserLogged ? (
         <ListAddressForm />
       ) : (
         <NewAddressForm

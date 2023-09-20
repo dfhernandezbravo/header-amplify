@@ -1,48 +1,47 @@
-import Image from 'next/image';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import useAnalytics from '@hooks/useAnalytics';
-import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
-import { openCategories } from '@store/category/slices/category-slice';
-import { RegionalizerContainer } from './styles';
+import store, { persistor } from '@store/index';
+import { useState } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import ModalRegionalizer from '../header-modal-regionalizer';
+import HeaderLocationContext from './context/header-location-context';
+import HeaderLocationContainer from './header-location';
 
 interface Props {
-  isCartPath?: boolean
+  orderFormId?: string;
+  customer: Customer | null;
+  addressSelected: AddressShoppingCart | null;
+  isUserLogged: boolean;
 }
 
-const HeaderLocation = ({isCartPath}: Props) => {
-  const { addressSelected } = useAppSelector((state) => state.regionalizer);
-  const { isLogged } = useAppSelector((state) => state.login);
-  const dispatch = useAppDispatch();
-  const { sendEventAnalytics } = useAnalytics();
-
-  const handleOnClick = () => {
-    dispatch(openCategories(false));
-    sendEventAnalytics({
-      event: 'interaccion',
-      category: 'Interacciones componente regionalizador',
-      action: 'Click selección ingresa tu ubicación',
-      tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
-    });
-    dispatch(setOpenModalRegionalizer(true));
-  };
+const HeaderLocation = ({
+  addressSelected,
+  orderFormId,
+  customer,
+  isUserLogged,
+}: Props) => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
-    <RegionalizerContainer onClick={handleOnClick} isCartPath={isCartPath}>
-      <Image
-        src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
-        width={19}
-        height={25}
-        alt="Location Icon"
-      />
-      <div>
-        <p className='title'>¿Dónde entregar tu compra?</p>
-        {addressSelected ? (
-          <strong>{addressSelected.city}</strong>
-        ) : (
-          <p>Ingresa tu ubicación</p>
-        )}
-      </div>
-    </RegionalizerContainer>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        <HeaderLocationContext.Provider
+          value={{
+            orderFormId,
+            customer,
+            isUserLogged,
+            onCloseModal: () => setIsOpenModal(false),
+            onOpenModal: () => setIsOpenModal(true),
+          }}
+        >
+          <HeaderLocationContainer addressSelected={addressSelected} />
+
+          <ModalRegionalizer
+            isOpen={isOpenModal}
+            onClose={() => setIsOpenModal(false)}
+          />
+        </HeaderLocationContext.Provider>
+      </PersistGate>
+    </Provider>
   );
 };
 

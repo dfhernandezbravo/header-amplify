@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { HeaderModalRegionalizerContainer, ModalIconButton } from './styles';
 import { useAppDispatch } from '@hooks/storeHooks';
 import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
 import { AiOutlineClose } from 'react-icons/ai';
+import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
 
 interface Props {
   title?: string;
 }
 
 const HeaderModalRegionalizer = ({ title }: Props) => {
-  const dispatch = useAppDispatch();
+  const { onCloseModal } = useContext(HeaderLocationContext)
 
   return (
     <HeaderModalRegionalizerContainer>
       <ModalIconButton
-        onClick={() => dispatch(setOpenModalRegionalizer(false))}
+        onClick={onCloseModal}
       >
         <AiOutlineClose size={20} />
       </ModalIconButton>

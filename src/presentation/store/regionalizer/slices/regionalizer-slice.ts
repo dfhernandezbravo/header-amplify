@@ -24,6 +24,12 @@ const regionalizerSlice = createSlice({
     pendingAddNewAddress: (state, { payload }: { payload: boolean }) => {
       state.isLoadingRegionalizer = payload;
     },
+    setAddressSelected: (
+      state,
+      { payload }: { payload: AddressShoppingCart },
+    ) => {
+      state.addressSelected = payload;
+    },
     successAddNewAddress: (
       state,
       { payload }: { payload: AddressShoppingCart },
@@ -39,6 +45,7 @@ export const {
   setOpenModalRegionalizer,
   pendingAddNewAddress,
   successAddNewAddress,
+  setAddressSelected,
 } = regionalizerSlice.actions;
 
 export default regionalizerSlice;
