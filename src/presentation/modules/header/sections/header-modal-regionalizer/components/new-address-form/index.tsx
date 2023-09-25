@@ -47,7 +47,7 @@ const NewAddressForm = ({ header }: Props) => {
     (async () => {
       const response = await getRegionalizerRegions();
       const indexOfPreselectedRegion = response?.findIndex(
-        (region) => region.name === 'Metropolitana',
+        (region) => region?.name === 'Metropolitana',
       );
       let highlightedRegion = response.splice(indexOfPreselectedRegion, 1)[0];
       let regionOrdered = orderByAlphabeticRegions(response);
@@ -96,12 +96,12 @@ const NewAddressForm = ({ header }: Props) => {
 
     if (addressSelected?.state) {
       return setRegionSelected(
-        regions.find((region) => region.name === addressSelected?.state),
+        regions.find((region) => region?.name === addressSelected?.state),
       );
     }
 
     setRegionSelected(
-      regions.find((region) => region.name === 'Metropolitana'),
+      regions.find((region) => region?.name === 'Metropolitana'),
     );
   }, [regions, addressSelected]);
 
@@ -109,7 +109,7 @@ const NewAddressForm = ({ header }: Props) => {
     if (communeSelected) {
       return setCommuneSelected(
         regionSelected?.comunas.find(
-          (commune) => commune.name === addressSelected?.city,
+          (commune) => commune?.name === addressSelected?.city,
         ),
       );
     }
@@ -142,7 +142,7 @@ const NewAddressForm = ({ header }: Props) => {
         >
           {regions?.map((region) => (
             <option key={region?.id} value={region?.id}>
-              {region.name}
+              {region?.name}
             </option>
           ))}
         </SelectNewAddressForm>
@@ -163,8 +163,8 @@ const NewAddressForm = ({ header }: Props) => {
           }
         >
           {ordereredCommune?.map((commune: Commune) => (
-            <option key={commune.id} value={commune.id}>
-              {commune.name}
+            <option key={commune?.id} value={commune?.id}>
+              {commune?.name}
             </option>
           ))}
         </SelectNewAddressForm>

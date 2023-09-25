@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+
+interface Props {
+  isCartPath?: boolean
+}
+
 export const HeaderMobileContainer = styled.div`
   width: 100%;
   display: flex;
@@ -8,37 +13,38 @@ export const HeaderMobileContainer = styled.div`
   color: white;
 `;
 
-export const HeaderMobileOptionSection = styled.div`
+export const HeaderMobileOptionSection = styled.div<Props>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 67px;
   padding: 8px 16px;
-  border-bottom: 1px solid hsla(0, 0%, 100%, 0.5);
+  border-bottom: ${({isCartPath}) => isCartPath ? 'none' : '1px solid hsla(0, 0%, 100%, 0.5);'};
 
   @media (max-width: 640px) {
     padding: 8px;
   }
 `;
 
-export const HeaderMobileOptionSectionElement = styled.div`
-  display: flex;
+export const HeaderMobileOptionSectionElement = styled.div<Props>`
+  display: ${({isCartPath}) => isCartPath ? 'none' : 'flex'};
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 16px;
 `;
 
-export const HeaderMobileSearchSection = styled.div`
+export const HeaderMobileSearchSection = styled.div<Props>`
+  display: ${({isCartPath}) => isCartPath ? 'none' : 'inherit'};
   width: 100%;
   padding: 12px 16px;
   height: 65px;
   position:relative;
 `;
 
-export const HeaderMobileLocationSection = styled.div`
+export const HeaderMobileLocationSection = styled.div<Props>`
   width: 100%;
-  background-color: #990707;
+  background-color:${({isCartPath}) => isCartPath ? '#af1311' : '#990707'}; 
   padding: 8px 16px;
 `;
 

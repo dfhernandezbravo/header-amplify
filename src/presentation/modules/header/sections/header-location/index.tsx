@@ -5,7 +5,11 @@ import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalize
 import { openCategories } from '@store/category/slices/category-slice';
 import { RegionalizerContainer } from './styles';
 
-const HeaderLocation = () => {
+interface Props {
+  isCartPath?: boolean
+}
+
+const HeaderLocation = ({isCartPath}: Props) => {
   const { addressSelected } = useAppSelector((state) => state.regionalizer);
   const { isLogged } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
@@ -23,7 +27,7 @@ const HeaderLocation = () => {
   };
 
   return (
-    <RegionalizerContainer onClick={handleOnClick}>
+    <RegionalizerContainer onClick={handleOnClick} isCartPath={isCartPath}>
       <Image
         src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
         width={19}
@@ -31,7 +35,7 @@ const HeaderLocation = () => {
         alt="Location Icon"
       />
       <div>
-        <p>¿Dónde entregar tu compra?</p>
+        <p className='title'>¿Dónde entregar tu compra?</p>
         {addressSelected ? (
           <strong>{addressSelected.city}</strong>
         ) : (

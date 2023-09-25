@@ -9,7 +9,13 @@ import React, { useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { IconCloseContainer, IconMenuContainer, MenuContainer } from './styles';
 
-const HeaderMenu = () => {
+
+interface Props {
+  isCartPath: boolean
+}
+
+const HeaderMenu = ({isCartPath}:Props) => {
+
   const dispatch = useAppDispatch();
   const { isOpenCategories } = useAppSelector((state) => state.category);
   const { sendEventAnalytics } = useAnalytics();
@@ -31,7 +37,7 @@ const HeaderMenu = () => {
   };
 
   return (
-    <MenuContainer onClick={handleOnClick}>
+    <MenuContainer isCartPath onClick={handleOnClick}>
       {isOpenCategories ? (
         <IconMenuContainer>
           <AiOutlineClose size={30} />

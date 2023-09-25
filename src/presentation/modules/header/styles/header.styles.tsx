@@ -4,6 +4,10 @@ type LinkProp = {
   image?: string;
 };
 
+interface Props {
+  isCartPath: boolean
+}
+
 export const HeaderContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -171,12 +175,12 @@ export const HeaderCartSection = styled.div`
   }
 `;
 
-export const HeaderBottom = styled.div`
+export const HeaderBottom = styled.div<Props>`
   height: 32px;
   background-color: #670000;
   padding: 0.5rem 5.3rem;
   width: 100%;
-  display: flex;
+  display: ${({isCartPath}) => isCartPath ? 'none' : 'flex'};
   justify-content: space-between;
   color: white;
   font: normal normal 600 16px/20px 'Open Sans';
@@ -196,7 +200,7 @@ export const HeaderBottom = styled.div`
     margin-left: 10px;
   }
   div {
-    display: flex;
+    display: ${({isCartPath}) => isCartPath ? 'none' : 'flex'};
   }
 
   div > span {

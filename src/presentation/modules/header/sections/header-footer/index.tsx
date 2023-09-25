@@ -5,11 +5,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const HeaderFooter = () => {
+interface Props {
+  isCartPath:boolean
+}
+
+const HeaderFooter = ({isCartPath}: Props) => {
   const { sendEventAnalytics } = useAnalytics();
   const { isLogged } = useAppSelector((state) => state.login);
+
+  // const isCarth = isCartPath ? isCartPath : false
+
   return (
-    <HeaderBottom>
+    <HeaderBottom isCartPath={isCartPath}>
       <div>
         <Link
           href="https://www.easy.cl/tiendas"

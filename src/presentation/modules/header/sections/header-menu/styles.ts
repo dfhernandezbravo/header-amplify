@@ -1,7 +1,13 @@
 import styled, { keyframes } from 'styled-components';
 
-export const MenuContainer = styled.button`
-  display: flex;
+
+interface Props {
+  isCartPath: boolean
+}
+
+
+export const MenuContainer = styled.button<Props>`
+  display: ${({isCartPath}) => isCartPath ? 'none' : 'flex'};
   align-items: center;
   font-size: 14px;
   font-weight: 500;
@@ -12,7 +18,7 @@ export const MenuContainer = styled.button`
   gap: 12px;
 
   @media (max-width: 768px) {
-    display: flex;
+    display: ${({isCartPath}) => isCartPath ? 'none' : 'flex'};
     flex-direction: column;
   }
 `;
