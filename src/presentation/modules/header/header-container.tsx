@@ -57,10 +57,19 @@ const HeaderContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  const getCartId = async () => {
+   await dispatch(getShoppingCart());
+   return
+  }
+
   // Scroll del Header
   useEffect(() => {
     if (!orderFormId) {
-      dispatch(getShoppingCart());
+     const retrieveCartId = async () => {
+      await getCartId()
+     }
+     retrieveCartId()
     }
     customDispatchEvent({
       name: WindowsEvents.CART_HEADER,
