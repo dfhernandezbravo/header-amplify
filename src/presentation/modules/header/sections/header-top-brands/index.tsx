@@ -3,6 +3,10 @@ import Tooltip from './toolTip'
 import { HeaderLink, HeaderTop, HeaderTopItem } from './styles';
 import { TopBrandsStruct } from '@entities/topBrands/top-brands-entity';
 
+interface Props {
+  isCartPath:boolean
+}
+
 const topBrands: TopBrandsStruct[] = [
   {
     name: 'Paris',
@@ -97,9 +101,10 @@ const handleRedirect = (link: string) => {
 }
 
 
-const HeaderTopBrands = () => {
+const HeaderTopBrands = ({isCartPath}: Props) => {
+
   return useMemo(() => (
-    <HeaderTop>
+    <HeaderTop isCartPath={isCartPath}>
       {topBrands.map((brand: TopBrandsStruct) => (
         <HeaderTopItem key={brand.name}>
           <HeaderLink

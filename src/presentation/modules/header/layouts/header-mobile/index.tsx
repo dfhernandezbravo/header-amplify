@@ -19,28 +19,32 @@ import {
 } from './styles';
 import HeaderModalLogin from '@modules/header/sections/header-modal-login';
 import ModalRegionalizer from '@modules/header/sections/header-modal-regionalizer';
+import { useRouter } from 'next/router';
 
 const HeaderMobile = () => {
   const { isOpenResults } = useAppSelector((state) => state.search);
   const dispatch = useAppDispatch();
 
+  const { pathname } = useRouter()
+  const isCartPath = pathname.includes('cart')
+
   return (
     <Mobile>
       <HeaderMobileContainer>
-        <HeaderMobileOptionSection>
+        <HeaderMobileOptionSection isCartPath={isCartPath}>
           <HeaderMobileOptionSectionElement>
-            <HeaderMenu />
+            <HeaderMenu isCartPath={isCartPath}/>
             <HeaderLogo />
           </HeaderMobileOptionSectionElement>
 
-          <HeaderMobileOptionSectionElement>
+          <HeaderMobileOptionSectionElement isCartPath={isCartPath}>
             <HeaderLogin />
             <HeaderCart />
           </HeaderMobileOptionSectionElement>
         </HeaderMobileOptionSection>
         <HeaderCategory />
 
-        <HeaderMobileSearchSection>
+        <HeaderMobileSearchSection isCartPath={isCartPath}>
           <SearchInputContainer
             onClick={() => dispatch(openResults())}
             placeholder="¡Hola! ¿Qué estás buscando?"
@@ -49,8 +53,8 @@ const HeaderMobile = () => {
 
         {isOpenResults && <HeaderSearchMobile />}
 
-        <HeaderMobileLocationSection>
-          <HeaderLocation />
+        <HeaderMobileLocationSection isCartPath={isCartPath}>
+          <HeaderLocation  isCartPath={isCartPath}/>
         </HeaderMobileLocationSection>
       </HeaderMobileContainer>
       <ModalRegionalizer />

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
+import getShoppingCartById from '@use-cases/shopping-cart/get-shopping-cart-by-id';
 
 type ShoppingCartState = ShoppingCart & {
   isShoppingCartUsed: boolean;
@@ -26,7 +27,12 @@ const shoppingCartSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getShoppingCart.fulfilled, (state, { payload }) => {
       state.orderFormId = payload.orderFormId;
-    });
+    })
+    .addCase(getShoppingCartById.fulfilled, (state, {payload}) => {
+
+      const quantity = payload?.items?.reduce((acc, cur) => acc + cur.quantity , 0)
+      state.quantity = quantity || 0
+    })
   },
 });
 

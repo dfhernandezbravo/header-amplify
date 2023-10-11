@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Cart from '@components/atoms/cartButton';
 import { WindowsEvents } from '@events/index';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
@@ -6,8 +7,10 @@ import { HeaderCartSection } from '@modules/header/styles/header.styles';
 import { openCategories } from '@store/category/slices/category-slice';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 
+import getShoppingCartById from '@use-cases/shopping-cart/get-shopping-cart-by-id';
+
 const HeaderCart = () => {
-  const { quantity } = useAppSelector((state) => state.shoppingCartHeader);
+  const { quantity, orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
 
@@ -25,6 +28,12 @@ const HeaderCart = () => {
       detail: { open: true },
     });
   };
+
+  useEffect(() => {
+    if(orderFormId) {
+      dispatch(getShoppingCartById(orderFormId))
+    }
+  })
 
   return (
     <HeaderCartSection>

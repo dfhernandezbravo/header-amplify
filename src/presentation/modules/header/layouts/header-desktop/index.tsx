@@ -18,20 +18,25 @@ import HeaderMenu from '@modules/header/sections/header-menu';
 import HeaderCategory from '@modules/header/sections/header-category';
 import HeaderModalLogin from '@modules/header/sections/header-modal-login';
 import ModalRegionalizer from '@modules/header/sections/header-modal-regionalizer';
+import { useRouter } from 'next/router';
 
 const HeaderDesktop = () => {
+
+  const { pathname } = useRouter()
+  const isCartPath = pathname.includes('cart')
+
   return (
     <Desktop>
-      <HeaderTopBrands />
-      <HeaderDesktopContainer>
+      <HeaderTopBrands isCartPath={isCartPath}/>
+      <HeaderDesktopContainer isCartPath={isCartPath}>
         <HeaderLogo />
-        <HeaderMenu />
+        <HeaderMenu isCartPath={isCartPath}/>
         <HeaderLocation />
-        <HeaderDesktopSearchSection>
+        <HeaderDesktopSearchSection  isCartPath={isCartPath}>
           <HeaderSearch />
           <HeaderResults />
         </HeaderDesktopSearchSection>
-        <Container>
+        <Container  isCartPath={isCartPath}>
           <HeaderLogin />
           <Divider />
           <HeaderCart />
@@ -40,7 +45,7 @@ const HeaderDesktop = () => {
       <HeaderModalLogin />
       <ModalRegionalizer />
       <HeaderCategory />
-      <HeaderFooter />
+      <HeaderFooter isCartPath={isCartPath}/>
     </Desktop>
   );
 };
