@@ -1,3 +1,4 @@
+import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
 import { useAppDispatch } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
 import { openCategories } from '@store/category/slices/category-slice';

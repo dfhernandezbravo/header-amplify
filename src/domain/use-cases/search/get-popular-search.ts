@@ -8,7 +8,7 @@ export const getPopularSearch = createAsyncThunk(
       const { data } = await searchService.getPopularSearches();
       return data.data.searches;
     } catch (error) {
-      console.error(error);
+      throw new Error('Oh no!!');
     }
   },
 );

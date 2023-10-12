@@ -1,3 +1,4 @@
+import { ProductSeller } from '@entities/search/searches.entity';
 import React from 'react';
 import {
   SuggestionAmount,

@@ -17,13 +17,11 @@ import {
   HeaderDesktopContainer,
   HeaderDesktopSearchSection,
 } from './styles';
+import { useAppSelector } from '@hooks/storeHooks';
 
 const HeaderDesktop = () => {
-  const {
-    orderFormId,
-    customer,
-    isUserLogged,
-  } = useRegionalizer();
+  const { orderFormId, customer, isUserLogged } = useRegionalizer();
+  const { isOpenResults } = useAppSelector((state) => state.search);
 
   return (
     <Desktop>
@@ -39,7 +37,7 @@ const HeaderDesktop = () => {
         />
         <HeaderDesktopSearchSection>
           <HeaderSearch />
-          <HeaderResults />
+          {isOpenResults && <HeaderResults />}
         </HeaderDesktopSearchSection>
         <Container  isCartPath={isCartPath}>
           <HeaderLogin />

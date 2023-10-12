@@ -1,6 +1,6 @@
 import { useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
-import { HeaderBottom } from '@modules/header/styles/header.styles';
+// import { HeaderBottom } from '@modules/header/styles/header.styles'; 
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -16,7 +16,7 @@ const HeaderFooter = ({isCartPath}: Props) => {
   // const isCarth = isCartPath ? isCartPath : false
 
   return (
-    <HeaderBottom isCartPath={isCartPath}>
+    <div>
       <div>
         <Link
           href="https://www.easy.cl/tiendas"
@@ -44,7 +44,7 @@ const HeaderFooter = ({isCartPath}: Props) => {
           alt=""
         />
       </div>
-    </HeaderBottom>
+    </div>
   );
 };
 

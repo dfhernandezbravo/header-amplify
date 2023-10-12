@@ -1,9 +1,9 @@
 import Accordion from '@components/atoms/accordion';
 import Desktop from '@components/layout/desktop';
 import Mobile from '@components/layout/mobile';
-import React from 'react';
-import { SiteMapLink, SiteMapLinkContainer, SiteMapLinkItem } from './styles';
+import { FooterSiteMap } from '@entities/footer/footer.entity';
 import { VerticalDivider } from '@modules/footer/styles';
+import { SiteMapLink, SiteMapLinkContainer, SiteMapLinkItem } from './styles';
 
 interface Props {
   data: FooterSiteMap[];

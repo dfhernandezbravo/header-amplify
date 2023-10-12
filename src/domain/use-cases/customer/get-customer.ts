@@ -6,7 +6,6 @@ const getCustomer = createAsyncThunk('/get/customer', async (email: string) => {
     const { data } = await customerService.getCustomer(email);
     return data;
   } catch (error) {
-    console.error(error);
     return null;
   }
 });

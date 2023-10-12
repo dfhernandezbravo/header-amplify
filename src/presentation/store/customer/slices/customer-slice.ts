@@ -1,3 +1,4 @@
+import { Customer, CustomerAddress } from '@entities/customer/customer.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import getAddressCustomer from '@use-cases/customer/get-address-customer';
 import getCustomer from '@use-cases/customer/get-customer';

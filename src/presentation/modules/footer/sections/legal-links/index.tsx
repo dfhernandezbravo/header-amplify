@@ -1,4 +1,4 @@
-import React from 'react';
+import { FooterLink } from '@entities/footer/footer.entity';
 import { LegalLink, LegalLinkContainer } from './styles';
 
 interface Props {

@@ -5,7 +5,7 @@ const generateAccessKey = async (dataRequest: GenerateAccessKeyRequest) => {
   try {
     await loginService.generateAccessKey(dataRequest);
   } catch (error) {
-    console.log(error);
+    throw new Error('Oh no!!');
   }
 };
 

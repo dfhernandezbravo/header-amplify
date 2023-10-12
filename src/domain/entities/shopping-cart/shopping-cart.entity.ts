@@ -1,8 +1,8 @@
-type ShoppingCart = {
+export type ShoppingCart = {
   orderFormId: string | undefined;
 };
 
-type AddressShoppingCart = {
+export type AddressShoppingCart = {
   addressType: 'search' | 'residential';
   city?: string;
   country: 'CHL';

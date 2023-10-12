@@ -12,17 +12,15 @@ export const NewAddressFormContainer = styled.div`
 export const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ theme: { spacing } }) => spacing[100]};
 
   & label {
-    font-size: 14px;
+    font-size: ${({ theme: { fontSize } }) => fontSize[100]};
   }
 `;
 
-export const SelectNewAddressForm = styled.select`
-  padding: 16px 20px;
-  border-radius: 4px;
-  border: 1px solid #dfe3e7;
-  color: #475f7b;
-  font-size: 16px;
-`;
+export const FormComtainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme: { spacing } }) => spacing[200]};
+`

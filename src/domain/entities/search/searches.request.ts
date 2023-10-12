@@ -1,8 +1,8 @@
-type GetSearchesRequest = {
+export type GetSearchesRequest = {
   query: string;
 };
 
-type ProductSuggestionsRequest = {
+export type ProductSuggestionsRequest = {
   selectedFacets: {
     key: string;
     value: string;

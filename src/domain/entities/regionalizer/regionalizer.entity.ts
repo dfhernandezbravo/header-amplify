@@ -1,4 +1,4 @@
-type Commune = {
+export type Commune = {
   id: string;
   lat: string;
   lon: string;
@@ -6,7 +6,7 @@ type Commune = {
   isActive: boolean;
 };
 
-type RegionalizerRegions = {
+export type Regions = {
   id: string;
   isActive: boolean;
   name: string;
@@ -28,7 +28,7 @@ type GeometryGoogle = {
   location: LocationGoogle;
 };
 
-type GoogleMapResults = {
+export type GoogleMapResults = {
   address_components: AddressComponents[];
   geometry: GeometryGoogle;
 };

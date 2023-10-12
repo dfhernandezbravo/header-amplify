@@ -1,7 +1,10 @@
 import Desktop from '@components/layout/desktop';
+import { Category } from '@entities/category/category.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import useAnalytics from '@hooks/useAnalytics';
+import { openCategories } from '@store/category/slices/category-slice';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CategoryDetailItem from '../../components/category-detail-item-desktop';
 import CategoryItem from '../../components/category-item';
 import {
@@ -12,8 +15,6 @@ import {
   CategoriesDetailTitleLink,
   CategoriesItemsContainer,
 } from './styles';
-import useAnalytics from '@hooks/useAnalytics';
-import { openCategories } from '@store/category/slices/category-slice';
 
 const CategoriesDesktop = () => {
   const { categories, isOpenCategories } = useAppSelector((state) => state.category); 

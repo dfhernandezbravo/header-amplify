@@ -1,14 +1,14 @@
+import { CategoriesSearch, Search } from '@entities/search/searches.entity';
+import { environments } from '@env/environments';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import React from 'react';
+import useAnalytics from '@hooks/useAnalytics';
+import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import {
   SearchCategoriesTitle,
   SearchItem,
   SearchItemCategory,
   SearchListContainer,
 } from './styles';
-import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
-import { environments } from '@env/environments';
-import useAnalytics from '@hooks/useAnalytics';
 
 const SearchList = () => {
   const { searches, categories, term } = useAppSelector(

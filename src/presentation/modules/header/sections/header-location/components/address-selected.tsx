@@ -1,6 +1,7 @@
+import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { setAddressSelected } from '@store/regionalizer/slices/regionalizer-slice';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface Props {
   address: AddressShoppingCart | null;

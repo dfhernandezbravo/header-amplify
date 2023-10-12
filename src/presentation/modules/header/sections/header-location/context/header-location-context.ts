@@ -1,3 +1,4 @@
+import { Customer } from '@entities/customer/customer.entity';
 import { createContext } from 'react';
 
 interface ContextValues {

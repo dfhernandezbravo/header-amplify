@@ -1,5 +1,5 @@
 import ButtonBack from '@components/atoms/button-back';
-import React from 'react';
+import { Category } from '@entities/category/category.entity';
 import CategoryAccordion from '../category-accordion';
 import {
   CategoriesDetailTitleMobileLink,

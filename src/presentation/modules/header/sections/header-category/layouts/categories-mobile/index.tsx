@@ -1,9 +1,10 @@
 import Mobile from '@components/layout/mobile';
+import { Category } from '@entities/category/category.entity';
 import { useAppSelector } from '@hooks/storeHooks';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import CategoryDetailItemMobile from '../../components/category-detail-item-mobile';
 import CategoryItem from '../../components/category-item';
 import { CategoriesMobileContainer, CategoriesMobileList } from './styles';
-import CategoryDetailItemMobile from '../../components/category-detail-item-mobile';
 
 const CategoriesMobile = () => {
   const { categories } = useAppSelector((state) => state.category);

@@ -1,4 +1,4 @@
-import React from 'react';
+import { FooterHelpData } from '@entities/footer/footer.entity';
 import Image from 'next/image';
 import { HelpDataContainer, HelpDataItem } from './styles';
 

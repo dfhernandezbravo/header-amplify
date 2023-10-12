@@ -1,11 +1,11 @@
-import React from 'react';
+import { Category } from '@entities/category/category.entity';
+import useAnalytics from '@hooks/useAnalytics';
 import {
   CategoryDetailItemContainer,
   CategoryDetailItemLink,
   CategoryDetailItemLinkAll,
   CategoryDetailItemTitle,
 } from './styles';
-import useAnalytics from '@hooks/useAnalytics';
 
 interface Props {
   category: Category;

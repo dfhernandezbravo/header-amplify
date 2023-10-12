@@ -1,6 +1,6 @@
 import ButtonBack from '@components/atoms/button-back';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import { AddNewAddressRequest } from '@entities/shopping-cart/shopping-cart-request';
+import { CustomerAddress } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
 import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from 'react';
 import HeaderModalRegionalizer from '../header-modal-regionalizer';
 import NewAddressForm from '../new-address-form';
 import RadioButtonAddress from '../radio-input-address';
+import mapDataListAddressForm from './map-data-request';
 import {
   ButtonNewAddress,
   HeaderNewAddressContainer,
@@ -69,25 +70,7 @@ const ListAddressForm = () => {
   const handleOnClick = async () => {
     if (!selectedAddress) return;
 
-    const formData: AddNewAddressRequest = {
-      selectedAddresses: [
-        {
-          addressType: selectedAddress.addressType,
-          city: selectedAddress.city,
-          country: selectedAddress.country,
-          geoCoordinates: selectedAddress.geoCoordinate,
-          state: selectedAddress.state,
-          receiverName: selectedAddress.receiverName,
-          addressId: selectedAddress.id,
-          postalCode: selectedAddress.postalCode,
-          neighborhood: selectedAddress.neighborhood,
-          complement: selectedAddress.complement,
-          reference: selectedAddress.reference,
-          street: selectedAddress.street,
-          number: selectedAddress.number,
-        },
-      ],
-    };
+    const formData = mapDataListAddressForm(selectedAddress);
     try {
       dispatch(pendingAddNewAddress(true));
 
@@ -104,9 +87,9 @@ const ListAddressForm = () => {
         comuna: selectedAddress.city,
       });
 
-      onCloseModal()
+      onCloseModal();
     } catch (error) {
-      console.log();
+      throw new Error('Error');
     } finally {
       dispatch(pendingAddNewAddress(false));
     }

@@ -15,6 +15,8 @@ export const environments = () => {
       hostURI = process.env.NEXT_PUBLIC_BFF_MOBILE_URL_STG;
       hostURL = process.env.NEXT_PUBLIC_HOST_URL_STG;
       break;
+    default:
+      break;
   }
   return {
     hostURI,

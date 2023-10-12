@@ -1,3 +1,4 @@
+import { Category } from '@entities/category/category.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import getCategories from '@use-cases/category/get-categories';
 

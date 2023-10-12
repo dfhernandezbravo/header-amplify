@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch } from '@hooks/storeHooks';
 import { navigateTo, setEmail } from '@store/login/slices/login-slice';
 import generateAccessKey from '@use-cases/login/generate-access-key';
-import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { ModalForm } from '../../styles';
@@ -42,7 +41,7 @@ const LoginUserEmail = ({ nextStep }: Props) => {
       await generateAccessKey({ userEmail: data.email });
       dispatch(navigateTo(nextStep));
     } catch (error) {
-      console.log(error);
+      throw new Error('Oh no!!')
     }
   };
 

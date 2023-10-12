@@ -1,6 +1,6 @@
+import { FooterPaymentsLinks } from '@entities/footer/footer.entity';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 interface Props {
   data: FooterPaymentsLinks[];

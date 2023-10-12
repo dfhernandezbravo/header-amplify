@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
-import { HeaderModalRegionalizerContainer, ModalIconButton } from './styles';
-import { useAppDispatch } from '@hooks/storeHooks';
-import { setOpenModalRegionalizer } from '@store/regionalizer/slices/regionalizer-slice';
-import { AiOutlineClose } from 'react-icons/ai';
 import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
+import { useContext } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
+import { HeaderModalRegionalizerContainer, ModalIconButton } from './styles';
 
 interface Props {
   title?: string;

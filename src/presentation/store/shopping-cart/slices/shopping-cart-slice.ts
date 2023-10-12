@@ -1,3 +1,4 @@
+import { ShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
 import getShoppingCartById from '@use-cases/shopping-cart/get-shopping-cart-by-id';

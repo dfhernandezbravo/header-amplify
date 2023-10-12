@@ -6,7 +6,7 @@ const getCategories = createAsyncThunk('get/categories', async () => {
     const { data } = await categoryService.getCategories();
     return data.data;
   } catch (error) {
-    console.error(error);
+    throw new Error('Error');
   }
 });
 

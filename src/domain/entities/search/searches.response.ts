@@ -1,4 +1,5 @@
 import PopularSearch from './popular-search.entity';
+import { CategoriesSearch, Product, Search } from './searches.entity';
 
 type GetSearchesResponse = {
   searches: Search[];

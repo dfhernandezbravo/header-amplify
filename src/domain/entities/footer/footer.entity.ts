@@ -1,27 +1,27 @@
-type FooterLink = {
+export type FooterLink = {
   title: string;
   link: string;
 }
 
-type FooterHelpData = FooterLink & {
+export type FooterHelpData = FooterLink & {
   image: string;
   subtitle: string;
 }
 
-type FooterSiteMap = {
+export type FooterSiteMap = {
   title: string;
   links: FooterLink[]
 }
 
-type FooterSocialLinks = FooterLink & {
+export type FooterSocialLinks = FooterLink & {
   icon: string;
 }
 
-type FooterPaymentsLinks = FooterLink & {
+export type FooterPaymentsLinks = FooterLink & {
   icon: string
 }
 
-type FooterData = {
+export type FooterData = {
   copyright: string;
   "help-data": FooterHelpData[];
   "site-map": FooterSiteMap[];

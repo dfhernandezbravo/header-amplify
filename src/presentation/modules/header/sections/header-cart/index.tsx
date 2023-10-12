@@ -3,7 +3,7 @@ import Cart from '@components/atoms/cartButton';
 import { WindowsEvents } from '@events/index';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
-import { HeaderCartSection } from '@modules/header/styles/header.styles';
+
 import { openCategories } from '@store/category/slices/category-slice';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 
@@ -36,9 +36,7 @@ const HeaderCart = () => {
   },[orderFormId])
 
   return (
-    <HeaderCartSection>
-      <Cart quantity={quantity} onClick={handleOnClickCart} />
-    </HeaderCartSection>
+    <Cart quantity={quantity} onClick={handleOnClickCart} />
   );
 };
 

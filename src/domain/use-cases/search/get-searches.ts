@@ -8,7 +8,7 @@ export const getSearches = createAsyncThunk(
       const { data } = await searchService.getSearches({ query });
       return data;
     } catch (error) {
-      console.error(error);
+      throw new Error('Oh no!!');
     }
   },
 );

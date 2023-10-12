@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 type LinkProp = {
   image?: string;
-  hasTooltip: boolean
+  hasTooltip: boolean;
 };
 
 interface Props {
@@ -43,13 +43,13 @@ const hasTooltip = css`
     right: 0;
     top: 12px;
     background-repeat: no-repeat;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   &:hover div {
-    display:block
+    display: block;
   }
-`
+`;
 
 export const HeaderLink = styled.div<LinkProp>`
   display: block;
@@ -70,10 +70,12 @@ export const HeaderLink = styled.div<LinkProp>`
   &:hover {
     background-color: #000;
   }
-  ${(props) => props.image ? `background: url(${props.image}) center 9px no-repeat;` : null  }
-  ${(props) => props.hasTooltip ? hasTooltip : null }
+  ${(props) =>
+    props.image
+      ? `background: url(${props.image}) center 9px no-repeat;`
+      : null}
+  ${(props) => (props.hasTooltip ? hasTooltip : null)}
 `;
-
 
 export const HeaderCencosudCardModal = styled.div`
   display: none;
@@ -92,7 +94,7 @@ export const HeaderCencosudCardModal = styled.div`
   }
 
   & :after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 100%;
     left: 66%;
@@ -102,23 +104,23 @@ export const HeaderCencosudCardModal = styled.div`
   }
 
   & ul {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     width: 100%;
   }
 
   & ul li {
     color: #1a1a1a;
-    font-family: OpenSans,sans-serif;
+    font-family: OpenSans, sans-serif;
     font-size: 14px;
     position: relative;
     list-style: none;
   }
 
-  & ul li span{
+  & ul li span {
     font-weight: 600;
-    &:hover{
-      cursor: pointer
+    &:hover {
+      cursor: pointer;
     }
   }
 
@@ -147,9 +149,4 @@ export const HeaderCencosudCardModal = styled.div`
   & ul .hand:before {
     background-image: url('/icons/header-top-brands/hand.svg');
   }
-
-  & ul .card:before {
-    background-image: url('/icons/header-top-brands/card.svg');
-  }
-  
-`
+`;

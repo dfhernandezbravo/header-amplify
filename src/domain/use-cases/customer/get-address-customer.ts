@@ -8,7 +8,6 @@ const getAddressCustomer = createAsyncThunk(
       const { data } = await customerService.getAddressCustomer(email);
       return data;
     } catch (error) {
-      console.error(error);
       return [];
     }
   },

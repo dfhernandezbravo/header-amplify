@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import React from 'react';
-import * as yup from 'yup';
+
 import { ModalForm } from '../../styles';
 import setPassword from '@use-cases/login/set-password';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
@@ -11,6 +11,7 @@ import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import InputCheckbox from '@components/atoms/inputs/input-checkbox';
 import Link from 'next/link';
 import { SetPasswordRequest } from '@entities/login/login.request';
+import userPasswordSchema from './schema-validation';
 
 type SetPasswordForm = {
   accessKey: string;
@@ -18,26 +19,6 @@ type SetPasswordForm = {
   confirmPassword: string;
   isTYC: boolean;
 };
-
-const schema = yup.object({
-  accessKey: yup.string().required('Campo requerido'),
-  password: yup
-    .string()
-    .trim()
-    .matches(
-      /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
-      'Su contraseña debe contener: 8 caracteres, números, letras minúsculas y mayúsculas',
-    )
-    .required('Campo Requerido'),
-  confirmPassword: yup
-    .string()
-    .required('Campo requerido')
-    .oneOf([yup.ref('password')], 'Las contraseñas no coinciden'),
-  isTYC: yup
-    .boolean()
-    .oneOf([true], 'Debes aceptar terminos y condiciones')
-    .default(false),
-});
 
 const LoginSetPassword = () => {
   const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
@@ -51,7 +32,7 @@ const LoginSetPassword = () => {
     control,
     formState: { errors },
   } = useForm<SetPasswordForm>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(userPasswordSchema),
     defaultValues: {
       isTYC: false,
     },

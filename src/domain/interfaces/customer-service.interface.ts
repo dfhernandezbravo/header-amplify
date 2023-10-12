@@ -1,3 +1,4 @@
+import { Customer, CustomerAddress } from '@entities/customer/customer.entity';
 import { AxiosResponse } from 'axios';
 
 export default interface CustomerService {

@@ -1,7 +1,7 @@
-import React from 'react';
-import { CategoryItemContainer, CategoryTitle } from './styles';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import CategoryIcon from '@components/atoms/icon-category';
+import { Category } from '@entities/category/category.entity';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { CategoryItemContainer, CategoryTitle } from './styles';
 
 interface Props {
   category: Category;

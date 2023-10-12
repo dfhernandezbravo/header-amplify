@@ -1,36 +1,36 @@
-type Search = {
+export type Search = {
   value: string;
   quantity: number;
 };
 
-type CategoriesSearch = {
+export type CategoriesSearch = {
   key: string;
   value: string;
   labelValue: string;
 };
 
-type ProductImage = {
+export type ProductImage = {
   imageUrl: string;
   imageTag: string;
   imageLabel: string;
 };
 
-type ProductCommertialOffer = {
+export type ProductCommertialOffer = {
   Price: number;
   ListPrice: number;
 };
 
-type ProductSeller = {
+export type ProductSeller = {
   commertialOffer: ProductCommertialOffer;
 };
 
-type ProductItems = {
+export type ProductItems = {
   name: string;
   images: ProductImage[];
   sellers: ProductSeller[];
 };
 
-type Product = {
+export type Product = {
   productId: string;
   productName: string;
   brand: string;

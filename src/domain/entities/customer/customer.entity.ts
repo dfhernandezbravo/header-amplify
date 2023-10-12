@@ -1,4 +1,4 @@
-type Customer = {
+export type Customer = {
   id: string;
   firstName: string;
   lastName: string;
@@ -10,7 +10,7 @@ type Customer = {
   isEmployee: boolean;
 };
 
-type CustomerAddress = {
+export type CustomerAddress = {
   addressType: 'search' | 'residential';
   city: string;
   country: 'CHL';

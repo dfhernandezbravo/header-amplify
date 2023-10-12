@@ -1,3 +1,5 @@
+import { Customer } from '@entities/customer/customer.entity';
+import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
 import store, { persistor } from '@store/index';
 import { useState } from 'react';
 import { Provider } from 'react-redux';
