@@ -33,7 +33,7 @@ const HeaderCart = () => {
     if(orderFormId) {
       dispatch(getShoppingCartById(orderFormId))
     }
-  })
+  },[orderFormId])
 
   return (
     <HeaderCartSection>
