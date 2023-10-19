@@ -18,7 +18,9 @@ const Newsletter = () => {
               <div className="newsletter__Inputs">
                 <input type="text" placeholder="Correo electrónico" />
                 <input type="text" placeholder="RUT" />
-                <Button onClick={(event) => event.preventDefault() }>Enviar</Button>
+                <Button onClick={(event) => event.preventDefault()}>
+                  Enviar
+                </Button>
               </div>
               <div className="newsletter__CheckboxContainer">
                 <input type="checkbox" name="terminos" id="terminos" />
@@ -36,7 +38,9 @@ const Newsletter = () => {
           <div className="newsletter__Title">
             <p>Conoce nuestras ofertas y novedades</p>
           </div>
-          <Button onClick={(event) => event.preventDefault()}>Suscríbete</Button>
+          <Button onClick={(event) => event.preventDefault()}>
+            Suscríbete
+          </Button>
         </div>
       )}
     </NewsletterContainer>

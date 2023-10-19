@@ -4,7 +4,7 @@ import { LoginMobileButton } from '../../styles';
 
 const HeaderLoginMobile = () => {
   const { customer } = useAppSelector((state) => state.customer);
-  
+
   return (
     <Mobile>
       <LoginMobileButton href="https://www.easy.cl/micuenta#/">

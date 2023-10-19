@@ -18,7 +18,7 @@ const ContentWrapper = styled.div<{ maxHeight?: number }>`
 const Accordion = ({ title, links }: AccordionProps) => {
   const [isExpanded, setExpanded] = useState<boolean>();
 
-  const contentRef = useRef<HTMLDivElement>();
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const contentHeight = isExpanded ? contentRef.current?.scrollHeight : 0;
 
   const handleExpandToggle = useCallback(() => {

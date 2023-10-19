@@ -11,8 +11,8 @@ import getShoppingCartById from '@use-cases/shopping-cart/get-shopping-cart-by-i
 const HeaderCart = () => {
   const { quantity, orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
   const dispatch = useAppDispatch();
-  const { sendAnalyticsOnClickCart } = useAnalyticsHeaderCart()
-  
+  const { sendAnalyticsOnClickCart } = useAnalyticsHeaderCart();
+
   const handleOnClickCart = () => {
     dispatch(openCategories(false));
     sendAnalyticsOnClickCart();
@@ -23,15 +23,7 @@ const HeaderCart = () => {
     });
   };
 
-  useEffect(() => {
-    if(orderFormId) {
-      dispatch(getShoppingCartById(orderFormId))
-    }
-  },[orderFormId])
-
-  return (
-    <Cart quantity={quantity} onClick={handleOnClickCart} />
-  );
+  return <Cart quantity={quantity} onClick={handleOnClickCart} />;
 };
 
 export default HeaderCart;

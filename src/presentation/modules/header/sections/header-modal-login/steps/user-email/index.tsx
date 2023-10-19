@@ -41,7 +41,7 @@ const LoginUserEmail = ({ nextStep }: Props) => {
       await generateAccessKey({ userEmail: data.email });
       dispatch(navigateTo(nextStep));
     } catch (error) {
-      throw new Error('Oh no!!')
+      throw new Error('Oh no!!');
     }
   };
 

@@ -1,8 +1,7 @@
-import { useAppSelector } from '@hooks/storeHooks';
-import React from 'react';
-import { PopularSearchItem, PopularSearchListContainer } from './styles';
 import { environments } from '@env/environments';
+import { useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
+import { PopularSearchItem, PopularSearchListContainer } from './styles';
 
 const PopularSearchesList = () => {
   const { popularSearches } = useAppSelector((state) => state.search);

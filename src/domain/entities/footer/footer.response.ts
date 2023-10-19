@@ -1,4 +1,4 @@
-import { FooterData } from "./footer.entity";
+import { FooterData } from './footer.entity';
 
 export type GetFooterData = {
   params: {

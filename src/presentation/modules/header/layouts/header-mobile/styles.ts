@@ -39,7 +39,7 @@ export const HeaderMobileSearchSection = styled.div<Props>`
   width: 100%;
   padding: 12px 16px;
   height: 65px;
-  position:relative;
+  position: relative;
 `;
 
 export const HeaderMobileLocationSection = styled.div<Props>`
@@ -64,8 +64,8 @@ export const IconSearchContainer = styled.div`
   color: #000;
   fill: #000;
   position: absolute;
-  right:0;
-  top:50%;
+  right: 0;
+  top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   padding: 0 8px;

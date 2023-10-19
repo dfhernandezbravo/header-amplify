@@ -1,4 +1,5 @@
 import Desktop from '@components/layout/desktop';
+import { useAppSelector } from '@hooks/storeHooks';
 import useRegionalizer from '@hooks/useRegionalizer';
 import HeaderCart from '@modules/header/sections/header-cart';
 import HeaderCategory from '@modules/header/sections/header-category';
@@ -17,7 +18,6 @@ import {
   HeaderDesktopContainer,
   HeaderDesktopSearchSection,
 } from './styles';
-import { useAppSelector } from '@hooks/storeHooks';
 
 const HeaderDesktop = () => {
   const { orderFormId, customer, isUserLogged } = useRegionalizer();
@@ -47,7 +47,7 @@ const HeaderDesktop = () => {
       </HeaderDesktopContainer>
       <HeaderModalLogin />
       <HeaderCategory />
-      <HeaderFooter isCartPath={isCartPath}/>
+      <HeaderFooter isCartPath={false} />
     </Desktop>
   );
 };

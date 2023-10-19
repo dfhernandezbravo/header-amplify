@@ -23,4 +23,4 @@ export const FormComtainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${({ theme: { spacing } }) => spacing[200]};
-`
+`;

@@ -12,7 +12,7 @@ interface Props {
 
 const ModalRegionalizer = ({ isOpen, onClose }: Props) => {
   const { isUserLogged } = useContext(HeaderLocationContext);
-  
+
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
       {isUserLogged ? (

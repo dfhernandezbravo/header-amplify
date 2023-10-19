@@ -2,7 +2,7 @@ import useAnalytics, { DataAnalytics } from '@hooks/useAnalytics';
 
 function useAnalyticsHeaderCart() {
   const { sendEventAnalytics } = useAnalytics();
-  
+
   function sendAnalyticsOnClickCart() {
     const data: DataAnalytics = {
       event: 'interaccion',

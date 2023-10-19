@@ -1,7 +1,7 @@
-import { CartContainer, BadgeQuantity, CartText } from './cartButton.styles';
-import { CgShoppingCart } from 'react-icons/cg';
-import { CartProps } from './cartButton.types';
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import { CgShoppingCart } from 'react-icons/cg';
+import { BadgeQuantity, CartContainer, CartText } from './cartButton.styles';
+import { CartProps } from './cartButton.types';
 
 const Cart = (props: CartProps) => {
   const { quantity, onClick } = props;

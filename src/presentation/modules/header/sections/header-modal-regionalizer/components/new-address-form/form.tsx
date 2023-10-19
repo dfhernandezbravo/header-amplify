@@ -47,7 +47,7 @@ const NewAddressForm = ({
     handleSubmit,
     formState: { isValid },
     watch,
-    setValue
+    setValue,
   } = useForm<NewAddressFormType>();
   const [communes, setCommunes] = useState<Commune[]>([]);
   const region = watch('regionSelected');
@@ -90,7 +90,7 @@ const NewAddressForm = ({
           defaultValue={communeDefault}
           render={({ field }) => (
             <Select
-            placeholder="Selecciona comuna"
+              placeholder="Selecciona comuna"
               {...field}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => option.id}

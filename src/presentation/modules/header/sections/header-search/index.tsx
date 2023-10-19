@@ -13,7 +13,7 @@ import { getSearches } from '@use-cases/search/get-searches';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import useAnalytics from '@hooks/useAnalytics';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import { openCategories } from '@store/category/slices/category-slice';
 
 const HeaderSearch = React.memo(function Search() {

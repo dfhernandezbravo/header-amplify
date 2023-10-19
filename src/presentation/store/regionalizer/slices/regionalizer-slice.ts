@@ -1,9 +1,9 @@
-import { RegionalizerRegions } from '@entities/regionalizer/regionalizer.entity';
+import { Regions } from '@entities/regionalizer/regionalizer.entity';
 import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
 import { createSlice } from '@reduxjs/toolkit';
 
 type RegionalizerState = {
-  regions: RegionalizerRegions | null;
+  regions: Regions | null;
   isOpenModalRegionalizer: boolean;
   addressSelected: AddressShoppingCart | null;
   isLoadingRegionalizer: boolean;

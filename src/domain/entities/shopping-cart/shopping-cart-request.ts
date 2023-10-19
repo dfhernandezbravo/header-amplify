@@ -1,4 +1,4 @@
-import { AddressShoppingCart } from "./shopping-cart.entity";
+import { AddressShoppingCart } from './shopping-cart.entity';
 
 type AddNewAddressRequest = {
   selectedAddresses: AddressShoppingCart[];

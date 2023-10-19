@@ -1,4 +1,7 @@
-import { GetSearchesRequest, ProductSuggestionsRequest } from '@entities/search/searches.request';
+import {
+  GetSearchesRequest,
+  ProductSuggestionsRequest,
+} from '@entities/search/searches.request';
 import {
   GetPopularSearchesResponse,
   GetSearchesResponse,

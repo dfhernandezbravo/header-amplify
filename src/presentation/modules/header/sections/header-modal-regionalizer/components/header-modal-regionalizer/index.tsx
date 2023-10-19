@@ -8,13 +8,11 @@ interface Props {
 }
 
 const HeaderModalRegionalizer = ({ title }: Props) => {
-  const { onCloseModal } = useContext(HeaderLocationContext)
+  const { onCloseModal } = useContext(HeaderLocationContext);
 
   return (
     <HeaderModalRegionalizerContainer>
-      <ModalIconButton
-        onClick={onCloseModal}
-      >
+      <ModalIconButton onClick={onCloseModal}>
         <AiOutlineClose size={20} />
       </ModalIconButton>
       <h3>{title}</h3>

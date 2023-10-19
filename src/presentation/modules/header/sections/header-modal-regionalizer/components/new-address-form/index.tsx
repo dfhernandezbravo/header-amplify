@@ -33,7 +33,7 @@ const NewAddress = ({ header }: Props) => {
     regionSelected,
   }: NewAddressFormType) => {
     try {
-      const formData = mapFormData(communeSelected, regionSelected);
+      const formData = mapFormData(communeSelected!, regionSelected);
       dispatch(pendingAddNewAddress(true));
       await addNewAddress({ data: formData, cartId: orderFormId! });
       dispatch(successAddNewAddress(formData.selectedAddresses[0]));

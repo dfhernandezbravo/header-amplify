@@ -1,4 +1,4 @@
-import { GoogleMapResults, Regions } from "./regionalizer.entity";
+import { GoogleMapResults, Regions } from './regionalizer.entity';
 
 export type GetRegionsResponse = {
   value: Regions[];

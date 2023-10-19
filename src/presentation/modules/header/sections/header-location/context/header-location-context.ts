@@ -5,8 +5,8 @@ interface ContextValues {
   orderFormId: string | null | undefined;
   customer: Customer | null;
   isUserLogged: boolean;
-  onCloseModal: () => void,
-  onOpenModal: () => void,
+  onCloseModal: () => void;
+  onOpenModal: () => void;
 }
 
 const HeaderLocationContext = createContext<ContextValues>({
@@ -14,7 +14,7 @@ const HeaderLocationContext = createContext<ContextValues>({
   customer: null,
   isUserLogged: false,
   onCloseModal: () => {},
-  onOpenModal: () => {}
+  onOpenModal: () => {},
 });
 
 export default HeaderLocationContext;

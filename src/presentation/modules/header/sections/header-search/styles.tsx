@@ -21,8 +21,8 @@ export const IconSearchContainer = styled.div`
   color: #000;
   fill: #000;
   position: absolute;
-  right:0;
-  top:50%;
+  right: 0;
+  top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   padding: 0 8px;

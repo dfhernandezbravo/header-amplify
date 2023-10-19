@@ -1,5 +1,9 @@
 import PopularSearch from '@entities/search/popular-search.entity';
-import { CategoriesSearch, Product, Search } from '@entities/search/searches.entity';
+import {
+  CategoriesSearch,
+  Product,
+  Search,
+} from '@entities/search/searches.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
