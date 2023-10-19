@@ -25,8 +25,8 @@ const HeaderDesktop = () => {
 
   return (
     <Desktop>
-      <HeaderTopBrands isCartPath={isCartPath}/>
-      <HeaderDesktopContainer isCartPath={isCartPath}>
+      <HeaderTopBrands />
+      <HeaderDesktopContainer>
         <HeaderLogo />
         <HeaderMenu />
         <HeaderLocation
@@ -39,7 +39,7 @@ const HeaderDesktop = () => {
           <HeaderSearch />
           {isOpenResults && <HeaderResults />}
         </HeaderDesktopSearchSection>
-        <Container  isCartPath={isCartPath}>
+        <Container>
           <HeaderLogin />
           <Divider />
           <HeaderCart />

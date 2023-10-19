@@ -24,26 +24,23 @@ const HeaderMobile = () => {
   const dispatch = useAppDispatch();
   const { orderFormId, isUserLogged, customer } = useRegionalizer();
 
-  const { pathname } = useRouter()
-  const isCartPath = pathname.includes('cart')
-
   return (
     <Mobile>
       <HeaderMobileContainer>
-        <HeaderMobileOptionSection isCartPath={isCartPath}>
+        <HeaderMobileOptionSection>
           <HeaderMobileOptionSectionElement>
-            <HeaderMenu isCartPath={isCartPath}/>
+            <HeaderMenu />
             <HeaderLogo />
           </HeaderMobileOptionSectionElement>
 
-          <HeaderMobileOptionSectionElement isCartPath={isCartPath}>
+          <HeaderMobileOptionSectionElement>
             <HeaderLogin />
             <HeaderCart />
           </HeaderMobileOptionSectionElement>
         </HeaderMobileOptionSection>
         <HeaderCategory />
 
-        <HeaderMobileSearchSection isCartPath={isCartPath}>
+        <HeaderMobileSearchSection>
           <SearchInputContainer
             onClick={() => dispatch(openResults())}
             placeholder="¡Hola! ¿Qué estás buscando?"

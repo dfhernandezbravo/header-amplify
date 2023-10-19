@@ -5,16 +5,12 @@ type LinkProp = {
   hasTooltip: boolean;
 };
 
-interface Props {
-  isCartPath: boolean
-}
-
-export const HeaderTop = styled.ul<Props>`
+export const HeaderTop = styled.ul`
   font-family: 'Open Sans', sans-serif;
   height: 30px;
   background-color: #333;
   width: 100%;
-  display: ${({isCartPath}) => isCartPath ? 'none' : 'flex'};
+  display: flex;
   justify-content: flex-end;
   align-items: flex-end;
 

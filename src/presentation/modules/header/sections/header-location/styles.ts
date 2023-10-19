@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface Props {
-  isCartPath?: boolean
+  isCartPath?: boolean;
 }
 
 export const RegionalizerContainer = styled.div<Props>`
@@ -11,12 +11,11 @@ export const RegionalizerContainer = styled.div<Props>`
   font-size: 12px;
   cursor: pointer;
 
- @media only screen and (max-width: 48em) {
+  @media only screen and (max-width: 48em) {
+    align-items: ${({ isCartPath }) => (isCartPath ? 'center' : 'inherit')};
 
-  align-items:${({ isCartPath }) => isCartPath ? 'center' : 'inherit'} ;
-
-  & .title {
-    display: ${({ isCartPath }) => isCartPath ? 'none' : 'inherit'}
+    & .title {
+      display: ${({ isCartPath }) => (isCartPath ? 'none' : 'inherit')};
+    }
   }
- }
 `;

@@ -5,17 +5,11 @@ import useAnalytics from '@hooks/useAnalytics';
 import { openCategories } from '@store/category/slices/category-slice';
 import getCategories from '@use-cases/category/get-categories';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { IconCloseContainer, IconMenuContainer, MenuContainer } from './styles';
 
-
-interface Props {
-  isCartPath: boolean
-}
-
-const HeaderMenu = ({isCartPath}:Props) => {
-
+const HeaderMenu = () => {
   const dispatch = useAppDispatch();
   const { isOpenCategories } = useAppSelector((state) => state.category);
   const { sendEventAnalytics } = useAnalytics();
@@ -37,7 +31,7 @@ const HeaderMenu = ({isCartPath}:Props) => {
   };
 
   return (
-    <MenuContainer isCartPath onClick={handleOnClick}>
+    <MenuContainer onClick={handleOnClick}>
       {isOpenCategories ? (
         <IconMenuContainer>
           <AiOutlineClose size={30} />
