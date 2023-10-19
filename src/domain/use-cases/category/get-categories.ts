@@ -4,7 +4,7 @@ import categoryService from '@services/category';
 const getCategories = createAsyncThunk('get/categories', async () => {
   try {
     const { data } = await categoryService.getCategories();
-    return data.data;
+    return data;
   } catch (error) {
     throw new Error('Error');
   }

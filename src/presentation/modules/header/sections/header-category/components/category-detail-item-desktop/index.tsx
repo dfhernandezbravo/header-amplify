@@ -1,5 +1,5 @@
 import { Category } from '@entities/category/category.entity';
-import useAnalytics from '@hooks/useAnalytics';
+import useAnalyticsCategoryDetail from './analytics';
 import {
   CategoryDetailItemContainer,
   CategoryDetailItemLink,
@@ -13,24 +13,15 @@ interface Props {
 
 const CategoryDetailItem = ({ category }: Props) => {
   const { name, children, url } = category;
-  const { sendEventAnalytics } = useAnalytics();
+  const { analyticsOnClickSubcategory, analyticsOnClickTitle } =
+    useAnalyticsCategoryDetail();
 
   const handleOnClickTitle = () => {
-    sendEventAnalytics({
-      event: 'interaccion',
-      category: 'Interacciones Header',
-      action: 'Clic Menu N2',
-      tag: category.name,
-    });
+    analyticsOnClickTitle(category.name);
   };
 
   const handleOnClickSubcategory = (subcategory: Category) => {
-    sendEventAnalytics({
-      event: 'interaccion',
-      category: 'Interacciones Header',
-      action: 'Clic Menu N3',
-      tag: subcategory.name,
-    });
+    analyticsOnClickSubcategory(subcategory.name);
   };
 
   return (

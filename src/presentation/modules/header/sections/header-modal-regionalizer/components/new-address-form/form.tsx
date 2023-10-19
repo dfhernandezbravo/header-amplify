@@ -4,8 +4,8 @@ import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entit
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
-import { NewAddressFormType } from './types';
 import { FormComtainer, SelectWrapper } from './styles';
+import { NewAddressFormType } from './types';
 
 interface Props {
   regions: Regions[];
@@ -27,10 +27,8 @@ const getCommuneDefault = (
   communes: Commune[],
   addressSelected: AddressShoppingCart | null,
 ) =>
-  addressSelected
-    ? communes.find((commune) => commune.name === addressSelected.city) ||
-      communes[0]
-    : communes[0];
+  addressSelected &&
+  communes.find((commune) => commune.name === addressSelected.city);
 
 const NewAddressForm = ({
   regions,
@@ -49,7 +47,7 @@ const NewAddressForm = ({
     handleSubmit,
     formState: { isValid },
     watch,
-    setValue,
+    setValue
   } = useForm<NewAddressFormType>();
   const [communes, setCommunes] = useState<Commune[]>([]);
   const region = watch('regionSelected');
@@ -60,10 +58,7 @@ const NewAddressForm = ({
         a.name.localeCompare(b.name),
       );
       setCommunes(newCommunes);
-      setValue(
-        'communeSelected',
-        getCommuneDefault(region.comunas, addressSelected),
-      );
+      setValue('communeSelected', null);
     }
   }, [region]);
 
@@ -95,6 +90,7 @@ const NewAddressForm = ({
           defaultValue={communeDefault}
           render={({ field }) => (
             <Select
+            placeholder="Selecciona comuna"
               {...field}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => option.id}

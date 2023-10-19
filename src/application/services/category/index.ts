@@ -1,10 +1,10 @@
-import { GetCategoriesResponse } from '@entities/category/categories.response';
+import { bffWebInstance } from '@data-sources/bbf-web-instance';
+import { Category } from '@entities/category/category.entity';
 import CategoryService from '@interfaces/category-service.interface';
-import axios from 'axios';
 
 const categoryService: CategoryService = {
   getCategories() {
-    return axios.get<GetCategoriesResponse>('/api/categories');
+    return bffWebInstance.get<Category[]>('/categories');
   },
 };
 

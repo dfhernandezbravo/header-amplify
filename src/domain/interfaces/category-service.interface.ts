@@ -1,8 +1,8 @@
-import { GetCategoriesResponse } from '@entities/category/categories.response';
+import { Category } from '@entities/category/category.entity';
 import { AxiosResponse } from 'axios';
 
 interface CategoryService {
-  getCategories(): Promise<AxiosResponse<GetCategoriesResponse>>;
+  getCategories(): Promise<AxiosResponse< Category[]>>;
 }
 
 export default CategoryService;

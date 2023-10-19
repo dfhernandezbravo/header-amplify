@@ -1,12 +1,12 @@
 import Desktop from '@components/layout/desktop';
 import { Category } from '@entities/category/category.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import useAnalytics from '@hooks/useAnalytics';
 import { openCategories } from '@store/category/slices/category-slice';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import CategoryDetailItem from '../../components/category-detail-item-desktop';
 import CategoryItem from '../../components/category-item';
+import useAnalyticsCategoriesDesktop from './analytics';
 import {
   CategoriesDesktopContainer,
   CategoriesDetailContainer,
@@ -17,35 +17,27 @@ import {
 } from './styles';
 
 const CategoriesDesktop = () => {
-  const { categories, isOpenCategories } = useAppSelector((state) => state.category); 
+  const { categories, isOpenCategories } = useAppSelector(
+    (state) => state.category,
+  );
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [category, setCategory] = useState<Category | null>(null);
-  const { sendEventAnalytics } = useAnalytics();
+  const { analyticsOnClickCategory, analyticsShowAll } =
+    useAnalyticsCategoriesDesktop();
 
   const handleHover = (categorySelected: Category) => {
     setCategory(categorySelected);
   };
 
   const handleClick = (categorySelected: Category) => {
-    sendEventAnalytics({
-      event: 'interaccion',
-      category: 'Interacciones Header',
-      action: 'Clic Menu N1',
-      tag: categorySelected.name,
-    });
+    analyticsOnClickCategory(categorySelected.name);
     dispatch(openCategories(!isOpenCategories));
     router.push(`/${categorySelected.subname}`);
   };
 
-  const handleOnClickShowAll = (category: Category) => {
-    sendEventAnalytics({
-      event: 'interaccion',
-      category: 'Interacciones Header',
-      action: 'Click mostrar todo menu',
-      tag: category.name,
-    });
-  };
+  const handleOnClickShowAll = (category: Category) =>
+    analyticsShowAll(category.name);
 
   return (
     <Desktop>
