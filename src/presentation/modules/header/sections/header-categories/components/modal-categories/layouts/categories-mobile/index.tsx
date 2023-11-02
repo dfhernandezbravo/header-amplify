@@ -1,13 +1,15 @@
 import Mobile from '@components/layout/mobile';
 import { Category } from '@entities/category/category.entity';
-import { useAppSelector } from '@hooks/storeHooks';
 import { useState } from 'react';
 import CategoryDetailItemMobile from '../../components/category-detail-item-mobile';
 import CategoryItem from '../../components/category-item';
 import { CategoriesMobileContainer, CategoriesMobileList } from './styles';
 
-const CategoriesMobile = () => {
-  const { categories } = useAppSelector((state) => state.category);
+interface Props {
+  categories: Category[];
+}
+
+const CategoriesMobile = ({ categories }: Props) => {
   const [category, setCategory] = useState<Category | null>(null);
 
   return (

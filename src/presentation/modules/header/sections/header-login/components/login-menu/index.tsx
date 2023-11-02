@@ -1,6 +1,6 @@
 import { Customer } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import { openCategories } from '@store/category/slices/category-slice';
+import { closeCategories } from '@store/category/slices/category-slice';
 import { openModalLogin } from '@store/login/slices/login-slice';
 import logout from '@use-cases/login/logout';
 import { LoginMenuContainer, MenuItem } from './style';
@@ -15,7 +15,7 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
   const dispatch = useAppDispatch();
 
   const handleClickItem = () => {
-    dispatch(openCategories(false));
+    dispatch(closeCategories());
     dispatch(openModalLogin());
   };
 

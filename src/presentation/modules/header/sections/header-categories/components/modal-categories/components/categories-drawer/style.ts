@@ -29,4 +29,5 @@ export const DrawerContent = styled.div`
   animation-name: ${animationModal};
   animation-duration: 0.5s;
   z-index: 999;
+  height: 100%;
 `;

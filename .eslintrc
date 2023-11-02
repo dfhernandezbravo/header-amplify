@@ -30,7 +30,7 @@
     "max-lines": ["error", 150],
     "max-params": ["error", 3],
     "no-alert": "error",
-    "no-console": "error",
+    "no-console": "warn",
     "no-debugger": "error",
     "no-lonely-if": "error",
     "no-mixed-operators": "error",

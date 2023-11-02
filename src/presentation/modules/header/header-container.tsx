@@ -1,22 +1,17 @@
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch } from '@hooks/storeHooks';
 import { closeResults } from '@store/search/slices/search-slice';
-import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
-import React, { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import useScroll from './hooks/use-scroll';
 import HeaderDesktop from './layouts/header-desktop';
 import HeaderMobile from './layouts/header-mobile';
 import CookiesProvider from './providers/cookies';
 import WindowsEventProvider from './providers/windows-event';
 import { HeaderContainerWrapper } from './styles';
-import useScroll from './hooks/use-scroll';
+import { HeaderProps } from './types';
 
-const HeaderContainer = () => {
-  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
+const HeaderContainer = ({ modules }: HeaderProps) => {
   const dispatch = useAppDispatch();
   const { visible } = useScroll();
-
-  useEffect(() => {
-    if (!orderFormId) dispatch(getShoppingCart());
-  }, [orderFormId]);
 
   useEffect(() => {
     if (!visible) {
@@ -24,14 +19,19 @@ const HeaderContainer = () => {
     }
   }, [visible, dispatch]);
 
+  const renderBody = useMemo(
+    () => (
+      <HeaderContainerWrapper visible={visible}>
+        <HeaderMobile modules={modules} />
+        <HeaderDesktop modules={modules} />
+      </HeaderContainerWrapper>
+    ),
+    [visible],
+  );
+
   return (
     <WindowsEventProvider>
-      <CookiesProvider>
-        <HeaderContainerWrapper visible={visible}>
-          <HeaderMobile />
-          <HeaderDesktop />
-        </HeaderContainerWrapper>
-      </CookiesProvider>
+      <CookiesProvider>{renderBody}</CookiesProvider>
     </WindowsEventProvider>
   );
 };

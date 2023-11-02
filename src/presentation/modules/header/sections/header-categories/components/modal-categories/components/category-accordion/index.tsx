@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import {
   AccordionContainer,
   AccordionContent,
   AccordionHeader,
   AccordionTitle,
 } from './styles';
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 interface AccordionProps {
   title: string;

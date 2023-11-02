@@ -1,7 +1,7 @@
 import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
 import { useAppDispatch } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
-import { openCategories } from '@store/category/slices/category-slice';
+import { closeCategories } from '@store/category/slices/category-slice';
 import Image from 'next/image';
 import { useContext } from 'react';
 import AddressSelected from './components/address-selected';
@@ -18,7 +18,7 @@ const HeaderLocationContainer = ({ addressSelected }: Props) => {
   const { isUserLogged, onOpenModal } = useContext(HeaderLocationContext);
 
   const handleOnClickRegionalizer = () => {
-    dispatch(openCategories(false));
+    dispatch(closeCategories());
     onOpenModal();
     sendEventAnalytics({
       event: 'interaccion',

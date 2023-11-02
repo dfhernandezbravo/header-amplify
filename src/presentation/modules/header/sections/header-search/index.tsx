@@ -1,20 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { SearchContainer, SearchInput, IconSearchContainer } from './styles';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import { getPopularSearch } from '@use-cases/search/get-popular-search';
+import useAnalytics from '@hooks/useAnalytics';
+import useDebounce from '@hooks/useDebounce';
+import { closeCategories } from '@store/category/slices/category-slice';
 import {
   cleanResults,
   closeResults,
   openResults,
   setTerm,
 } from '@store/search/slices/search-slice';
-import useDebounce from '@hooks/useDebounce';
-import { getSearches } from '@use-cases/search/get-searches';
+import { getPopularSearch } from '@use-cases/search/get-popular-search';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
-import useAnalytics from '@hooks/useAnalytics';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { getSearches } from '@use-cases/search/get-searches';
 import { useRouter } from 'next/router';
-import { openCategories } from '@store/category/slices/category-slice';
+import React, { useCallback, useEffect, useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { IconSearchContainer, SearchContainer, SearchInput } from './styles';
 
 const HeaderSearch = React.memo(function Search() {
   const [search, setSearch] = useState('');
@@ -63,7 +63,7 @@ const HeaderSearch = React.memo(function Search() {
   }, [searches, sendEventAnalytics, search]);
 
   const handleOnClickSearch = () => {
-    dispatch(openCategories(false));
+    dispatch(closeCategories());
     sendEventAnalytics({
       event: 'interaccion',
       category: 'Header',
