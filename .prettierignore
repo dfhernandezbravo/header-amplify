@@ -1,5 +1,5 @@
 next.config.js
-k8
+k8s/
 node_modules
 .lintstagedrc.js
 .prettierrc
