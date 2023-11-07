@@ -18,6 +18,7 @@ function App({ Component, pageProps }: AppProps) {
           logo: true,
           search: true,
         }}
+        cartId=''
       />
       <Component {...pageProps} />
       <Footer />

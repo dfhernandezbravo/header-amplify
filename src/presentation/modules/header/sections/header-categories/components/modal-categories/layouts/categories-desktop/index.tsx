@@ -1,8 +1,6 @@
 import Desktop from '@components/layout/desktop';
 import { Category } from '@entities/category/category.entity';
-import { useAppDispatch } from '@hooks/storeHooks';
 import useCategoriesAnalytics from '@modules/header/sections/header-categories/analytics/categories-analytics';
-import { closeCategories } from '@store/category/slices/category-slice';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import CategoryDetailItem from '../../components/category-detail-item-desktop';
@@ -23,22 +21,44 @@ interface Props {
 const CategoriesDesktop = ({ categories }: Props) => {
   const router = useRouter();
   const [category, setCategory] = useState<Category | null>(null);
-  const { eventOnClickCategory, eventOnClickShowAll } =
-    useCategoriesAnalytics();
-  const dispatch = useAppDispatch();
+  const {
+    eventOnClickCategoryN1,
+    eventOnClickShowAll,
+    eventOnClickCategoryN2,
+    eventOnClickCategoryN3,
+  } = useCategoriesAnalytics();
 
   const handleHover = (categorySelected: Category) => {
     setCategory(categorySelected);
   };
 
-  const handleClick = (categorySelected: Category) => {
-    eventOnClickCategory(categorySelected.name);
-    dispatch(closeCategories());
-    router.push(`/${categorySelected.subname}`);
+  const handleClickN1 = (category: Category) => {
+    if (router.asPath === `/${category.subname}`) return;
+
+    eventOnClickCategoryN1(category.name);
+    router.push(category.subname);
   };
 
-  const handleOnClickShowAll = (category: Category) =>
+  const handleClickN2 = (category: Category) => {
+    if (router.asPath === `/${category.subname}`) return;
+
+    eventOnClickCategoryN2(category.name);
+    router.push(category.subname);
+  };
+
+  const handleClickN3 = (category: Category) => {
+    if (router.asPath === `/${category.subname}`) return;
+
+    eventOnClickCategoryN3(category.name);
+    router.push(category.subname);
+  };
+
+  const handleOnClickShowAll = (category: Category) => {
+    if (router.asPath === `/${category.subname}`) return;
+
     eventOnClickShowAll(category.name);
+    router.push(category.subname);
+  };
 
   return (
     <Desktop>
@@ -48,7 +68,7 @@ const CategoriesDesktop = ({ categories }: Props) => {
             <CategoryItem
               key={category.id}
               onHover={handleHover}
-              onClick={handleClick}
+              onClick={handleClickN1}
               category={category}
             />
           ))}
@@ -69,7 +89,12 @@ const CategoriesDesktop = ({ categories }: Props) => {
 
             <CategoriesDetailGrid>
               {category.children.map((item) => (
-                <CategoryDetailItem category={item} key={item.id} />
+                <CategoryDetailItem
+                  category={item}
+                  key={item.id}
+                  onClickN2={handleClickN2}
+                  onClickN3={handleClickN3}
+                />
               ))}
             </CategoriesDetailGrid>
           </CategoriesDetailContainer>

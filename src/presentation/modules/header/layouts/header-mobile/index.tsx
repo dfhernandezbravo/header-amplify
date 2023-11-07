@@ -3,11 +3,13 @@ import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useRegionalizer from '@hooks/useRegionalizer';
 import useShowModules from '@modules/header/hooks/use-show-module';
 import HeaderCart from '@modules/header/sections/header-cart';
-import HeaderCategory from '@modules/header/sections/header-categories/components/modal-categories';
+import {
+  MenuCategories,
+  ModalCategories,
+} from '@modules/header/sections/header-categories';
 import HeaderLocation from '@modules/header/sections/header-location';
 import HeaderLogin from '@modules/header/sections/header-login';
 import HeaderLogo from '@modules/header/sections/header-logo';
-import HeaderMenu from '@modules/header/sections/header-categories/components/menu-icon';
 import HeaderModalLogin from '@modules/header/sections/header-modal-login';
 import HeaderSearchMobile from '@modules/header/sections/header-search-mobile';
 import { Modules } from '@modules/header/types';
@@ -27,6 +29,7 @@ interface Props {
 
 const HeaderMobile = ({ modules }: Props) => {
   const { isOpenResults } = useAppSelector((state) => state.search);
+  const { isOpenCategories } = useAppSelector((state) => state.category);
   const dispatch = useAppDispatch();
   const { orderFormId, isUserLogged, customer } = useRegionalizer();
   const { showModule } = useShowModules();
@@ -36,7 +39,7 @@ const HeaderMobile = ({ modules }: Props) => {
       <HeaderMobileContainer>
         <HeaderMobileOptionSection>
           <HeaderMobileOptionSectionElement>
-            {showModule(modules.categories, <HeaderMenu />)}
+            {showModule(modules.categories, <MenuCategories />)}
 
             {showModule(modules.logo, <HeaderLogo />)}
           </HeaderMobileOptionSectionElement>
@@ -46,7 +49,6 @@ const HeaderMobile = ({ modules }: Props) => {
             {showModule(modules.cart, <HeaderCart />)}
           </HeaderMobileOptionSectionElement>
         </HeaderMobileOptionSection>
-        <HeaderCategory />
 
         {showModule(
           modules.search,
@@ -57,6 +59,7 @@ const HeaderMobile = ({ modules }: Props) => {
             />
           </HeaderMobileSearchSection>,
         )}
+        {isOpenCategories && <ModalCategories />}
 
         {showModule(
           modules.location,

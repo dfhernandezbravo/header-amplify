@@ -11,4 +11,5 @@ export type Modules = {
 
 export interface HeaderProps {
   modules: Modules;
+  cartId: string;
 }

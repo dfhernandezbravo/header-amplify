@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { closeCategories } from '@store/category/slices/category-slice';
 import getCategories from '@use-cases/category/get-categories';
 import { useQuery } from 'react-query';
 import CategoriesDrawer from './components/categories-drawer';
 import CategoriesDesktop from './layouts/categories-desktop';
 import CategoriesMobile from './layouts/categories-mobile';
-import { closeCategories } from '@store/category/slices/category-slice';
 
 const ModalCategories = () => {
   const { isOpenCategories } = useAppSelector((state) => state.category);

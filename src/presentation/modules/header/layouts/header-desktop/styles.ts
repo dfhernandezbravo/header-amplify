@@ -5,7 +5,7 @@ export const HeaderDesktopContainer = styled.div`
   flex-direction: row;
   padding: 8px 40px 8px 30px;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   color: white;
   gap: 32px;
 `;

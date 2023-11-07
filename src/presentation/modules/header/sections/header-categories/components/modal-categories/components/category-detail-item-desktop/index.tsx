@@ -1,5 +1,4 @@
 import { Category } from '@entities/category/category.entity';
-import useAnalyticsCategoryDetail from './analytics';
 import {
   CategoryDetailItemContainer,
   CategoryDetailItemLink,
@@ -9,24 +8,16 @@ import {
 
 interface Props {
   category: Category;
+  onClickN2: (category: Category) => void;
+  onClickN3: (category: Category) => void;
 }
 
-const CategoryDetailItem = ({ category }: Props) => {
-  const { name, children, url } = category;
-  const { analyticsOnClickSubcategory, analyticsOnClickTitle } =
-    useAnalyticsCategoryDetail();
-
-  const handleOnClickTitle = () => {
-    analyticsOnClickTitle(category.name);
-  };
-
-  const handleOnClickSubcategory = (subcategory: Category) => {
-    analyticsOnClickSubcategory(subcategory.name);
-  };
+const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
+  const { name, children, subname } = category;
 
   return (
     <CategoryDetailItemContainer>
-      <CategoryDetailItemTitle href={url} onClick={handleOnClickTitle}>
+      <CategoryDetailItemTitle href="" onClick={() => onClickN2(category)}>
         {name}
       </CategoryDetailItemTitle>
 
@@ -34,13 +25,13 @@ const CategoryDetailItem = ({ category }: Props) => {
         <CategoryDetailItemLink
           href={item.url}
           key={item.id}
-          onClick={() => handleOnClickSubcategory(item)}
+          onClick={() => onClickN3(item)}
         >
           {item.name}
         </CategoryDetailItemLink>
       ))}
 
-      <CategoryDetailItemLinkAll href={url}>
+      <CategoryDetailItemLinkAll href={subname}>
         Mostrar todo
       </CategoryDetailItemLinkAll>
     </CategoryDetailItemContainer>

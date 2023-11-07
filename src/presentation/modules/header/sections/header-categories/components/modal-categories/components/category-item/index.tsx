@@ -16,7 +16,10 @@ const CategoryItem = ({
 }: Props) => {
   return (
     <CategoryItemContainer
-      onClick={() => onClick(category)}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick(category);
+      }}
       onMouseOver={(e) => {
         e.preventDefault();
         onHover(category);
@@ -24,7 +27,6 @@ const CategoryItem = ({
     >
       <CategoryIcon subname={category.subname} />
       <CategoryTitle>{category.name}</CategoryTitle>
-
       <MdOutlineKeyboardArrowRight size={20} />
     </CategoryItemContainer>
   );

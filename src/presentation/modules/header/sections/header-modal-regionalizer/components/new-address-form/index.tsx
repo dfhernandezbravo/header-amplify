@@ -13,6 +13,8 @@ import NewAddressForm from './form';
 import { mapFormData } from './map-form-data';
 import { NewAddressFormContainer } from './styles';
 import { NewAddressFormType } from './types';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { WindowsEvents } from '@events/index';
 
 interface Props {
   header?: React.ReactNode;
@@ -43,6 +45,10 @@ const NewAddress = ({ header }: Props) => {
         communeSelected: communeSelected ? communeSelected.name : '',
       });
       onCloseModal();
+      customDispatchEvent({
+        name: WindowsEvents.UPDATE_SHIPPING_CART,
+        detail: null,
+      });
     } catch (error) {
       throw new Error('Error');
     } finally {

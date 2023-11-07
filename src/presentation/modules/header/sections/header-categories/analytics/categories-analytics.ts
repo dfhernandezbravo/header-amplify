@@ -12,12 +12,30 @@ export default function useCategoriesAnalytics() {
     });
   }
 
-  function eventOnClickCategory(category: string) {
+  function eventOnClickCategoryN1(category: string) {
     sendEventAnalytics({
       event: 'interaccion',
       category: 'Interacciones Header',
       action: 'Clic Menu N1',
       tag: category,
+    });
+  }
+
+  function eventOnClickCategoryN2(category: string) {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Interacciones Header',
+      action: 'Clic Menu N2',
+      tag: category,
+    });
+  }
+
+  function eventOnClickCategoryN3(subcategory: string) {
+    sendEventAnalytics({
+      event: 'interaccion',
+      category: 'Interacciones Header',
+      action: 'Clic Menu N3',
+      tag: subcategory,
     });
   }
 
@@ -32,7 +50,9 @@ export default function useCategoriesAnalytics() {
 
   return {
     eventOnClickMenuIcon,
-    eventOnClickCategory,
+    eventOnClickCategoryN1,
+    eventOnClickCategoryN2,
+    eventOnClickCategoryN3,
     eventOnClickShowAll,
   };
 }

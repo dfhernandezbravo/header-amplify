@@ -23,6 +23,9 @@ const shoppingCartSlice = createSlice({
     setQuantity: (state, { payload }) => {
       state.quantity = payload;
     },
+    setOrderFormId: (state, { payload }: { payload: string }) => {
+      state.orderFormId = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getShoppingCart.fulfilled, (state, { payload }) => {
@@ -31,6 +34,7 @@ const shoppingCartSlice = createSlice({
   },
 });
 
-export const { setShoppingCartUse, setQuantity } = shoppingCartSlice.actions;
+export const { setShoppingCartUse, setQuantity, setOrderFormId } =
+  shoppingCartSlice.actions;
 
 export default shoppingCartSlice;

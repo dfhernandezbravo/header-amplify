@@ -8,8 +8,9 @@ import CookiesProvider from './providers/cookies';
 import WindowsEventProvider from './providers/windows-event';
 import { HeaderContainerWrapper } from './styles';
 import { HeaderProps } from './types';
+import { setOrderFormId } from '@store/shopping-cart/slices/shopping-cart-slice';
 
-const HeaderContainer = ({ modules }: HeaderProps) => {
+const HeaderContainer = ({ modules, cartId }: HeaderProps) => {
   const dispatch = useAppDispatch();
   const { visible } = useScroll();
 
@@ -18,6 +19,10 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
       dispatch(closeResults());
     }
   }, [visible, dispatch]);
+
+  useEffect(() => {
+    dispatch(setOrderFormId(cartId));
+  }, [cartId]);
 
   const renderBody = useMemo(
     () => (
