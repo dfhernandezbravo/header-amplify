@@ -1,0 +1,13 @@
+next.config.js
+k8
+node_modules
+.lintstagedrc.js
+.prettierrc
+commitlint.config.js
+custom.d.ts
+Dockerfile
+styled.d.ts
+tsconfig.json
+package.json
+yarn.lock
+.husky
