@@ -21,7 +21,7 @@ const AddressSelected = ({ address }: Props) => {
       {addressSelected ? (
         <strong>{addressSelected.city}</strong>
       ) : (
-        <p>Ingresa tu ubicación</p>
+        <span>Ingresa tu ubicación</span>
       )}
     </div>
   );
