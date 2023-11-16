@@ -5,8 +5,9 @@ import { closeCategories } from '@store/category/slices/category-slice';
 import Image from 'next/image';
 import { useContext } from 'react';
 import AddressSelected from './components/address-selected';
+import PopupRegionalizer from './components/popup-regionalizer';
 import HeaderLocationContext from './context/header-location-context';
-import { RegionalizerContainer } from './styles';
+import { ButtonRegionalizer, RegionalizerContainer } from './styles';
 
 interface Props {
   addressSelected: AddressShoppingCart | null;
@@ -29,14 +30,19 @@ const HeaderLocationContainer = ({ addressSelected }: Props) => {
   };
 
   return (
-    <RegionalizerContainer onClick={handleOnClickRegionalizer}>
-      <Image
-        src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
-        width={19}
-        height={25}
-        alt="Location Icon"
-      />
-      <AddressSelected address={addressSelected} />
+    <RegionalizerContainer>
+      <ButtonRegionalizer onClick={handleOnClickRegionalizer}>
+        <Image
+          src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
+          width={19}
+          height={25}
+          alt="Location Icon"
+        />
+        <AddressSelected address={addressSelected} />
+      </ButtonRegionalizer>
+      {!addressSelected && (
+        <PopupRegionalizer onClick={handleOnClickRegionalizer} />
+      )}
     </RegionalizerContainer>
   );
 };
