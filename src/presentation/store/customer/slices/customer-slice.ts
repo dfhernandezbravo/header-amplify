@@ -24,7 +24,6 @@ const customerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCustomer.fulfilled, (state, { payload }) => {
-        console.log('customer', { payload });
         state.customer = payload;
       })
       .addCase(getAddressCustomer.fulfilled, (state, { payload }) => {
