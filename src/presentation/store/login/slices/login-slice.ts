@@ -5,6 +5,7 @@ import {
   LoginProviders,
   LoginStep,
   SocialLogin,
+  SocialProviders,
 } from '@entities/login/login.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import getLoginMethods from '@use-cases/login/get-login-methods';
@@ -43,7 +44,12 @@ const initialState: LoginState = {
       step: 'UserPassword',
     },
   ],
-  socialMethods: [],
+  socialMethods: [
+    {
+      providerName: SocialProviders.GOOGLE,
+      url: '/',
+    },
+  ],
 };
 
 const loginSlice = createSlice({
@@ -65,6 +71,9 @@ const loginSlice = createSlice({
     },
     setAuthCookies: (state, { payload }: { payload: AuthCookie[] }) => {
       state.authCookies = [...state.authCookies, ...payload];
+    },
+    setLogin: (state, { payload }: { payload: boolean }) => {
+      state.isLogged = payload;
     },
   },
   // use cases
@@ -115,6 +124,7 @@ export const {
   closeModalLogin,
   navigateTo,
   setEmail,
+  setLogin,
   setAuthCookies,
 } = loginSlice.actions;
 

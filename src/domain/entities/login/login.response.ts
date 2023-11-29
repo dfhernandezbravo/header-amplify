@@ -5,3 +5,7 @@ export type LoginResponse = {
 };
 
 export type GenerateTokenResponse = AuthCookie;
+
+export type socialLoginResponse = {
+  url: string;
+};

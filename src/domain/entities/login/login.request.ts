@@ -24,3 +24,8 @@ export type SetPasswordRequest = {
 export type GenerateTokenRequest = {
   checkoutAuth: string;
 };
+
+export type SocialLoginRequest = {
+  providerName: string;
+  callback: string;
+};
