@@ -15,6 +15,13 @@ const WindowsEventProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
   const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
 
+  const sendCartId = () => {
+    customDispatchEvent({
+      name: WindowsEvents.CART_ID,
+      detail: { cartId: orderFormId },
+    });
+  };
+
   useEffect(() => {
     document.addEventListener(WindowsEvents.CART_HEADER, (event) => {
       event.preventDefault();
@@ -29,6 +36,10 @@ const WindowsEventProvider = ({ children }: Props) => {
         dispatch(setShoppingCartUse(customEvent.detail.isShoppingCartUsed));
       }
     });
+
+    document.addEventListener(WindowsEvents.GET_CART_ID, () => {
+      sendCartId();
+    });
   }, [dispatch]);
 
   useEffect(() => {
@@ -36,10 +47,7 @@ const WindowsEventProvider = ({ children }: Props) => {
       name: WindowsEvents.CART_HEADER,
       detail: { cartId: orderFormId },
     });
-    customDispatchEvent({
-      name: WindowsEvents.CART_ID,
-      detail: { cartId: orderFormId },
-    });
+    sendCartId();
   }, [orderFormId, dispatch]);
 
   return <>{children}</>;
