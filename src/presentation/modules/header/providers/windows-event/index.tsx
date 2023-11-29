@@ -14,6 +14,7 @@ interface Props {
 const WindowsEventProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
   const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
+  // const { isLogged, userEmail } = useAppSelector(state =>  state.login)
 
   const sendCartId = () => {
     customDispatchEvent({
@@ -21,6 +22,12 @@ const WindowsEventProvider = ({ children }: Props) => {
       detail: { cartId: orderFormId },
     });
   };
+
+  useEffect(() => {
+    console.log('updated orderForm');
+    console.log({ orderFormId });
+    sendCartId();
+  }, [orderFormId]);
 
   useEffect(() => {
     document.addEventListener(WindowsEvents.CART_HEADER, (event) => {
