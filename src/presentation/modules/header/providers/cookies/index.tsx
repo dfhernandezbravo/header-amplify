@@ -63,7 +63,10 @@ const CookiesProvider = ({ children }: Props) => {
         ];
         const decodeToken = decodeJWT(checkoutAndToken.token);
         const email = decodeToken?.data?.email;
-        setCookie('checkoutAuth', checkoutAndToken.checkoutAuth);
+        setCookie(
+          'checkoutAuth',
+          decodeURIComponent(checkoutAndToken.checkoutAuth),
+        );
         setCookie('token', checkoutAndToken.token);
         setCookie('user', email);
         dispatch(setEmail(email));

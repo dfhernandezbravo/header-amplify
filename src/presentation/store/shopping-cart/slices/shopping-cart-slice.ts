@@ -24,13 +24,11 @@ const shoppingCartSlice = createSlice({
       state.quantity = payload;
     },
     setOrderFormId: (state, { payload }: { payload: string }) => {
-      console.log('updating orderFormId', payload);
       state.orderFormId = payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getShoppingCart.fulfilled, (state, { payload }) => {
-      console.log('updating orderFormId', payload.orderFormId);
       state.orderFormId = payload.orderFormId;
     });
   },
