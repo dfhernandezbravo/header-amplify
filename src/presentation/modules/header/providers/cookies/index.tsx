@@ -69,14 +69,14 @@ const CookiesProvider = ({ children }: Props) => {
         );
         setCookie('token', checkoutAndToken.token);
         setCookie('user', email);
-        dispatch(setEmail(email));
+        dispatch(setEmail(decodeURIComponent(email)));
         dispatch(getCustomer(email));
         dispatch(setLogin(true));
         const newUrl = deleteSearParams(paramToDelete);
         router.push(newUrl);
       }
     }
-  }, []);
+  }, [dispatch]);
 
   return <>{children}</>;
 };
