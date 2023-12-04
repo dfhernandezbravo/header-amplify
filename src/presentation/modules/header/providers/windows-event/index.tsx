@@ -1,6 +1,7 @@
 import { WindowsEvents } from '@events/index';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { openModalLogin } from '@store/login/slices/login-slice';
 import {
   setQuantity,
   setShoppingCartUse,
@@ -23,6 +24,10 @@ const WindowsEventProvider = ({ children }: Props) => {
   };
 
   useEffect(() => {
+    sendCartId();
+  }, [orderFormId]);
+
+  useEffect(() => {
     document.addEventListener(WindowsEvents.CART_HEADER, (event) => {
       event.preventDefault();
       const customEvent = event as CustomEvent<{
@@ -40,6 +45,10 @@ const WindowsEventProvider = ({ children }: Props) => {
     document.addEventListener(WindowsEvents.GET_CART_ID, () => {
       sendCartId();
     });
+
+    document.addEventListener(WindowsEvents.OPEN_LOGIN_MODAL, () => {
+      dispatch(openModalLogin());
+    });
   }, [dispatch]);
 
   useEffect(() => {
@@ -47,7 +56,6 @@ const WindowsEventProvider = ({ children }: Props) => {
       name: WindowsEvents.CART_HEADER,
       detail: { cartId: orderFormId },
     });
-    sendCartId();
   }, [orderFormId, dispatch]);
 
   return <>{children}</>;
