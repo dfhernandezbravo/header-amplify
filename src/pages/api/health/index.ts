@@ -5,5 +5,6 @@ export default async function handler(
     _req: NextApiRequest,
     res: NextApiResponse,
 ) {
-    res.status(200).json({ message: "healt test" });
+    console.log(">>>> HEALT TEST HEADER MCF <<<<")
+    res.status(200).json({ message: ">>> healt test mcf <<<" });
 }

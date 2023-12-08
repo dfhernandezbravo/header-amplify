@@ -2,13 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import searchService from '@services/search';
 
 export const getPopularSearch = createAsyncThunk(
-  'get/products/search/popular',
+  'get/search/popular',
   async () => {
     try {
       const { data } = await searchService.getPopularSearches();
-      return data.data.searches;
+      return data.searches;
     } catch (error) {
-      throw new Error('Oh no!!');
+      console.error(error);
     }
   },
 );

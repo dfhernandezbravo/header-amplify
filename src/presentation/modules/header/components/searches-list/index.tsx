@@ -1,5 +1,4 @@
 import { CategoriesSearch, Search } from '@entities/search/searches.entity';
-import { environments } from '@env/environments';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
@@ -16,9 +15,6 @@ const SearchList = () => {
   );
 
   const dispatch = useAppDispatch();
-
-  const { hostURL } = environments();
-
   const { sendEventAnalytics } = useAnalytics();
 
   const onMouseOverSearch = (searchSelected: Search) => {
@@ -64,7 +60,7 @@ const SearchList = () => {
     <SearchListContainer>
       {searches.map((search) => (
         <SearchItem
-          href={`${hostURL}/${search.value}?map=ft`}
+          href={`/${search.value}?map=ft`}
           key={search.value}
           onMouseOver={() => onMouseOverSearch(search)}
           onClick={(e) => {
@@ -84,7 +80,7 @@ const SearchList = () => {
             e.stopPropagation();
             handleOnClickCategory(category.labelValue);
           }}
-          href={`${hostURL}/${category.value}/${term}?map=${category.key},ft`}
+          href={`/${category.value}/${term}?map=${category.key},ft`}
           key={category.key}
           onMouseOver={() => onMouseOverCategory(category)}
         >

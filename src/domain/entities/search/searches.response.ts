@@ -7,9 +7,7 @@ type GetSearchesResponse = {
 };
 
 type GetPopularSearchesResponse = {
-  data: {
-    searches: PopularSearch[];
-  };
+  searches: PopularSearch[];
 };
 
 type ProductSuggestionsResponse = {

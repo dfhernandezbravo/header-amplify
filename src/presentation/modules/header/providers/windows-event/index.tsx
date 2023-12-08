@@ -1,7 +1,6 @@
 import { WindowsEvents } from '@events/index';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
-import { openModalLogin } from '@store/login/slices/login-slice';
 import {
   setQuantity,
   setShoppingCartUse,
@@ -44,10 +43,6 @@ const WindowsEventProvider = ({ children }: Props) => {
 
     document.addEventListener(WindowsEvents.GET_CART_ID, () => {
       sendCartId();
-    });
-
-    document.addEventListener(WindowsEvents.OPEN_LOGIN_MODAL, () => {
-      dispatch(openModalLogin());
     });
   }, [dispatch]);
 

@@ -8,10 +8,10 @@ export default async function handler(
 ) {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BFF_MOBILE_URL_STG}/products/search/popular`,
+      `${process.env.NEXT_PUBLIC_BFF_WEB_URL}/search/popular`,
     );
     res.json(data);
   } catch (error) {
-    throw new Error('Oh no!!');
+    console.error(error)
   }
 }

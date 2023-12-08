@@ -11,12 +11,10 @@ import {
   SuggestionsMobileDetail,
   SuggestionsMobileItem,
 } from './styles';
-import { environments } from '@env/environments';
 import useAnalytics from '@hooks/useAnalytics';
 
 const HeaderSuggestionsMobile = () => {
   const { productSuggestions } = useAppSelector((state) => state.search);
-  const { hostURL } = environments();
   const { sendEventAnalytics } = useAnalytics();
 
   const handleOnClick = (product: string) => {
@@ -33,26 +31,26 @@ const HeaderSuggestionsMobile = () => {
       <SuggestionsMobileContainer>
         <h5>Resultados de productos</h5>
 
-        {productSuggestions.map((product) => (
+        {productSuggestions?.map((product) => (
           <SuggestionsMobileItem
             key={product.productId}
-            href={`${hostURL}/${product.link}`}
+            href={`/${product.link}`}
             onClick={(e) => {
               e.stopPropagation();
               handleOnClick(product.productName);
             }}
           >
             <Image
-              src={product.items[0].images[0].imageUrl}
+              src={product?.items[0]?.images[0]?.imageUrl}
               width={60}
               height={60}
-              alt={product.items[0].images[0].imageLabel}
+              alt={product?.items[0]?.images[0]?.imageLabel}
             />
 
             <SuggestionsMobileDetail>
-              <SuggestionBrand>{product.brand} </SuggestionBrand>
+              <SuggestionBrand>{product?.brand} </SuggestionBrand>
 
-              <SuggestionName>{product.productName}</SuggestionName>
+              <SuggestionName>{product?.productName}</SuggestionName>
             </SuggestionsMobileDetail>
           </SuggestionsMobileItem>
         ))}

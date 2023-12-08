@@ -1,3 +1,4 @@
+import { bffWebInstance } from './../../data-sources/bbf-web-instance';
 import {
   GetSearchesRequest,
   ProductSuggestionsRequest,
@@ -12,9 +13,7 @@ import axios from 'axios';
 
 const searchService: SearchService = {
   getPopularSearches() {
-    return axios.get<GetPopularSearchesResponse>(
-      '/api/products/search/popular',
-    );
+    return bffWebInstance.get<GetPopularSearchesResponse>('/search/popular');
   },
   getSearches(params: GetSearchesRequest) {
     return axios.get<GetSearchesResponse>('/api/products/search/autocomplete', {

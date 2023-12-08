@@ -17,14 +17,14 @@ const HeaderResults = () => {
           <Spinner />
         </HeaderResultSpinnerContainer>
       )}
-      {searches.length && (
+      {searches?.length > 0 && (
         <>
           <SearchList />
           <HeaderSuggestions />
         </>
       )}
       {isEmptySearch && <EmptySearch />}
-      {popularSearches.length && <PopularSearchesList />}
+      {popularSearches?.length > 0 && <PopularSearchesList />}
     </HeaderResultsContainer>
   );
 };
