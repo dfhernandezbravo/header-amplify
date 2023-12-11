@@ -22,7 +22,7 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
   return (
     <LoginMenuContainer isVisible={isMenuOpen}>
       {customer ? (
-        <LoginMenuContainer isVisible={isMenuOpen}>
+        <>
           <MenuItem href="https://www.easy.cl/micuenta#/profile">
             Mis Datos
           </MenuItem>
@@ -41,7 +41,7 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
           <MenuItem last href="" onClick={() => dispatch(logout(authCookies))}>
             Salir
           </MenuItem>
-        </LoginMenuContainer>
+        </>
       ) : (
         <MenuItem href="" onClick={handleClickItem}>
           Crear / Ingresar
