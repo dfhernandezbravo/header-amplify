@@ -23,21 +23,11 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
     <LoginMenuContainer isVisible={isMenuOpen}>
       {customer ? (
         <>
-          <MenuItem href="https://www.easy.cl/micuenta#/profile">
-            Mis Datos
-          </MenuItem>
-          <MenuItem href="https://www.easy.cl/micuenta#/cards">
-            Mis Tarjetas
-          </MenuItem>
-          <MenuItem href="https://www.easy.cl/micuenta#/addresses">
-            Mis Direcciones
-          </MenuItem>
-          <MenuItem href="https://ayuda.easy.cl/mis-compras?">
-            Mis Compras
-          </MenuItem>
-          <MenuItem href="https://www.easy.cl/micuenta#/wishlist">
-            Mis Favoritos
-          </MenuItem>
+          <MenuItem href="/account/profile">Mis Datos</MenuItem>
+          <MenuItem href="/account/cards">Mis Tarjetas</MenuItem>
+          <MenuItem href="/account/addresses">Mis Direcciones</MenuItem>
+          <MenuItem href="/account/purchases">Mis Compras</MenuItem>
+          <MenuItem href="/account/favorites">Mis Favoritos</MenuItem>
           <MenuItem last href="" onClick={() => dispatch(logout(authCookies))}>
             Salir
           </MenuItem>

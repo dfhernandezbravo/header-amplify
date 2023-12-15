@@ -17,7 +17,7 @@ const HeaderLogo = () => {
       className="logo"
       href="/"
       onClick={() => {
-        router.back();
+        router.push('/');
         sendEventAnalytics({
           event: 'interaccion',
           category: 'Interacciones Header',
