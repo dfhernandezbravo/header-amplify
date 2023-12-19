@@ -5,6 +5,7 @@ export const ListAddressFormContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  color: #000;
 `;
 
 export const ListAddressContainer = styled.div`

@@ -19,7 +19,9 @@ const AddressSelected = ({ address }: Props) => {
     <div>
       <p>¿Dónde entregar tu compra?</p>
       {addressSelected ? (
-        <strong>{addressSelected.city}</strong>
+        <strong>
+          {addressSelected?.neighborhood ?? addressSelected?.state}
+        </strong>
       ) : (
         <span>Ingresa tu ubicación</span>
       )}
