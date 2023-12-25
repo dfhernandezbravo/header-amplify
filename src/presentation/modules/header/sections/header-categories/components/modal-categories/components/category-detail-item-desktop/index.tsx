@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { Category } from '@entities/category/category.entity';
 import {
   CategoryDetailItemContainer,
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
-  const { name, children, subname } = category;
+  const { name, sub_categories, url } = category;
 
   return (
     <CategoryDetailItemContainer>
@@ -21,17 +22,18 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
         {name}
       </CategoryDetailItemTitle>
 
-      {children.map((item) => (
-        <CategoryDetailItemLink
-          href={item.url}
-          key={item.id}
-          onClick={() => onClickN3(item)}
-        >
-          {item.name}
-        </CategoryDetailItemLink>
-      ))}
+      {sub_categories &&
+        sub_categories.map((item) => (
+          <CategoryDetailItemLink
+            href={item.url}
+            key={item.id}
+            onClick={() => onClickN3(item)}
+          >
+            {item.name}
+          </CategoryDetailItemLink>
+        ))}
 
-      <CategoryDetailItemLinkAll href={subname}>
+      <CategoryDetailItemLinkAll href={url}>
         Mostrar todo
       </CategoryDetailItemLinkAll>
     </CategoryDetailItemContainer>

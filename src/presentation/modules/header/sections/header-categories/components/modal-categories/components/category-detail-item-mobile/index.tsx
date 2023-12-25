@@ -30,15 +30,16 @@ const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
         </CategoriesDetailTitleMobileLink>
       </CategoryHeader>
 
-      {category.children.map((item) => (
+      {category?.categories.map((item) => (
         <CategoryContent key={item.id}>
           <CategoryAccordion title={item.name}>
             <ChildrenAccordionCategory>
-              {item.children.map((sub) => (
-                <CategoryLink key={sub.id} href={sub.url}>
-                  {sub.name}
-                </CategoryLink>
-              ))}
+              {item?.sub_categories?.length > 0 &&
+                item.sub_categories.map((sub) => (
+                  <CategoryLink key={sub.id} href={sub.url}>
+                    {sub.name}
+                  </CategoryLink>
+                ))}
 
               <CategoryLinkAll href={item.url}>Mostrar todo </CategoryLinkAll>
             </ChildrenAccordionCategory>

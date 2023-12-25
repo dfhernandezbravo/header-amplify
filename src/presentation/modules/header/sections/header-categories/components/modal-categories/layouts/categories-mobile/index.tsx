@@ -18,7 +18,7 @@ const CategoriesMobile = ({ categories }: Props) => {
         {!category ? (
           <CategoriesMobileList>
             <h2>Categorías</h2>
-            {categories.map((item) => (
+            {categories?.map((item) => (
               <CategoryItem
                 key={item.id}
                 category={item}

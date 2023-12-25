@@ -1,25 +1,14 @@
 import React from 'react';
-import { iconsCategory } from '@env/icons-category';
 import Image from 'next/image';
 
 interface Props {
-  subname: string;
+  icon: string;
 }
 
-const CategoryIcon = ({ subname }: Props) => {
-  const icon = iconsCategory[subname];
-
+const CategoryIcon = ({ icon }: Props) => {
   const size = 20;
 
-  return (
-    <Image
-      src={`/icons/categories/${icon}.svg`}
-      width={size}
-      height={size}
-      alt=""
-      priority
-    />
-  );
+  return <Image src={icon} width={size} height={size} alt="" priority />;
 };
 
 export default CategoryIcon;

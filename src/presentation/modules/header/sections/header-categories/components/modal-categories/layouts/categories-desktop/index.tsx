@@ -13,6 +13,8 @@ import {
   CategoriesDetailTitleLink,
   CategoriesItemsContainer,
 } from './styles';
+import { closeCategories } from '@store/category/slices/category-slice';
+import { useAppDispatch } from '@hooks/storeHooks';
 
 interface Props {
   categories: Category[];
@@ -20,6 +22,7 @@ interface Props {
 
 const CategoriesDesktop = ({ categories }: Props) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [category, setCategory] = useState<Category | null>(null);
   const {
     eventOnClickCategoryN1,
@@ -31,33 +34,38 @@ const CategoriesDesktop = ({ categories }: Props) => {
   const handleHover = (categorySelected: Category) => {
     setCategory(categorySelected);
   };
+  const closeModal = () => dispatch(closeCategories());
 
   const handleClickN1 = (category: Category) => {
-    if (router.asPath === `/${category.subname}`) return;
+    if (router.asPath === `/${category.url}`) return;
 
     eventOnClickCategoryN1(category.name);
-    router.push(category.subname);
+    closeModal();
+    router.push('/' + category.url);
   };
 
   const handleClickN2 = (category: Category) => {
-    if (router.asPath === `/${category.subname}`) return;
+    if (router.asPath === `/${category.url}`) return;
 
     eventOnClickCategoryN2(category.name);
-    router.push(category.subname);
+    closeModal();
+    router.push('/' + category.url);
   };
 
   const handleClickN3 = (category: Category) => {
-    if (router.asPath === `/${category.subname}`) return;
+    if (router.asPath === `/${category.url}`) return;
 
     eventOnClickCategoryN3(category.name);
-    router.push(category.subname);
+    closeModal();
+    router.push('/' + category.url);
   };
 
   const handleOnClickShowAll = (category: Category) => {
-    if (router.asPath === `/${category.subname}`) return;
+    if (router.asPath === `/${category.url}`) return;
 
     eventOnClickShowAll(category.name);
-    router.push(category.subname);
+    closeModal();
+    router.push('/' + category.url);
   };
 
   return (
@@ -77,10 +85,10 @@ const CategoriesDesktop = ({ categories }: Props) => {
         {category && (
           <CategoriesDetailContainer>
             <CategoriesDetailTitle>
-              <h2>{category.name}</h2>
+              <h2>{category?.name}</h2>
 
               <CategoriesDetailTitleLink
-                href={category.url}
+                href={category?.url}
                 onClick={() => handleOnClickShowAll(category)}
               >
                 Mostrar todo
@@ -88,7 +96,7 @@ const CategoriesDesktop = ({ categories }: Props) => {
             </CategoriesDetailTitle>
 
             <CategoriesDetailGrid>
-              {category.children.map((item) => (
+              {category?.categories.map((item) => (
                 <CategoryDetailItem
                   category={item}
                   key={item.id}

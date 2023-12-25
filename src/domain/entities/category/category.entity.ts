@@ -4,5 +4,7 @@ export type Category = {
   hasChildren: boolean;
   url: string;
   subname: string;
-  children: Category[];
+  icon: string;
+  sub_categories: Category[];
+  categories: Category[];
 };

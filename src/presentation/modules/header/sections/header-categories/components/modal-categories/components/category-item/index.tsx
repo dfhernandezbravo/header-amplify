@@ -25,7 +25,7 @@ const CategoryItem = ({
         onHover(category);
       }}
     >
-      <CategoryIcon subname={category.subname} />
+      <CategoryIcon icon={category?.icon} />
       <CategoryTitle>{category.name}</CategoryTitle>
       <MdOutlineKeyboardArrowRight size={20} />
     </CategoryItemContainer>
