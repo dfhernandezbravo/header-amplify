@@ -22,7 +22,7 @@ const PopularSearchesList = () => {
       {popularSearches?.map((search) => (
         <PopularSearchItem
           key={search.term}
-          href={`/${search.term}?map=ft`}
+          href={`/${search.term}?page=plp`}
           onClick={(e) => {
             e.stopPropagation();
             handleOnClick(search.term);

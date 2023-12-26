@@ -1,4 +1,7 @@
-import React from 'react';
+import Desktop from '@components/layout/desktop';
+import { useAppSelector } from '@hooks/storeHooks';
+import SuggestionPrice from '../../components/suggestion-price';
+import SuggestionImage from '../../components/suggestions-image';
 import {
   SuggestionBrand,
   SuggestionName,
@@ -6,10 +9,6 @@ import {
   SuggestionsItemContainer,
   SuggestionsListContainer,
 } from './styles';
-import SuggestionImage from '../../components/suggestions-image';
-import SuggestionPrice from '../../components/suggestion-price';
-import { useAppSelector } from '@hooks/storeHooks';
-import Desktop from '@components/layout/desktop';
 
 const HeaderSuggestionsDesktop = () => {
   const { productSuggestions } = useAppSelector((state) => state.search);
@@ -23,7 +22,7 @@ const HeaderSuggestionsDesktop = () => {
           {productSuggestions.map((product) => (
             <SuggestionsItemContainer
               key={product.productId}
-              href={`/${product.link}`}
+              href={product.link}
             >
               <SuggestionImage images={product.items[0].images} />
 
