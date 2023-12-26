@@ -60,7 +60,7 @@ const SearchList = () => {
     <SearchListContainer>
       {searches.map((search) => (
         <SearchItem
-          href={`/${search.value}?map=ft`}
+          href={`/${search.value}?page=plp`}
           key={search.value}
           onMouseOver={() => onMouseOverSearch(search)}
           onClick={(e) => {
@@ -80,7 +80,7 @@ const SearchList = () => {
             e.stopPropagation();
             handleOnClickCategory(category.labelValue);
           }}
-          href={`/${category.value}/${term}?map=${category.key},ft`}
+          href={`/${category.value}/${term}`}
           key={category.key}
           onMouseOver={() => onMouseOverCategory(category)}
         >

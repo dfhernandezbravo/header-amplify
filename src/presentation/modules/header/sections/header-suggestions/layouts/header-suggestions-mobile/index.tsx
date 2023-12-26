@@ -1,7 +1,7 @@
 import Mobile from '@components/layout/mobile';
 import { useAppSelector } from '@hooks/storeHooks';
+import useAnalytics from '@hooks/useAnalytics';
 import Image from 'next/image';
-import React from 'react';
 import {
   SuggestionBrand,
   SuggestionName,
@@ -11,7 +11,6 @@ import {
   SuggestionsMobileDetail,
   SuggestionsMobileItem,
 } from './styles';
-import useAnalytics from '@hooks/useAnalytics';
 
 const HeaderSuggestionsMobile = () => {
   const { productSuggestions } = useAppSelector((state) => state.search);
@@ -34,7 +33,7 @@ const HeaderSuggestionsMobile = () => {
         {productSuggestions?.map((product) => (
           <SuggestionsMobileItem
             key={product.productId}
-            href={`/${product.link}`}
+            href={product.link}
             onClick={(e) => {
               e.stopPropagation();
               handleOnClick(product.productName);
