@@ -60,7 +60,7 @@ const SearchList = () => {
     <SearchListContainer>
       {searches.map((search) => (
         <SearchItem
-          href={`/${search.value}?page=plp`}
+          href={`/search/${search.value}`}
           key={search.value}
           onMouseOver={() => onMouseOverSearch(search)}
           onClick={(e) => {

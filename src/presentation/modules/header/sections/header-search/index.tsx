@@ -73,7 +73,14 @@ const HeaderSearch = React.memo(function Search() {
   };
 
   const handleOnClickSearchIcon = () => {
-    router.push(`${search}?_q=${search}&map=ft`);
+    router.push(`/search/${search}`);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      dispatch(closeResults());
+      router.push(`/search/${search}`);
+    }
   };
 
   return (
@@ -82,6 +89,7 @@ const HeaderSearch = React.memo(function Search() {
         type="search"
         placeholder="¡Hola! ¿Qué estás buscando?"
         onFocus={() => dispatch(openResults())}
+        onKeyDown={handleKeyDown}
         onBlur={() =>
           setTimeout(() => {
             dispatch(closeResults());
