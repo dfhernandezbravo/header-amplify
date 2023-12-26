@@ -14,9 +14,7 @@ const Cart = (props: CartProps) => {
         <BadgeQuantity>{quantity}</BadgeQuantity>
       ) : null}
       {width < 1026 ? (
-        <>
-          <CgShoppingCart size={'32px'} />
-        </>
+        <CgShoppingCart size={'32px'} />
       ) : (
         <>
           <CgShoppingCart size={'24px'} />

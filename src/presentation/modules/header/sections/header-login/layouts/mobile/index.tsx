@@ -7,7 +7,7 @@ const HeaderLoginMobile = () => {
 
   return (
     <Mobile>
-      <LoginMobileButton href="https://www.easy.cl/micuenta#/">
+      <LoginMobileButton href="/account">
         {customer ? (
           <span>
             Hola <br /> {customer.firstName}

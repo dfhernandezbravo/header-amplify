@@ -34,7 +34,7 @@ const WindowsEventProvider = ({ children }: Props) => {
         isShoppingCartUsed?: boolean;
         quantityItems?: number;
       }>;
-      if (customEvent.detail.quantityItems) {
+      if (typeof customEvent.detail.quantityItems === 'number') {
         dispatch(setQuantity(customEvent.detail.quantityItems));
       }
       if (customEvent.detail.isShoppingCartUsed) {
