@@ -4,6 +4,17 @@ export const CartContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: #ffffff;
+  border-left: 1px solid #ffffff;
+  padding: 4px;
+  & .shoppingcart-icon {
+    padding: 4px;
+    &:hover {
+      background-color: #670000;
+      display: flex;
+      border-radius: 28px;
+    }
+  }
 `;
 
 export const BadgeQuantity = styled.div`
@@ -19,11 +30,4 @@ export const BadgeQuantity = styled.div`
   min-width: 24px;
   text-align: center;
   font-size: 12px;
-`;
-
-export const CartText = styled.div`
-  line-height: 1.5rem;
-  font-weight: 500;
-  font-size: 14px;
-  margin-left: 5px;
 `;

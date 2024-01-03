@@ -17,7 +17,7 @@ import HeaderSearch from '@modules/header/sections/header-search';
 import HeaderTopBrands from '@modules/header/sections/header-top-brands';
 import { Modules } from '@modules/header/types';
 import {
-  Container,
+  FirstRow,
   HeaderDesktopContainer,
   HeaderDesktopSearchSection,
 } from './styles';
@@ -36,9 +36,15 @@ const HeaderDesktop = ({ modules }: Props) => {
     <Desktop>
       {showModule(modules.topBrands, <HeaderTopBrands />)}
 
-      <HeaderDesktopContainer>
+      <FirstRow>
         {showModule(modules.logo, <HeaderLogo />)}
-        {showModule(modules.categories, <MenuCategories />)}
+        {showModule(
+          modules.search,
+          <HeaderDesktopSearchSection>
+            <HeaderSearch />
+            {isOpenResults && <HeaderResults />}
+          </HeaderDesktopSearchSection>,
+        )}
         {showModule(
           modules.location,
           <HeaderLocation
@@ -48,18 +54,12 @@ const HeaderDesktop = ({ modules }: Props) => {
             isUserLogged={isUserLogged}
           />,
         )}
-        {showModule(
-          modules.search,
-          <HeaderDesktopSearchSection>
-            <HeaderSearch />
-            {isOpenResults && <HeaderResults />}
-          </HeaderDesktopSearchSection>,
-        )}
+        {showModule(modules.login, <HeaderLogin />)}
+        {showModule(modules.cart, <HeaderCart />)}
+      </FirstRow>
 
-        <Container>
-          {showModule(modules.login, <HeaderLogin />)}
-          {showModule(modules.cart, <HeaderCart />)}
-        </Container>
+      <HeaderDesktopContainer>
+        {showModule(modules.categories, <MenuCategories />)}
       </HeaderDesktopContainer>
 
       {showModule(modules.footerHeader, <HeaderFooter />)}

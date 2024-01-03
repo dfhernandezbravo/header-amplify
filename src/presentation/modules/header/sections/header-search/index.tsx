@@ -13,8 +13,8 @@ import { getProductsSuggestions } from '@use-cases/search/get-products-suggestio
 import { getSearches } from '@use-cases/search/get-searches';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
 import { IconSearchContainer, SearchContainer, SearchInput } from './styles';
+import Image from 'next/image';
 
 const HeaderSearch = React.memo(function Search() {
   const [search, setSearch] = useState('');
@@ -87,7 +87,7 @@ const HeaderSearch = React.memo(function Search() {
     <SearchContainer>
       <SearchInput
         type="search"
-        placeholder="¡Hola! ¿Qué estás buscando?"
+        placeholder="Buscar..."
         onFocus={() => dispatch(openResults())}
         onKeyDown={handleKeyDown}
         onBlur={() =>
@@ -104,7 +104,12 @@ const HeaderSearch = React.memo(function Search() {
         onClick={handleOnClickSearch}
       />
       <IconSearchContainer onClick={handleOnClickSearchIcon}>
-        <AiOutlineSearch size={24} />
+        <Image
+          src="/icons/header/search-icon.svg"
+          width={24}
+          height={24}
+          alt="search-icon"
+        />
       </IconSearchContainer>
     </SearchContainer>
   );

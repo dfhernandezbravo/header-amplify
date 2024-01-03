@@ -6,7 +6,7 @@ export const SearchContainer = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  border-radius: 8px;
+  border-radius: 28px;
   height: 40px;
   padding: 1rem;
   border: none;
@@ -15,17 +15,15 @@ export const SearchInput = styled.input`
   font-size: 14px;
   font-weight: 400;
   padding-right: 3rem;
+  padding-left: 3rem;
 `;
 
 export const IconSearchContainer = styled.div`
-  color: #000;
-  fill: #000;
   position: absolute;
-  right: 0;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   padding: 0 8px;
-  background-color: #fff;
-  border-left: 1px solid #d2d2d2;
+  background-color: transparent;
 `;

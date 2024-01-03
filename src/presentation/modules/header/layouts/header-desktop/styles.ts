@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const FirstRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+`;
+
 export const HeaderDesktopContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -13,15 +20,10 @@ export const HeaderDesktopContainer = styled.div`
 export const HeaderDesktopSearchSection = styled.div`
   display: flex;
   flex: 1;
+  max-width: 1250px;
 `;
 
 export const Divider = styled.div`
   height: 50px;
   border-left: 0.5px solid white;
-`;
-
-export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 `;

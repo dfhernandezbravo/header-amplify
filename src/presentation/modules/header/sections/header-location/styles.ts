@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const RegionalizerContainer = styled.div`
   position: relative;
+  padding: 1rem;
+  &:hover {
+    padding: 1rem;
+    background-color: #670000;
+    border-radius: 28px;
+  }
 `;
 
 export const ButtonRegionalizer = styled.button`

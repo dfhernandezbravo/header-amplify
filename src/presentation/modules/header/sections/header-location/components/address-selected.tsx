@@ -15,16 +15,19 @@ const AddressSelected = ({ address }: Props) => {
     if (address) dispatch(setAddressSelected(address));
   }, [address, dispatch]);
 
+  if (!addressSelected) {
+    return (
+      <div>
+        <p>Ingresa</p>
+        <strong>Tu ubicación</strong>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <p>¿Dónde entregar tu compra?</p>
-      {addressSelected ? (
-        <strong>
-          {addressSelected?.neighborhood ?? addressSelected?.state}
-        </strong>
-      ) : (
-        <span>Ingresa tu ubicación</span>
-      )}
+      <p>Entrega en</p>
+      <strong>{addressSelected?.neighborhood ?? addressSelected?.state}</strong>
     </div>
   );
 };

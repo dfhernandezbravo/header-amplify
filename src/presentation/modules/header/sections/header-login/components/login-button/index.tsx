@@ -8,7 +8,7 @@ interface Props {
 
 const LoginButton = ({ customer }: Props) => {
   return (
-    <LoginUser>
+    <LoginUser className="login-user">
       <span>¡Hola{customer ? ` ${customer?.firstName}` : ''}!</span>
       <LoginButtonContainerDesktop>
         <strong>{customer ? 'Mi cuenta' : 'Inicia Sesión'}</strong>

@@ -13,7 +13,7 @@ export const PopupWrapper = styled.div`
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 12px;
-  width: 120%;
+  width: 330px;
   color: #4d4d4d;
   display: flex;
   flex-direction: column;
@@ -22,13 +22,19 @@ export const PopupWrapper = styled.div`
 
 export const PopupDescription = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 8px;
   align-items: flex-start;
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
   font-family: ${({ theme: { fontFamily } }) => fontFamily.openSans};
+
+  & .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 `;
 
 export const Arrow = styled.div`
