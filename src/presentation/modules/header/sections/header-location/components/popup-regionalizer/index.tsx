@@ -34,13 +34,13 @@ const PopupRegionalizer = ({ onClick }: Props) => {
         <PopupWrapper>
           <Arrow />
           <PopupDescription>
-            <span>
-              Selecciona tu ubicación para conocer la disponibilidad de
-              productos
-            </span>
-            <ModalIconButton onClick={handleOnClose}>
-              <AiOutlineClose size={20} />
-            </ModalIconButton>
+            <div className="header">
+              <strong>Selecciona una ubicación</strong>
+              <ModalIconButton onClick={handleOnClose}>
+                <AiOutlineClose size={20} />
+              </ModalIconButton>
+            </div>
+            <span>Y conoce la disponibilidad de productos</span>
           </PopupDescription>
           <ButtonPrimary title="Ingresa ubicación" onClick={onClick} />
         </PopupWrapper>

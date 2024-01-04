@@ -29,6 +29,13 @@ export const LoginInformation = styled.div`
   align-items: center;
   justify-content: center;
   gap: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #670000;
+    padding: 1rem;
+    border-radius: 28px;
+  }
 `;
 
 export const LoginMobileButton = styled(Link)`

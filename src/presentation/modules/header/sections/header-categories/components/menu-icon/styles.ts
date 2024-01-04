@@ -10,11 +10,6 @@ export const MenuContainer = styled.button`
   background-color: transparent;
   color: white;
   gap: 12px;
-
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-  }
 `;
 
 export const animationIconClose = keyframes`

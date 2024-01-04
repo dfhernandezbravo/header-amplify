@@ -7,7 +7,6 @@ import {
   MenuCategories,
   ModalCategories,
 } from '@modules/header/sections/header-categories';
-import HeaderFooter from '@modules/header/sections/header-footer';
 import HeaderLocation from '@modules/header/sections/header-location';
 import HeaderLogin from '@modules/header/sections/header-login';
 import HeaderLogo from '@modules/header/sections/header-logo';
@@ -17,10 +16,12 @@ import HeaderSearch from '@modules/header/sections/header-search';
 import HeaderTopBrands from '@modules/header/sections/header-top-brands';
 import { Modules } from '@modules/header/types';
 import {
-  Container,
+  FirstRow,
   HeaderDesktopContainer,
   HeaderDesktopSearchSection,
+  SecondRow,
 } from './styles';
+import HeaderInformation from '@modules/header/sections/header-information';
 
 interface Props {
   modules: Modules;
@@ -35,34 +36,33 @@ const HeaderDesktop = ({ modules }: Props) => {
   return (
     <Desktop>
       {showModule(modules.topBrands, <HeaderTopBrands />)}
-
       <HeaderDesktopContainer>
-        {showModule(modules.logo, <HeaderLogo />)}
-        {showModule(modules.categories, <MenuCategories />)}
-        {showModule(
-          modules.location,
-          <HeaderLocation
-            addressSelected={null}
-            orderFormId={orderFormId}
-            customer={customer}
-            isUserLogged={isUserLogged}
-          />,
-        )}
-        {showModule(
-          modules.search,
-          <HeaderDesktopSearchSection>
-            <HeaderSearch />
-            {isOpenResults && <HeaderResults />}
-          </HeaderDesktopSearchSection>,
-        )}
-
-        <Container>
+        <FirstRow>
+          {showModule(modules.logo, <HeaderLogo />)}
+          {showModule(
+            modules.search,
+            <HeaderDesktopSearchSection>
+              <HeaderSearch />
+              {isOpenResults && <HeaderResults />}
+            </HeaderDesktopSearchSection>,
+          )}
+          {showModule(
+            modules.location,
+            <HeaderLocation
+              addressSelected={null}
+              orderFormId={orderFormId}
+              customer={customer}
+              isUserLogged={isUserLogged}
+            />,
+          )}
           {showModule(modules.login, <HeaderLogin />)}
           {showModule(modules.cart, <HeaderCart />)}
-        </Container>
+        </FirstRow>
+        <SecondRow>
+          {showModule(modules.categories, <MenuCategories />)}
+          {showModule(modules.footerHeader, <HeaderInformation />)}
+        </SecondRow>
       </HeaderDesktopContainer>
-
-      {showModule(modules.footerHeader, <HeaderFooter />)}
       <HeaderModalLogin />
       {isOpenCategories && <ModalCategories />}
     </Desktop>

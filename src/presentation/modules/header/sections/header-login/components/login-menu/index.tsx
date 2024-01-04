@@ -1,7 +1,5 @@
 import { Customer } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import { closeCategories } from '@store/category/slices/category-slice';
-import { openModalLogin } from '@store/login/slices/login-slice';
 import logout from '@use-cases/login/logout';
 import { LoginMenuContainer, MenuItem } from './style';
 
@@ -14,14 +12,9 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
   const { authCookies } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
 
-  const handleClickItem = () => {
-    dispatch(closeCategories());
-    dispatch(openModalLogin());
-  };
-
   return (
     <LoginMenuContainer isVisible={isMenuOpen}>
-      {customer ? (
+      {customer && (
         <>
           <MenuItem href="/account/profile">Mis Datos</MenuItem>
           <MenuItem href="/account/cards">Mis Tarjetas</MenuItem>
@@ -32,10 +25,6 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
             Salir
           </MenuItem>
         </>
-      ) : (
-        <MenuItem href="" onClick={handleClickItem}>
-          Crear / Ingresar
-        </MenuItem>
       )}
     </LoginMenuContainer>
   );

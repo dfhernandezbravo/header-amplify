@@ -8,20 +8,19 @@ import {
   ModalCategories,
 } from '@modules/header/sections/header-categories';
 import HeaderLocation from '@modules/header/sections/header-location';
-import HeaderLogin from '@modules/header/sections/header-login';
 import HeaderLogo from '@modules/header/sections/header-logo';
 import HeaderModalLogin from '@modules/header/sections/header-modal-login';
 import HeaderSearchMobile from '@modules/header/sections/header-search-mobile';
 import { Modules } from '@modules/header/types';
 import { openResults } from '@store/search/slices/search-slice';
 import {
+  FirsRowMobile,
   HeaderMobileContainer,
-  HeaderMobileLocationSection,
-  HeaderMobileOptionSection,
-  HeaderMobileOptionSectionElement,
   HeaderMobileSearchSection,
   SearchInputContainer,
+  SecondRowMobile,
 } from './styles';
+import Image from 'next/image';
 
 interface Props {
   modules: Modules;
@@ -37,41 +36,40 @@ const HeaderMobile = ({ modules }: Props) => {
   return (
     <Mobile>
       <HeaderMobileContainer>
-        <HeaderMobileOptionSection>
-          <HeaderMobileOptionSectionElement>
-            {showModule(modules.categories, <MenuCategories />)}
+        <FirsRowMobile>
+          {showModule(modules.logo, <HeaderLogo />)}
+          {showModule(
+            modules.search,
+            <HeaderMobileSearchSection>
+              <SearchInputContainer
+                onClick={() => dispatch(openResults())}
+                placeholder="Buscar..."
+              />
+              <Image
+                className="search-icon"
+                src="/icons/header/search-icon.svg"
+                width={24}
+                height={24}
+                alt="search-icon"
+              />
+            </HeaderMobileSearchSection>,
+          )}
+          {showModule(modules.cart, <HeaderCart />)}
+        </FirsRowMobile>
 
-            {showModule(modules.logo, <HeaderLogo />)}
-          </HeaderMobileOptionSectionElement>
-
-          <HeaderMobileOptionSectionElement>
-            {showModule(modules.login, <HeaderLogin />)}
-            {showModule(modules.cart, <HeaderCart />)}
-          </HeaderMobileOptionSectionElement>
-        </HeaderMobileOptionSection>
-
-        {showModule(
-          modules.search,
-          <HeaderMobileSearchSection>
-            <SearchInputContainer
-              onClick={() => dispatch(openResults())}
-              placeholder="¡Hola! ¿Qué estás buscando?"
-            />
-          </HeaderMobileSearchSection>,
-        )}
-        {isOpenCategories && <ModalCategories />}
-
-        {showModule(
-          modules.location,
-          <HeaderMobileLocationSection>
+        <SecondRowMobile>
+          {showModule(modules.categories, <MenuCategories />)}
+          {showModule(
+            modules.location,
             <HeaderLocation
               addressSelected={null}
               orderFormId={orderFormId}
               customer={customer}
               isUserLogged={isUserLogged}
-            />
-          </HeaderMobileLocationSection>,
-        )}
+            />,
+          )}
+        </SecondRowMobile>
+        {isOpenCategories && <ModalCategories />}
       </HeaderMobileContainer>
       {isOpenResults && <HeaderSearchMobile />}
       <HeaderModalLogin />

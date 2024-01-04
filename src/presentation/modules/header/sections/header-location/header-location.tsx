@@ -4,10 +4,11 @@ import useAnalytics from '@hooks/useAnalytics';
 import { closeCategories } from '@store/category/slices/category-slice';
 import Image from 'next/image';
 import { useContext } from 'react';
-import AddressSelected from './components/address-selected';
+import AddressSelected from './components/address-selected/address-selected';
 import PopupRegionalizer from './components/popup-regionalizer';
 import HeaderLocationContext from './context/header-location-context';
 import { ButtonRegionalizer, RegionalizerContainer } from './styles';
+import AddressSelectedMobile from './components/address-selected/address-selected-mobile';
 
 interface Props {
   addressSelected: AddressShoppingCart | null;
@@ -39,6 +40,7 @@ const HeaderLocationContainer = ({ addressSelected }: Props) => {
           alt="Location Icon"
         />
         <AddressSelected address={addressSelected} />
+        <AddressSelectedMobile address={addressSelected} />
       </ButtonRegionalizer>
       {!addressSelected && (
         <PopupRegionalizer onClick={handleOnClickRegionalizer} />

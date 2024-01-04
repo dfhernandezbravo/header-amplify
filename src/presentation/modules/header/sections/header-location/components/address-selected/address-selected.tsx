@@ -1,13 +1,15 @@
+import Desktop from '@components/layout/desktop';
 import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { setAddressSelected } from '@store/regionalizer/slices/regionalizer-slice';
 import { useEffect } from 'react';
+import { ContainerDesktop } from './styles';
 
-interface Props {
+export interface AddressProps {
   address: AddressShoppingCart | null;
 }
 
-const AddressSelected = ({ address }: Props) => {
+const AddressSelected = ({ address }: AddressProps) => {
   const { addressSelected } = useAppSelector((state) => state.regionalizer);
   const dispatch = useAppDispatch();
 
@@ -15,17 +17,26 @@ const AddressSelected = ({ address }: Props) => {
     if (address) dispatch(setAddressSelected(address));
   }, [address, dispatch]);
 
+  if (!addressSelected) {
+    return (
+      <Desktop>
+        <ContainerDesktop>
+          <p>Ingresa</p>
+          <strong>Tu ubicación</strong>
+        </ContainerDesktop>
+      </Desktop>
+    );
+  }
+
   return (
-    <div>
-      <p>¿Dónde entregar tu compra?</p>
-      {addressSelected ? (
+    <Desktop>
+      <ContainerDesktop>
+        <p>Entrega en</p>
         <strong>
           {addressSelected?.neighborhood ?? addressSelected?.state}
         </strong>
-      ) : (
-        <span>Ingresa tu ubicación</span>
-      )}
-    </div>
+      </ContainerDesktop>
+    </Desktop>
   );
 };
 

@@ -26,8 +26,6 @@ export const SearchInput = styled.input`
 `;
 
 export const IconSearchContainer = styled.div`
-  color: #000;
-  fill: #000;
   position: absolute;
   left: 0;
   top: 50%;
