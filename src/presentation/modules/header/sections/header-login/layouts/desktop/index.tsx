@@ -26,7 +26,7 @@ const HeaderLoginDesktop = () => {
       >
         <LoginInformation onClick={() => handleLogin()}>
           <Image
-            src="https://easycl.vtexassets.com/arquivos/new-desktop-user-icon.svg"
+            src="/icons/header/user-circle.svg"
             width={25}
             height={25}
             alt="User Icon"
