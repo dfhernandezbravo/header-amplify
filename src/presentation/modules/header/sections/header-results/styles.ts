@@ -17,20 +17,20 @@ const animationInMenu = keyframes`
   }
 `;
 
-const HeaderResultsContainer = styled.div`
+const HeaderResultsContainer = styled.div<{ width: number | string }>`
   animation-name: ${animationInMenu};
   animation-duration: 0.5s;
-
+  width: ${(props) => props.width};
+  border: 1px solid #b4c2cb;
+  border-radius: 16px;
   @media (min-width: 1024px) {
     z-index: 999;
+    border-radius: 16px;
     position: absolute;
     background-color: white;
     margin-top: 50px;
-    padding: 12px 0px;
     max-height: 630px;
-    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    min-width: 520px;
+    width: ${(props) => props.width};
     color: black;
     display: flex;
     flex-direction: row;
@@ -42,5 +42,22 @@ export const HeaderResultSpinnerContainer = styled.div`
   height: 300px;
   width: 100%;
 `;
+const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: max-content;
+`;
+const TextContent = styled.div`
+  color: #363f45;
+  width: fit-content;
+  min-width: max-content;
+  margin-left: 15px;
+  & > h4 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+`;
 
-export { HeaderResultsContainer };
+export { HeaderResultsContainer, LoadingContainer, TextContent };

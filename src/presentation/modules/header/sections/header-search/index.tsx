@@ -7,22 +7,25 @@ import {
   closeResults,
   openResults,
   setTerm,
+  setSearchWidth,
 } from '@store/search/slices/search-slice';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import { getSearches } from '@use-cases/search/get-searches';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { IconSearchContainer, SearchContainer, SearchInput } from './styles';
+import SearchIcon from '@assets/icons/categories/icon-search.svg';
+import Image from 'next/image';
 
 const HeaderSearch = React.memo(function Search() {
+  const searchRef = useRef<HTMLDivElement>(null);
   const [search, setSearch] = useState('');
+  const router = useRouter();
   const debouncedSearch = useDebounce(search, 500);
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
   const { searches } = useAppSelector((state) => state.search);
-  const router = useRouter();
 
   const sendQuery = useCallback(() => {
     dispatch(setTerm(search));
@@ -62,6 +65,23 @@ const HeaderSearch = React.memo(function Search() {
     }
   }, [searches, sendEventAnalytics, search]);
 
+  const handleResizeSearchResults = () => {
+    if (searchRef?.current) {
+      const width = searchRef?.current?.offsetWidth;
+      dispatch(setSearchWidth(width));
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleResizeSearchResults();
+    }, 300);
+    window.addEventListener('resize', handleResizeSearchResults);
+    return () => {
+      window.removeEventListener('resize', handleResizeSearchResults);
+    };
+  }, []);
+
   const handleOnClickSearch = () => {
     dispatch(closeCategories());
     sendEventAnalytics({
@@ -84,10 +104,13 @@ const HeaderSearch = React.memo(function Search() {
   };
 
   return (
-    <SearchContainer>
+    <SearchContainer ref={searchRef}>
+      <IconSearchContainer onClick={handleOnClickSearchIcon}>
+        <Image width={16} height={16} src={SearchIcon} alt="search" priority />
+      </IconSearchContainer>
       <SearchInput
         type="search"
-        placeholder="¡Hola! ¿Qué estás buscando?"
+        placeholder="Buscar..."
         onFocus={() => dispatch(openResults())}
         onKeyDown={handleKeyDown}
         onBlur={() =>
@@ -103,9 +126,6 @@ const HeaderSearch = React.memo(function Search() {
         }}
         onClick={handleOnClickSearch}
       />
-      <IconSearchContainer onClick={handleOnClickSearchIcon}>
-        <AiOutlineSearch size={24} />
-      </IconSearchContainer>
     </SearchContainer>
   );
 });
