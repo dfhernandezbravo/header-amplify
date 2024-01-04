@@ -4,7 +4,12 @@ import EmptySearch from '@modules/header/components/empty-searches-list';
 import PopularSearchesList from '@modules/header/components/initial-searches-list';
 import SearchList from '@modules/header/components/searches-list';
 import HeaderSuggestions from '../header-suggestions';
-import { HeaderResultSpinnerContainer, HeaderResultsContainer } from './styles';
+import {
+  HeaderResultSpinnerContainer,
+  HeaderResultsContainer,
+  TextContent,
+  LoadingContainer,
+} from './styles';
 import { useEffect, useState } from 'react';
 
 const HeaderResults = () => {
@@ -21,9 +26,15 @@ const HeaderResults = () => {
   return (
     <HeaderResultsContainer width={`${searchWidth}px` || '100%'}>
       {isLoading && (
-        <HeaderResultSpinnerContainer>
-          <Spinner />
-        </HeaderResultSpinnerContainer>
+        <LoadingContainer>
+          <HeaderResultSpinnerContainer>
+            <Spinner />
+          </HeaderResultSpinnerContainer>
+          <TextContent>
+            <h4>Buscando artículos</h4>
+            <p>Espere un segundo...</p>
+          </TextContent>
+        </LoadingContainer>
       )}
       {searches?.length > 0 && (
         <>
