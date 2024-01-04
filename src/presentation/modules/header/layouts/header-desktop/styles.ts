@@ -1,20 +1,28 @@
 import styled from 'styled-components';
 
+export const HeaderDesktopContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 8px 40px 8px 30px;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const FirstRow = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
   margin: 0.5rem 0.5rem 0 0.5rem;
+  width: 98%;
 `;
 
-export const HeaderDesktopContainer = styled.div`
+export const SecondRow = styled.div`
   display: flex;
-  flex-direction: row;
-  padding: 8px 40px 8px 30px;
+  justify-content: space-between;
   align-items: center;
-  /* justify-content: space-between; */
-  color: white;
-  gap: 32px;
+  width: 98%;
+  margin-bottom: 10px;
 `;
 
 export const HeaderDesktopSearchSection = styled.div`

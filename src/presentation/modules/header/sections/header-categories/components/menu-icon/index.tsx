@@ -1,10 +1,11 @@
+import { useRouter } from 'next/router';
+import OffertLink from './components/offert-link';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useBreakpoints from '@hooks/useBreakpoints';
 import {
   closeCategories,
   openCategories,
 } from '@store/category/slices/category-slice';
-import { useRouter } from 'next/router';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import useCategoriesAnalytics from '../../analytics/categories-analytics';
 import { IconCloseContainer, IconMenuContainer, MenuContainer } from './styles';
@@ -34,6 +35,7 @@ const MenuIcon = () => {
       )}
 
       <span>{device === 'Desktop' ? 'Categorías' : 'Menú'}</span>
+      <OffertLink />
     </MenuContainer>
   );
 };
