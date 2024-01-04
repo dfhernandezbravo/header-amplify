@@ -1,6 +1,12 @@
 import { useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
-import { PopularSearchItem, PopularSearchListContainer } from './styles';
+import {
+  PopularSearchItem,
+  IconRightContainer,
+  ContainerPopulars,
+} from './styles';
+import IconArrowUpLeft from '@assets/icons/categories/icon-arrow-up-left.svg';
+import Image from 'next/image';
 
 const PopularSearchesList = () => {
   const { popularSearches } = useAppSelector((state) => state.search);
@@ -16,9 +22,8 @@ const PopularSearchesList = () => {
   };
 
   return (
-    <PopularSearchListContainer>
-      <h4>Búsquedas populares </h4>
-
+    <ContainerPopulars>
+      <h4>Búsquedas populares 🔥</h4>
       {popularSearches?.map((search) => (
         <PopularSearchItem
           key={search.term}
@@ -29,9 +34,23 @@ const PopularSearchesList = () => {
           }}
         >
           {search.term}
+          <IconRightContainer
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOnClick(search.term);
+            }}
+          >
+            <Image
+              src={IconArrowUpLeft}
+              alt={search.term}
+              width={16}
+              height={16}
+              priority
+            />
+          </IconRightContainer>
         </PopularSearchItem>
       ))}
-    </PopularSearchListContainer>
+    </ContainerPopulars>
   );
 };
 

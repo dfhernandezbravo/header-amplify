@@ -17,20 +17,20 @@ const animationInMenu = keyframes`
   }
 `;
 
-const HeaderResultsContainer = styled.div`
+const HeaderResultsContainer = styled.div<{ width: number | string }>`
   animation-name: ${animationInMenu};
   animation-duration: 0.5s;
-
+  width: ${(props) => props.width};
+  border: 1px solid #b4c2cb;
   @media (min-width: 1024px) {
     z-index: 999;
     position: absolute;
     background-color: white;
     margin-top: 50px;
-    padding: 12px 0px;
     max-height: 630px;
     box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    min-width: 520px;
+    width: ${(props) => props.width};
     color: black;
     display: flex;
     flex-direction: row;
