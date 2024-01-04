@@ -19,6 +19,7 @@ type SearchState = {
   searches: Search[];
   categories: CategoriesSearch[];
   productSuggestions: Product[];
+  searchWidth: null | number;
 };
 
 const initialState: SearchState = {
@@ -31,6 +32,7 @@ const initialState: SearchState = {
   isOpenResults: false,
   isEmptySearch: false,
   isLoadingSuggestions: false,
+  searchWidth: null,
 };
 
 const searchSlice = createSlice({
@@ -51,6 +53,9 @@ const searchSlice = createSlice({
     },
     setTerm: (state, { payload }: { payload: string }) => {
       state.term = payload;
+    },
+    setSearchWidth: (state, { payload }) => {
+      state.searchWidth = payload;
     },
   },
   extraReducers: (builder) => {
@@ -95,6 +100,11 @@ const searchSlice = createSlice({
   },
 });
 
-export const { openResults, closeResults, cleanResults, setTerm } =
-  searchSlice.actions;
+export const {
+  openResults,
+  closeResults,
+  cleanResults,
+  setTerm,
+  setSearchWidth,
+} = searchSlice.actions;
 export default searchSlice;

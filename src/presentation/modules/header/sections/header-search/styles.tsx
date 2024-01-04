@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const SearchContainer = styled.div`
   width: 100%;
   position: relative;
+  border: 1px solid;
+  display: flex;
+  background: #ffffff;
+  border-radius: 28px;
 `;
 
 export const SearchInput = styled.input`
@@ -15,15 +19,20 @@ export const SearchInput = styled.input`
   font-size: 14px;
   font-weight: 400;
   padding-right: 3rem;
-  padding-left: 3rem;
+  margin-left: 20px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const IconSearchContainer = styled.div`
   position: absolute;
-  left: 10px;
+  left: 0;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   padding: 0 8px;
-  background-color: transparent;
+  background-color: #fff;
+  border-left: 1px solid #d2d2d2;
+  border-radius: 50%;
 `;

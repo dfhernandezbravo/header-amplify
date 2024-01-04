@@ -17,7 +17,7 @@ const SpinnerWrapper = styled.div`
 const SpinnerElement = styled.div`
   width: 40px;
   height: 40px;
-  border: 4px solid #ccc;
+  border: 8px solid #ccc;
   border-top-color: #af1212;
   border-radius: 50%;
   animation: ${spinAnimation} 1s linear infinite;
