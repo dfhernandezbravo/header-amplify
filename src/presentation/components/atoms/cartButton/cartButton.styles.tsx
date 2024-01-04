@@ -9,11 +9,16 @@ export const CartContainer = styled.div`
   padding: 4px;
   & .shoppingcart-icon {
     padding: 4px;
+    height: 30px;
     &:hover {
       background-color: #670000;
       display: flex;
       border-radius: 28px;
     }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    border-left: none;
   }
 `;
 

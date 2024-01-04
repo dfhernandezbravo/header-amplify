@@ -60,11 +60,9 @@ const HeaderDesktop = ({ modules }: Props) => {
         </FirstRow>
         <SecondRow>
           {showModule(modules.categories, <MenuCategories />)}
-          <HeaderInformation />
+          {showModule(modules.footerHeader, <HeaderInformation />)}
         </SecondRow>
       </HeaderDesktopContainer>
-
-      {/* {showModule(modules.footerHeader, <HeaderFooter />)} */}
       <HeaderModalLogin />
       {isOpenCategories && <ModalCategories />}
     </Desktop>

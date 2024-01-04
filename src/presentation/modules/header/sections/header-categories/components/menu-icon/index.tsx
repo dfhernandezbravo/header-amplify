@@ -35,7 +35,7 @@ const MenuIcon = () => {
       )}
 
       <span>{device === 'Desktop' ? 'Categorías' : 'Menú'}</span>
-      <OffertLink />
+      {device === 'Desktop' && <OffertLink />}
     </MenuContainer>
   );
 };
