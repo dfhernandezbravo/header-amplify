@@ -18,16 +18,16 @@ export const CartContainer = styled.div`
 `;
 
 export const BadgeQuantity = styled.div`
-  background-color: #fdf737;
+  background-color: #dfffff;
   border: 1px solid #cc1414;
   border-radius: 10px;
-  color: #333;
+  color: #ae1311;
   font-weight: 700;
   padding: 0;
   position: relative;
-  left: 32px;
-  top: -10px;
-  min-width: 24px;
+  left: 40px;
+  top: -13px;
+  min-width: 20px;
   text-align: center;
   font-size: 12px;
 `;
