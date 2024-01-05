@@ -18,7 +18,6 @@ const SearchItem = styled(Link)`
   text-transform: capitalize;
   padding: 0px 10px 20px 20px;
   display: block;
-
   &:hover {
     background-color: #eee;
     border-radius: 12px 0px 0px 12px;

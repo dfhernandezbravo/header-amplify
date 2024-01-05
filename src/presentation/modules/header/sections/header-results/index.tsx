@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Spinner from '@components/atoms/spinner';
 import { useAppSelector } from '@hooks/storeHooks';
 import EmptySearch from '@modules/header/components/empty-searches-list';
@@ -11,9 +12,11 @@ import {
   LoadingContainer,
 } from './styles';
 import { useEffect, useState } from 'react';
+import NoContentResults from './components/no-content-results';
 
 const HeaderResults = () => {
   const [showPopularResults, setShowPopularResults] = useState(true);
+  const [showNoContent, setShowNoContent] = useState(false);
   const { isLoading, isEmptySearch, popularSearches, searches, searchWidth } =
     useAppSelector((state) => state.search);
 
@@ -23,9 +26,32 @@ const HeaderResults = () => {
     else setShowPopularResults(false);
   }, [isLoading, searches]);
 
+  useEffect(() => {
+    let seconds = 0;
+    const limit = 4;
+    let interval: string | number | NodeJS.Timer | undefined;
+    const counter = () => {
+      if (seconds === limit) {
+        clearInterval(interval);
+        setShowNoContent(true);
+      }
+      seconds++;
+    };
+    if (isLoading) {
+      interval = setInterval(counter, 1000);
+    } else {
+      setShowNoContent(false);
+      clearInterval(interval);
+      seconds = 0;
+    }
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isLoading]);
+
   return (
     <HeaderResultsContainer width={`${searchWidth}px` || '100%'}>
-      {isLoading && (
+      {isLoading && !showNoContent && (
         <LoadingContainer>
           <HeaderResultSpinnerContainer>
             <Spinner />
@@ -36,6 +62,7 @@ const HeaderResults = () => {
           </TextContent>
         </LoadingContainer>
       )}
+      {showNoContent && <NoContentResults />}
       {searches?.length > 0 && (
         <>
           <SearchList />
