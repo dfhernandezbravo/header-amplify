@@ -8,6 +8,8 @@ import {
   SearchItemCategory,
   SearchListContainer,
 } from './styles';
+import React from 'react';
+import SuggestionsHighlight from '@modules/header/sections/header-suggestions/components/suggestions-highlights';
 
 const SearchList = () => {
   const { searches, categories, term } = useAppSelector(
@@ -68,7 +70,7 @@ const SearchList = () => {
             handleOnClickSearch(search.value);
           }}
         >
-          {search.value}
+          <SuggestionsHighlight value={search.value} term={term} />
         </SearchItem>
       ))}
 
