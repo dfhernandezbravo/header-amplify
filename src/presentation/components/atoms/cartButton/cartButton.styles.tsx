@@ -10,6 +10,7 @@ export const CartContainer = styled.div`
   & .shoppingcart-icon {
     padding: 4px;
     height: 30px;
+    margin-left: 15px;
     &:hover {
       background-color: #670000;
       display: flex;
@@ -30,7 +31,7 @@ export const BadgeQuantity = styled.div`
   font-weight: 700;
   padding: 0;
   position: relative;
-  left: 40px;
+  left: 50px;
   top: -13px;
   min-width: 20px;
   text-align: center;

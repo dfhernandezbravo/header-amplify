@@ -4,9 +4,7 @@ export const HeaderDesktopContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding: 8px 40px 8px 30px;
   align-items: center;
-  gap: 10px;
 `;
 
 export const FirstRow = styled.div`
