@@ -5,7 +5,6 @@ import {
   IconRightContainer,
   ContainerPopulars,
 } from './styles';
-import IconArrowUpLeft from '@assets/icons/categories/icon-arrow-up-left.svg';
 import Image from 'next/image';
 
 const PopularSearchesList = () => {
@@ -41,7 +40,7 @@ const PopularSearchesList = () => {
             }}
           >
             <Image
-              src={IconArrowUpLeft}
+              src="/icons/categories/icon-arrow-up-left.svg"
               alt={search.term}
               width={16}
               height={16}

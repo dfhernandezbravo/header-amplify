@@ -6,8 +6,6 @@ import {
   ItemRecentResult,
   ContainerRecents,
 } from './styles';
-import IconCross from '@assets/icons/categories/icon-cross.svg';
-import IconRecent from '@assets/icons/categories/icon-recent.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -71,7 +69,7 @@ const RecentResultsList = () => {
               }}
             >
               <Image
-                src={IconRecent}
+                src="/icons/categories/icon-recent.svg"
                 alt={result.value}
                 width={20}
                 height={20}
@@ -94,7 +92,7 @@ const RecentResultsList = () => {
               }}
             >
               <Image
-                src={IconCross}
+                src="/icons/categories/icon-cross.svg"
                 alt={result.value}
                 width={16}
                 height={16}

@@ -15,7 +15,6 @@ import { getSearches } from '@use-cases/search/get-searches';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { IconSearchContainer, SearchContainer, SearchInput } from './styles';
-import SearchIcon from '@assets/icons/categories/icon-search.svg';
 import Image from 'next/image';
 
 const HeaderSearch = React.memo(function Search() {
@@ -106,7 +105,13 @@ const HeaderSearch = React.memo(function Search() {
   return (
     <SearchContainer ref={searchRef}>
       <IconSearchContainer onClick={handleOnClickSearchIcon}>
-        <Image width={16} height={16} src={SearchIcon} alt="search" priority />
+        <Image
+          width={16}
+          height={16}
+          src="/icons/categories/icon-search.svg"
+          alt="search"
+          priority
+        />
       </IconSearchContainer>
       <SearchInput
         type="search"
