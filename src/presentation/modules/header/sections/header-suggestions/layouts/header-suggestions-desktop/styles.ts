@@ -11,17 +11,22 @@ export const SuggestionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-left: 1px solid #acacac;
+  border-left: 1px solid #b4c2cb;
   padding: 0px 12px;
   max-width: 1000px;
   overflow-y: auto;
+  & > h4 {
+    color: #363f45;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+  }
 `;
 
 export const SuggestionsListContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 12px;
+  width: 100%;
+  justify-content: space-between;
 `;
 
 export const SuggestionsItemContainer = styled(Link)`
@@ -29,24 +34,26 @@ export const SuggestionsItemContainer = styled(Link)`
   flex-direction: column;
   gap: 12px;
   padding: 8px;
+  margin: 15px;
   max-width: 160px;
   text-decoration: none;
   color: black;
 `;
 
 export const SuggestionBrand = styled.span`
-  font-size: 15px;
-  color: #1a1a1a;
+  font-size: 12px;
+  line-height: 16px;
+  color: #363f45;
   font-weight: 600;
 `;
 
 export const SuggestionName = styled.span`
-  color: #4d4d4d;
-  font-size: 14px;
+  color: #485760;
+  font-size: 12px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  height: 40px;
+  height: max-content;
 
   @supports (-webkit-line-clamp: 2) {
     overflow: hidden;

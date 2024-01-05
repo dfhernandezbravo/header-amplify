@@ -8,20 +8,23 @@ export const SuggestionPriceContainer = styled.div`
 `;
 
 export const SuggestionAmount = styled.span`
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
+  color: #363f45;
 `;
 
 export const SuggestionDiscount = styled.div`
-  background-color: #cc1414;
+  background-color: #af1212;
   border-radius: 3px;
+  width: fill-content;
+  height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 11px;
   color: white;
   font-weight: 700;
-  padding: 4px;
+  padding: 1px 4px 1px 4px;
 `;
 
 export const SuggestionListPrice = styled.span`
