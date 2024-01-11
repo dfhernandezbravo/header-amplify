@@ -40,9 +40,8 @@ const LoginUserPassword = () => {
   });
 
   const dispatch = useAppDispatch();
-  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
-    (state) => state.shoppingCartHeader,
-  );
+  const { cartId: orderFormId, isShoppingCartUsed: isShoppingCartUse } =
+    useAppSelector((state) => state.shoppingCartHeader);
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const dataForm = isShoppingCartUse ? { ...data, orderFormId } : data;
@@ -104,7 +103,7 @@ const LoginUserPassword = () => {
           onClick={() => dispatch(navigateTo('EmailSetPassword'))}
         >
           <span>¿No estás registrado?</span>
-          <LinkNewAccount>Crear cuenta </LinkNewAccount>
+          <LinkNewAccount>Crear cuenta</LinkNewAccount>
         </ButtonNewAccount>
       </NewAccountContainer>
     </ModalForm>

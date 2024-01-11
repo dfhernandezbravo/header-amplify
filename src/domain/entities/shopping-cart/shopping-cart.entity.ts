@@ -1,5 +1,5 @@
 export type ShoppingCart = {
-  orderFormId: string | undefined;
+  cartId: string | undefined;
 };
 
 export type AddressShoppingCart = {
