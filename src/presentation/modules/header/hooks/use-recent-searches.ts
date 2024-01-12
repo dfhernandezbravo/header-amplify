@@ -21,7 +21,7 @@ export const useRecentSearches = () => {
     const recentSearches = getRecentSearches();
     if (recentSearches.length === 0) {
       const newSearchTerm = [];
-      newSearchTerm.unshift(term);
+      newSearchTerm.push(term);
       setItemsToLocalStorage(newSearchTerm);
       return;
     }
