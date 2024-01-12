@@ -48,8 +48,8 @@ const HeaderMobile = ({ modules }: Props) => {
               <Image
                 className="search-icon"
                 src="/icons/header/search-icon.svg"
-                width={24}
-                height={24}
+                width={18}
+                height={18}
                 alt="search-icon"
               />
             </HeaderMobileSearchSection>,

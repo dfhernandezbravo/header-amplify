@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { IconSearchContainer, SearchContainer, SearchInput } from './styles';
 import Image from 'next/image';
+import { useRecentSearches } from '@modules/header/hooks/use-recent-searches';
 
 const HeaderSearch = React.memo(function Search() {
   const searchRef = useRef<HTMLDivElement>(null);
@@ -25,6 +26,8 @@ const HeaderSearch = React.memo(function Search() {
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
   const { searches } = useAppSelector((state) => state.search);
+  const { setRecentSearches } = useRecentSearches();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const sendQuery = useCallback(() => {
     dispatch(setTerm(search));
@@ -92,14 +95,27 @@ const HeaderSearch = React.memo(function Search() {
   };
 
   const handleOnClickSearchIcon = () => {
+    setRecentSearches(search);
     router.push(`/search/${search}`);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
+      setRecentSearches(search);
       dispatch(closeResults());
       router.push(`/search/${search}`);
     }
+  };
+  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTimeout(() => {
+      if (e.relatedTarget?.id === 'remove-recent-search') {
+        setTimeout(() => {
+          inputRef?.current?.focus();
+        }, 100);
+        return;
+      }
+      dispatch(closeResults());
+    }, 100);
   };
 
   return (
@@ -118,11 +134,8 @@ const HeaderSearch = React.memo(function Search() {
         placeholder="Buscar..."
         onFocus={() => dispatch(openResults())}
         onKeyDown={handleKeyDown}
-        onBlur={() =>
-          setTimeout(() => {
-            dispatch(closeResults());
-          }, 100)
-        }
+        ref={inputRef}
+        onBlur={handleOnBlur}
         onChange={(e) => {
           if (e.target.value === '') {
             dispatch(cleanResults());
@@ -134,5 +147,4 @@ const HeaderSearch = React.memo(function Search() {
     </SearchContainer>
   );
 });
-
 export default HeaderSearch;
