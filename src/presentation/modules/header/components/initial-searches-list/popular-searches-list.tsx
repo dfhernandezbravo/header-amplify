@@ -1,4 +1,4 @@
-import { useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
 import {
   PopularSearchItem,
@@ -6,10 +6,12 @@ import {
   ContainerPopulars,
 } from './styles';
 import Image from 'next/image';
+import { closeResults } from '@store/search/slices/search-slice';
 
 const PopularSearchesList = () => {
   const { popularSearches } = useAppSelector((state) => state.search);
   const { sendEventAnalytics } = useAnalytics();
+  const dispatch = useAppDispatch();
 
   const handleOnClick = (term: string) => {
     sendEventAnalytics({
@@ -18,6 +20,9 @@ const PopularSearchesList = () => {
       action: 'Click Término Búsqueda populares',
       tag: term,
     });
+    setTimeout(() => {
+      dispatch(closeResults());
+    }, 100);
   };
 
   return (

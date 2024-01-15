@@ -6,9 +6,9 @@ import {
 } from './styles';
 import HeaderSearch from '../header-search';
 import HeaderResults from '../header-results';
-import ButtonBack from '@components/atoms/button-back';
 import { useAppDispatch } from '@hooks/storeHooks';
 import { closeResults } from '@store/search/slices/search-slice';
+import CancelButton from '@components/atoms/cancel-button';
 
 const HeaderSearchMobile = () => {
   const dispatch = useAppDispatch();
@@ -17,8 +17,8 @@ const HeaderSearchMobile = () => {
     <SearchMobileContainer>
       <SearchMobileContent>
         <SearchMobileHeader>
-          <ButtonBack onClick={() => dispatch(closeResults())} />
           <HeaderSearch />
+          <CancelButton onClick={() => dispatch(closeResults())} />
         </SearchMobileHeader>
         <HeaderResults />
       </SearchMobileContent>

@@ -10,6 +10,7 @@ import {
 } from './styles';
 import React from 'react';
 import SuggestionsHighlight from '@modules/header/sections/header-suggestions/components/suggestions-highlights';
+import { closeResults } from '@store/search/slices/search-slice';
 
 const SearchList = () => {
   const { searches, categories, term } = useAppSelector(
@@ -68,6 +69,7 @@ const SearchList = () => {
           onClick={(e) => {
             e.stopPropagation();
             handleOnClickSearch(search.value);
+            dispatch(closeResults());
           }}
         >
           <SuggestionsHighlight value={search.value} term={term} />
@@ -81,6 +83,7 @@ const SearchList = () => {
           onClick={(e) => {
             e.stopPropagation();
             handleOnClickCategory(category.labelValue);
+            dispatch(closeResults());
           }}
           href={`/${category.value}/${term}`}
           key={category.key}

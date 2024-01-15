@@ -20,25 +20,29 @@ const animationInMenu = keyframes`
 const HeaderResultsContainer = styled.div<{ width: number | string }>`
   animation-name: ${animationInMenu};
   animation-duration: 0.5s;
-  width: ${(props) => props.width};
-  border: 1px solid #b4c2cb;
-  border-radius: 16px;
+  width: 100%;
+  border: none;
+  display: flex;
+  flex-direction: column-reverse;
+
   @media (min-width: 1024px) {
     z-index: 999;
     border-radius: 16px;
     position: absolute;
     background-color: white;
-    margin-top: 50px;
+    margin-top: 45px;
     max-height: 630px;
-    width: ${(props) => props.width};
     color: black;
-    display: flex;
     flex-direction: row;
+    align-items: center;
+    width: ${(props) => props.width};
+    border: 1px solid #b4c2cb;
+    border-radius: 16px;
   }
 `;
 
 export const HeaderResultSpinnerContainer = styled.div`
-  diplay: flex;
+  display: flex;
   height: 300px;
   width: 100%;
 `;
@@ -48,6 +52,10 @@ const LoadingContainer = styled.div`
   align-items: center;
   margin: auto;
   width: max-content;
+
+  @media (max-width: 1023px) {
+    height: 90vh;
+  }
 `;
 const TextContent = styled.div`
   color: #363f45;
@@ -60,4 +68,29 @@ const TextContent = styled.div`
   }
 `;
 
-export { HeaderResultsContainer, LoadingContainer, TextContent };
+const SearchContainerResults = styled.div`
+  flex-direction: column-reverse;
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+  }
+`;
+
+const NoContentContainer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+`;
+
+export {
+  HeaderResultsContainer,
+  LoadingContainer,
+  TextContent,
+  SearchContainerResults,
+  NoContentContainer,
+};

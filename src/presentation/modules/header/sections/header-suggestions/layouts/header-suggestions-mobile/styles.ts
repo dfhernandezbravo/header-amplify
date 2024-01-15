@@ -21,5 +21,5 @@ export const SuggestionsMobileDetail = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 40px;
+  height: 50px;
 `;

@@ -19,9 +19,15 @@ export const HeaderMobileSearchSection = styled.div`
   }
   & .search-icon {
     position: absolute;
-    top: 45%;
+    top: 48%;
     left: 24px;
     transform: translate(0, -50%);
+
+    @media (min-width: 1024px) {
+      top: 45%;
+      width: 24px;
+      height: 24px;
+    }
   }
 `;
 
@@ -42,12 +48,11 @@ export const IconSearchContainer = styled.div`
   fill: #000;
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   cursor: pointer;
-  padding: 0 8px;
+  padding: 0 8px 0 16px;
   background-color: #fff;
-  border-left: 1px solid #d2d2d2;
 `;
 
 export const FirsRowMobile = styled.div`

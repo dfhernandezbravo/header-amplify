@@ -10,9 +10,12 @@ import {
   HeaderResultsContainer,
   TextContent,
   LoadingContainer,
+  SearchContainerResults,
+  NoContentContainer,
 } from './styles';
 import { useEffect, useState } from 'react';
 import NoContentResults from './components/no-content-results';
+import RecentResultsList from '@modules/header/components/initial-searches-list/recent-results-list';
 
 const HeaderResults = () => {
   const [showPopularResults, setShowPopularResults] = useState(true);
@@ -58,16 +61,21 @@ const HeaderResults = () => {
           </HeaderResultSpinnerContainer>
           <TextContent>
             <h4>Buscando artículos</h4>
-            <p>Espere un segundo...</p>
+            <p>Espera un segundo...</p>
           </TextContent>
         </LoadingContainer>
       )}
-      {showNoContent && <NoContentResults />}
+      {showNoContent && (
+        <NoContentContainer>
+          <RecentResultsList />
+          <NoContentResults />
+        </NoContentContainer>
+      )}
       {searches?.length > 0 && (
-        <>
+        <SearchContainerResults>
           <SearchList />
           <HeaderSuggestions />
-        </>
+        </SearchContainerResults>
       )}
       {isEmptySearch && <EmptySearch />}
       {showPopularResults && popularSearches?.length > 0 && (
