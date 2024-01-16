@@ -1,12 +1,9 @@
 import { WindowsEvents } from '@events/index';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch } from '@hooks/storeHooks';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import { openModalLogin } from '@store/login/slices/login-slice';
-import {
-  setQuantity,
-  setShoppingCartUse,
-} from '@store/shopping-cart/slices/shopping-cart-slice';
 import React, { useEffect } from 'react';
+import { useCaseEvents } from './use-cases-events';
 
 interface Props {
   children: React.ReactNode;
@@ -14,49 +11,40 @@ interface Props {
 
 const WindowsEventProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
-  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
-
-  const sendCartId = () => {
-    customDispatchEvent({
-      name: WindowsEvents.CART_ID,
-      detail: { cartId: orderFormId },
-    });
-  };
+  const { handleGetShoppingCart, handleGetCartId } = useCaseEvents();
 
   useEffect(() => {
-    sendCartId();
-  }, [orderFormId]);
+    document.addEventListener(WindowsEvents.GET_CART_ID, handleGetCartId);
 
-  useEffect(() => {
-    document.addEventListener(WindowsEvents.CART_HEADER, (event) => {
-      event.preventDefault();
-      const customEvent = event as CustomEvent<{
-        isShoppingCartUsed?: boolean;
-        quantityItems?: number;
-      }>;
-      if (typeof customEvent.detail.quantityItems === 'number') {
-        dispatch(setQuantity(customEvent.detail.quantityItems));
-      }
-      if (customEvent.detail.isShoppingCartUsed) {
-        dispatch(setShoppingCartUse(customEvent.detail.isShoppingCartUsed));
-      }
-    });
-
-    document.addEventListener(WindowsEvents.GET_CART_ID, () => {
-      sendCartId();
-    });
+    document.addEventListener(
+      WindowsEvents.GET_SHOPPING_CART,
+      handleGetShoppingCart,
+    );
 
     document.addEventListener(WindowsEvents.OPEN_LOGIN_MODAL, () => {
       dispatch(openModalLogin());
     });
+
+    return () => {
+      document.removeEventListener(WindowsEvents.GET_CART_ID, handleGetCartId);
+
+      document.removeEventListener(
+        WindowsEvents.GET_SHOPPING_CART,
+        handleGetShoppingCart,
+      );
+    };
   }, [dispatch]);
 
   useEffect(() => {
     customDispatchEvent({
-      name: WindowsEvents.CART_HEADER,
-      detail: { cartId: orderFormId },
+      name: WindowsEvents.DISPATCH_GET_CART_ID,
+      detail: {},
     });
-  }, [orderFormId, dispatch]);
+    customDispatchEvent({
+      name: WindowsEvents.DISPATCH_GET_CART,
+      detail: {},
+    });
+  }, []);
 
   return <>{children}</>;
 };

@@ -20,6 +20,7 @@
       "@interfaces/*": ["./src/domain/interfaces/*"],
       "@use-cases/*": ["./src/domain/use-cases/*"],
       "@data-sources/*": ["./src/application/data-sources/*"],
+      "@infra/*": ["./src/application/infra/*"],
       "@services/*": ["./src/application/services/*"],
       "@modules/*": ["./src/presentation/modules/*"],
       "@events/*": ["./src/presentation/events/*"],

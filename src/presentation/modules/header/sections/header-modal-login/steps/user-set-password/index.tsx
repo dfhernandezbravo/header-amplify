@@ -3,7 +3,7 @@ import React from 'react';
 
 import { ModalForm } from '../../styles';
 import setPassword from '@use-cases/login/set-password';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputText from '@components/atoms/inputs/input-text';
 import InputPassword from '@components/atoms/inputs/input-password';
@@ -21,9 +21,8 @@ type SetPasswordForm = {
 };
 
 const LoginSetPassword = () => {
-  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
-    (state) => state.shoppingCartHeader,
-  );
+  const { cartId: orderFormId, isShoppingCartUsed: isShoppingCartUse } =
+    useAppSelector((state) => state.shoppingCartHeader);
   const { userEmail } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
 

@@ -1,16 +1,18 @@
-import { ShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
+import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 import { createSlice } from '@reduxjs/toolkit';
-import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
 
-type ShoppingCartState = ShoppingCart & {
+type ShoppingCartState = {
+  cartId: string;
   isShoppingCartUsed: boolean;
   quantity: number;
+  shoppingCart: ShoppingCart | null;
 };
 
 const initialState: ShoppingCartState = {
-  orderFormId: undefined,
+  cartId: '',
   isShoppingCartUsed: false,
   quantity: 0,
+  shoppingCart: null,
 };
 
 const shoppingCartSlice = createSlice({
@@ -23,18 +25,16 @@ const shoppingCartSlice = createSlice({
     setQuantity: (state, { payload }) => {
       state.quantity = payload;
     },
-    setOrderFormId: (state, { payload }: { payload: string }) => {
-      state.orderFormId = payload;
+    setCartId: (state, { payload }: { payload: string }) => {
+      state.cartId = payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(getShoppingCart.fulfilled, (state, { payload }) => {
-      state.orderFormId = payload.orderFormId;
-    });
+    setShoppingCart: (state, { payload }: { payload: ShoppingCart }) => {
+      state.shoppingCart = payload;
+    },
   },
 });
 
-export const { setShoppingCartUse, setQuantity, setOrderFormId } =
+export const { setShoppingCartUse, setQuantity, setCartId, setShoppingCart } =
   shoppingCartSlice.actions;
 
 export default shoppingCartSlice;

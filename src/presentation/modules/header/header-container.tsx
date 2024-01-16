@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch } from '@hooks/storeHooks';
 import { closeResults } from '@store/search/slices/search-slice';
 import { useEffect, useMemo } from 'react';
 import useScroll from './hooks/use-scroll';
@@ -8,11 +8,8 @@ import CookiesProvider from './providers/cookies';
 import WindowsEventProvider from './providers/windows-event';
 import { HeaderContainerWrapper } from './styles';
 import { HeaderProps } from './types';
-import getShoppingCart from '@use-cases/shopping-cart/get-shopping-cart';
 
 const HeaderContainer = ({ modules }: HeaderProps) => {
-  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
-
   const dispatch = useAppDispatch();
   const { visible } = useScroll();
 
@@ -21,12 +18,6 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
       dispatch(closeResults());
     }
   }, [visible, dispatch]);
-
-  useEffect(() => {
-    if (!orderFormId) {
-      dispatch(getShoppingCart());
-    }
-  }, []);
 
   const renderBody = useMemo(
     () => (
