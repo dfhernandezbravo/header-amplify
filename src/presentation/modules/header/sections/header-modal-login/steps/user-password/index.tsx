@@ -1,14 +1,17 @@
 import InputPassword from '@components/atoms/inputs/input-password';
 import InputText from '@components/atoms/inputs/input-text';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { ModalForm } from '../../styles';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import login from '@use-cases/login/login';
-import { navigateTo, setEmail } from '@store/login/slices/login-slice';
+import {
+  closeModalLogin,
+  navigateTo,
+  setEmail,
+} from '@store/login/slices/login-slice';
 import {
   ButtonNewAccount,
   ButtonResetPassword,
@@ -16,14 +19,17 @@ import {
   NewAccountContainer,
   ResetPasswordContainer,
 } from './styles';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { AxiosError } from 'axios';
+import getCustomer from '@use-cases/customer/get-customer';
 
 type LoginForm = {
-  user: string;
+  email: string;
   password: string;
 };
 
 const schema = yup.object({
-  user: yup
+  email: yup
     .string()
     .required('El correo es requerido')
     .email('El correo que ingresaste no es válido, intenta de nuevo'),
@@ -46,17 +52,41 @@ const LoginUserPassword = () => {
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const dataForm = isShoppingCartUse ? { ...data, orderFormId } : data;
 
-    dispatch(setEmail(data.user));
+    dispatch(setEmail(data.email));
 
-    dispatch(login(dataForm));
+    // dispatch(login(dataForm));
+    customDispatchEvent({ name: 'DISPATCH_SIGNIN', detail: dataForm });
   };
+
+  const getLoginResponse = (event: Event) => {
+    event.stopImmediatePropagation();
+    const customEvent = event as CustomEvent<{
+      success: boolean;
+      error: AxiosError;
+    }>;
+    const {
+      detail: { success },
+    } = customEvent;
+    if (success) {
+      dispatch(closeModalLogin());
+      dispatch(getCustomer());
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('GET_SIGNUP_SUCCESS', getLoginResponse);
+
+    return () => {
+      document.removeEventListener('GET_SIGNUP_SUCCESS', getLoginResponse);
+    };
+  }, []);
 
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>
       <strong>Ingresa con tu usuario y contraseña en Easy.cl</strong>
 
       <Controller
-        name="user"
+        name="email"
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -64,8 +94,8 @@ const LoginUserPassword = () => {
             {...field}
             label="Ingresa tu correo electrónico"
             placeholder="Ejemplo: correo@mail.com"
-            error={Boolean(errors.user)}
-            errorMessage={errors.user?.message}
+            error={Boolean(errors.email)}
+            errorMessage={errors.email?.message}
             ref={null}
           />
         )}

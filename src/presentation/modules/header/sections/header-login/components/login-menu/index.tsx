@@ -1,7 +1,8 @@
 import { Customer } from '@entities/customer/customer.entity';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import logout from '@use-cases/login/logout';
 import { LoginMenuContainer, MenuItem } from './style';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { useAppDispatch } from '@hooks/storeHooks';
+import getCustomer from '@use-cases/customer/get-customer';
 
 interface Props {
   isMenuOpen: boolean;
@@ -9,8 +10,11 @@ interface Props {
 }
 
 const LoginMenu = ({ isMenuOpen, customer }: Props) => {
-  const { authCookies } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
+  const onClickLogout = () => {
+    customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
+    dispatch(getCustomer());
+  };
 
   return (
     <LoginMenuContainer isVisible={isMenuOpen}>
@@ -21,7 +25,7 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
           <MenuItem href="/account/addresses">Mis Direcciones</MenuItem>
           <MenuItem href="/account/purchases">Mis Compras</MenuItem>
           <MenuItem href="/account/favorites">Mis Favoritos</MenuItem>
-          <MenuItem last href="" onClick={() => dispatch(logout(authCookies))}>
+          <MenuItem last href="" onClick={onClickLogout}>
             Salir
           </MenuItem>
         </>
