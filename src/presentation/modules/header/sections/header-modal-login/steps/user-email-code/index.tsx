@@ -1,13 +1,15 @@
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import InputText from '@components/atoms/inputs/input-text';
+import { ValidateAccessKeyRequest } from '@entities/login/login.request';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import validateAccessKey from '@use-cases/login/validate-access-key';
-import React from 'react';
+import { useAppSelector } from '@hooks/storeHooks';
+import { AUTH_EVENTS } from '@infra/events/auth';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import useResponseLogin from '../../hooks/use-response-login';
 import { ModalForm } from '../../styles';
-import { ValidateAccessKeyRequest } from '@entities/login/login.request';
 
 type ValidateForm = {
   accessKey: string;
@@ -26,18 +28,31 @@ const LoginUserEmailCode = () => {
     resolver: yupResolver(schema),
   });
 
-  const dispatch = useAppDispatch();
-  const { cartId: orderFormId, isShoppingCartUsed: isShoppingCartUse } =
-    useAppSelector((state) => state.shoppingCartHeader);
   const { userEmail } = useAppSelector((state) => state.login);
+  const { getLoginResponse } = useResponseLogin();
 
   const onSubmit: SubmitHandler<ValidateForm> = async (data) => {
-    const dataForm: ValidateAccessKeyRequest = isShoppingCartUse
-      ? { userEmail, accessKey: data.accessKey, orderFormId }
-      : { userEmail, accessKey: data.accessKey };
+    const dataForm: ValidateAccessKeyRequest = {
+      email: userEmail,
+      accessKey: data.accessKey,
+    };
 
-    dispatch(validateAccessKey(dataForm));
+    customDispatchEvent({
+      name: AUTH_EVENTS.DISPATCH_ACCESS_KEY_VALIDATION,
+      detail: dataForm,
+    });
   };
+
+  useEffect(() => {
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, getLoginResponse);
+
+    return () => {
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+        getLoginResponse,
+      );
+    };
+  }, []);
 
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>

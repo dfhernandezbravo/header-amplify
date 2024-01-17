@@ -4,13 +4,12 @@ import LoginService from '@interfaces/login-service.interface';
 const loginService: LoginService = {
   login: (data) => bffWebInstance.post('/auth/login', data),
 
-  generateAccessKey: (data) => bffWebInstance.post('/auth/mail/token', data),
+  generateAccessKey: (data) => bffWebInstance.post('/auth/accessKey', data),
 
   validateAccessKey: (data) =>
-    bffWebInstance.post('/auth/mail/token/validate', data),
+    bffWebInstance.post('/auth/accessKey/validation', data),
 
-  setPassword: (data) =>
-    bffWebInstance.post('/auth/password/setpassword', data),
+  setPassword: (data) => bffWebInstance.post('/auth/password', data),
 
   generateToken: (data) =>
     bffWebInstance.get('/auth/jwt', {

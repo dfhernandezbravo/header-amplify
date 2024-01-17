@@ -1,17 +1,15 @@
+import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import InputPassword from '@components/atoms/inputs/input-password';
 import InputText from '@components/atoms/inputs/input-text';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAppDispatch } from '@hooks/storeHooks';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { navigateTo, setEmail } from '@store/login/slices/login-slice';
 import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import ButtonPrimary from '@components/atoms/buttons/button-primary';
+import useResponseLogin from '../../hooks/use-response-login';
 import { ModalForm } from '../../styles';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import {
-  closeModalLogin,
-  navigateTo,
-  setEmail,
-} from '@store/login/slices/login-slice';
 import {
   ButtonNewAccount,
   ButtonResetPassword,
@@ -19,9 +17,7 @@ import {
   NewAccountContainer,
   ResetPasswordContainer,
 } from './styles';
-import { customDispatchEvent } from '@store/events/dispatchEvents';
-import { AxiosError } from 'axios';
-import getCustomer from '@use-cases/customer/get-customer';
+import { AUTH_EVENTS } from '@infra/events/auth';
 
 type LoginForm = {
   email: string;
@@ -46,38 +42,22 @@ const LoginUserPassword = () => {
   });
 
   const dispatch = useAppDispatch();
-  const { cartId: orderFormId, isShoppingCartUsed: isShoppingCartUse } =
-    useAppSelector((state) => state.shoppingCartHeader);
+  const { getLoginResponse } = useResponseLogin();
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
-    const dataForm = isShoppingCartUse ? { ...data, orderFormId } : data;
-
     dispatch(setEmail(data.email));
 
-    // dispatch(login(dataForm));
-    customDispatchEvent({ name: 'DISPATCH_SIGNIN', detail: dataForm });
-  };
-
-  const getLoginResponse = (event: Event) => {
-    event.stopImmediatePropagation();
-    const customEvent = event as CustomEvent<{
-      success: boolean;
-      error: AxiosError;
-    }>;
-    const {
-      detail: { success },
-    } = customEvent;
-    if (success) {
-      dispatch(closeModalLogin());
-      dispatch(getCustomer());
-    }
+    customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
   };
 
   useEffect(() => {
-    document.addEventListener('GET_SIGNUP_SUCCESS', getLoginResponse);
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, getLoginResponse);
 
     return () => {
-      document.removeEventListener('GET_SIGNUP_SUCCESS', getLoginResponse);
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+        getLoginResponse,
+      );
     };
   }, []);
 

@@ -1,17 +1,18 @@
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import React from 'react';
-
-import { ModalForm } from '../../styles';
-import setPassword from '@use-cases/login/set-password';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import InputText from '@components/atoms/inputs/input-text';
-import InputPassword from '@components/atoms/inputs/input-password';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import InputCheckbox from '@components/atoms/inputs/input-checkbox';
-import Link from 'next/link';
+import InputPassword from '@components/atoms/inputs/input-password';
+import InputText from '@components/atoms/inputs/input-text';
 import { SetPasswordRequest } from '@entities/login/login.request';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useAppSelector } from '@hooks/storeHooks';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import useResponseLogin from '../../hooks/use-response-login';
+import { ModalForm } from '../../styles';
 import userPasswordSchema from './schema-validation';
+import { AUTH_EVENTS } from '@infra/events/auth';
 
 type SetPasswordForm = {
   accessKey: string;
@@ -21,10 +22,7 @@ type SetPasswordForm = {
 };
 
 const LoginSetPassword = () => {
-  const { cartId: orderFormId, isShoppingCartUsed: isShoppingCartUse } =
-    useAppSelector((state) => state.shoppingCartHeader);
   const { userEmail } = useAppSelector((state) => state.login);
-  const dispatch = useAppDispatch();
 
   const {
     handleSubmit,
@@ -37,19 +35,31 @@ const LoginSetPassword = () => {
     },
   });
 
+  const { getLoginResponse } = useResponseLogin();
+
   const onSubmit: SubmitHandler<SetPasswordForm> = async (data) => {
     const dataSetPassword: SetPasswordRequest = {
-      user: userEmail,
+      email: userEmail,
       newPassword: data.password,
       accessKey: data.accessKey,
     };
 
-    const dataSend = isShoppingCartUse
-      ? { ...dataSetPassword, orderFormId }
-      : dataSetPassword;
-
-    dispatch(setPassword(dataSend));
+    customDispatchEvent({
+      name: AUTH_EVENTS.DISPATCH_SET_PASSWORD,
+      detail: dataSetPassword,
+    });
   };
+
+  useEffect(() => {
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, getLoginResponse);
+
+    return () => {
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+        getLoginResponse,
+      );
+    };
+  }, []);
 
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>
