@@ -1,5 +1,0 @@
-{
-  "/api/*": "/$1",
-  "/:resource/:id/show": "/:resource/:id",
-  "/products/search/popular": "/searches-popular"
-}

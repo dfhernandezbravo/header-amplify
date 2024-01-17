@@ -26,6 +26,8 @@ RUN echo "NEXT_PUBLIC_BFF_WEB_URL -- $NEXT_PUBLIC_BFF_WEB_URL"
 RUN echo "NEXT_PUBLIC_API_KEY_BFF_WEB -- $NEXT_PUBLIC_API_KEY_BFF_WEB"
 RUN echo "NEXT_PUBLIC_VTEX_GRAPHQL -- $NEXT_PUBLIC_VTEX_GRAPHQL"
 
+RUN npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J
+
 RUN NODE_ENV='' yarn install && \
 yarn build
 

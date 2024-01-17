@@ -1,20 +1,23 @@
 import { bffWebInstance } from '@data-sources/bbf-web-instance';
+import { AUTHCOOKIES } from '@infra/cookies';
 import CustomerService from '@interfaces/customer-service.interface';
-import Cookies from 'js-cookie';
+import Cookies from 'universal-cookie';
 
 const httpInstance = bffWebInstance;
 
 httpInstance.interceptors.request.use(function (config) {
-  const token = Cookies.get('token');
-  config.headers.Authorization = token ? `Bearer ${token}` : '';
+  const cookies = new Cookies();
+  const accessToken = cookies.get(AUTHCOOKIES.ACCESS_TOKEN);
+
+  if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 });
 
 const customerService: CustomerService = {
-  getCustomer(email) {
-    return httpInstance.get(`/customer/${email}`);
+  getCustomer() {
+    return httpInstance.get(`/customers`);
   },
-  getAddressCustomer: (email) => httpInstance.get(`/customer/${email}/address`),
+  getAddressCustomer: () => httpInstance.get(`/customer/addresses`),
 };
 
 export default customerService;

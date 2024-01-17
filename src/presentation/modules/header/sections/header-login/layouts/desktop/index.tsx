@@ -1,12 +1,12 @@
 import Desktop from '@components/layout/desktop';
-import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { closeCategories } from '@store/category/slices/category-slice';
+import { openModalLogin } from '@store/login/slices/login-slice';
 import Image from 'next/image';
 import { useState } from 'react';
 import LoginButton from '../../components/login-button';
 import LoginMenu from '../../components/login-menu';
 import { LoginContainerDesktop, LoginInformation } from '../../styles';
-import { openModalLogin } from '@store/login/slices/login-slice';
-import { closeCategories } from '@store/category/slices/category-slice';
 
 const HeaderLoginDesktop = () => {
   const { customer } = useAppSelector((state) => state.customer);

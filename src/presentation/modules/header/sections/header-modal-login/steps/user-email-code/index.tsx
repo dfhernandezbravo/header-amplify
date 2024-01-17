@@ -27,9 +27,8 @@ const LoginUserEmailCode = () => {
   });
 
   const dispatch = useAppDispatch();
-  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
-    (state) => state.shoppingCartHeader,
-  );
+  const { cartId: orderFormId, isShoppingCartUsed: isShoppingCartUse } =
+    useAppSelector((state) => state.shoppingCartHeader);
   const { userEmail } = useAppSelector((state) => state.login);
 
   const onSubmit: SubmitHandler<ValidateForm> = async (data) => {

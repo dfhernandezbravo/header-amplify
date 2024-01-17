@@ -41,7 +41,7 @@ const ListAddressForm = () => {
   );
 
   useEffect(() => {
-    if (customer) dispatch(getAddressCustomer(customer.email));
+    if (customer) dispatch(getAddressCustomer());
   }, [customer, dispatch]);
 
   const HeaderNewAddress = () => (
