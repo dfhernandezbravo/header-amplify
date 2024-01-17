@@ -8,15 +8,17 @@ import {
   openResults,
   setTerm,
   setSearchWidth,
+  setRecentSearches,
 } from '@store/search/slices/search-slice';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import { getSearches } from '@use-cases/search/get-searches';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { IconSearchContainer, SearchContainer, SearchInput } from './styles';
-import Image from 'next/image';
-import { useRecentSearches } from '@modules/header/hooks/use-recent-searches';
+import { SearchContainer, SearchInput } from './styles';
+import SearchIcon from './components/search-icon';
+import ClearSearchButton from './components/clear-search-button';
+import useBreakpoints from '@hooks/useBreakpoints';
 
 const HeaderSearch = React.memo(function Search() {
   const searchRef = useRef<HTMLDivElement>(null);
@@ -26,8 +28,8 @@ const HeaderSearch = React.memo(function Search() {
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
   const { searches } = useAppSelector((state) => state.search);
-  const { setRecentSearches } = useRecentSearches();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { device } = useBreakpoints();
 
   const sendQuery = useCallback(() => {
     dispatch(setTerm(search));
@@ -42,9 +44,7 @@ const HeaderSearch = React.memo(function Search() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (debouncedSearch) {
-      sendQuery();
-    }
+    if (debouncedSearch) sendQuery();
   }, [debouncedSearch, sendQuery]);
 
   useEffect(() => {
@@ -56,7 +56,6 @@ const HeaderSearch = React.memo(function Search() {
         tag: search,
       });
     }
-
     if (!searches.length && search !== '') {
       sendEventAnalytics({
         event: 'interaccion',
@@ -94,18 +93,14 @@ const HeaderSearch = React.memo(function Search() {
     });
   };
 
-  const handleOnClickSearchIcon = () => {
-    setRecentSearches(search);
-    router.push(`/search/${search}`);
-  };
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      setRecentSearches(search);
+      dispatch(setRecentSearches(search));
       dispatch(closeResults());
       router.push(`/search/${search}`);
     }
   };
+
   const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setTimeout(() => {
       if (e.relatedTarget?.id === 'remove-recent-search') {
@@ -114,36 +109,46 @@ const HeaderSearch = React.memo(function Search() {
         }, 100);
         return;
       }
-      dispatch(closeResults());
+      if (device === 'Desktop') dispatch(closeResults());
     }, 100);
+  };
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '') {
+      setSearch(value);
+      dispatch(cleanResults());
+      return;
+    }
+    const updatedValue = value.replace(
+      /[^a-zA-Z´\u00C0-\u017F\u00f1\u00d1\d\s]+/g,
+      '',
+    );
+    setSearch(updatedValue);
   };
 
   return (
     <SearchContainer ref={searchRef}>
-      <IconSearchContainer onClick={handleOnClickSearchIcon}>
-        <Image
-          width={16}
-          height={16}
-          src="/icons/categories/icon-search.svg"
-          alt="search"
-          priority
-        />
-      </IconSearchContainer>
+      <SearchIcon search={search} />
       <SearchInput
         type="search"
         placeholder="Buscar..."
-        onFocus={() => dispatch(openResults())}
+        maxLength={30}
+        onFocus={() => {
+          setTimeout(() => {
+            dispatch(openResults());
+          }, 100);
+        }}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         onBlur={handleOnBlur}
-        onChange={(e) => {
-          if (e.target.value === '') {
-            dispatch(cleanResults());
-          }
-          setSearch(e.target.value);
-        }}
+        onChange={handleOnChange}
         onClick={handleOnClickSearch}
+        value={search}
       />
+      {search && (
+        <ClearSearchButton setSearch={setSearch} inputRef={inputRef} />
+      )}
     </SearchContainer>
   );
 });

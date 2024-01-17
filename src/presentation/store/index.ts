@@ -27,6 +27,11 @@ const persistLoginConfig = {
   storage,
 };
 
+const persistSearchConfig = {
+  key: 'search',
+  storage,
+};
+
 const shoppingCartReducer = persistReducer(
   persistShoppingCartConfig,
   shoppingCartSlice.reducer,
@@ -39,10 +44,12 @@ const regionalizerReducer = persistReducer(
 
 const loginReducer = persistReducer(persistLoginConfig, loginSlice.reducer);
 
+const searchReducer = persistReducer(persistSearchConfig, searchSlice.reducer);
+
 const store = configureStore({
   reducer: {
     cart: cartSlice.reducer,
-    search: searchSlice.reducer,
+    search: searchReducer,
     category: categorySlice.reducer,
     login: loginReducer,
     customer: customerSlice.reducer,

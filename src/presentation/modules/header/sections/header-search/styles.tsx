@@ -23,23 +23,6 @@ export const SearchInput = styled.input`
   }
 
   &::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-    height: 18px;
-    width: 18px;
-    background-image: url('/icons/general/close-icon.svg');
-    cursor: pointer;
-    background-repeat: no-repeat;
-    margin-top: 5px;
+    display: none;
   }
-`;
-
-export const IconSearchContainer = styled.div`
-  position: absolute;
-  left: 0;
-  top: 55%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  padding: 0 8px 0 16px;
-  background-color: #fff;
-  border-radius: 50%;
 `;

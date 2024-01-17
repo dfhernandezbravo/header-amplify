@@ -10,7 +10,10 @@ import {
 } from './styles';
 import React from 'react';
 import SuggestionsHighlight from '@modules/header/sections/header-suggestions/components/suggestions-highlights';
-import { closeResults } from '@store/search/slices/search-slice';
+import {
+  closeResults,
+  setRecentSearches,
+} from '@store/search/slices/search-slice';
 
 const SearchList = () => {
   const { searches, categories, term } = useAppSelector(
@@ -69,6 +72,7 @@ const SearchList = () => {
           onClick={(e) => {
             e.stopPropagation();
             handleOnClickSearch(search.value);
+            dispatch(setRecentSearches(search.value));
             dispatch(closeResults());
           }}
         >
@@ -76,7 +80,7 @@ const SearchList = () => {
         </SearchItem>
       ))}
 
-      <SearchCategoriesTitle>Categorias</SearchCategoriesTitle>
+      <SearchCategoriesTitle>Categorías</SearchCategoriesTitle>
 
       {categories.map((category) => (
         <SearchItemCategory
