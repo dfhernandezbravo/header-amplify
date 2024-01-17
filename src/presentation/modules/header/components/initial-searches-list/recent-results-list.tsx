@@ -8,17 +8,17 @@ import {
 } from './styles';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useRecentSearches } from '@modules/header/hooks/use-recent-searches';
-import { useState } from 'react';
-import { useAppDispatch } from '@hooks/storeHooks';
-import { closeResults } from '@store/search/slices/search-slice';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import {
+  closeResults,
+  removeRecentSearch,
+} from '@store/search/slices/search-slice';
 
 const RecentResultsList = () => {
   const { sendEventAnalytics } = useAnalytics();
   const router = useRouter();
-  const { getRecentSearches, removeRecentSearch } = useRecentSearches();
-  const [recentSearches, setRecentSearches] = useState(getRecentSearches());
   const dispatch = useAppDispatch();
+  const { recentSearches } = useAppSelector((state) => state.search);
 
   const handleOnClick = (term: string) => {
     sendEventAnalytics({
@@ -32,9 +32,8 @@ const RecentResultsList = () => {
     }, 100);
   };
 
-  const handleRemoveTerm = (result: string) => {
-    const updatedRecentSearches = removeRecentSearch(result);
-    setRecentSearches(updatedRecentSearches);
+  const handleRemoveTerm = (term: string) => {
+    dispatch(removeRecentSearch(term));
   };
 
   return (

@@ -6,7 +6,10 @@ import {
   ContainerPopulars,
 } from './styles';
 import Image from 'next/image';
-import { closeResults } from '@store/search/slices/search-slice';
+import {
+  closeResults,
+  setRecentSearches,
+} from '@store/search/slices/search-slice';
 
 const PopularSearchesList = () => {
   const { popularSearches } = useAppSelector((state) => state.search);
@@ -21,6 +24,7 @@ const PopularSearchesList = () => {
       tag: term,
     });
     setTimeout(() => {
+      dispatch(setRecentSearches(term));
       dispatch(closeResults());
     }, 100);
   };

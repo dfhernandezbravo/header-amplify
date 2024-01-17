@@ -1,5 +1,5 @@
 import Mobile from '@components/layout/mobile';
-import { useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
 import Image from 'next/image';
 import {
@@ -11,10 +11,15 @@ import {
   SuggestionsMobileDetail,
   SuggestionsMobileItem,
 } from './styles';
+import {
+  setRecentSearches,
+  closeResults,
+} from '@store/search/slices/search-slice';
 
 const HeaderSuggestionsMobile = () => {
   const { productSuggestions } = useAppSelector((state) => state.search);
   const { sendEventAnalytics } = useAnalytics();
+  const dispatch = useAppDispatch();
 
   const handleOnClick = (product: string) => {
     sendEventAnalytics({
@@ -23,6 +28,10 @@ const HeaderSuggestionsMobile = () => {
       action: 'Click Producto Sugerido',
       tag: product,
     });
+
+    const term = product.split(' ')[0];
+    if (term) dispatch(setRecentSearches(term.toLowerCase()));
+    dispatch(closeResults());
   };
 
   return (

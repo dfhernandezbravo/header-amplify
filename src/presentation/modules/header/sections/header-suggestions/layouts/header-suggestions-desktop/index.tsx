@@ -1,5 +1,5 @@
 import Desktop from '@components/layout/desktop';
-import { useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import SuggestionPrice from '../../components/suggestion-price';
 import SuggestionImage from '../../components/suggestions-image';
 import {
@@ -9,9 +9,16 @@ import {
   SuggestionsItemContainer,
   SuggestionsListContainer,
 } from './styles';
+import { setRecentSearches } from '@store/search/slices/search-slice';
 
 const HeaderSuggestionsDesktop = () => {
   const { productSuggestions } = useAppSelector((state) => state.search);
+  const dispatch = useAppDispatch();
+
+  const handleClick = (product: string) => {
+    const term = product.split(' ')[0];
+    if (term) dispatch(setRecentSearches(term.toLowerCase()));
+  };
 
   return (
     <Desktop>
@@ -23,6 +30,7 @@ const HeaderSuggestionsDesktop = () => {
             <SuggestionsItemContainer
               key={product.productId}
               href={product.link}
+              onClick={() => handleClick(product.productName)}
             >
               <SuggestionImage images={product.items[0].images} />
 
