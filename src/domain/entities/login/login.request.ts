@@ -5,20 +5,18 @@ export type LoginRequest = {
 };
 
 export type GenerateAccessKeyRequest = {
-  userEmail: string;
+  email: string;
 };
 
 export type ValidateAccessKeyRequest = {
-  userEmail: string;
+  email: string;
   accessKey: string;
-  orderFormId?: string;
 };
 
 export type SetPasswordRequest = {
-  user: string;
+  email: string;
   newPassword: string;
   accessKey: string;
-  orderFormId?: string;
 };
 
 export type GenerateTokenRequest = {
