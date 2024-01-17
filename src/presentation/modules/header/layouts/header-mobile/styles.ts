@@ -6,7 +6,7 @@ export const HeaderMobileContainer = styled.div`
   flex-direction: column;
   background-color: #af1212;
   color: white;
-  padding: 0.7rem;
+  padding: 10px 2rem 10px 0.7rem;
 `;
 
 export const HeaderMobileSearchSection = styled.div`
