@@ -21,7 +21,6 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
     dispatch(getCustomer());
   };
 
-  console.log({ customer, softLoginName });
   if (!customer && softLoginName) {
     return (
       <LoginMenuContainer isVisible={isMenuOpen}>

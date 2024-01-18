@@ -20,7 +20,6 @@ const CookiesProvider = ({ children }: Props) => {
   useEffect(() => {
     const validateAccessToken = async () => {
       if (cookies.accessToken) {
-        console.log(cookies.accessToken);
         const response = await dispatch(getCustomer());
         if ((response.payload as Customer).firstName) {
           const currentDate = new Date();
