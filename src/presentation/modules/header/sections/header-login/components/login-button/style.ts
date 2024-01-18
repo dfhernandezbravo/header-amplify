@@ -12,6 +12,7 @@ export const LoginUser = styled.div`
 
 export const LoginButtonContainerDesktop = styled.div`
   display: flex;
+  margin-top: 0.25rem;
   align-items: center;
   gap: 0.35rem;
 

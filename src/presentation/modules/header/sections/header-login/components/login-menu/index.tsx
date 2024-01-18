@@ -1,25 +1,37 @@
 import { Customer } from '@entities/customer/customer.entity';
 import { LoginMenuContainer, MenuItem } from './style';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import getCustomer from '@use-cases/customer/get-customer';
 
 interface Props {
   isMenuOpen: boolean;
   customer: Customer | null;
+  handleLogin: () => void;
 }
 
-const LoginMenu = ({ isMenuOpen, customer }: Props) => {
+const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
+  const { softLoginName } = useAppSelector((state) => state.customer);
   const dispatch = useAppDispatch();
   const onClickLogout = () => {
     customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
     dispatch(getCustomer());
   };
 
+  if (!customer && softLoginName) {
+    return (
+      <LoginMenuContainer isVisible={isMenuOpen}>
+        <MenuItem href="" onClick={() => handleLogin()}>
+          Inicia sesión
+        </MenuItem>
+      </LoginMenuContainer>
+    );
+  }
+
   return (
-    <LoginMenuContainer isVisible={isMenuOpen}>
+    <>
       {customer && (
-        <>
+        <LoginMenuContainer isVisible={isMenuOpen}>
           <MenuItem href="/account/profile">Mis Datos</MenuItem>
           <MenuItem href="/account/cards">Mis Tarjetas</MenuItem>
           <MenuItem href="/account/addresses">Mis Direcciones</MenuItem>
@@ -28,9 +40,9 @@ const LoginMenu = ({ isMenuOpen, customer }: Props) => {
           <MenuItem last href="" onClick={onClickLogout}>
             Salir
           </MenuItem>
-        </>
+        </LoginMenuContainer>
       )}
-    </LoginMenuContainer>
+    </>
   );
 };
 

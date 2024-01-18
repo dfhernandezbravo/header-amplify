@@ -54,8 +54,7 @@ const LoginUserEmail = ({ nextStep }: Props) => {
         render={({ field }) => (
           <InputText
             {...field}
-            label="Ingresa tu correo electrónico"
-            placeholder="Ejemplo: correo@mail.com"
+            placeholder="Correo electrónico"
             error={Boolean(errors.email)}
             errorMessage={errors.email?.message}
             ref={null}

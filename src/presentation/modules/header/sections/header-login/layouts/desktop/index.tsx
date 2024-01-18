@@ -33,8 +33,12 @@ const HeaderLoginDesktop = () => {
           />
           <LoginButton customer={customer} />
         </LoginInformation>
-        {customer && isMenuOpen && (
-          <LoginMenu isMenuOpen={isMenuOpen} customer={customer} />
+        {isMenuOpen && (
+          <LoginMenu
+            isMenuOpen={isMenuOpen}
+            customer={customer}
+            handleLogin={() => handleLogin()}
+          />
         )}
       </LoginContainerDesktop>
     </Desktop>

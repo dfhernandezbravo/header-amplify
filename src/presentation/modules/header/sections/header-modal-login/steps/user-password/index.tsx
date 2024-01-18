@@ -10,13 +10,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import useResponseLogin from '../../hooks/use-response-login';
 import { ModalForm } from '../../styles';
-import {
-  ButtonNewAccount,
-  ButtonResetPassword,
-  LinkNewAccount,
-  NewAccountContainer,
-  ResetPasswordContainer,
-} from './styles';
+import { ButtonResetPassword, ResetPasswordContainer } from './styles';
 import { AUTH_EVENTS } from '@infra/events/auth';
 
 type LoginForm = {
@@ -36,6 +30,7 @@ const LoginUserPassword = () => {
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<LoginForm>({
     resolver: yupResolver(schema),
@@ -61,10 +56,11 @@ const LoginUserPassword = () => {
     };
   }, []);
 
+  const watchEmail = watch('email');
+  const watchPassword = watch('password');
+
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>
-      <strong>Ingresa con tu usuario y contraseña en Easy.cl</strong>
-
       <Controller
         name="email"
         control={control}
@@ -72,8 +68,7 @@ const LoginUserPassword = () => {
         render={({ field }) => (
           <InputText
             {...field}
-            label="Ingresa tu correo electrónico"
-            placeholder="Ejemplo: correo@mail.com"
+            placeholder="Correo electrónico"
             error={Boolean(errors.email)}
             errorMessage={errors.email?.message}
             ref={null}
@@ -88,8 +83,7 @@ const LoginUserPassword = () => {
         render={({ field }) => (
           <InputPassword
             {...field}
-            label="Ingresa tu contraseña"
-            placeholder="********"
+            placeholder="Contraseña"
             error={Boolean(errors.password)}
             errorMessage={errors.password?.message}
             ref={null}
@@ -105,17 +99,11 @@ const LoginUserPassword = () => {
           ¿Olvidaste tu contraseña?
         </ButtonResetPassword>
       </ResetPasswordContainer>
-
-      <ButtonPrimary type="submit" title="Ingresar a mi cuenta" />
-
-      <NewAccountContainer>
-        <ButtonNewAccount
-          onClick={() => dispatch(navigateTo('EmailSetPassword'))}
-        >
-          <span>¿No estás registrado?</span>
-          <LinkNewAccount>Crear cuenta</LinkNewAccount>
-        </ButtonNewAccount>
-      </NewAccountContainer>
+      <ButtonPrimary
+        type="submit"
+        title="Ingresar a mi cuenta"
+        disabled={!watchEmail || !watchPassword}
+      />
     </ModalForm>
   );
 };
