@@ -5,13 +5,11 @@ import getCustomer from '@use-cases/customer/get-customer';
 
 type CustomerState = {
   customer: Customer | null;
-  softLoginName: string | null;
   addresses: CustomerAddress[];
 };
 
 const initialState: CustomerState = {
   customer: null,
-  softLoginName: null,
   addresses: [],
 };
 
@@ -27,8 +25,6 @@ const customerSlice = createSlice({
     builder
       .addCase(getCustomer.fulfilled, (state, { payload }) => {
         state.customer = payload;
-        if (!payload) return;
-        state.softLoginName = payload.firstName;
       })
       .addCase(getAddressCustomer.fulfilled, (state, { payload }) => {
         state.addresses = payload;

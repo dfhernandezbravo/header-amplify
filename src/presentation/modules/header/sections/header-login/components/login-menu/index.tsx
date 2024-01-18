@@ -3,6 +3,7 @@ import { LoginMenuContainer, MenuItem } from './style';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import getCustomer from '@use-cases/customer/get-customer';
+import { Cookies } from 'react-cookie';
 
 interface Props {
   isMenuOpen: boolean;
@@ -11,13 +12,16 @@ interface Props {
 }
 
 const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
-  const { softLoginName } = useAppSelector((state) => state.customer);
+  const cookies = new Cookies();
+  const { softLoginName } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
   const onClickLogout = () => {
+    cookies.remove('softLogin');
     customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
     dispatch(getCustomer());
   };
 
+  console.log({ customer, softLoginName });
   if (!customer && softLoginName) {
     return (
       <LoginMenuContainer isVisible={isMenuOpen}>

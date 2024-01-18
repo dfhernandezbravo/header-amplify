@@ -8,7 +8,7 @@ interface Props {
 }
 
 const LoginButton = ({ customer }: Props) => {
-  const { softLoginName } = useAppSelector((state) => state.customer);
+  const { softLoginName } = useAppSelector((state) => state.login);
 
   return (
     <LoginUser className="login-user">
