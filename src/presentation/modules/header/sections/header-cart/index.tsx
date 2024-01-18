@@ -13,7 +13,7 @@ const HeaderCart = () => {
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    if (shoppingCart) {
+    if (shoppingCart && shoppingCart.items.length) {
       const totalQuantity = shoppingCart.items.reduce(
         (accumulator, current) => accumulator + current.quantity,
         0,
