@@ -15,7 +15,6 @@ const HeaderLoginDesktop = () => {
   const dispatch = useAppDispatch();
 
   const isLogged = shoppingCart?.loggedIn;
-  console.log('isLogged', isLogged);
   const handleLogin = () => {
     if (isLogged) return;
     dispatch(closeCategories());

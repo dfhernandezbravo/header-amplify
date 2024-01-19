@@ -16,7 +16,7 @@ const WindowsEventProvider = ({ children }: Props) => {
   useEffect(() => {
     document.addEventListener(WindowsEvents.GET_CART_ID, handleGetCartId);
 
-    document.addEventListener(
+    window.addEventListener(
       WindowsEvents.GET_SHOPPING_CART,
       handleGetShoppingCart,
     );
@@ -28,7 +28,7 @@ const WindowsEventProvider = ({ children }: Props) => {
     return () => {
       document.removeEventListener(WindowsEvents.GET_CART_ID, handleGetCartId);
 
-      document.removeEventListener(
+      window.removeEventListener(
         WindowsEvents.GET_SHOPPING_CART,
         handleGetShoppingCart,
       );

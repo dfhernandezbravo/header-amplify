@@ -19,10 +19,11 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
   const onClickLogout = () => {
     cookies.remove('softLogin');
     dispatch(setSoftLoginName(null));
+    console.log('logout');
     customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
     dispatch(getCustomer());
   };
-
+  console.log(softLoginName, 'softLoginName');
   if (!customer && softLoginName) {
     return (
       <LoginMenuContainer isVisible={isMenuOpen}>

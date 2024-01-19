@@ -39,7 +39,10 @@ const CookiesProvider = ({ children }: Props) => {
       }
     };
     validateAccessToken();
-  }, [cookies.accessToken, dispatch]);
+    if (cookies.accessToken) {
+      dispatch(getCustomer());
+    }
+  }, [cookies.accessToken, cookies.softLogin, dispatch]);
 
   // useEffect(() => {
   //   const validateSocialLogin = window.location.search;
