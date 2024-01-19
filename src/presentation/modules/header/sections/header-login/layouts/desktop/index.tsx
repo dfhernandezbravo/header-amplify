@@ -10,10 +10,14 @@ import { LoginContainerDesktop, LoginInformation } from '../../styles';
 
 const HeaderLoginDesktop = () => {
   const { customer } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
 
+  const isLogged = shoppingCart?.loggedIn;
+  console.log('isLogged', isLogged);
   const handleLogin = () => {
+    if (isLogged) return;
     dispatch(closeCategories());
     dispatch(openModalLogin());
   };

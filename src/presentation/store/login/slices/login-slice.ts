@@ -77,7 +77,7 @@ const loginSlice = createSlice({
     setLogin: (state, { payload }: { payload: boolean }) => {
       state.isLogged = payload;
     },
-    setSoftLoginName: (state, { payload }: { payload: string }) => {
+    setSoftLoginName: (state, { payload }: { payload: string | null }) => {
       state.softLoginName = payload;
     },
   },
