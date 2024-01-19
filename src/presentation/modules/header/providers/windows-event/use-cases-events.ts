@@ -9,7 +9,7 @@ export const useCaseEvents = () => {
   const dispatch = useAppDispatch();
 
   const handleGetCartId = (event: Event) => {
-    event.stopImmediatePropagation();
+    event.preventDefault();
     const customEvent = event as CustomEvent<{ cartId: string }>;
     const {
       detail: { cartId },
@@ -18,7 +18,7 @@ export const useCaseEvents = () => {
   };
 
   const handleGetShoppingCart = (event: Event) => {
-    event.stopImmediatePropagation();
+    event.preventDefault();
     const customEvent = event as CustomEvent<{
       shoppingCart: ShoppingCart;
     }>;

@@ -14,7 +14,6 @@ const CookiesProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (cookies.accessToken) {
-      console.log(cookies.accessToken);
       dispatch(getCustomer());
     }
   }, [cookies.accessToken, dispatch]);
