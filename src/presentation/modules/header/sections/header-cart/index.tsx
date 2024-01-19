@@ -19,6 +19,8 @@ const HeaderCart = () => {
         0,
       );
       setQuantity(totalQuantity);
+    } else {
+      setQuantity(0);
     }
   }, [shoppingCart]);
 
