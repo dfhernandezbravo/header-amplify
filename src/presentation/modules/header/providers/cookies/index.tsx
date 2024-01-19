@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '@hooks/storeHooks';
-import { setSoftLoginName } from '@store/login/slices/login-slice';
 import { AUTHCOOKIES } from '@infra/cookies';
 import getCustomer from '@use-cases/customer/get-customer';
 import { useCookies } from 'react-cookie';
@@ -31,10 +30,6 @@ const CookiesProvider = ({ children }: Props) => {
           const softLoginValue = (response.payload as Customer).firstName;
           setCookies('softLogin', softLoginValue, { expires: expirationDate });
         }
-        return;
-      }
-      if (cookies.softLogin) {
-        dispatch(setSoftLoginName(cookies.softLogin));
       }
     };
 

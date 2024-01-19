@@ -24,7 +24,6 @@ type LoginState = {
   authCookies: AuthCookie[];
   userEmail: string;
   error: AppError | null;
-  softLoginName: string | null;
 };
 
 const initialState: LoginState = {
@@ -35,7 +34,6 @@ const initialState: LoginState = {
   authCookies: [],
   userEmail: '',
   error: null,
-  softLoginName: null,
   loginMethods: [
     {
       provider: LoginProviders.EMAIL,
@@ -76,9 +74,6 @@ const loginSlice = createSlice({
     },
     setLogin: (state, { payload }: { payload: boolean }) => {
       state.isLogged = payload;
-    },
-    setSoftLoginName: (state, { payload }: { payload: string | null }) => {
-      state.softLoginName = payload;
     },
   },
   // use cases
@@ -131,7 +126,6 @@ export const {
   setEmail,
   setLogin,
   setAuthCookies,
-  setSoftLoginName,
 } = loginSlice.actions;
 
 export default loginSlice;

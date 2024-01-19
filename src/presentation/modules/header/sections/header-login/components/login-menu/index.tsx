@@ -4,7 +4,6 @@ import { customDispatchEvent } from '@store/events/dispatchEvents';
 import { useAppDispatch } from '@hooks/storeHooks';
 import getCustomer from '@use-cases/customer/get-customer';
 import { Cookies } from 'react-cookie';
-import { setSoftLoginName } from '@store/login/slices/login-slice';
 
 interface Props {
   isMenuOpen: boolean;
@@ -19,7 +18,6 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
 
   const onClickLogout = () => {
     cookies.remove('softLogin');
-    dispatch(setSoftLoginName(null));
     customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
     dispatch(getCustomer());
   };
