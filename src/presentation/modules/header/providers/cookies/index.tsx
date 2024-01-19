@@ -30,7 +30,6 @@ const CookiesProvider = ({ children }: Props) => {
           );
           const softLoginValue = (response.payload as Customer).firstName;
           setCookies('softLogin', softLoginValue, { expires: expirationDate });
-          dispatch(setSoftLoginName(softLoginValue));
         }
         return;
       }
@@ -38,10 +37,8 @@ const CookiesProvider = ({ children }: Props) => {
         dispatch(setSoftLoginName(cookies.softLogin));
       }
     };
+
     validateAccessToken();
-    if (cookies.accessToken) {
-      dispatch(getCustomer());
-    }
   }, [cookies.accessToken, cookies.softLogin, dispatch]);
 
   // useEffect(() => {

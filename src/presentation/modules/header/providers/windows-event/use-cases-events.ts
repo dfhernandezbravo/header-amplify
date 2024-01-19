@@ -25,7 +25,6 @@ export const useCaseEvents = () => {
     const {
       detail: { shoppingCart },
     } = customEvent;
-    console.log('shoppingCart', shoppingCart);
     dispatch(setShoppingCart(shoppingCart));
   };
 
