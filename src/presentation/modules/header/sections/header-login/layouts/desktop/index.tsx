@@ -11,7 +11,7 @@ import { LoginContainerDesktop, LoginInformation } from '../../styles';
 const HeaderLoginDesktop = () => {
   const { customer } = useAppSelector((state) => state.customer);
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
   const dispatch = useAppDispatch();
 
   const isLogged = shoppingCart?.loggedIn;
@@ -25,7 +25,7 @@ const HeaderLoginDesktop = () => {
     <Desktop>
       <LoginContainerDesktop
         onMouseOver={() => setIsMenuOpen(true)}
-        onMouseLeave={() => setIsMenuOpen(false)}
+        // onMouseLeave={() => setIsMenuOpen(false)}
       >
         <LoginInformation onClick={() => handleLogin()}>
           <Image

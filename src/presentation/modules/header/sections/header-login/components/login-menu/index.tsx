@@ -37,11 +37,12 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
         <LoginMenuContainer isVisible={isMenuOpen}>
           <MenuItem href="/account/profile">Mis Datos</MenuItem>
           <MenuItem href="/account/cards">Mis Tarjetas</MenuItem>
+          <MenuItem href="/account/cards">Mis cuenta bancaria</MenuItem>
           <MenuItem href="/account/addresses">Mis Direcciones</MenuItem>
           <MenuItem href="/account/purchases">Mis Compras</MenuItem>
           <MenuItem href="/account/favorites">Mis Favoritos</MenuItem>
           <MenuItem last href="" onClick={onClickLogout}>
-            Salir
+            Cerrar sesión
           </MenuItem>
         </LoginMenuContainer>
       )}
