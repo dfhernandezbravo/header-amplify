@@ -45,8 +45,8 @@ export const LoginMenuContainer = styled.div<{ isVisible: boolean }>`
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 999;
-  border-radius: 4px;
-  padding: 2px;
+  border-radius: 8px;
+  border: 1px solid #b4c2cb;
   animation-name: ${({ isVisible }) =>
     isVisible ? animationInMenu : animationOutMenu};
   animation-duration: 0.2s;
@@ -54,16 +54,17 @@ export const LoginMenuContainer = styled.div<{ isVisible: boolean }>`
 
 export const MenuItem = styled(Link)<MenuItemProps>`
   display: block;
-  color: #333;
+  color: #485760;
   text-decoration: none;
   cursor: pointer;
-  min-width: 150px;
-  font-size: 15px;
+  min-width: 158px;
+  font-size: 14px;
   padding: 12px;
   text-align: left;
-  border-bottom: ${(props) => (!props.last ? '1px solid #f2f2f2' : 'none')};
+  border-radius: 4px;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #e1e6ea;
+    font-weight: 600;
   }
 `;
