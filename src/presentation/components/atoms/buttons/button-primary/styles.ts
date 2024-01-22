@@ -13,7 +13,9 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+    background-color: #e1e6ea;
+    color: #6e8391;
+    font-weight: 600;
+    cursor: inherit;
   }
 `;

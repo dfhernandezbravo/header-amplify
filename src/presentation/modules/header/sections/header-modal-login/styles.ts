@@ -13,6 +13,9 @@ export const ModalForm = styled.form`
   gap: 16px;
   padding: 12px 0px;
   width: 400px;
+  & .info-text {
+    color: #485760;
+  }
 
   @media (max-width: 720px) {
     width: 100%;

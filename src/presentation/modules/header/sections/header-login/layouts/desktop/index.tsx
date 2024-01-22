@@ -10,10 +10,13 @@ import { LoginContainerDesktop, LoginInformation } from '../../styles';
 
 const HeaderLoginDesktop = () => {
   const { customer } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
 
+  const isLogged = shoppingCart?.loggedIn;
   const handleLogin = () => {
+    if (isLogged) return;
     dispatch(closeCategories());
     dispatch(openModalLogin());
   };
@@ -33,8 +36,12 @@ const HeaderLoginDesktop = () => {
           />
           <LoginButton customer={customer} />
         </LoginInformation>
-        {customer && isMenuOpen && (
-          <LoginMenu isMenuOpen={isMenuOpen} customer={customer} />
+        {isMenuOpen && (
+          <LoginMenu
+            isMenuOpen={isMenuOpen}
+            customer={customer}
+            handleLogin={() => handleLogin()}
+          />
         )}
       </LoginContainerDesktop>
     </Desktop>

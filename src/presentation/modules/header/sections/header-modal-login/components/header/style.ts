@@ -6,9 +6,13 @@ export const ModalHeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  width: 400px;
   border-bottom: 1px solid #afafaf;
   padding: 12px 0px;
+
+  & .title,
+  .back-button {
+    color: #485760;
+  }
 
   @media (max-width: 720px) {
     width: 100%;

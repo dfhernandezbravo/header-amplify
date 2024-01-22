@@ -23,11 +23,11 @@ const ModalHeader = () => {
     <ModalHeaderContainer>
       {backStep ? (
         <ModalIconButton onClick={() => dispatch(navigateTo(backStep))}>
-          <AiOutlineArrowLeft size={20} />
-          <span>Volver</span>
+          <AiOutlineArrowLeft size={20} color="#485760" />
+          <span className="back-button">Volver</span>
         </ModalIconButton>
       ) : (
-        <strong>Ingresa a tu cuenta de Easy.cl</strong>
+        <p className="title">Ingresa a tu cuenta de Easy.cl</p>
       )}
       <ModalIconButton onClick={() => dispatch(closeModalLogin())}>
         <AiOutlineClose size={20} />

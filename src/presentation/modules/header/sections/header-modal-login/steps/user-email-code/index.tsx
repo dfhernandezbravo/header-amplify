@@ -56,7 +56,7 @@ const LoginUserEmailCode = () => {
 
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>
-      <span>
+      <span className="info-text">
         Ingresa la clave de acceso que enviamos al correo:
         <br />
         <strong>{userEmail}</strong>
