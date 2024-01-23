@@ -1,38 +1,32 @@
 import styled from 'styled-components';
 
-export const RadioLabel = styled.label`
+interface RadioLabelProps {
+  isChecked: boolean;
+}
+
+export const RadioLabel = styled.label<RadioLabelProps>`
   display: flex;
   flex-direction: row;
   gap: 12px;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid #eee;
-  padding: 12px;
+  padding: 20px;
   font-size: 12px;
   cursor: pointer;
+  border: 2px solid ${({ isChecked }) => (isChecked ? '#363F45' : '#eee')};
+
+  & .text {
+    font-size: 14px;
+    color: #363f45;
+    margin-bottom: 5px;
+  }
+  & .state-text {
+    font-size: 14px;
+    color: #6e8391;
+  }
 `;
 
 export const RadioInput = styled.input`
   display: none;
   flex: 1;
-`;
-
-export const RadioWrapper = styled.span<{ checked: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  border: 3px solid ${({ checked }) => (checked ? '#cc1515' : 'gray')};
-  border-radius: 50%;
-  padding: 2px;
-`;
-
-export const RadioCheck = styled.span<{ checked: boolean }>`
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #cc1515;
-  visibility: ${({ checked }) => (checked ? 'visible' : 'hidden')};
 `;

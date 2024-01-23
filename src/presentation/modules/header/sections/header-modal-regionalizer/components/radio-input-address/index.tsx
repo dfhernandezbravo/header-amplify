@@ -1,27 +1,32 @@
-import { RadioCheck, RadioInput, RadioLabel, RadioWrapper } from './styles';
+import { RadioInput, RadioLabel } from './styles';
 
 interface Props {
   text: string;
+  state: string;
   checked: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
   value?: string;
 }
 
-const RadioButtonAddress = ({ text, checked, onChange, value }: Props) => {
+const RadioButtonAddress = ({
+  text,
+  state,
+  checked,
+  onChange,
+  value,
+}: Props) => {
   return (
-    <RadioLabel>
-      <div>
-        <RadioWrapper checked={checked}>
-          <RadioCheck checked={checked} />
-        </RadioWrapper>
-      </div>
+    <RadioLabel isChecked={checked}>
       <RadioInput
         type="radio"
         checked={checked}
         onChange={onChange}
         value={value}
       />
-      {text}
+      <div>
+        <p className="text">{text}</p>
+        <p className="state-text">{state}</p>
+      </div>
     </RadioLabel>
   );
 };

@@ -16,6 +16,7 @@ import NewAddressForm from '../new-address-form';
 import RadioButtonAddress from '../radio-input-address';
 import mapDataListAddressForm from './map-data-request';
 import {
+  ButtonContainer,
   ButtonNewAddress,
   HeaderNewAddressContainer,
   ListAddressContainer,
@@ -25,14 +26,16 @@ import {
 const ListAddressForm = () => {
   const dispatch = useAppDispatch();
   const { addresses } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );
 
   const { sendEventAnalytics } = useAnalytics();
-  const { orderFormId, isUserLogged, customer, onCloseModal } = useContext(
+  const { orderFormId, customer, onCloseModal } = useContext(
     HeaderLocationContext,
   );
+  const isUserLogged = shoppingCart?.loggedIn;
 
   const [selectedAddress, setSelectedAddress] =
     useState<CustomerAddress | null>(null);
@@ -94,7 +97,6 @@ const ListAddressForm = () => {
       dispatch(pendingAddNewAddress(false));
     }
   };
-
   return step === 'list-address' ? (
     <ListAddressFormContainer>
       <HeaderModalRegionalizer title="Ingresa tu ubicación" />
@@ -107,7 +109,8 @@ const ListAddressForm = () => {
         {filterRepeatedAddress.map((address) => (
           <RadioButtonAddress
             checked={selectedAddress?.id === address.id}
-            text={`${address.street}, ${address.number}, ${address.neighborhood}, ${address.state}`}
+            text={`${address.street}, ${address.number}`}
+            state={`${address.neighborhood}, ${address.state}`}
             key={address.id}
             onChange={() => setSelectedAddress(address)}
             value={address.id}
@@ -118,12 +121,14 @@ const ListAddressForm = () => {
       <ButtonNewAddress onClick={() => setStep('new-address')}>
         Elegir otra ubicación
       </ButtonNewAddress>
-
-      <ButtonPrimary
-        title={!isLoadingRegionalizer ? 'Guardar mi ubicación' : 'Cargando...'}
-        disabled={!selectedAddress || isLoadingRegionalizer}
-        onClick={handleOnClick}
-      />
+      <ButtonContainer isLoading={isLoadingRegionalizer}>
+        <ButtonPrimary
+          className="add-location-button"
+          title={!isLoadingRegionalizer ? 'Guardar mi ubicación' : ''}
+          disabled={!selectedAddress || isLoadingRegionalizer}
+          onClick={handleOnClick}
+        />
+      </ButtonContainer>
     </ListAddressFormContainer>
   ) : (
     <NewAddressForm header={<HeaderNewAddress />} />
