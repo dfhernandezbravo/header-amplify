@@ -1,10 +1,10 @@
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { Commune, Regions } from '@entities/regionalizer/regionalizer.entity';
 import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
-import { FormComtainer, SelectWrapper } from './styles';
+import { ButtonContainer, FormComtainer, SelectWrapper } from './styles';
 import { NewAddressFormType } from './types';
 
 interface Props {
@@ -13,15 +13,6 @@ interface Props {
   isLoadingForm: boolean;
   addressSelected: AddressShoppingCart | null;
 }
-
-const getRegionDefault = (
-  regions: Regions[],
-  addressSelected: AddressShoppingCart | null,
-) =>
-  addressSelected
-    ? regions.find((region) => region.name === addressSelected.state) ||
-      regions[0]
-    : regions[0];
 
 const getCommuneDefault = (
   communes: Commune[],
@@ -36,12 +27,6 @@ const NewAddressForm = ({
   isLoadingForm,
   addressSelected,
 }: Props) => {
-  const regionDefault = getRegionDefault(regions, addressSelected);
-  const communeDefault = getCommuneDefault(
-    regionDefault.comunas,
-    addressSelected,
-  );
-
   const {
     control,
     handleSubmit,
@@ -51,6 +36,20 @@ const NewAddressForm = ({
   } = useForm<NewAddressFormType>();
   const [communes, setCommunes] = useState<Commune[]>([]);
   const region = watch('regionSelected');
+
+  const regionDefault = useMemo(() => {
+    const regionSelected =
+      regions.find((region) => region.name === addressSelected?.state) ||
+      regions[0];
+    if (addressSelected) {
+      setValue('regionSelected', regionSelected);
+      return regionSelected;
+    }
+    return undefined;
+  }, [addressSelected]);
+
+  const communeDefault =
+    regionDefault && getCommuneDefault(regionDefault?.comunas, addressSelected);
 
   useEffect(() => {
     if (region) {
@@ -65,24 +64,24 @@ const NewAddressForm = ({
   return (
     <FormComtainer onSubmit={handleSubmit(handleOnSubmit)}>
       <SelectWrapper>
-        <label htmlFor="">Regiones</label>
         <Controller
           name="regionSelected"
           control={control}
-          rules={{ required: true }}
           defaultValue={regionDefault}
+          rules={{ required: true }}
           render={({ field }) => (
             <Select
+              placeholder="Región"
               {...field}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => option.id}
               options={regions}
+              isDisabled={isLoadingForm}
             />
           )}
         />
       </SelectWrapper>
       <SelectWrapper>
-        <label htmlFor="">Comunas</label>
         <Controller
           name="communeSelected"
           control={control}
@@ -90,20 +89,24 @@ const NewAddressForm = ({
           defaultValue={communeDefault}
           render={({ field }) => (
             <Select
-              placeholder="Selecciona comuna"
+              placeholder="Comuna"
               {...field}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => option.id}
               options={communes}
+              isDisabled={!region || isLoadingForm}
             />
           )}
         />
       </SelectWrapper>
-      <ButtonPrimary
-        type="submit"
-        disabled={!isValid}
-        title={isLoadingForm ? 'Cargando...' : 'Guardar Ubicación'}
-      />
+      <ButtonContainer isLoading={isLoadingForm}>
+        <ButtonPrimary
+          className="add-location-button"
+          type="submit"
+          disabled={!isValid || isLoadingForm}
+          title={isLoadingForm ? '' : 'Guardar Ubicación'}
+        />
+      </ButtonContainer>
     </FormComtainer>
   );
 };

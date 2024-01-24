@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
 import {
   pendingAddNewAddress,
+  setErrorSetLocation,
   successAddNewAddress,
 } from '@store/regionalizer/slices/regionalizer-slice';
 import getRegionalizerRegions from '@use-cases/regionalizer/get-regions';
@@ -50,7 +51,10 @@ const NewAddress = ({ header }: Props) => {
         detail: null,
       });
     } catch (error) {
-      throw new Error('Error');
+      dispatch(setErrorSetLocation(true));
+      setTimeout(() => {
+        dispatch(setErrorSetLocation(false));
+      }, 2000);
     } finally {
       dispatch(pendingAddNewAddress(false));
     }
@@ -62,7 +66,7 @@ const NewAddress = ({ header }: Props) => {
     <NewAddressFormContainer>
       {header}
 
-      <p>
+      <p className="description">
         Te mostraremos los productos disponibles para la región y comuna
         seleccionados
       </p>

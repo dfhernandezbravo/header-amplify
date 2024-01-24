@@ -7,6 +7,7 @@ type RegionalizerState = {
   isOpenModalRegionalizer: boolean;
   addressSelected: AddressShoppingCart | null;
   isLoadingRegionalizer: boolean;
+  errorSetLocation: boolean;
 };
 
 const initialState: RegionalizerState = {
@@ -14,6 +15,7 @@ const initialState: RegionalizerState = {
   isOpenModalRegionalizer: false,
   addressSelected: null,
   isLoadingRegionalizer: false,
+  errorSetLocation: false,
 };
 
 const regionalizerSlice = createSlice({
@@ -40,6 +42,9 @@ const regionalizerSlice = createSlice({
       state.addressSelected = payload;
       state.isOpenModalRegionalizer = false;
     },
+    setErrorSetLocation: (state, { payload }: { payload: boolean }) => {
+      state.errorSetLocation = payload;
+    },
   },
 });
 
@@ -48,6 +53,7 @@ export const {
   pendingAddNewAddress,
   successAddNewAddress,
   setAddressSelected,
+  setErrorSetLocation,
 } = regionalizerSlice.actions;
 
 export default regionalizerSlice;

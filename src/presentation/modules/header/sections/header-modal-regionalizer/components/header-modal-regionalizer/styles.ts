@@ -2,13 +2,22 @@ import styled from 'styled-components';
 
 export const HeaderModalRegionalizerContainer = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
   width: 100%;
-  border-bottom: 1px solid #afafaf;
-  padding: 12px 0px;
+
+  & .modal-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  & .title {
+    font-size: 18px;
+    color: #485760;
+  }
 
   @media (max-width: 720px) {
     width: 100%;
