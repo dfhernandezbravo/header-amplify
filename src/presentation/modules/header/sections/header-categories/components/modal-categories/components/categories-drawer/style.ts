@@ -1,7 +1,7 @@
 import styled, { keyframes, createGlobalStyle } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle<{ isOpen: boolean }>`
-    ${(props) => (props.isOpen ? `body {overflow: hidden}` : '')}
+export const BlockScroll = createGlobalStyle<{ isOpen: boolean }>`
+    ${(props) => (props.isOpen ? `body, html {overflow: hidden};` : '')}
 `;
 
 export const DrawerContainer = styled.div<{ isOpen: boolean }>`
