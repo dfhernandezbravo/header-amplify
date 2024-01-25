@@ -33,7 +33,7 @@ const AddressSelected = ({ address }: AddressProps) => {
       <ContainerDesktop>
         <p>Entrega en</p>
         <strong>
-          {addressSelected?.neighborhood ?? addressSelected?.state}
+          {addressSelected?.neighborhood ?? addressSelected?.city}
         </strong>
       </ContainerDesktop>
     </Desktop>

@@ -3,6 +3,7 @@ export type Commune = {
   lat: string;
   lon: string;
   name: string;
+  city: string;
   isActive: boolean;
 };
 

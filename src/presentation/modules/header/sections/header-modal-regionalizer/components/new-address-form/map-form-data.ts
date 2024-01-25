@@ -8,10 +8,11 @@ export const mapFormData = (
   selectedAddresses: [
     {
       addressType: 'search',
-      city: regionSelected?.name,
+      city: communeSelected?.city,
+      neighborhood: communeSelected?.name,
       country: 'CHL',
       geoCoordinates: [communeSelected?.lon!, communeSelected?.lat!],
-      state: communeSelected?.name,
+      state: regionSelected?.name,
     },
   ],
 });

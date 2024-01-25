@@ -29,7 +29,7 @@ const AddressSelectedMobile = ({ address }: AddressProps) => {
 
   return (
     <Mobile>
-      <strong>{addressSelected?.neighborhood ?? addressSelected?.state}</strong>
+      <strong>{addressSelected?.neighborhood ?? addressSelected?.city}</strong>
     </Mobile>
   );
 };
