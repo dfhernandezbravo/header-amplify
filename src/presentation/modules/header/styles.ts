@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderContainerWrapper = styled.div<{ visible: boolean }>`
-  position: sticky;
+  position: fixed;
   z-index: 999;
   top: 0;
   left: 0;

@@ -33,7 +33,7 @@ const CategoriesDrawer = ({ children, onClose, isOpen }: Props) => {
   };
 
   return (
-    <DrawerContainer isOpen={isOpen}>
+    <DrawerContainer>
       <BlockScroll isOpen={isOpen} />
       <DrawerContent onClick={handleContentClick}>{children}</DrawerContent>
       <Opacity onClick={() => onClose()} />
