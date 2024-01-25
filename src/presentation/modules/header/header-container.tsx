@@ -6,7 +6,7 @@ import HeaderDesktop from './layouts/header-desktop';
 import HeaderMobile from './layouts/header-mobile';
 import CookiesProvider from './providers/cookies';
 import WindowsEventProvider from './providers/windows-event';
-import { HeaderContainerWrapper } from './styles';
+import { HeaderContainerWrapper, Spacer } from './styles';
 import { HeaderProps } from './types';
 
 const HeaderContainer = ({ modules }: HeaderProps) => {
@@ -21,10 +21,13 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
 
   const renderBody = useMemo(
     () => (
-      <HeaderContainerWrapper visible={visible}>
-        <HeaderMobile modules={modules} />
-        <HeaderDesktop modules={modules} />
-      </HeaderContainerWrapper>
+      <>
+        <HeaderContainerWrapper visible={visible}>
+          <HeaderMobile modules={modules} />
+          <HeaderDesktop modules={modules} />
+        </HeaderContainerWrapper>
+        <Spacer />
+      </>
     ),
     [visible],
   );

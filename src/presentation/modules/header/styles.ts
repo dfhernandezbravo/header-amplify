@@ -11,3 +11,12 @@ export const HeaderContainerWrapper = styled.div<{ visible: boolean }>`
   transform: ${({ visible }) =>
     visible ? 'translateY(0)' : 'translateY(-100%)'};
 `;
+
+export const Spacer = styled.div`
+  width: 100%;
+  height: 150px;
+
+  @media screen and (max-width: 968px) {
+    height: 118px;
+  }
+`;
