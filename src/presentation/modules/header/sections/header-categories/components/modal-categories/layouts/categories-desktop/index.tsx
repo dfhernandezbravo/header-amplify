@@ -23,7 +23,9 @@ interface Props {
 const CategoriesDesktop = ({ categories }: Props) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [category, setCategory] = useState<Category | null>(null);
+  const [categorySelected, setCategorySelected] = useState<Category | null>(
+    null,
+  );
   const {
     eventOnClickCategoryN1,
     eventOnClickShowAll,
@@ -32,7 +34,7 @@ const CategoriesDesktop = ({ categories }: Props) => {
   } = useCategoriesAnalytics();
 
   const handleHover = (categorySelected: Category) => {
-    setCategory(categorySelected);
+    setCategorySelected(categorySelected);
   };
   const closeModal = () => dispatch(closeCategories());
 
@@ -70,7 +72,7 @@ const CategoriesDesktop = ({ categories }: Props) => {
 
   return (
     <Desktop>
-      <CategoriesDesktopContainer>
+      <CategoriesDesktopContainer isOpen={!!categorySelected}>
         <CategoriesItemsContainer>
           {categories.map((category) => (
             <CategoryItem
@@ -78,25 +80,26 @@ const CategoriesDesktop = ({ categories }: Props) => {
               onHover={handleHover}
               onClick={handleClickN1}
               category={category}
+              categorySelected={categorySelected}
             />
           ))}
         </CategoriesItemsContainer>
 
-        {category && (
+        {categorySelected && (
           <CategoriesDetailContainer>
             <CategoriesDetailTitle>
-              <h2>{category?.name}</h2>
+              <h2>{categorySelected?.name}</h2>
 
               <CategoriesDetailTitleLink
-                href={category?.url}
-                onClick={() => handleOnClickShowAll(category)}
+                href={categorySelected?.url}
+                onClick={() => handleOnClickShowAll(categorySelected)}
               >
                 Mostrar todo
               </CategoriesDetailTitleLink>
             </CategoriesDetailTitle>
 
             <CategoriesDetailGrid>
-              {category?.categories.map((item) => (
+              {categorySelected?.categories.map((item) => (
                 <CategoryDetailItem
                   category={item}
                   key={item.id}

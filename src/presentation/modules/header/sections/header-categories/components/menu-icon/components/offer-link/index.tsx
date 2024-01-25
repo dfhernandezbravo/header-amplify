@@ -1,13 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { OffertContainer } from './styles';
+import { OfferContainer } from './styles';
 
-const OffertLink = () => {
+const OfferLink = () => {
   return (
-    <OffertContainer>
+    <OfferContainer>
       <Image
-        src="/icons/header/ofert-icon.svg"
+        src="/icons/header/offer-icon.svg"
         width={24}
         height={24}
         alt="ofert-icon"
@@ -15,8 +15,8 @@ const OffertLink = () => {
       <Link href="/" className="text">
         Ofertas
       </Link>
-    </OffertContainer>
+    </OfferContainer>
   );
 };
 
-export default OffertLink;
+export default OfferLink;

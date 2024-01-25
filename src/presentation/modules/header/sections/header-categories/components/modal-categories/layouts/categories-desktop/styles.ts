@@ -1,10 +1,21 @@
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const CategoriesDesktopContainer = styled.div`
+export const CategoriesDesktopContainer = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: row;
-  height: 90vh;
+  height: 79vh;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  ${({ isOpen }) =>
+    !isOpen &&
+    css`
+      border-top-right-radius: 0;
+    `}
+  overflow: hidden;
+  background-color: #fff;
+  margin: 0.8rem;
+  margin-top: 0;
 `;
 
 export const CategoriesItemsContainer = styled.div`
@@ -42,7 +53,8 @@ export const CategoriesDetailTitle = styled.div`
 
 export const CategoriesDetailTitleLink = styled(Link)`
   text-decoration: underline;
-  color: #1a1a1a;
-  font-size: 13px;
+  color: #1479b8;
+  font-size: 14px;
   font-weight: 600;
+  line-height: 16px;
 `;

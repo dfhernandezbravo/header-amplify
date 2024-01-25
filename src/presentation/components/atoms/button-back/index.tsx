@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonBackContainer } from './styles';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { IoIosArrowBack } from 'react-icons/io';
 
 interface Props {
   onClick: () => void;
@@ -9,7 +9,8 @@ interface Props {
 const ButtonBack = ({ onClick }: Props) => {
   return (
     <ButtonBackContainer onClick={onClick}>
-      <AiOutlineArrowLeft size={24} />
+      <IoIosArrowBack size={20} color="#485760" />
+      Volver
     </ButtonBackContainer>
   );
 };

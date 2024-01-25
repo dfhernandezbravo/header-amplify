@@ -5,6 +5,7 @@ import {
   CategoryDetailItemLink,
   CategoryDetailItemLinkAll,
   CategoryDetailItemTitle,
+  CategoryDetailTitleContainer,
 } from './styles';
 
 interface Props {
@@ -18,10 +19,14 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
 
   return (
     <CategoryDetailItemContainer>
-      <CategoryDetailItemTitle href="" onClick={() => onClickN2(category)}>
-        {name}
-      </CategoryDetailItemTitle>
-
+      <CategoryDetailTitleContainer>
+        <CategoryDetailItemTitle href="" onClick={() => onClickN2(category)}>
+          {name}
+        </CategoryDetailItemTitle>
+        <CategoryDetailItemLinkAll href={url}>
+          Mostrar todo
+        </CategoryDetailItemLinkAll>
+      </CategoryDetailTitleContainer>
       {sub_categories &&
         sub_categories.map((item) => (
           <CategoryDetailItemLink
@@ -32,10 +37,6 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
             {item.name}
           </CategoryDetailItemLink>
         ))}
-
-      <CategoryDetailItemLinkAll href={url}>
-        Mostrar todo
-      </CategoryDetailItemLinkAll>
     </CategoryDetailItemContainer>
   );
 };

@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
 import { AddressProps } from './address-selected';
 import { setAddressSelected } from '@store/regionalizer/slices/regionalizer-slice';
 import Mobile from '@components/layout/mobile';
+import { YourLocationText } from './styles';
 
 const AddressSelectedMobile = ({ address }: AddressProps) => {
   const { addressSelected } = useAppSelector((state) => state.regionalizer);
@@ -16,7 +17,7 @@ const AddressSelectedMobile = ({ address }: AddressProps) => {
   if (!addressSelected) {
     return (
       <Mobile>
-        <strong>Tu ubicación</strong>
+        <YourLocationText>Tu ubicación</YourLocationText>
         <Image
           src="/icons/general/chevron-right.svg"
           width={10}

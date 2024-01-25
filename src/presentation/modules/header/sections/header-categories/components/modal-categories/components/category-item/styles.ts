@@ -11,7 +11,7 @@ export const CategoryItemContainer = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
 
   @media only screen and (max-width: 768px) {
     padding: 0.5rem 0px;
@@ -25,5 +25,11 @@ export const CategoryItemContainer = styled.button`
 export const CategoryTitle = styled.span`
   text-align: left;
   flex: 1;
-  padding: 0px 8px;
+  padding: 0px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #485760;
 `;

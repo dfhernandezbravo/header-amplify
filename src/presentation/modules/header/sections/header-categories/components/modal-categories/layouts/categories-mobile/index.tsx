@@ -3,7 +3,12 @@ import { Category } from '@entities/category/category.entity';
 import { useState } from 'react';
 import CategoryDetailItemMobile from '../../components/category-detail-item-mobile';
 import CategoryItem from '../../components/category-item';
-import { CategoriesMobileContainer, CategoriesMobileList } from './styles';
+import {
+  CategoriesMobileContainer,
+  CategoriesMobileList,
+  CategoriesMobileTitle,
+} from './styles';
+import UserMenu from './components/user-menu';
 
 interface Props {
   categories: Category[];
@@ -16,18 +21,22 @@ const CategoriesMobile = ({ categories }: Props) => {
     <Mobile>
       <CategoriesMobileContainer>
         {!category ? (
-          <CategoriesMobileList>
-            <h2>Categorías</h2>
-            {categories?.map((item) => (
-              <CategoryItem
-                key={item.id}
-                category={item}
-                onClick={(category) => {
-                  setCategory(category);
-                }}
-              />
-            ))}
-          </CategoriesMobileList>
+          <>
+            <UserMenu />
+            <CategoriesMobileList>
+              <CategoriesMobileTitle>Categorías</CategoriesMobileTitle>
+              {categories?.map((item, i) => (
+                <CategoryItem
+                  key={`${item.id}-${i}}`}
+                  category={item}
+                  onClick={(category) => {
+                    setCategory(category);
+                  }}
+                  categorySelected={category}
+                />
+              ))}
+            </CategoriesMobileList>
+          </>
         ) : (
           <CategoryDetailItemMobile
             category={category}
