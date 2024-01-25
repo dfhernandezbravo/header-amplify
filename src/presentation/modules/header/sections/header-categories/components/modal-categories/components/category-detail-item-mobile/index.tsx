@@ -11,6 +11,8 @@ import {
   ChildrenAccordionCategory,
   CategoryDetailItemContainer,
 } from './styles';
+import { useAppDispatch } from '@hooks/storeHooks';
+import { closeCategories } from '@store/category/slices/category-slice';
 
 interface Props {
   category: Category;
@@ -18,12 +20,20 @@ interface Props {
 }
 
 const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
+  const dispatch = useAppDispatch();
+  const closeModal = () => {
+    dispatch(closeCategories());
+  };
+
   return (
     <CategoryDetailItemContainer>
       <ButtonBack onClick={onBack} />
       <CategoryHeader>
         <CategoryHeaderTitle>{category.name}</CategoryHeaderTitle>
-        <CategoriesDetailTitleMobileLink href={category.url}>
+        <CategoriesDetailTitleMobileLink
+          onClick={closeModal}
+          href={category.url}
+        >
           Mostrar Todo
         </CategoriesDetailTitleMobileLink>
       </CategoryHeader>
@@ -34,12 +44,18 @@ const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
             <ChildrenAccordionCategory>
               {item?.sub_categories?.length > 0 &&
                 item.sub_categories.map((sub) => (
-                  <CategoryLink key={sub.id} href={sub.url}>
+                  <CategoryLink
+                    key={sub.id}
+                    href={sub.url}
+                    onClick={closeModal}
+                  >
                     {sub.name}
                   </CategoryLink>
                 ))}
 
-              <CategoryLinkAll href={item.url}>Mostrar todo </CategoryLinkAll>
+              <CategoryLinkAll href={item.url} onClick={closeModal}>
+                Mostrar todo{' '}
+              </CategoryLinkAll>
             </ChildrenAccordionCategory>
           </CategoryAccordion>
         </CategoryContent>

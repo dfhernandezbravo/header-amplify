@@ -4,7 +4,7 @@ export const BlockScroll = createGlobalStyle<{ isOpen: boolean }>`
     ${(props) => (props.isOpen ? `body, html {overflow: hidden};` : '')}
 `;
 
-export const DrawerContainer = styled.div<{ isOpen: boolean }>`
+export const DrawerContainer = styled.div`
   left: 0;
   width: 100%;
   display: flex;
@@ -19,6 +19,8 @@ export const DrawerContainer = styled.div<{ isOpen: boolean }>`
 export const Opacity = styled.div`
   left: 0;
   top: 0;
+  bottom: 0;
+  right: 0;
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -50,7 +52,6 @@ const animationModalMobile = keyframes`
 `;
 
 export const DrawerContent = styled.div`
-  overflow: auto;
   animation-name: ${animationModal};
   animation-duration: 0.5s;
   z-index: 9999;

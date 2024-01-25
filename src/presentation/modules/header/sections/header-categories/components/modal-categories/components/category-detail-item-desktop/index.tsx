@@ -7,6 +7,8 @@ import {
   CategoryDetailItemTitle,
   CategoryDetailTitleContainer,
 } from './styles';
+import { useAppDispatch } from '@hooks/storeHooks';
+import { closeCategories } from '@store/category/slices/category-slice';
 
 interface Props {
   category: Category;
@@ -16,14 +18,24 @@ interface Props {
 
 const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
   const { name, sub_categories, url } = category;
+  const dispatch = useAppDispatch();
+  const closeModal = () => {
+    dispatch(closeCategories());
+  };
 
   return (
     <CategoryDetailItemContainer>
       <CategoryDetailTitleContainer>
-        <CategoryDetailItemTitle href="" onClick={() => onClickN2(category)}>
+        <CategoryDetailItemTitle
+          href=""
+          onClick={() => {
+            closeModal();
+            onClickN2(category);
+          }}
+        >
           {name}
         </CategoryDetailItemTitle>
-        <CategoryDetailItemLinkAll href={url}>
+        <CategoryDetailItemLinkAll onClick={closeModal} href={url}>
           Mostrar todo
         </CategoryDetailItemLinkAll>
       </CategoryDetailTitleContainer>
@@ -32,7 +44,10 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
           <CategoryDetailItemLink
             href={item.url}
             key={item.id}
-            onClick={() => onClickN3(item)}
+            onClick={() => {
+              closeModal();
+              onClickN3(item);
+            }}
           >
             {item.name}
           </CategoryDetailItemLink>
