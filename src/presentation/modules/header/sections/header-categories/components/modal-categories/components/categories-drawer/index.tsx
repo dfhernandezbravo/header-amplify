@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { DrawerContainer, DrawerContent, Opacity, GlobalStyle } from './style';
+import { DrawerContainer, DrawerContent, Opacity, BlockScroll } from './style';
 
 interface Props {
   children: React.ReactNode;
@@ -34,7 +34,7 @@ const CategoriesDrawer = ({ children, onClose, isOpen }: Props) => {
 
   return (
     <DrawerContainer isOpen={isOpen}>
-      <GlobalStyle isOpen={isOpen} />
+      <BlockScroll isOpen={isOpen} />
       <DrawerContent onClick={handleContentClick}>{children}</DrawerContent>
       <Opacity onClick={() => onClose()} />
     </DrawerContainer>

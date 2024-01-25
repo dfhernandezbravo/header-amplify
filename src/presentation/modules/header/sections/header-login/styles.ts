@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from 'styled-components';
 
 export const LoginContainer = styled.button`
@@ -38,10 +37,9 @@ export const LoginInformation = styled.div`
   }
 `;
 
-export const LoginMobileButton = styled(Link)`
+export const LoginMobileButton = styled.button`
   border: none;
   background-color: transparent;
-  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 1rem;
