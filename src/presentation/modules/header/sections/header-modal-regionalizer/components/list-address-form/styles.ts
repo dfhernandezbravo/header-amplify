@@ -16,6 +16,9 @@ export const ListAddressFormContainer = styled.div`
   gap: 20px;
   padding: 20px;
   color: #000;
+  @media only screen and (max-width: 768px) {
+    width: auto;
+  }
 `;
 
 export const ListAddressContainer = styled.div`
@@ -24,7 +27,6 @@ export const ListAddressContainer = styled.div`
   gap: 4px;
   max-height: 250px;
   padding: 0px 4px;
-
   overflow-y: scroll;
   scrollbar-width: auto;
   scrollbar-color: #888888 transparent;
@@ -35,8 +37,11 @@ export const ListAddressContainer = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: red; /* Color del thumb */
+    background-color: #6e8391; /* Color del thumb */
     border-radius: 5px; /* Borde del thumb */
+  }
+  @media only screen and (max-width: 768px) {
+    max-height: 210px;
   }
 `;
 

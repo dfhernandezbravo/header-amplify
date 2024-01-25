@@ -100,11 +100,8 @@ const ListAddressForm = () => {
   return step === 'list-address' ? (
     <ListAddressFormContainer>
       <HeaderModalRegionalizer title="Ingresa tu ubicación" />
-
       <p>Cuéntanos dónde quieres recibir tu compra</p>
-
       <h3>Tus direcciones</h3>
-
       <ListAddressContainer>
         {filterRepeatedAddress.map((address) => (
           <RadioButtonAddress

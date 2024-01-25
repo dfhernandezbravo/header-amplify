@@ -24,6 +24,9 @@ export const RadioLabel = styled.label<RadioLabelProps>`
     font-size: 14px;
     color: #6e8391;
   }
+  @media only screen and (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 export const RadioInput = styled.input`
