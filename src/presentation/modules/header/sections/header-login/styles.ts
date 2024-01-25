@@ -28,7 +28,7 @@ export const LoginInformation = styled.div`
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   &:hover {
     background-color: #670000;
