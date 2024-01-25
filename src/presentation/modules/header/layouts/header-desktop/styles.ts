@@ -5,6 +5,9 @@ export const HeaderDesktopContainer = styled.div`
   /* width: 100%; */
   flex-direction: column;
   align-items: center;
+  min-height: 120px;
+  margin-left: 1rem;
+  margin-right: 1rem;
 `;
 
 export const FirstRow = styled.div`
@@ -13,7 +16,7 @@ export const FirstRow = styled.div`
   justify-content: space-between;
   gap: 15px;
   margin: 0.5rem 0.5rem 0 0.5rem;
-  width: 98%;
+  width: 100%;
   padding: 0 10px 0 0;
 `;
 
@@ -21,9 +24,10 @@ export const SecondRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 98%;
+  width: 100%;
   padding: 0 10px 0 0;
   margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 export const HeaderDesktopSearchSection = styled.div`

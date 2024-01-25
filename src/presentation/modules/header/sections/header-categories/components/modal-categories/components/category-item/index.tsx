@@ -5,6 +5,7 @@ import { CategoryItemContainer, CategoryTitle } from './styles';
 
 interface Props {
   category: Category;
+  categorySelected: Category | null;
   onHover?: (category: Category) => void;
   onClick?: (category: Category) => void;
 }
@@ -13,6 +14,7 @@ const CategoryItem = ({
   category,
   onClick = () => {},
   onHover = () => {},
+  categorySelected,
 }: Props) => {
   return (
     <CategoryItemContainer
@@ -27,7 +29,9 @@ const CategoryItem = ({
     >
       <CategoryIcon icon={category?.icon} />
       <CategoryTitle>{category.name}</CategoryTitle>
-      <MdOutlineKeyboardArrowRight size={20} />
+      {category.name === categorySelected?.name && (
+        <MdOutlineKeyboardArrowRight size={20} color="#AF1212" />
+      )}
     </CategoryItemContainer>
   );
 };

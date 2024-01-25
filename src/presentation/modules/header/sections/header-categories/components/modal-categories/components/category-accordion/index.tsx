@@ -22,14 +22,14 @@ const CategoryAccordion: React.FC<AccordionProps> = ({ title, children }) => {
   };
 
   return (
-    <AccordionContainer>
+    <AccordionContainer isOpen={isOpen}>
       <AccordionHeader onClick={toggleAccordion} isOpen={isOpen}>
         <AccordionTitle>{title}</AccordionTitle>
 
         {isOpen ? (
-          <MdKeyboardArrowUp size={sizeIcon} />
+          <MdKeyboardArrowUp size={sizeIcon} color="#AF1212" />
         ) : (
-          <MdKeyboardArrowDown size={sizeIcon} />
+          <MdKeyboardArrowDown size={sizeIcon} color="#485760" />
         )}
       </AccordionHeader>
       <AccordionContent isOpen={isOpen}>{children}</AccordionContent>

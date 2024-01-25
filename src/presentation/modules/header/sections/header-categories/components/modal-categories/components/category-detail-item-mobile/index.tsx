@@ -9,6 +9,7 @@ import {
   CategoryLink,
   CategoryLinkAll,
   ChildrenAccordionCategory,
+  CategoryDetailItemContainer,
 } from './styles';
 
 interface Props {
@@ -18,13 +19,10 @@ interface Props {
 
 const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
   return (
-    <div>
+    <CategoryDetailItemContainer>
+      <ButtonBack onClick={onBack} />
       <CategoryHeader>
-        <CategoryHeaderTitle>
-          <ButtonBack onClick={onBack} />
-
-          <h3>{category.name}</h3>
-        </CategoryHeaderTitle>
+        <CategoryHeaderTitle>{category.name}</CategoryHeaderTitle>
         <CategoriesDetailTitleMobileLink href={category.url}>
           Mostrar Todo
         </CategoriesDetailTitleMobileLink>
@@ -46,7 +44,7 @@ const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
           </CategoryAccordion>
         </CategoryContent>
       ))}
-    </div>
+    </CategoryDetailItemContainer>
   );
 };
 

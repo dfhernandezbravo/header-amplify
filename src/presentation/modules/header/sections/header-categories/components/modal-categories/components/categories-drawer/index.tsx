@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { DrawerContainer, DrawerContent } from './style';
+import React, { useEffect } from 'react';
+import { DrawerContainer, DrawerContent, Opacity, GlobalStyle } from './style';
 
 interface Props {
   children: React.ReactNode;
@@ -8,24 +8,6 @@ interface Props {
 }
 
 const CategoriesDrawer = ({ children, onClose, isOpen }: Props) => {
-  const [startX, setStartX] = useState(0);
-  const [endX, setEndX] = useState(0);
-
-  const handleTouchStart = (e: TouchEvent) => {
-    setStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e: TouchEvent) => {
-    setEndX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    const swipeDistance = startX - endX;
-    if (swipeDistance < 50) {
-      onClose();
-    }
-  };
-
   const handleKeyPress = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       onClose();
@@ -34,25 +16,13 @@ const CategoriesDrawer = ({ children, onClose, isOpen }: Props) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('touchstart', handleTouchStart);
-      document.addEventListener('touchmove', handleTouchMove);
-      document.addEventListener('touchend', handleTouchEnd);
       document.addEventListener('keydown', handleKeyPress);
-      document.body.classList.add('header-footer-open-modal');
     } else {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('keydown', handleKeyPress);
-      document.body.classList.remove('header-footer-open-modal');
     }
 
     return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('keydown', handleKeyPress);
-      document.body.classList.remove('header-footer-open-modal');
     };
   }, [isOpen]);
 
@@ -63,8 +33,10 @@ const CategoriesDrawer = ({ children, onClose, isOpen }: Props) => {
   };
 
   return (
-    <DrawerContainer onClick={() => onClose()}>
+    <DrawerContainer isOpen={isOpen}>
+      <GlobalStyle isOpen={isOpen} />
       <DrawerContent onClick={handleContentClick}>{children}</DrawerContent>
+      <Opacity onClick={() => onClose()} />
     </DrawerContainer>
   );
 };

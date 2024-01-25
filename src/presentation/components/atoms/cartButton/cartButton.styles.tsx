@@ -8,13 +8,16 @@ export const CartContainer = styled.div`
   border-left: 1px solid #ffffff;
   padding: 4px;
   & .shoppingcart-icon {
+    height: 40px;
+    width: 40px;
     padding: 4px;
-    height: 30px;
     margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       background-color: #670000;
-      display: flex;
-      border-radius: 28px;
+      border-radius: 50%;
     }
   }
 

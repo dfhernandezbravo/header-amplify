@@ -33,7 +33,7 @@ export const LoginInformation = styled.div`
   cursor: pointer;
   &:hover {
     background-color: #670000;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 28px;
   }
 `;
@@ -41,7 +41,14 @@ export const LoginInformation = styled.div`
 export const LoginMobileButton = styled(Link)`
   border: none;
   background-color: transparent;
-  color: inherit;
-  font-size: 16px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #485760;
 `;
