@@ -47,7 +47,7 @@ export const Title = styled.div`
   }
 `;
 
-export const Content: any = styled.div`
+export const Content = styled.div`
   padding: 0 0 1rem;
 
   a {

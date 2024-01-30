@@ -1,13 +1,12 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import categoryService from '@services/category';
 
-const getCategories = createAsyncThunk('get/categories', async () => {
+const getCategories = async () => {
   try {
     const { data } = await categoryService.getCategories();
-    return data.data;
+    return data;
   } catch (error) {
-    console.error(error);
+    throw new Error('Error');
   }
-});
+};
 
 export default getCategories;

@@ -1,14 +1,19 @@
+import { CategoriesSearch, Search } from '@entities/search/searches.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import React from 'react';
+import useAnalytics from '@hooks/useAnalytics';
+import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import {
   SearchCategoriesTitle,
   SearchItem,
   SearchItemCategory,
   SearchListContainer,
 } from './styles';
-import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
-import { environments } from '@env/environments';
-import useAnalytics from '@hooks/useAnalytics';
+import React from 'react';
+import SuggestionsHighlight from '@modules/header/sections/header-suggestions/components/suggestions-highlights';
+import {
+  closeResults,
+  setRecentSearches,
+} from '@store/search/slices/search-slice';
 
 const SearchList = () => {
   const { searches, categories, term } = useAppSelector(
@@ -16,9 +21,6 @@ const SearchList = () => {
   );
 
   const dispatch = useAppDispatch();
-
-  const { hostURL } = environments();
-
   const { sendEventAnalytics } = useAnalytics();
 
   const onMouseOverSearch = (searchSelected: Search) => {
@@ -64,27 +66,30 @@ const SearchList = () => {
     <SearchListContainer>
       {searches.map((search) => (
         <SearchItem
-          href={`${hostURL}/${search.value}?map=ft`}
+          href={`/search/${search.value}`}
           key={search.value}
           onMouseOver={() => onMouseOverSearch(search)}
           onClick={(e) => {
             e.stopPropagation();
             handleOnClickSearch(search.value);
+            dispatch(setRecentSearches(search.value));
+            dispatch(closeResults());
           }}
         >
-          {search.value}
+          <SuggestionsHighlight value={search.value} term={term} />
         </SearchItem>
       ))}
 
-      <SearchCategoriesTitle>Categorias</SearchCategoriesTitle>
+      <SearchCategoriesTitle>Categorías</SearchCategoriesTitle>
 
       {categories.map((category) => (
         <SearchItemCategory
           onClick={(e) => {
             e.stopPropagation();
             handleOnClickCategory(category.labelValue);
+            dispatch(closeResults());
           }}
-          href={`${hostURL}/${category.value}/${term}?map=${category.key},ft`}
+          href={`/${category.value}/${term}`}
           key={category.key}
           onMouseOver={() => onMouseOverCategory(category)}
         >

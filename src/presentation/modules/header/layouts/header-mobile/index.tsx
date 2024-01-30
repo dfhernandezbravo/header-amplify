@@ -1,63 +1,77 @@
 import Mobile from '@components/layout/mobile';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import useRegionalizer from '@hooks/useRegionalizer';
+import useShowModules from '@modules/header/hooks/use-show-module';
 import HeaderCart from '@modules/header/sections/header-cart';
-import HeaderCategory from '@modules/header/sections/header-category';
-import HeaderLocation from '@modules/header/sections/header-location';
-import HeaderLogin from '@modules/header/sections/header-login';
-import HeaderLogo from '@modules/header/sections/header-logo';
-import HeaderMenu from '@modules/header/sections/header-menu';
-import HeaderSearchMobile from '@modules/header/sections/header-search-mobile';
-import { openResults } from '@store/search/slices/search-slice';
-import React from 'react';
 import {
+  MenuCategories,
+  ModalCategories,
+} from '@modules/header/sections/header-categories';
+import HeaderLocation from '@modules/header/sections/header-location';
+import HeaderLogo from '@modules/header/sections/header-logo';
+import HeaderModalLogin from '@modules/header/sections/header-modal-login';
+import HeaderSearchMobile from '@modules/header/sections/header-search-mobile';
+import { Modules } from '@modules/header/types';
+import { openResults } from '@store/search/slices/search-slice';
+import {
+  FirsRowMobile,
   HeaderMobileContainer,
-  HeaderMobileLocationSection,
-  HeaderMobileOptionSection,
-  HeaderMobileOptionSectionElement,
   HeaderMobileSearchSection,
   SearchInputContainer,
+  SecondRowMobile,
 } from './styles';
-import HeaderModalLogin from '@modules/header/sections/header-modal-login';
-import ModalRegionalizer from '@modules/header/sections/header-modal-regionalizer';
-import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-const HeaderMobile = () => {
+interface Props {
+  modules: Modules;
+}
+
+const HeaderMobile = ({ modules }: Props) => {
   const { isOpenResults } = useAppSelector((state) => state.search);
+  const { isOpenCategories } = useAppSelector((state) => state.category);
   const dispatch = useAppDispatch();
-
-  const { pathname } = useRouter()
-  const isCartPath = pathname.includes('cart')
+  const { orderFormId, isUserLogged, customer } = useRegionalizer();
+  const { showModule } = useShowModules();
 
   return (
     <Mobile>
       <HeaderMobileContainer>
-        <HeaderMobileOptionSection isCartPath={isCartPath}>
-          <HeaderMobileOptionSectionElement>
-            <HeaderMenu isCartPath={isCartPath}/>
-            <HeaderLogo />
-          </HeaderMobileOptionSectionElement>
+        <FirsRowMobile>
+          {showModule(modules.logo, <HeaderLogo />)}
+          {showModule(
+            modules.search,
+            <HeaderMobileSearchSection>
+              <SearchInputContainer
+                onClick={() => dispatch(openResults())}
+                placeholder="Buscar..."
+              />
+              <Image
+                className="search-icon"
+                src="/icons/header/search-icon.svg"
+                width={18}
+                height={18}
+                alt="search-icon"
+              />
+            </HeaderMobileSearchSection>,
+          )}
+          {showModule(modules.cart, <HeaderCart />)}
+        </FirsRowMobile>
 
-          <HeaderMobileOptionSectionElement isCartPath={isCartPath}>
-            <HeaderLogin />
-            <HeaderCart />
-          </HeaderMobileOptionSectionElement>
-        </HeaderMobileOptionSection>
-        <HeaderCategory />
-
-        <HeaderMobileSearchSection isCartPath={isCartPath}>
-          <SearchInputContainer
-            onClick={() => dispatch(openResults())}
-            placeholder="¡Hola! ¿Qué estás buscando?"
-          />
-        </HeaderMobileSearchSection>
-
-        {isOpenResults && <HeaderSearchMobile />}
-
-        <HeaderMobileLocationSection isCartPath={isCartPath}>
-          <HeaderLocation  isCartPath={isCartPath}/>
-        </HeaderMobileLocationSection>
+        <SecondRowMobile>
+          {showModule(modules.categories, <MenuCategories />)}
+          {showModule(
+            modules.location,
+            <HeaderLocation
+              addressSelected={null}
+              orderFormId={orderFormId}
+              customer={customer}
+              isUserLogged={isUserLogged}
+            />,
+          )}
+        </SecondRowMobile>
+        {isOpenCategories && <ModalCategories />}
       </HeaderMobileContainer>
-      <ModalRegionalizer />
+      {isOpenResults && <HeaderSearchMobile />}
       <HeaderModalLogin />
     </Mobile>
   );

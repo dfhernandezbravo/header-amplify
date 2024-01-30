@@ -1,4 +1,5 @@
 import Newsletter from '@components/organisms/newsletterForm';
+import { FooterData } from '@entities/footer/footer.entity';
 import getFooterData from '@use-cases/footer/get-footer-data';
 import { useEffect, useState } from 'react';
 import HelpDataFooter from './sections/help-data';

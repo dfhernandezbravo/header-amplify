@@ -5,13 +5,10 @@ import {
   LoginProviders,
   LoginStep,
   SocialLogin,
+  SocialProviders,
 } from '@entities/login/login.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import getLoginMethods from '@use-cases/login/get-login-methods';
-import login from '@use-cases/login/login';
-import logout from '@use-cases/login/logout';
-import setPassword from '@use-cases/login/set-password';
-import validateAccessKey from '@use-cases/login/validate-access-key';
 
 type LoginState = {
   isOpenModalLogin: boolean;
@@ -43,7 +40,12 @@ const initialState: LoginState = {
       step: 'UserPassword',
     },
   ],
-  socialMethods: [],
+  socialMethods: [
+    {
+      providerName: SocialProviders.GOOGLE,
+      url: '/',
+    },
+  ],
 };
 
 const loginSlice = createSlice({
@@ -66,47 +68,18 @@ const loginSlice = createSlice({
     setAuthCookies: (state, { payload }: { payload: AuthCookie[] }) => {
       state.authCookies = [...state.authCookies, ...payload];
     },
+    setLogin: (state, { payload }: { payload: boolean }) => {
+      state.isLogged = payload;
+    },
+    setLoginError: (state, { payload }: { payload: AppError | null }) => {
+      state.error = payload;
+    },
   },
   // use cases
   extraReducers: (builder) => {
-    builder
-      .addCase(setPassword.fulfilled, (state, { payload }) => {
-        state.authCookies = [...state.authCookies, ...payload] || [];
-        state.isOpenModalLogin = false;
-        state.loginStep = 'Methods';
-        state.isLogged = true;
-        state.isLoading = false;
-      })
-      .addCase(setPassword.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(login.fulfilled, (state, { payload }) => {
-        state.isOpenModalLogin = false;
-        state.loginStep = 'Methods';
-        state.authCookies = [...state.authCookies, ...payload] || [];
-        state.isLogged = true;
-        state.isLoading = false;
-      })
-      .addCase(login.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(validateAccessKey.fulfilled, (state, { payload }) => {
-        state.isOpenModalLogin = false;
-        state.loginStep = 'Methods';
-        state.authCookies = [...state.authCookies, ...payload] || [];
-        state.isLogged = true;
-        state.isLoading = false;
-      })
-      .addCase(validateAccessKey.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(logout.fulfilled, (state, { payload }) => {
-        state.authCookies = payload;
-        state.isLogged = false;
-      })
-      .addCase(getLoginMethods.fulfilled, (state, { payload }) => {
-        state.socialMethods = payload;
-      });
+    builder.addCase(getLoginMethods.fulfilled, (state, { payload }) => {
+      state.socialMethods = payload;
+    });
   },
 });
 
@@ -115,7 +88,9 @@ export const {
   closeModalLogin,
   navigateTo,
   setEmail,
+  setLogin,
   setAuthCookies,
+  setLoginError,
 } = loginSlice.actions;
 
 export default loginSlice;

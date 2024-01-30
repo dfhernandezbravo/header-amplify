@@ -1,22 +1,18 @@
 import { useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
-import { HeaderBottom } from '@modules/header/styles/header.styles';
+import { HeaderBottom } from './style';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-interface Props {
-  isCartPath:boolean
-}
-
-const HeaderFooter = ({isCartPath}: Props) => {
+const HeaderFooter = () => {
   const { sendEventAnalytics } = useAnalytics();
   const { isLogged } = useAppSelector((state) => state.login);
 
   // const isCarth = isCartPath ? isCartPath : false
 
   return (
-    <HeaderBottom isCartPath={isCartPath}>
+    <HeaderBottom>
       <div>
         <Link
           href="https://www.easy.cl/tiendas"

@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import customerService from '@services/customer';
 
-const getCustomer = createAsyncThunk('/get/customer', async (email: string) => {
+const getCustomer = createAsyncThunk('/get/customer', async () => {
   try {
-    const { data } = await customerService.getCustomer(email);
+    const { data } = await customerService.getCustomer();
     return data;
   } catch (error) {
-    console.error(error);
     return null;
   }
 });

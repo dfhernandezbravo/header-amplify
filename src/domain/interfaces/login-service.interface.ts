@@ -4,11 +4,13 @@ import {
   GenerateTokenRequest,
   LoginRequest,
   SetPasswordRequest,
+  SocialLoginRequest,
   ValidateAccessKeyRequest,
 } from '@entities/login/login.request';
 import {
   GenerateTokenResponse,
   LoginResponse,
+  socialLoginResponse,
 } from '@entities/login/login.response';
 import { AxiosResponse } from 'axios';
 
@@ -30,4 +32,8 @@ export default interface LoginService {
   ): Promise<AxiosResponse<GenerateTokenResponse>>;
 
   getLoginMethods(): Promise<AxiosResponse<SocialLogin[]>>;
+
+  socialLogin: (
+    data: SocialLoginRequest,
+  ) => Promise<AxiosResponse<socialLoginResponse>>;
 }

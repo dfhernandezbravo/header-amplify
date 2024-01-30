@@ -1,35 +1,41 @@
 import ButtonBack from '@components/atoms/button-back';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import { AddNewAddressRequest } from '@entities/shopping-cart/shopping-cart-request';
+import { CustomerAddress } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
+import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
 import {
   pendingAddNewAddress,
   successAddNewAddress,
 } from '@store/regionalizer/slices/regionalizer-slice';
 import getAddressCustomer from '@use-cases/customer/get-address-customer';
 import addNewAddress from '@use-cases/shopping-cart/add-new-address';
-import React, { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import HeaderModalRegionalizer from '../header-modal-regionalizer';
 import NewAddressForm from '../new-address-form';
 import RadioButtonAddress from '../radio-input-address';
+import mapDataListAddressForm from './map-data-request';
 import {
+  ButtonContainer,
   ButtonNewAddress,
   HeaderNewAddressContainer,
   ListAddressContainer,
   ListAddressFormContainer,
 } from './styles';
-import HeaderModalRegionalizer from '../header-modal-regionalizer';
 
 const ListAddressForm = () => {
-  const { addresses, customer } = useAppSelector((state) => state.customer);
-  const { orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
+  const dispatch = useAppDispatch();
+  const { addresses } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );
-  const { isLogged } = useAppSelector((state) => state.login);
-  const { sendEventAnalytics } = useAnalytics();
 
-  const dispatch = useAppDispatch();
+  const { sendEventAnalytics } = useAnalytics();
+  const { orderFormId, customer, onCloseModal } = useContext(
+    HeaderLocationContext,
+  );
+  const isUserLogged = shoppingCart?.loggedIn;
 
   const [selectedAddress, setSelectedAddress] =
     useState<CustomerAddress | null>(null);
@@ -38,7 +44,7 @@ const ListAddressForm = () => {
   );
 
   useEffect(() => {
-    if (customer) dispatch(getAddressCustomer(customer.email));
+    if (customer) dispatch(getAddressCustomer());
   }, [customer, dispatch]);
 
   const HeaderNewAddress = () => (
@@ -67,25 +73,7 @@ const ListAddressForm = () => {
   const handleOnClick = async () => {
     if (!selectedAddress) return;
 
-    const formData: AddNewAddressRequest = {
-      selectedAddresses: [
-        {
-          addressType: selectedAddress.addressType,
-          city: selectedAddress.city,
-          country: selectedAddress.country,
-          geoCoordinates: selectedAddress.geoCoordinate,
-          state: selectedAddress.state,
-          receiverName: selectedAddress.receiverName,
-          addressId: selectedAddress.id,
-          postalCode: selectedAddress.postalCode,
-          neighborhood: selectedAddress.neighborhood,
-          complement: selectedAddress.complement,
-          reference: selectedAddress.reference,
-          street: selectedAddress.street,
-          number: selectedAddress.number,
-        },
-      ],
-    };
+    const formData = mapDataListAddressForm(selectedAddress);
     try {
       dispatch(pendingAddNewAddress(true));
 
@@ -97,30 +85,29 @@ const ListAddressForm = () => {
         event: 'interaccion',
         category: 'Interacciones componente regionalizador',
         action: 'Click selección ingresa tu ubicación',
-        tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
+        tag: isUserLogged ? 'Usuario Logeado' : 'Usuario Guest',
         region: selectedAddress.state,
         comuna: selectedAddress.city,
       });
+
+      onCloseModal();
     } catch (error) {
-      console.log();
+      throw new Error('Error');
     } finally {
       dispatch(pendingAddNewAddress(false));
     }
   };
-
   return step === 'list-address' ? (
     <ListAddressFormContainer>
       <HeaderModalRegionalizer title="Ingresa tu ubicación" />
-
       <p>Cuéntanos dónde quieres recibir tu compra</p>
-
       <h3>Tus direcciones</h3>
-
       <ListAddressContainer>
         {filterRepeatedAddress.map((address) => (
           <RadioButtonAddress
             checked={selectedAddress?.id === address.id}
-            text={`${address.street}, ${address.number}, ${address.neighborhood}, ${address.state}`}
+            text={`${address.street}, ${address.number}`}
+            state={`${address.neighborhood}, ${address.state}`}
             key={address.id}
             onChange={() => setSelectedAddress(address)}
             value={address.id}
@@ -131,12 +118,14 @@ const ListAddressForm = () => {
       <ButtonNewAddress onClick={() => setStep('new-address')}>
         Elegir otra ubicación
       </ButtonNewAddress>
-
-      <ButtonPrimary
-        title={!isLoadingRegionalizer ? 'Guardar mi ubicación' : 'Cargando...'}
-        disabled={!selectedAddress || isLoadingRegionalizer}
-        onClick={handleOnClick}
-      />
+      <ButtonContainer isLoading={isLoadingRegionalizer}>
+        <ButtonPrimary
+          className="add-location-button"
+          title={!isLoadingRegionalizer ? 'Guardar mi ubicación' : ''}
+          disabled={!selectedAddress || isLoadingRegionalizer}
+          onClick={handleOnClick}
+        />
+      </ButtonContainer>
     </ListAddressFormContainer>
   ) : (
     <NewAddressForm header={<HeaderNewAddress />} />

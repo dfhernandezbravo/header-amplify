@@ -8,25 +8,26 @@ export type ColorButtonLinkLogin = 'default' | 'green';
 
 interface Props {
   icon: React.ReactNode;
-  title: string;
   color?: ColorButtonLinkLogin;
   nextStep: keyof LoginStep;
 }
 
 const ButtonLinkLogin: React.FC<Props> = ({
   icon,
-  title,
   color = 'default',
   nextStep,
 }) => {
   const dispacth = useAppDispatch();
   return (
     <ButtonLinkContainer
+      href={''}
       color={color}
       onClick={() => dispacth(navigateTo(nextStep))}
     >
       {icon}
-      {title}
+      <p>
+        Ingresar con <span className="bold-text">código de acceso</span>
+      </p>
     </ButtonLinkContainer>
   );
 };

@@ -1,7 +1,7 @@
 import Mobile from '@components/layout/mobile';
-import { useAppSelector } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import useAnalytics from '@hooks/useAnalytics';
 import Image from 'next/image';
-import React from 'react';
 import {
   SuggestionBrand,
   SuggestionName,
@@ -11,13 +11,15 @@ import {
   SuggestionsMobileDetail,
   SuggestionsMobileItem,
 } from './styles';
-import { environments } from '@env/environments';
-import useAnalytics from '@hooks/useAnalytics';
+import {
+  setRecentSearches,
+  closeResults,
+} from '@store/search/slices/search-slice';
 
 const HeaderSuggestionsMobile = () => {
   const { productSuggestions } = useAppSelector((state) => state.search);
-  const { hostURL } = environments();
   const { sendEventAnalytics } = useAnalytics();
+  const dispatch = useAppDispatch();
 
   const handleOnClick = (product: string) => {
     sendEventAnalytics({
@@ -26,6 +28,10 @@ const HeaderSuggestionsMobile = () => {
       action: 'Click Producto Sugerido',
       tag: product,
     });
+
+    const term = product.split(' ')[0];
+    if (term) dispatch(setRecentSearches(term.toLowerCase()));
+    dispatch(closeResults());
   };
 
   return (
@@ -33,26 +39,26 @@ const HeaderSuggestionsMobile = () => {
       <SuggestionsMobileContainer>
         <h5>Resultados de productos</h5>
 
-        {productSuggestions.map((product) => (
+        {productSuggestions?.map((product) => (
           <SuggestionsMobileItem
             key={product.productId}
-            href={`${hostURL}/${product.link}`}
+            href={product.link}
             onClick={(e) => {
               e.stopPropagation();
               handleOnClick(product.productName);
             }}
           >
             <Image
-              src={product.items[0].images[0].imageUrl}
+              src={product?.items[0]?.images[0]?.imageUrl}
               width={60}
               height={60}
-              alt={product.items[0].images[0].imageLabel}
+              alt={product?.items[0]?.images[0]?.imageLabel}
             />
 
             <SuggestionsMobileDetail>
-              <SuggestionBrand>{product.brand} </SuggestionBrand>
+              <SuggestionBrand>{product?.brand} </SuggestionBrand>
 
-              <SuggestionName>{product.productName}</SuggestionName>
+              <SuggestionName>{product?.productName}</SuggestionName>
             </SuggestionsMobileDetail>
           </SuggestionsMobileItem>
         ))}

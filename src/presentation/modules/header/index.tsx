@@ -1,23 +1,24 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { Provider } from 'react-redux';
-import store, { persistor } from '@store/index';
-import { CookiesProvider } from 'react-cookie';
+import ProvidersLayout from '@components/layout/providers';
 import HeaderContainer from './header-container';
-import { PersistGate } from 'redux-persist/integration/react';
-import { ThemeProvider } from 'styled-components';
-import { themeStyled } from '@theme/index';
+import { HeaderProps } from './types';
 
-const Header = () => {
+const Header = ({
+  modules = {
+    location: true,
+    login: true,
+    logo: true,
+    categories: true,
+    search: true,
+    cart: true,
+    topBrands: true,
+    footerHeader: true,
+  },
+  ...rest
+}: HeaderProps) => {
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor} loading={null}>
-        <CookiesProvider>
-          <ThemeProvider theme={themeStyled}>
-            <HeaderContainer />
-          </ThemeProvider>
-        </CookiesProvider>
-      </PersistGate>
-    </Provider>
+    <ProvidersLayout>
+      <HeaderContainer {...rest} modules={modules} />
+    </ProvidersLayout>
   );
 };
 export default Header;

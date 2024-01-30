@@ -1,16 +1,18 @@
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import React from 'react';
-import * as yup from 'yup';
-import { ModalForm } from '../../styles';
-import setPassword from '@use-cases/login/set-password';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import InputText from '@components/atoms/inputs/input-text';
-import InputPassword from '@components/atoms/inputs/input-password';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import InputCheckbox from '@components/atoms/inputs/input-checkbox';
-import Link from 'next/link';
+import InputPassword from '@components/atoms/inputs/input-password';
+import InputText from '@components/atoms/inputs/input-text';
 import { SetPasswordRequest } from '@entities/login/login.request';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useAppSelector } from '@hooks/storeHooks';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import useResponseLogin from '../../hooks/use-response-login';
+import { ModalForm } from '../../styles';
+import userPasswordSchema from './schema-validation';
+import { AUTH_EVENTS } from '@infra/events/auth';
 
 type SetPasswordForm = {
   accessKey: string;
@@ -19,57 +21,45 @@ type SetPasswordForm = {
   isTYC: boolean;
 };
 
-const schema = yup.object({
-  accessKey: yup.string().required('Campo requerido'),
-  password: yup
-    .string()
-    .trim()
-    .matches(
-      /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
-      'Su contraseña debe contener: 8 caracteres, números, letras minúsculas y mayúsculas',
-    )
-    .required('Campo Requerido'),
-  confirmPassword: yup
-    .string()
-    .required('Campo requerido')
-    .oneOf([yup.ref('password')], 'Las contraseñas no coinciden'),
-  isTYC: yup
-    .boolean()
-    .oneOf([true], 'Debes aceptar terminos y condiciones')
-    .default(false),
-});
-
 const LoginSetPassword = () => {
-  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
-    (state) => state.shoppingCartHeader,
-  );
   const { userEmail } = useAppSelector((state) => state.login);
-  const dispatch = useAppDispatch();
 
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<SetPasswordForm>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(userPasswordSchema),
     defaultValues: {
       isTYC: false,
     },
   });
 
+  const { loginSuccess } = useResponseLogin();
+
   const onSubmit: SubmitHandler<SetPasswordForm> = async (data) => {
     const dataSetPassword: SetPasswordRequest = {
-      user: userEmail,
+      email: userEmail,
       newPassword: data.password,
       accessKey: data.accessKey,
     };
 
-    const dataSend = isShoppingCartUse
-      ? { ...dataSetPassword, orderFormId }
-      : dataSetPassword;
-
-    dispatch(setPassword(dataSend));
+    customDispatchEvent({
+      name: AUTH_EVENTS.DISPATCH_SET_PASSWORD,
+      detail: dataSetPassword,
+    });
   };
+
+  useEffect(() => {
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, loginSuccess);
+
+    return () => {
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+        loginSuccess,
+      );
+    };
+  }, []);
 
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>

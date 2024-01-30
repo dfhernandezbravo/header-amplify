@@ -1,55 +1,38 @@
 import styled from 'styled-components';
 
-
-interface Props {
-  isCartPath?: boolean
-}
-
 export const HeaderMobileContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   background-color: #af1212;
   color: white;
+  padding: 10px 0.7rem;
 `;
 
-export const HeaderMobileOptionSection = styled.div<Props>`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 67px;
-  padding: 8px 16px;
-  border-bottom: ${({isCartPath}) => isCartPath ? 'none' : '1px solid hsla(0, 0%, 100%, 0.5);'};
-
-  @media (max-width: 640px) {
-    padding: 8px;
-  }
-`;
-
-export const HeaderMobileOptionSectionElement = styled.div<Props>`
-  display: ${({isCartPath}) => isCartPath ? 'none' : 'flex'};
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-`;
-
-export const HeaderMobileSearchSection = styled.div<Props>`
-  display: ${({isCartPath}) => isCartPath ? 'none' : 'inherit'};
+export const HeaderMobileSearchSection = styled.div`
   width: 100%;
   padding: 12px 16px;
   height: 65px;
-  position:relative;
-`;
+  position: relative;
+  & ::placeholder {
+    padding-left: 1rem;
+  }
+  & .search-icon {
+    position: absolute;
+    top: 48%;
+    left: 24px;
+    transform: translate(0, -50%);
 
-export const HeaderMobileLocationSection = styled.div<Props>`
-  width: 100%;
-  background-color:${({isCartPath}) => isCartPath ? '#af1311' : '#990707'}; 
-  padding: 8px 16px;
+    @media (min-width: 1024px) {
+      top: 45%;
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 export const SearchInputContainer = styled.input`
-  border-radius: 8px;
+  border-radius: 28px;
   height: 40px;
   padding: 1rem;
   border: none;
@@ -64,11 +47,21 @@ export const IconSearchContainer = styled.div`
   color: #000;
   fill: #000;
   position: absolute;
-  right:0;
-  top:50%;
+  right: 0;
+  top: 55%;
   transform: translateY(-50%);
   cursor: pointer;
-  padding: 0 8px;
+  padding: 0 8px 0 16px;
   background-color: #fff;
-  border-left: 1px solid #d2d2d2;
+`;
+
+export const FirsRowMobile = styled.div`
+  display: flex;
+  margin-bottom: 0.5rem;
+`;
+
+export const SecondRowMobile = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

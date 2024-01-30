@@ -1,34 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
-import getCategories from '@use-cases/category/get-categories';
 
 type CategoryState = {
-  categories: Category[];
-  isLoading: boolean;
   isOpenCategories: boolean;
+};
+
+const initialState: CategoryState = {
+  isOpenCategories: false,
 };
 
 const categorySlice = createSlice({
   name: 'category',
-  initialState: {
-    categories: [],
-    isLoading: false,
-    isOpenCategories: false,
-  } as CategoryState,
+  initialState,
   reducers: {
-    openCategories: (state, { payload }) => {
-      state.isOpenCategories = payload || false;
+    openCategories: (state) => {
+      state.isOpenCategories = true;
+    },
+    closeCategories: (state) => {
+      state.isOpenCategories = false;
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getCategories.fulfilled, (state, { payload }) => {
-        state.categories = payload || [];
-        state.isLoading = false;
-      })
-      .addCase(getCategories.pending, (state) => {
-        state.isLoading = true;
-      });
-  },
 });
-export const { openCategories } = categorySlice.actions;
+
+export const { openCategories, closeCategories } = categorySlice.actions;
 export default categorySlice;

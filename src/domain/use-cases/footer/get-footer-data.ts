@@ -5,7 +5,7 @@ const getFooterData = async () => {
     const { data } = await footerService.getFooterData();
     return data.params;
   } catch (error) {
-    console.error(error);
+    return null;
   }
 };
 

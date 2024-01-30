@@ -1,14 +1,15 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { AccordionContainer, Content, Title } from './accordion.styles';
-import styled from 'styled-components';
+import { FooterLink } from '@entities/footer/footer.entity';
 import Link from 'next/link';
+import { useCallback, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { AccordionContainer, Content, Title } from './accordion.styles';
 
 interface AccordionProps {
   title: string;
   links: FooterLink[];
 }
 
-const ContentWrapper: any = styled.div<{ maxHeight: number }>`
+const ContentWrapper = styled.div<{ maxHeight?: number }>`
   max-height: ${(p) => `${p.maxHeight}px`};
   transition: max-height 0.25s ease-in-out;
   overflow: hidden;
@@ -17,7 +18,7 @@ const ContentWrapper: any = styled.div<{ maxHeight: number }>`
 const Accordion = ({ title, links }: AccordionProps) => {
   const [isExpanded, setExpanded] = useState<boolean>();
 
-  const contentRef = useRef<HTMLDivElement>();
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const contentHeight = isExpanded ? contentRef.current?.scrollHeight : 0;
 
   const handleExpandToggle = useCallback(() => {

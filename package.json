@@ -4,16 +4,16 @@
   "private": true,
   "proxy": "https://cl-ccom-easy-host-headless.ecomm-stg.cencosud.com",
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "rm -rf .next && next dev --port 3001",
     "build": "next build",
     "start": "next start",
     "start:prod": "next build && next start -p 3001",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "server:mock": "json-server --watch ./server-mock/db.json --routes ./server-mock/routes.json --port 3005"
+    "lint": "next lint",
+    "prepare": "husky install",
+    "format": "prettier --write . --config .prettierrc"
   },
   "dependencies": {
+    "@cencosud-ds/easy-design-system": "^1.1.17",
     "@hookform/resolvers": "^3.1.1",
     "@module-federation/nextjs-mf": "^6.4.0",
     "@reduxjs/toolkit": "^1.9.5",
@@ -30,10 +30,12 @@
     "react": "18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.45.1",
+    "react-hook-form": "^7.47.0",
     "react-icons": "^4.8.0",
     "react-is": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-redux": "^8.0.5",
+    "react-select": "^5.7.7",
     "redux-persist": "^6.0.0",
     "sharp": "^0.32.1",
     "styled-components": "^5.3.10",
@@ -42,6 +44,8 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.8.0",
+    "@commitlint/config-conventional": "^17.8.0",
     "@types/js-cookie": "^3.0.3",
     "@types/redux-persist": "^4.3.1",
     "@types/styled-components": "^5.1.26",
@@ -50,7 +54,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.8.8"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.3"
   },
   "resolutions": {
     "styled-components": "^5"

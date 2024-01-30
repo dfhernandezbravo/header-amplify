@@ -15,21 +15,21 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      // "@/*": ["./src/*"],
-      "@assets/*": ["./src/presentation/assets/*"],
-      "@store/*": ["./src/presentation/store/*"],
-      "@components/*": ["./src/presentation/components/*"],
-      "@hooks/*": ["./src/presentation/hooks/*"],
-      "@mocks/*": ["./src/presentation/mocks/*"],
       "@env/*": ["./src/domain/env/*"],
       "@entities/*": ["./src/domain/entities/*"],
       "@interfaces/*": ["./src/domain/interfaces/*"],
       "@use-cases/*": ["./src/domain/use-cases/*"],
       "@data-sources/*": ["./src/application/data-sources/*"],
+      "@infra/*": ["./src/application/infra/*"],
       "@services/*": ["./src/application/services/*"],
       "@modules/*": ["./src/presentation/modules/*"],
       "@events/*": ["./src/presentation/events/*"],
-      "@theme/*": ["./src/presentation/theme/*"]
+      "@theme/*": ["./src/presentation/theme/*"],
+      "@assets/*": ["./src/presentation/assets/*"],
+      "@store/*": ["./src/presentation/store/*"],
+      "@components/*": ["./src/presentation/components/*"],
+      "@hooks/*": ["./src/presentation/hooks/*"],
+      "@mocks/*": ["./src/presentation/mocks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

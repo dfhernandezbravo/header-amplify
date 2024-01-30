@@ -1,13 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "react-hooks"],
-  "extends": [
-    "next",
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "prettier",
-    "plugin:storybook/recommended"
-  ],
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
   "globals": {
     "React": "readonly"
   },
@@ -18,7 +12,30 @@
     "@typescript-eslint/no-unused-vars": [
       "error",
       { "vars": "all", "args": "none", "ignoreRestSiblings": false }
-    ]
+    ],
+    "no-dupe-args": "error",
+    "no-dupe-else-if": "error",
+    "no-dupe-keys": "error",
+    "no-duplicate-case": "error",
+    "no-duplicate-imports": "error",
+    "no-irregular-whitespace": "error",
+    "no-unreachable": "error",
+    "no-use-before-define": "error",
+    "valid-typeof": "error",
+    "block-scoped-var": "error",
+    "camelcase": "error",
+    "complexity": ["error", 9],
+    "default-case": "error",
+    "eqeqeq": ["error", "always"],
+    "max-lines": ["error", 155],
+    "max-params": ["error", 3],
+    "no-alert": "error",
+    "no-console": "warn",
+    "no-debugger": "error",
+    "no-lonely-if": "error",
+    "no-mixed-operators": "error",
+    "no-var": "error",
+    "@typescript-eslint/no-explicit-any": "error"
   },
   "settings": {
     "react": {

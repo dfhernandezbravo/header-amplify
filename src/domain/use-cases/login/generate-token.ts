@@ -9,7 +9,7 @@ const generateToken = createAsyncThunk(
       const { data } = await loginService.generateToken(dataRequest);
       return data;
     } catch (error) {
-      console.error(error);
+      throw new Error('Oh no!!');
     }
   },
 );

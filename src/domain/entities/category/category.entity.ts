@@ -1,8 +1,10 @@
-type Category = {
+export type Category = {
   id: string;
   name: string;
   hasChildren: boolean;
   url: string;
   subname: string;
-  children: Category[];
+  icon: string;
+  sub_categories: Category[];
+  categories: Category[];
 };

@@ -1,29 +1,30 @@
+import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import InputPassword from '@components/atoms/inputs/input-password';
 import InputText from '@components/atoms/inputs/input-text';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import { useAppDispatch } from '@hooks/storeHooks';
+import { AUTH_EVENTS } from '@infra/events/auth';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import {
+  navigateTo,
+  setEmail,
+  setLoginError,
+} from '@store/login/slices/login-slice';
+import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import ButtonPrimary from '@components/atoms/buttons/button-primary';
+import LoginErrors from '../../components/login-errors';
+import useResponseLogin from '../../hooks/use-response-login';
 import { ModalForm } from '../../styles';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import login from '@use-cases/login/login';
-import { navigateTo, setEmail } from '@store/login/slices/login-slice';
-import {
-  ButtonNewAccount,
-  ButtonResetPassword,
-  LinkNewAccount,
-  NewAccountContainer,
-  ResetPasswordContainer,
-} from './styles';
+import { ButtonResetPassword, ResetPasswordContainer } from './styles';
 
 type LoginForm = {
-  user: string;
+  email: string;
   password: string;
 };
 
 const schema = yup.object({
-  user: yup
+  email: yup
     .string()
     .required('El correo es requerido')
     .email('El correo que ingresaste no es válido, intenta de nuevo'),
@@ -34,39 +35,52 @@ const LoginUserPassword = () => {
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<LoginForm>({
     resolver: yupResolver(schema),
   });
 
   const dispatch = useAppDispatch();
-  const { orderFormId, isShoppingCartUsed: isShoppingCartUse } = useAppSelector(
-    (state) => state.shoppingCartHeader,
-  );
+  const { loginSuccess, loginError } = useResponseLogin();
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
-    const dataForm = isShoppingCartUse ? { ...data, orderFormId } : data;
+    dispatch(setLoginError(null));
+    dispatch(setEmail(data.email));
 
-    dispatch(setEmail(data.user));
-
-    dispatch(login(dataForm));
+    customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
   };
+
+  useEffect(() => {
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, loginSuccess);
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
+
+    return () => {
+      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginSuccess);
+      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
+    };
+  }, []);
+
+  const watchEmail = watch('email');
+  const watchPassword = watch('password');
+
+  useEffect(() => {
+    dispatch(setLoginError(null));
+  }, []);
 
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>
-      <strong>Ingresa con tu usuario y contraseña en Easy.cl</strong>
-
+      <LoginErrors />
       <Controller
-        name="user"
+        name="email"
         control={control}
         defaultValue=""
         render={({ field }) => (
           <InputText
             {...field}
-            label="Ingresa tu correo electrónico"
-            placeholder="Ejemplo: correo@mail.com"
-            error={Boolean(errors.user)}
-            errorMessage={errors.user?.message}
+            placeholder="Correo electrónico"
+            error={Boolean(errors.email)}
+            errorMessage={errors.email?.message}
             ref={null}
           />
         )}
@@ -79,8 +93,7 @@ const LoginUserPassword = () => {
         render={({ field }) => (
           <InputPassword
             {...field}
-            label="Ingresa tu contraseña"
-            placeholder="********"
+            placeholder="Contraseña"
             error={Boolean(errors.password)}
             errorMessage={errors.password?.message}
             ref={null}
@@ -96,17 +109,11 @@ const LoginUserPassword = () => {
           ¿Olvidaste tu contraseña?
         </ButtonResetPassword>
       </ResetPasswordContainer>
-
-      <ButtonPrimary type="submit" title="Ingresar a mi cuenta" />
-
-      <NewAccountContainer>
-        <ButtonNewAccount
-          onClick={() => dispatch(navigateTo('EmailSetPassword'))}
-        >
-          <span>¿No estás registrado?</span>
-          <LinkNewAccount>Crear cuenta </LinkNewAccount>
-        </ButtonNewAccount>
-      </NewAccountContainer>
+      <ButtonPrimary
+        type="submit"
+        title="Ingresar a mi cuenta"
+        disabled={!watchEmail || !watchPassword}
+      />
     </ModalForm>
   );
 };

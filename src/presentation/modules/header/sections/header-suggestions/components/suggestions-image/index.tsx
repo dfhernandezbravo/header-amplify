@@ -1,3 +1,4 @@
+import { ProductImage } from '@entities/search/searches.entity';
 import Image from 'next/image';
 import React from 'react';
 import { SuggestionImageContainer } from './styles';

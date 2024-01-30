@@ -1,27 +1,62 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+type ButtonProps = {
+  isLoading: boolean;
+};
+const spin = keyframes`
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+`;
 
 export const NewAddressFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 12px;
-  max-width: 450px;
+  max-width: 385px;
+  color: black;
+  & .description {
+    font-size: ${({ theme: { fontSize } }) => fontSize[200]};
+    color: #485760;
+  }
 `;
 
 export const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ theme: { spacing } }) => spacing[100]};
 
   & label {
-    font-size: 14px;
+    font-size: ${({ theme: { fontSize } }) => fontSize[100]};
   }
 `;
 
-export const SelectNewAddressForm = styled.select`
-  padding: 16px 20px;
-  border-radius: 4px;
-  border: 1px solid #dfe3e7;
-  color: #475f7b;
-  font-size: 16px;
+export const FormComtainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme: { spacing } }) => spacing[200]};
+`;
+
+export const ButtonContainer = styled.div<ButtonProps>`
+  & .add-location-button {
+    position: relative;
+    min-height: 42px;
+    ${({ isLoading }) =>
+      isLoading &&
+      css`
+        &::before {
+          content: '';
+          position: absolute;
+          top: 15%;
+          left: 46%;
+          display: block;
+          border: 4px solid rgb(175, 19, 17);
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          border-left-color: #ffffff;
+          animation: ${spin} 1s linear infinite;
+        }
+      `}
+  }
 `;

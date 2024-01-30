@@ -1,1 +1,1 @@
-declare module 'popular/*'
+declare module 'popular/*';

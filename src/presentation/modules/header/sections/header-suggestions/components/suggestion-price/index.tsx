@@ -1,3 +1,4 @@
+import { ProductSeller } from '@entities/search/searches.entity';
 import React from 'react';
 import {
   SuggestionAmount,
@@ -10,6 +11,11 @@ interface Props {
   sellers: ProductSeller[];
 }
 
+type currencyFormatter = {
+  currency: string;
+  value: number;
+};
+
 function getPercentage(price: number, listPrice: number) {
   const diff = listPrice - price;
   const percentage = (diff / listPrice) * 100;
@@ -17,12 +23,21 @@ function getPercentage(price: number, listPrice: number) {
   return Math.round(percentage);
 }
 
-const formatCurrency = (amount: number) =>
-  amount.toLocaleString('en-US', {
+const currencyFormatterCLP = ({ currency, value }: currencyFormatter) => {
+  const formatter = new Intl.NumberFormat('es-CL', {
     style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
+    currencySign: 'accounting',
+    currency,
   });
+  return formatter.format(value);
+};
+
+export const formattedCLP = (value: number) => {
+  return currencyFormatterCLP({
+    currency: 'CLP',
+    value,
+  });
+};
 
 const SuggestionPrice: React.FC<Props> = ({ sellers }) => {
   const { commertialOffer } = sellers[0];
@@ -32,7 +47,7 @@ const SuggestionPrice: React.FC<Props> = ({ sellers }) => {
   return (
     <div>
       <SuggestionPriceContainer>
-        <SuggestionAmount>{formatCurrency(Price)}</SuggestionAmount>
+        <SuggestionAmount>{formattedCLP(Price)}</SuggestionAmount>
 
         {discountPercentage > 0 && (
           <SuggestionDiscount>{discountPercentage}%</SuggestionDiscount>
@@ -41,7 +56,7 @@ const SuggestionPrice: React.FC<Props> = ({ sellers }) => {
 
       {discountPercentage > 0 && (
         <SuggestionListPrice>
-          Normal: {formatCurrency(ListPrice)}
+          Normal: {formattedCLP(ListPrice)}
         </SuggestionListPrice>
       )}
     </div>

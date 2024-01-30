@@ -17,7 +17,7 @@ export const ModalWrapper = styled.div`
 export const ModalContent = styled.div`
   background-color: white;
   padding: 16px;
-  border-radius: 4px;
+  border-radius: 24px;
 
   @media (max-width: 720px) {
     width: 100%;

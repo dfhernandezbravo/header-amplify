@@ -1,11 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
     _req: NextApiRequest,
-    res: NextApiResponse<any>,
+    res: NextApiResponse,
 ) {
-    console.log("TEST HEALT HEADER")
-    res.status(200).json({ message: "healt test" });
+    console.log(">>>> HEALT TEST HEADER MCF <<<<")
+    res.status(200).json({ message: ">>> healt test mcf <<<" });
 }

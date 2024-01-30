@@ -1,4 +1,7 @@
-import React from 'react';
+import Desktop from '@components/layout/desktop';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import SuggestionPrice from '../../components/suggestion-price';
+import SuggestionImage from '../../components/suggestions-image';
 import {
   SuggestionBrand,
   SuggestionName,
@@ -6,15 +9,16 @@ import {
   SuggestionsItemContainer,
   SuggestionsListContainer,
 } from './styles';
-import SuggestionImage from '../../components/suggestions-image';
-import SuggestionPrice from '../../components/suggestion-price';
-import { useAppSelector } from '@hooks/storeHooks';
-import Desktop from '@components/layout/desktop';
-import { environments } from '@env/environments';
+import { setRecentSearches } from '@store/search/slices/search-slice';
 
 const HeaderSuggestionsDesktop = () => {
   const { productSuggestions } = useAppSelector((state) => state.search);
-  const { hostURL } = environments();
+  const dispatch = useAppDispatch();
+
+  const handleClick = (product: string) => {
+    const term = product.split(' ')[0];
+    if (term) dispatch(setRecentSearches(term.toLowerCase()));
+  };
 
   return (
     <Desktop>
@@ -25,7 +29,8 @@ const HeaderSuggestionsDesktop = () => {
           {productSuggestions.map((product) => (
             <SuggestionsItemContainer
               key={product.productId}
-              href={`${hostURL}${product.link}`}
+              href={product.link}
+              onClick={() => handleClick(product.productName)}
             >
               <SuggestionImage images={product.items[0].images} />
 

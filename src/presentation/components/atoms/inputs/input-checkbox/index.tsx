@@ -1,12 +1,11 @@
 import React from 'react';
-import { InputBaseProps } from '../input-base';
+import { ErrorMessage } from '../input-base/styles';
 import {
   CheckboxContainer,
   CheckboxInput,
   CheckboxLabel,
   InputWrapper,
 } from './styles';
-import { ErrorMessage } from '../input-base/styles';
 
 interface Props {
   checked: boolean;

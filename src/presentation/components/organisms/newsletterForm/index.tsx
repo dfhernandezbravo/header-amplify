@@ -1,14 +1,10 @@
 import Button from '@components/atoms/footerButton';
-import { NewsletterContainer, NewsletterForm } from './newsletterForm.styles';
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import { NewsletterContainer, NewsletterForm } from './newsletterForm.styles';
 
 const Newsletter = () => {
   const { width } = useWindowDimensions();
   const breakpoint = 1026;
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-  };
 
   return (
     <NewsletterContainer>
@@ -18,11 +14,13 @@ const Newsletter = () => {
             <p>Suscríbete a nuestras ofertas y novedades</p>
           </div>
           <NewsletterForm>
-            <form action="submit" onSubmit={handleSubmit}>
+            <form action="submit" onSubmit={(event) => event.preventDefault()}>
               <div className="newsletter__Inputs">
                 <input type="text" placeholder="Correo electrónico" />
                 <input type="text" placeholder="RUT" />
-                <Button onClick={handleSubmit}>Enviar</Button>
+                <Button onClick={(event) => event.preventDefault()}>
+                  Enviar
+                </Button>
               </div>
               <div className="newsletter__CheckboxContainer">
                 <input type="checkbox" name="terminos" id="terminos" />
@@ -40,7 +38,9 @@ const Newsletter = () => {
           <div className="newsletter__Title">
             <p>Conoce nuestras ofertas y novedades</p>
           </div>
-          <Button onClick={handleSubmit}>Suscríbete</Button>
+          <Button onClick={(event) => event.preventDefault()}>
+            Suscríbete
+          </Button>
         </div>
       )}
     </NewsletterContainer>

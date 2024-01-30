@@ -1,27 +1,32 @@
-import { useEffect } from 'react'
 import Cart from '@components/atoms/cartButton';
 import { WindowsEvents } from '@events/index';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import useAnalytics from '@hooks/useAnalytics';
-import { HeaderCartSection } from '@modules/header/styles/header.styles';
-import { openCategories } from '@store/category/slices/category-slice';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
-
-import getShoppingCartById from '@use-cases/shopping-cart/get-shopping-cart-by-id';
+import useAnalyticsHeaderCart from './analytics';
+import { closeCategories } from '@store/category/slices/category-slice';
+import { useEffect, useState } from 'react';
 
 const HeaderCart = () => {
-  const { quantity, orderFormId } = useAppSelector((state) => state.shoppingCartHeader);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const dispatch = useAppDispatch();
-  const { sendEventAnalytics } = useAnalytics();
+  const { sendAnalyticsOnClickCart } = useAnalyticsHeaderCart();
+  const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    if (shoppingCart && shoppingCart.items.length) {
+      const totalQuantity = shoppingCart.items.reduce(
+        (accumulator, current) => accumulator + current.quantity,
+        0,
+      );
+      setQuantity(totalQuantity);
+    } else {
+      setQuantity(0);
+    }
+  }, [shoppingCart]);
 
   const handleOnClickCart = () => {
-    dispatch(openCategories(false));
-    sendEventAnalytics({
-      event: 'interaccion',
-      category: 'Interacciones Header',
-      action: 'Click',
-      tag: 'Mini cart',
-    });
+    dispatch(closeCategories());
+    sendAnalyticsOnClickCart();
 
     customDispatchEvent({
       name: WindowsEvents.TOGGLE_CART_ASIDE,
@@ -29,17 +34,7 @@ const HeaderCart = () => {
     });
   };
 
-  useEffect(() => {
-    if(orderFormId) {
-      dispatch(getShoppingCartById(orderFormId))
-    }
-  })
-
-  return (
-    <HeaderCartSection>
-      <Cart quantity={quantity} onClick={handleOnClickCart} />
-    </HeaderCartSection>
-  );
+  return <Cart quantity={quantity} onClick={handleOnClickCart} />;
 };
 
 export default HeaderCart;
