@@ -38,28 +38,29 @@ const CategoryDetailItemMobile = ({ category, onBack }: Props) => {
         </CategoriesDetailTitleMobileLink>
       </CategoryHeader>
 
-      {category?.categories.map((item) => (
-        <CategoryContent key={item.id}>
-          <CategoryAccordion title={item.name}>
-            <ChildrenAccordionCategory>
-              {item?.sub_categories?.length > 0 &&
-                item.sub_categories.map((sub) => (
-                  <CategoryLink
-                    key={sub.id}
-                    href={sub.url}
-                    onClick={closeModal}
-                  >
-                    {sub.name}
-                  </CategoryLink>
-                ))}
+      {category?.categories?.length > 0 &&
+        category?.categories.map((item) => (
+          <CategoryContent key={item.id}>
+            <CategoryAccordion title={item.name}>
+              <ChildrenAccordionCategory>
+                {item?.sub_categories?.length > 0 &&
+                  item.sub_categories.map((sub) => (
+                    <CategoryLink
+                      key={sub.id}
+                      href={sub.url}
+                      onClick={closeModal}
+                    >
+                      {sub.name}
+                    </CategoryLink>
+                  ))}
 
-              <CategoryLinkAll href={item.url} onClick={closeModal}>
-                Mostrar todo{' '}
-              </CategoryLinkAll>
-            </ChildrenAccordionCategory>
-          </CategoryAccordion>
-        </CategoryContent>
-      ))}
+                <CategoryLinkAll href={item.url} onClick={closeModal}>
+                  Mostrar todo{' '}
+                </CategoryLinkAll>
+              </ChildrenAccordionCategory>
+            </CategoryAccordion>
+          </CategoryContent>
+        ))}
     </CategoryDetailItemContainer>
   );
 };
