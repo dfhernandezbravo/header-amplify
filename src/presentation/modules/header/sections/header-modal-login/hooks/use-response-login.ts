@@ -1,17 +1,19 @@
 import { useAppDispatch } from '@hooks/storeHooks';
-import { closeModalLogin } from '@store/login/slices/login-slice';
+import {
+  closeModalLogin,
+  setLoginError,
+} from '@store/login/slices/login-slice';
 import getCustomer from '@use-cases/customer/get-customer';
 import { AxiosError } from 'axios';
 
 const useResponseLogin = () => {
   const dispatch = useAppDispatch();
 
-  const getLoginResponse = (event: Event) => {
+  const loginSuccess = (event: Event) => {
     event.stopImmediatePropagation();
 
     const customEvent = event as CustomEvent<{
       success: boolean;
-      error: AxiosError;
     }>;
 
     const {
@@ -24,8 +26,29 @@ const useResponseLogin = () => {
     }
   };
 
+  const loginError = (event: Event) => {
+    event.stopImmediatePropagation();
+
+    const customEvent = event as CustomEvent<{
+      error: AxiosError;
+    }>;
+
+    const {
+      detail: {
+        error: { response },
+      },
+    } = customEvent;
+
+    if (response?.status === 401) {
+      dispatch(
+        setLoginError({ error: 'Unauthorized', message: response.statusText }),
+      );
+    }
+  };
+
   return {
-    getLoginResponse,
+    loginSuccess,
+    loginError,
   };
 };
 

@@ -29,7 +29,7 @@ const LoginUserEmailCode = () => {
   });
 
   const { userEmail } = useAppSelector((state) => state.login);
-  const { getLoginResponse } = useResponseLogin();
+  const { loginSuccess } = useResponseLogin();
 
   const onSubmit: SubmitHandler<ValidateForm> = async (data) => {
     const dataForm: ValidateAccessKeyRequest = {
@@ -44,12 +44,12 @@ const LoginUserEmailCode = () => {
   };
 
   useEffect(() => {
-    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, getLoginResponse);
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, loginSuccess);
 
     return () => {
       document.removeEventListener(
         AUTH_EVENTS.GET_SIGNUP_SUCCESS,
-        getLoginResponse,
+        loginSuccess,
       );
     };
   }, []);
