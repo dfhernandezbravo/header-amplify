@@ -58,9 +58,14 @@ const LoginUserEmail = ({ nextStep }: Props) => {
             error={Boolean(errors.email)}
             errorMessage={errors.email?.message}
             ref={null}
+            className="input-text"
           />
         )}
       />
+      <p className="text">
+        Te enviaremos el <strong>código de acceso</strong> a tu correo
+        electrónico
+      </p>
 
       <ButtonPrimary title="Continuar" type="submit" />
     </ModalForm>

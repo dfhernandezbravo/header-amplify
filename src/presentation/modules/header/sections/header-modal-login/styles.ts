@@ -1,5 +1,15 @@
 import styled, { keyframes } from 'styled-components';
 
+export const Container = styled.div`
+  display: flex;
+`;
+
+export const SocialLoginContainer = styled.div`
+  border-left: 2px solid #b4c2cb;
+  padding-left: 12px;
+  margin-left: 12px;
+`;
+
 export const ModalContent = styled.form`
   display: flex;
   flex-direction: column;
@@ -11,10 +21,26 @@ export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 12px 0px;
   width: 400px;
+
+  & .input-text {
+    font-size: 16px;
+  }
+
+  & .input-text:focus {
+    border-color: #000000;
+    outline: auto;
+  }
+
+  & .text {
+    font-size: 12px;
+  }
+
   & .info-text {
-    color: #485760;
+    color: #363f45;
+    padding: 0 3rem;
+    text-align: center;
+    font-size: 16px;
   }
 
   @media (max-width: 720px) {

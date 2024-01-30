@@ -6,7 +6,6 @@ export const ModalHeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  border-bottom: 1px solid #afafaf;
   padding: 12px 0px;
 
   & .title,
