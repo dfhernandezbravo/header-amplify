@@ -23,22 +23,13 @@ export const ModalForm = styled.form`
   gap: 16px;
   width: 400px;
 
-  & .input-text {
-    font-size: 16px;
-  }
-
-  & .input-text:focus {
-    border-color: #000000;
-    outline: auto;
-  }
-
   & .text {
     font-size: 12px;
   }
 
   & .info-text {
     color: #363f45;
-    padding: 0 3rem;
+    padding: 1rem 2rem;
     text-align: center;
     font-size: 16px;
   }
