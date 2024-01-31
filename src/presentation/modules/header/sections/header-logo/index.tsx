@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import useAnalytics from '@hooks/useAnalytics';
@@ -12,12 +11,17 @@ const HeaderLogo = () => {
   const router = useRouter();
   const { pathname } = router;
 
+  const handleRedirect = () => {
+    if (pathname.includes('cart')) router.back();
+    else router.push('/');
+  };
+
   return (
-    <Link
+    <div
+      style={{ cursor: 'pointer' }}
       className="logo"
-      href="/"
       onClick={() => {
-        router.push('/');
+        handleRedirect();
         sendEventAnalytics({
           event: 'interaccion',
           category: 'Interacciones Header',
@@ -33,7 +37,7 @@ const HeaderLogo = () => {
         height={60}
         title="Easy Home"
       />
-    </Link>
+    </div>
   );
 };
 
