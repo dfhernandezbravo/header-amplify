@@ -3,15 +3,20 @@ import InputPassword from '@components/atoms/inputs/input-password';
 import InputText from '@components/atoms/inputs/input-text';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch } from '@hooks/storeHooks';
+import { AUTH_EVENTS } from '@infra/events/auth';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
-import { navigateTo, setEmail } from '@store/login/slices/login-slice';
-import React, { useEffect } from 'react';
+import {
+  navigateTo,
+  setEmail,
+  setLoginError,
+} from '@store/login/slices/login-slice';
+import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import LoginErrors from '../../components/login-errors';
 import useResponseLogin from '../../hooks/use-response-login';
 import { ModalForm } from '../../styles';
 import { ButtonResetPassword, ResetPasswordContainer } from './styles';
-import { AUTH_EVENTS } from '@infra/events/auth';
 
 type LoginForm = {
   email: string;
@@ -37,30 +42,35 @@ const LoginUserPassword = () => {
   });
 
   const dispatch = useAppDispatch();
-  const { getLoginResponse } = useResponseLogin();
+  const { loginSuccess, loginError } = useResponseLogin();
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+    dispatch(setLoginError(null));
     dispatch(setEmail(data.email));
 
     customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
   };
 
   useEffect(() => {
-    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, getLoginResponse);
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, loginSuccess);
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
 
     return () => {
-      document.removeEventListener(
-        AUTH_EVENTS.GET_SIGNUP_SUCCESS,
-        getLoginResponse,
-      );
+      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginSuccess);
+      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
     };
   }, []);
 
   const watchEmail = watch('email');
   const watchPassword = watch('password');
 
+  useEffect(() => {
+    dispatch(setLoginError(null));
+  }, []);
+
   return (
     <ModalForm onSubmit={handleSubmit(onSubmit)}>
+      <LoginErrors />
       <Controller
         name="email"
         control={control}

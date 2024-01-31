@@ -99,14 +99,16 @@ const CategoriesDesktop = ({ categories }: Props) => {
             </CategoriesDetailTitle>
 
             <CategoriesDetailGrid>
-              {categorySelected?.categories.map((item) => (
-                <CategoryDetailItem
-                  category={item}
-                  key={item.id}
-                  onClickN2={handleClickN2}
-                  onClickN3={handleClickN3}
-                />
-              ))}
+              {categorySelected &&
+                categorySelected?.categories?.length > 0 &&
+                categorySelected?.categories.map((item) => (
+                  <CategoryDetailItem
+                    category={item}
+                    key={item.id}
+                    onClickN2={handleClickN2}
+                    onClickN3={handleClickN3}
+                  />
+                ))}
             </CategoriesDetailGrid>
           </CategoriesDetailContainer>
         )}

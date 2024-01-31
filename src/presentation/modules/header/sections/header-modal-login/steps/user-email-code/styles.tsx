@@ -5,11 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  & .info-text {
-    color: #363f45;
-    padding: 2rem 2rem 0 2rem;
-    text-align: center;
-  }
   & .custom-btn {
     margin-top: 2rem;
   }

@@ -36,42 +36,6 @@ const CookiesProvider = ({ children }: Props) => {
     validateAccessToken();
   }, [cookies.accessToken, cookies.softLogin, dispatch]);
 
-  // useEffect(() => {
-  //   const validateSocialLogin = window.location.search;
-  //   if (validateSocialLogin === '') return;
-  //   const cookies = validateSocialLogin?.replace('?', '').split('&');
-  //   const authStatus = cookies.includes('authStatus=success');
-  //   if (authStatus) {
-  //     const checkoutAndToken = getCheckoutAuthAndToken(cookies);
-  //     if (checkoutAndToken.checkoutAuth && checkoutAndToken.token) {
-  //       const paramToDelete = [
-  //         'authStatus',
-  //         'authCookieName',
-  //         'authCookieValue',
-  //         'accountAuthCookieName',
-  //         'accountAuthCookieValue',
-  //         'checkoutAuthCookieName',
-  //         'checkoutAuthCookieValue',
-  //         'jwtAuthCookieName',
-  //         'jwtAuthCookieValue',
-  //       ];
-  //       const decodeToken = decodeJWT(checkoutAndToken.token);
-  //       const email = decodeToken?.data?.email;
-  //       setCookie(
-  //         'checkoutAuth',
-  //         decodeURIComponent(checkoutAndToken.checkoutAuth),
-  //       );
-  //       setCookie('token', checkoutAndToken.token);
-  //       setCookie('user', email);
-  //       dispatch(setEmail(decodeURIComponent(email)));
-  //       dispatch(getCustomer(email));
-  //       dispatch(setLogin(true));
-  //       const newUrl = deleteSearParams(paramToDelete);
-  //       router.push(newUrl);
-  //     }
-  //   }
-  // }, [dispatch]);
-
   return <>{children}</>;
 };
 

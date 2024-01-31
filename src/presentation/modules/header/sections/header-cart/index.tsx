@@ -5,6 +5,7 @@ import { customDispatchEvent } from '@store/events/dispatchEvents';
 import useAnalyticsHeaderCart from './analytics';
 import { closeCategories } from '@store/category/slices/category-slice';
 import { useEffect, useState } from 'react';
+import { ShoppingCartItem } from '@cencosud-ds/easy-design-system';
 
 const HeaderCart = () => {
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
@@ -15,7 +16,8 @@ const HeaderCart = () => {
   useEffect(() => {
     if (shoppingCart && shoppingCart.items.length) {
       const totalQuantity = shoppingCart.items.reduce(
-        (accumulator, current) => accumulator + current.quantity,
+        (accumulator: number, current: ShoppingCartItem) =>
+          accumulator + current.quantity,
         0,
       );
       setQuantity(totalQuantity);

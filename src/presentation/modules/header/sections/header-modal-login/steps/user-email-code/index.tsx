@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useEffect, useState, useRef } from 'react';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { ValidateAccessKeyRequest } from '@entities/login/login.request';
@@ -7,21 +8,21 @@ import useResponseLogin from '../../hooks/use-response-login';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import generateAccessKey from '@use-cases/login/generate-access-key';
 import { Container, InputContainer } from './styles';
-import { setError } from '@store/error/slices/error-slice';
 import fotmatCountDown from '@modules/header/sections/header-modal-login/hooks/format-countdown';
 import ErrorMessage from '@components/atoms/error-message';
+import { AxiosError } from 'axios';
+import EmailCodeHeader from './component/header';
 
 let currentIndex = 0;
 const LoginUserEmailCode = () => {
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(120);
   const [inputsBox, setinputsBox] = useState<string[]>(new Array(6).fill(''));
   const [loading, setLoading] = useState(false);
   const [activeInputBox, setActiveInputBox] = useState(0);
+  const [error, setError] = useState(false);
   const { userEmail } = useAppSelector((state) => state.login);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { error } = useAppSelector((state) => state.error);
-
-  const { getLoginResponse } = useResponseLogin();
+  const { loginSuccess } = useResponseLogin();
 
   const onSubmit = async () => {
     const dataForm: ValidateAccessKeyRequest = {
@@ -65,7 +66,8 @@ const LoginUserEmailCode = () => {
   const resendAccessKey = () => {
     generateAccessKey({ email: userEmail });
     setCountdown(120);
-    setError(null);
+    setError(false);
+    setinputsBox(new Array(6).fill(''));
   };
 
   const handleOnKeyDown = (
@@ -76,6 +78,21 @@ const LoginUserEmailCode = () => {
     if (key === 'Backspace') {
       setActiveInputBox(currentIndex - 1);
     }
+  };
+
+  const handleError = (event: Event) => {
+    const customEvent = event as CustomEvent<{
+      error: AxiosError;
+    }>;
+    const {
+      detail: {
+        error: { response },
+      },
+    } = customEvent;
+    if (response?.status) {
+      setError(true);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -100,26 +117,21 @@ const LoginUserEmailCode = () => {
   useEffect(() => {
     document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, (event) => {
       setLoading(false);
-      getLoginResponse(event);
+      loginSuccess(event);
     });
-
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, handleError);
     return () => {
       document.removeEventListener(
         AUTH_EVENTS.GET_SIGNUP_SUCCESS,
-        getLoginResponse,
+        loginSuccess,
       );
+      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, handleError);
     };
   }, []);
 
   return (
     <Container onSubmit={() => onSubmit()}>
-      <span className="info-text">
-        Revisa tu correo electrónico
-        <br />
-        <strong>{userEmail},</strong>
-        <br />
-        Te hemos enviamos un código de acceso
-      </span>
+      <EmailCodeHeader />
       <InputContainer>
         {inputsBox.map((_, index) => {
           return (
@@ -151,5 +163,4 @@ const LoginUserEmailCode = () => {
     </Container>
   );
 };
-
 export default LoginUserEmailCode;

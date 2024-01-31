@@ -35,7 +35,7 @@ const LoginSetPassword = () => {
     },
   });
 
-  const { getLoginResponse } = useResponseLogin();
+  const { loginSuccess } = useResponseLogin();
 
   const onSubmit: SubmitHandler<SetPasswordForm> = async (data) => {
     const dataSetPassword: SetPasswordRequest = {
@@ -51,12 +51,12 @@ const LoginSetPassword = () => {
   };
 
   useEffect(() => {
-    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, getLoginResponse);
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, loginSuccess);
 
     return () => {
       document.removeEventListener(
         AUTH_EVENTS.GET_SIGNUP_SUCCESS,
-        getLoginResponse,
+        loginSuccess,
       );
     };
   }, []);
