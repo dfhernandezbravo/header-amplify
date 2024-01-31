@@ -16,10 +16,10 @@ const loginService: LoginService = {
       headers: { checkoutAuth: data.checkoutAuth },
     }),
 
-  getLoginMethods: () => bffWebInstance.get('/auth/socialLogin/providers'),
+  getLoginMethods: () => bffWebInstance.get('/auth/social-logins/providers'),
 
   socialLogin: (data) =>
-    bffWebInstance.post('auth/socialLogin/urlAuthProvider', data),
+    bffWebInstance.post('/auth/social-logins/providers', data),
 };
 
 export default loginService;
