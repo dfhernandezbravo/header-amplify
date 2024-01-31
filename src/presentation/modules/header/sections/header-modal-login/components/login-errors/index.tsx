@@ -1,10 +1,15 @@
 import { Error } from '@entities/errors';
 import { useAppSelector } from '@hooks/storeHooks';
 import React from 'react';
-import LoginUnauthorized from './errors/unauthorized';
+import ErrorMessageTooltip from '@components/atoms/error-message-tooltip';
 
 const ErrorsComponents: Record<Error, React.ReactNode> = {
-  Unauthorized: <LoginUnauthorized />,
+  Unauthorized: (
+    <ErrorMessageTooltip
+      title="Datos Incorrectos"
+      description="El correo o contraseña son incorrectos. Por favor, vuelve a intentar."
+    />
+  ),
   InternalServerError: <div>Error</div>,
 };
 

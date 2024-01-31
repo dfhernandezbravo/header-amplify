@@ -1,27 +1,30 @@
+import { useEffect } from 'react';
+import { useAppDispatch } from '@hooks/storeHooks';
 import Image from 'next/image';
-import { Container } from './styles';
-
+import { Container, ErrorText } from './styles';
+import { setError } from '@store/error/slices/error-slice';
 interface ErrorMessageProps {
-  title: string;
-  description: string;
+  message: string;
 }
 
-const ErrorMessage = ({ title, description }: ErrorMessageProps) => {
+const ErrorMessage = ({ message }: ErrorMessageProps) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(setError(null));
+    }, 10000);
+  }, []);
+
   return (
     <Container>
-      <div>
-        <Image
-          src="/icons/general/error-icon-red.svg"
-          width={20}
-          height={20}
-          alt="error-icon"
-          className="error-icon"
-        />
-      </div>
-      <div>
-        <p className="title">{title}</p>
-        <p className="description">{description}</p>
-      </div>
+      <Image
+        src="/icons/general/error-icon-red.svg"
+        alt="error"
+        width={20}
+        height={20}
+      />
+      <ErrorText>{message}</ErrorText>
     </Container>
   );
 };

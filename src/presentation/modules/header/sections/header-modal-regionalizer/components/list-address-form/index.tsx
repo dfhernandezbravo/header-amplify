@@ -16,7 +16,6 @@ import NewAddressForm from '../new-address-form';
 import RadioButtonAddress from '../radio-input-address';
 import mapDataListAddressForm from './map-data-request';
 import {
-  ButtonContainer,
   ButtonNewAddress,
   HeaderNewAddressContainer,
   ListAddressContainer,
@@ -118,14 +117,12 @@ const ListAddressForm = () => {
       <ButtonNewAddress onClick={() => setStep('new-address')}>
         Elegir otra ubicación
       </ButtonNewAddress>
-      <ButtonContainer isLoading={isLoadingRegionalizer}>
-        <ButtonPrimary
-          className="add-location-button"
-          title={!isLoadingRegionalizer ? 'Guardar mi ubicación' : ''}
-          disabled={!selectedAddress || isLoadingRegionalizer}
-          onClick={handleOnClick}
-        />
-      </ButtonContainer>
+      <ButtonPrimary
+        title={!isLoadingRegionalizer ? 'Guardar mi ubicación' : ''}
+        disabled={!selectedAddress || isLoadingRegionalizer}
+        onClick={handleOnClick}
+        isLoading={isLoadingRegionalizer}
+      />
     </ListAddressFormContainer>
   ) : (
     <NewAddressForm header={<HeaderNewAddress />} />
