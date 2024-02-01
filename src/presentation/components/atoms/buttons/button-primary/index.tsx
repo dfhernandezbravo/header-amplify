@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import { Button } from './styles';
+import { Button, ButtonContainer } from './styles';
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -7,13 +7,16 @@ interface Props
     HTMLButtonElement
   > {
   title: string;
+  isLoading?: boolean;
 }
 
-const ButtonPrimary: React.FC<Props> = ({ title, ...rest }) => {
+const ButtonPrimary: React.FC<Props> = ({ title, isLoading, ...rest }) => {
   return (
-    <Button {...rest} ref={null}>
-      {title}
-    </Button>
+    <ButtonContainer isLoading={isLoading ?? false}>
+      <Button className="custom-btn" {...rest} ref={null}>
+        {title}
+      </Button>
+    </ButtonContainer>
   );
 };
 

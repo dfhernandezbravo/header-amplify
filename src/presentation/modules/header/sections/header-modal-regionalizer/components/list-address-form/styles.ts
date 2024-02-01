@@ -1,13 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
-
-type ButtonProps = {
-  isLoading: boolean;
-};
-
-const spin = keyframes`
-    0%{transform: rotate(0deg);}
-    100%{transform: rotate(360deg);}
-`;
+import styled from 'styled-components';
 
 export const ListAddressFormContainer = styled.div`
   display: flex;
@@ -62,28 +53,4 @@ export const HeaderNewAddressContainer = styled.div`
   flex-direction: row;
   gap: 12px;
   align-items: center;
-`;
-
-export const ButtonContainer = styled.div<ButtonProps>`
-  & .add-location-button {
-    position: relative;
-    min-height: 42px;
-    ${({ isLoading }) =>
-      isLoading &&
-      css`
-        &::before {
-          content: '';
-          position: absolute;
-          top: 15%;
-          left: 46%;
-          display: block;
-          border: 4px solid rgb(175, 19, 17);
-          width: 25px;
-          height: 25px;
-          border-radius: 50%;
-          border-left-color: #ffffff;
-          animation: ${spin} 1s linear infinite;
-        }
-      `}
-  }
 `;

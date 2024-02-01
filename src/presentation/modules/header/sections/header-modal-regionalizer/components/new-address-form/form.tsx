@@ -4,7 +4,7 @@ import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entit
 import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
-import { ButtonContainer, FormComtainer, SelectWrapper } from './styles';
+import { FormComtainer, SelectWrapper } from './styles';
 import { NewAddressFormType } from './types';
 
 interface Props {
@@ -99,14 +99,12 @@ const NewAddressForm = ({
           )}
         />
       </SelectWrapper>
-      <ButtonContainer isLoading={isLoadingForm}>
-        <ButtonPrimary
-          className="add-location-button"
-          type="submit"
-          disabled={!isValid || isLoadingForm}
-          title={isLoadingForm ? '' : 'Guardar Ubicación'}
-        />
-      </ButtonContainer>
+      <ButtonPrimary
+        type="submit"
+        disabled={!isValid || isLoadingForm}
+        title={isLoadingForm ? '' : 'Guardar Ubicación'}
+        isLoading={isLoadingForm}
+      />
     </FormComtainer>
   );
 };

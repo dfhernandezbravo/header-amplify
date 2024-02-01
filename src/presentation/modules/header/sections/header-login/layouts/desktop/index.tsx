@@ -1,9 +1,10 @@
+import { useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Desktop from '@components/layout/desktop';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { closeCategories } from '@store/category/slices/category-slice';
 import { openModalLogin } from '@store/login/slices/login-slice';
-import Image from 'next/image';
-import { useState } from 'react';
 import LoginButton from '../../components/login-button';
 import LoginMenu from '../../components/login-menu';
 import { LoginContainerDesktop, LoginInformation } from '../../styles';
@@ -13,10 +14,13 @@ const HeaderLoginDesktop = () => {
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const isLogged = shoppingCart?.loggedIn;
   const handleLogin = () => {
-    if (isLogged) return;
+    if (isLogged) {
+      return router.push('/account/profile');
+    }
     dispatch(closeCategories());
     dispatch(openModalLogin());
   };

@@ -1,17 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
   display: flex;
-  gap: 14px;
-  align-items: center;
-  background-color: #f8bcba;
-  padding: 4px;
-  border-radius: 8px;
+  gap: 5px;
+  width: 87%;
+  padding-top: 0.4rem;
+`;
 
-  & .title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #363f45;
-  }
+export const ErrorText = styled.span`
+  color: #9e1515;
+  font-size: 12px;
+  font-weight: 600;
 `;

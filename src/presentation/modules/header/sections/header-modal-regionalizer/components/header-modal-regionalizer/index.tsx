@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { HeaderModalRegionalizerContainer, ModalIconButton } from './styles';
 import { useAppSelector } from '@hooks/storeHooks';
-import ErrorMessage from '@components/atoms/error-message';
+import ErrorMessage from '@components/atoms/error-message-tooltip';
 
 interface Props {
   title?: string;
