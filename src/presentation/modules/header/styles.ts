@@ -6,7 +6,7 @@ export const HeaderContainerWrapper = styled.div<{ visible: boolean }>`
   top: 0;
   left: 0;
   width: 100%;
-  background-color: ${(props) => props.theme.colors.primary.main};
+  background-color: #ae1311;
   transition: transform 0.6s ease-in-out;
   transform: ${({ visible }) =>
     visible ? 'translateY(0)' : 'translateY(-100%)'};

@@ -28,7 +28,7 @@ export const PopupDescription = styled.div`
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
-  font-family: ${({ theme: { fontFamily } }) => fontFamily.openSans};
+  font-family: 'Open Sans';
 
   & .header {
     display: flex;

@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import { PasswordFormat } from '../..';
 import { Container, ValidatorContainer } from './styles';
+import { PasswordFormat } from '../../types';
 
 interface RequirePasswordProps {
   validator: PasswordFormat;
 }
-
 interface ValidatorProps {
   text: string;
   isValid: boolean;

@@ -1,4 +1,4 @@
-import { PasswordFormat } from '..';
+import { PasswordFormat } from '../types';
 
 const inputValidator = (value: string, validateInput: PasswordFormat) => {
   const hasLowercase = /[a-z]/.test(value);

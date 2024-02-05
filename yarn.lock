@@ -132,10 +132,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@ccom-easy-design-system/atoms.textfield@0.0.4":
-  version "0.0.4"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.4.tgz#caae6f498951cdbf5d244b0c356b7350940b7c67"
-  integrity sha512-6e2L8Ey+rhl/wI98OOSZ6iPHpfxU7nFXH6QinHEWIOIfiQHMQ2Ora5MA2jLtTe8/IKfkr3g6FtHPDiiSrywNlg==
+"@ccom-easy-design-system/atoms.textfield@^0.0.13":
+  version "0.0.13"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.13.tgz#e25c106dea772558e649c139e655d5fc9b42cb74"
+  integrity sha512-wH1xIhnmaV7nDARKEQX8pQy3u3c1T+mrHPPTPcCPqRZrr1zScUnf+NbYi6CQMSoMvGIJmpXpCh2O7Z34sVP9mQ==
   dependencies:
     "@ccom-easy-design-system/atoms.tooltip" "0.0.2"
     react-icons "^5.0.1"

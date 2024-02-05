@@ -19,6 +19,7 @@ type LoginState = {
   socialMethods: SocialLogin[];
   authCookies: AuthCookie[];
   userEmail: string;
+  userPassword: string;
   error: AppError | null;
 };
 
@@ -29,6 +30,7 @@ const initialState: LoginState = {
   loginStep: 'Methods',
   authCookies: [],
   userEmail: '',
+  userPassword: '',
   error: null,
   loginMethods: [
     {
@@ -65,6 +67,9 @@ const loginSlice = createSlice({
     setEmail: (state, { payload }: { payload: string }) => {
       state.userEmail = payload;
     },
+    setPassword: (state, { payload }: { payload: string }) => {
+      state.userPassword = payload;
+    },
     setAuthCookies: (state, { payload }: { payload: AuthCookie[] }) => {
       state.authCookies = [...state.authCookies, ...payload];
     },
@@ -88,6 +93,7 @@ export const {
   closeModalLogin,
   navigateTo,
   setEmail,
+  setPassword,
   setLogin,
   setAuthCookies,
   setLoginError,

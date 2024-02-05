@@ -1,19 +1,12 @@
 import store, { persistor } from '@store/index';
-import { themeStyled } from '@theme/index';
+import dynamic from 'next/dynamic';
+// import { themeStyled } from '@theme/index';
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { ThemeProvider } from 'styled-components';
-
-// const EasyThemeProvider = dynamic(
-//   () =>
-//     import("@ccom-easy-design-system/theme.theme-provider").then(
-//       (module) => module.EasyThemeProvider
-//     ),
-//   { ssr: false }
-// );
+// import { ThemeProvider } from 'styled-components';
 
 interface Props {
   children: React.ReactNode;
@@ -27,13 +20,22 @@ const queryClient = new QueryClient({
   },
 });
 
+const EasyThemeProvider = dynamic(
+  () =>
+    import('@ccom-easy-design-system/theme.theme-provider').then(
+      (module) => module.EasyThemeProvider,
+    ),
+  { ssr: false },
+);
+
 const ProvidersLayout = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <CookiesProvider>
-            <ThemeProvider theme={themeStyled}>{children}</ThemeProvider>
+            {/* <ThemeProvider theme={themeStyled}>{children}</ThemeProvider> */}
+            <EasyThemeProvider>{children}</EasyThemeProvider>
           </CookiesProvider>
         </PersistGate>
       </Provider>

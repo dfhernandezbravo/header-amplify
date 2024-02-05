@@ -1,20 +1,16 @@
-import { useContext } from 'react';
-import CreateAccountContext from '../../context/create-account-context';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
 import { navigateTo } from '@store/login/slices/login-slice';
 import generateAccessKey from '@use-cases/login/generate-access-key';
 import { Container } from './styles';
 
 const SendUserCode = () => {
-  const {
-    formValues: { email },
-  } = useContext(CreateAccountContext);
+  const { userEmail } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
 
   const handleOnClick = async () => {
     try {
-      await generateAccessKey({ email });
+      await generateAccessKey({ email: userEmail });
       dispatch(navigateTo('EmailCode'));
     } catch (error) {
       console.log('error', error);

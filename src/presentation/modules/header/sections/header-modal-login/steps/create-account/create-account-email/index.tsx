@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import CreateAccountContext from '../../context/create-account-context';
 import InputText from '@components/atoms/inputs/input-text';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch } from '@hooks/storeHooks';
-import { navigateTo } from '@store/login/slices/login-slice';
+import { navigateTo, setEmail } from '@store/login/slices/login-slice';
 import { Container, InputContainer } from './styles';
 
 const schema = yup.object({
@@ -21,7 +19,6 @@ type EmailForm = {
 };
 
 const CreateAccountEmail = () => {
-  const { formValues, handleFormValues } = useContext(CreateAccountContext);
   const dispatch = useAppDispatch();
 
   const {
@@ -33,10 +30,7 @@ const CreateAccountEmail = () => {
   });
 
   const handleOnClick: SubmitHandler<EmailForm> = (data) => {
-    handleFormValues({
-      ...formValues,
-      email: data.email,
-    });
+    dispatch(setEmail(data.email));
     dispatch(navigateTo('creadAccountUserPassword'));
   };
 

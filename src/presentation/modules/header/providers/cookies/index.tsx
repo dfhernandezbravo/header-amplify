@@ -20,7 +20,7 @@ const CookiesProvider = ({ children }: Props) => {
     const validateAccessToken = async () => {
       if (cookies.accessToken) {
         const response = await dispatch(getCustomer());
-        if ((response.payload as Customer).firstName) {
+        if ((response.payload as Customer)?.firstName) {
           const currentDate = new Date();
           const expirationDate = new Date(
             currentDate.getFullYear() + 1,
