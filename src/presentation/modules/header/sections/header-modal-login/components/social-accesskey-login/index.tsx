@@ -36,7 +36,7 @@ const SocialAccessKeyLogin = () => {
       ))}
       <NewAccountContainer>
         <ButtonNewAccount
-          onClick={() => dispatch(navigateTo('EmailSetPassword'))}
+          onClick={() => dispatch(navigateTo('createAccountEmail'))}
         >
           <LinkNewAccountText>¿No tienes cuenta?</LinkNewAccountText>
           <LinkNewAccount>Crear cuenta </LinkNewAccount>

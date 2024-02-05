@@ -4,6 +4,9 @@ import LoginUserEmail from './user-email';
 import LoginUserEmailCode from './user-email-code';
 import LoginUserPassword from './user-password';
 import LoginSetPassword from './user-set-password';
+import CreateAccountEmail from './create-account/create-account-email';
+import CreateAccountUserPassword from './create-account/create-account-password';
+import SendUserCode from './create-account/send-user-code';
 
 export const loginSteps: LoginStep = {
   Email: <LoginUserEmail nextStep="EmailCode" />,
@@ -12,4 +15,7 @@ export const loginSteps: LoginStep = {
   SetPassword: <LoginSetPassword />,
   EmailCode: <LoginUserEmailCode />,
   EmailSetPassword: <LoginUserEmail nextStep="SetPassword" />,
+  createAccountEmail: <CreateAccountEmail />,
+  creadAccountUserPassword: <CreateAccountUserPassword />,
+  sendUserCode: <SendUserCode />,
 };

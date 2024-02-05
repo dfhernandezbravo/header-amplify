@@ -7,6 +7,14 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
 
+// const EasyThemeProvider = dynamic(
+//   () =>
+//     import("@ccom-easy-design-system/theme.theme-provider").then(
+//       (module) => module.EasyThemeProvider
+//     ),
+//   { ssr: false }
+// );
+
 interface Props {
   children: React.ReactNode;
 }
