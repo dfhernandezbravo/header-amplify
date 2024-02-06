@@ -1,40 +1,28 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '@hooks/storeHooks';
-import { AUTHCOOKIES } from '@infra/cookies';
-import getCustomer from '@use-cases/customer/get-customer';
+import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
 import { useCookies } from 'react-cookie';
-import { Customer } from '@entities/customer/customer.entity';
+import { setCustomer } from '@store/customer/slices/customer-slice';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const CookiesProvider = ({ children }: Props) => {
-  const [cookies, setCookies] = useCookies([
-    AUTHCOOKIES.ACCESS_TOKEN,
-    'softLogin',
-  ]);
   const dispatch = useAppDispatch();
+  // const  { customer  } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
+  const [_cookie, setCookie, removeCookie] = useCookies(['softLogin']);
 
   useEffect(() => {
-    const validateAccessToken = async () => {
-      if (cookies.accessToken) {
-        const response = await dispatch(getCustomer());
-        if ((response.payload as Customer).firstName) {
-          const currentDate = new Date();
-          const expirationDate = new Date(
-            currentDate.getFullYear() + 1,
-            currentDate.getMonth(),
-            currentDate.getDate(),
-          );
-          const softLoginValue = (response.payload as Customer).firstName;
-          setCookies('softLogin', softLoginValue, { expires: expirationDate });
-        }
-      }
-    };
-
-    validateAccessToken();
-  }, [cookies.accessToken, cookies.softLogin, dispatch]);
+    if (shoppingCart?.loggedIn) {
+      // dispatch(getCustomer())
+      const { firstName } = shoppingCart.customer;
+      setCookie('softLogin', firstName);
+    } else {
+      dispatch(setCustomer(null));
+      removeCookie('softLogin');
+    }
+  }, [shoppingCart]);
 
   return <>{children}</>;
 };
