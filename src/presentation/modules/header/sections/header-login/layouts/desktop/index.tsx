@@ -19,7 +19,10 @@ const HeaderLoginDesktop = () => {
   const isLogged = shoppingCart?.loggedIn;
   const handleLogin = () => {
     if (isLogged) {
-      return router.push('/account/profile');
+      return router.push({
+        pathname: '/account/[content]',
+        query: { content: 'profile' },
+      });
     }
     dispatch(closeCategories());
     dispatch(openModalLogin());
