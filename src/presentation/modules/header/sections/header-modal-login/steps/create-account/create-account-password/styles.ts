@@ -34,6 +34,12 @@ export const InputContainer = styled.div`
     font-size: 14px;
     font-weight: 600;
   }
+
+  & .password-not-same {
+    color: #79110d;
+    font-size: 14px;
+    font-weight: 600;
+  }
 `;
 
 export const ConditionContainer = styled.div`
@@ -41,6 +47,7 @@ export const ConditionContainer = styled.div`
   gap: 5px;
   margin: 1rem 0;
   align-items: center;
+  justify-content: center;
 
   & .checkbox {
     width: 18px;
@@ -48,5 +55,10 @@ export const ConditionContainer = styled.div`
   }
   & .checkbox:checked {
     background-color: #485760;
+    font-weight: 600;
+  }
+
+  & .link {
+    color: #363f45;
   }
 `;

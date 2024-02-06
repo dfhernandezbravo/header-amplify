@@ -1,25 +1,19 @@
 import React, { ChangeEvent, useMemo, useState } from 'react';
+import Link from 'next/link';
 import inputValidator from './hooks/inputValidator';
 import RequirePassword from './components/require-password';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { useAppDispatch } from '@hooks/storeHooks';
 import { navigateTo, setPassword } from '@store/login/slices/login-slice';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { PasswordFormat, passwordFormat } from './types';
 import { ConditionContainer, Container, InputContainer } from './styles';
-
-const TextField = dynamic(
-  () =>
-    import('@ccom-easy-design-system/atoms.textfield').then(
-      (module) => module.Textfield,
-    ),
-  { ssr: false },
-);
+import InputText from '@components/atoms/inputs/input-text';
+import InputCheckbox from '@components/atoms/inputs/input-checkbox';
 
 const CreateAccountUserPassword = () => {
   const [passwordInput, setPasswordInput] = useState('');
   const [passwordRepeated, setPasswordRepeated] = useState('');
+  const [errorSamePassword, setErrorSamePassword] = useState(false);
   const [validateInput, setValidateInput] =
     useState<PasswordFormat>(passwordFormat);
   const [termAndConditionAccepted, setTermAndConditionAccepted] =
@@ -32,8 +26,9 @@ const CreateAccountUserPassword = () => {
   const dispatch = useAppDispatch();
 
   const handleOnClick = () => {
+    setErrorSamePassword(false);
     if (passwordInput !== passwordRepeated) {
-      console.log('Las contraseñas no coinciden');
+      setErrorSamePassword(true);
       return;
     }
     dispatch(setPassword(passwordInput));
@@ -58,9 +53,9 @@ const CreateAccountUserPassword = () => {
     <Container>
       <p className="title"> Crear contraseña</p>
       <InputContainer>
-        <TextField
+        <InputText
           className="input"
-          label="Contraseña"
+          placeholder="Contraseña"
           type={showInputTexts.password ? 'text' : 'password'}
           value={passwordInput}
           onChange={handlePassword}
@@ -78,13 +73,16 @@ const CreateAccountUserPassword = () => {
         </p>
       </InputContainer>
       <InputContainer>
-        <TextField
+        <InputText
           className="input"
-          label="Repetir contraseña"
+          placeholder="Repetir contraseña"
           type={showInputTexts.passwordRepeated ? 'text' : 'password'}
           value={passwordRepeated}
           onChange={(event) => setPasswordRepeated(event.target.value)}
         />
+        {errorSamePassword && (
+          <p className="password-not-same">La contraseña no coincide</p>
+        )}
         <p
           className="show-hide-input"
           onClick={() =>
@@ -99,13 +97,20 @@ const CreateAccountUserPassword = () => {
       </InputContainer>
       {!isValidInput && <RequirePassword validator={validateInput} />}
       <ConditionContainer>
-        <input
+        <InputCheckbox
+          checked={termAndConditionAccepted}
+          onChange={(event) =>
+            setTermAndConditionAccepted(event.target.checked)
+          }
+          label=""
+        />
+        {/* <input
           className="checkbox"
           type="checkbox"
           onChange={(event) =>
             setTermAndConditionAccepted(event.target.checked)
           }
-        />
+        /> */}
         <p className="term-and-condition">
           acepto los{' '}
           <Link

@@ -24,10 +24,13 @@ const CreateAccountEmail = () => {
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<EmailForm>({
     resolver: yupResolver(schema),
   });
+
+  const emailValue = watch('email');
 
   const handleOnClick: SubmitHandler<EmailForm> = (data) => {
     dispatch(setEmail(data.email));
@@ -54,7 +57,11 @@ const CreateAccountEmail = () => {
           )}
         />
       </InputContainer>
-      <ButtonPrimary title="Continuar" onClick={handleSubmit(handleOnClick)} />
+      <ButtonPrimary
+        title="Continuar"
+        onClick={handleSubmit(handleOnClick)}
+        disabled={!emailValue}
+      />
     </Container>
   );
 };
