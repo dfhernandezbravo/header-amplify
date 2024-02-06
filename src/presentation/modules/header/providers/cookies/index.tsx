@@ -9,13 +9,11 @@ interface Props {
 
 const CookiesProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
-  // const  { customer  } = useAppSelector((state) => state.customer);
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const [_cookie, setCookie, removeCookie] = useCookies(['softLogin']);
 
   useEffect(() => {
     if (shoppingCart?.loggedIn) {
-      // dispatch(getCustomer())
       const { firstName } = shoppingCart.customer;
       setCookie('softLogin', firstName);
     } else {
