@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Desktop from '@components/layout/desktop';
@@ -17,6 +17,9 @@ const HeaderLoginDesktop = () => {
   const router = useRouter();
 
   const isLogged = shoppingCart?.loggedIn;
+
+  console.log('isLogged desde header-->', isLogged);
+
   const handleLogin = () => {
     if (isLogged) {
       return router.push({
@@ -27,6 +30,12 @@ const HeaderLoginDesktop = () => {
     dispatch(closeCategories());
     dispatch(openModalLogin());
   };
+
+  useEffect(() => {
+    if (router?.pathname?.includes('/account') && isLogged === false) {
+      dispatch(openModalLogin());
+    }
+  }, [router, isLogged]);
 
   return (
     <Desktop>

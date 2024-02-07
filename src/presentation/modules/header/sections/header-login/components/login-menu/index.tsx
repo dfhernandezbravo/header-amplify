@@ -22,7 +22,7 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
     cookies.remove('softLogin');
     customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
     dispatch(getCustomer());
-    if (router.pathname.includes('/account')) {
+    if (router?.pathname?.includes('/account')) {
       router.push('/');
     }
   };
