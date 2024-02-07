@@ -74,9 +74,9 @@ const CategoriesDesktop = ({ categories }: Props) => {
     <Desktop>
       <CategoriesDesktopContainer isOpen={!!categorySelected}>
         <CategoriesItemsContainer>
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <CategoryItem
-              key={category.id}
+              key={`${category.id}-${index}`}
               onHover={handleHover}
               onClick={handleClickN1}
               category={category}

@@ -7,6 +7,7 @@ import {
   MenuCategories,
   ModalCategories,
 } from '@modules/header/sections/header-categories';
+import HeaderInformation from '@modules/header/sections/header-information';
 import HeaderLocation from '@modules/header/sections/header-location';
 import HeaderLogin from '@modules/header/sections/header-login';
 import HeaderLogo from '@modules/header/sections/header-logo';
@@ -21,7 +22,6 @@ import {
   HeaderDesktopSearchSection,
   SecondRow,
 } from './styles';
-import HeaderInformation from '@modules/header/sections/header-information';
 
 interface Props {
   modules: Modules;
