@@ -11,6 +11,7 @@ interface Props {
 const ModalRegionalizer = ({ isOpen, onClose }: Props) => {
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const isUserLogged = shoppingCart?.loggedIn;
+
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
       {isUserLogged ? (

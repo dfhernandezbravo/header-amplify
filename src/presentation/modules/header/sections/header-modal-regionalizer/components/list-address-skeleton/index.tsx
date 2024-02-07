@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from './style';
 import { Skeleton } from '@cencosud-ds/easy-design-system';
 
-const RegionalizerSkeleton = () => {
+const ListAddressSkeleton = () => {
   return (
     <Container>
       <Skeleton
@@ -27,4 +27,4 @@ const RegionalizerSkeleton = () => {
   );
 };
 
-export default RegionalizerSkeleton;
+export default ListAddressSkeleton;
