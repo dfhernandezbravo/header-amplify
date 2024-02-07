@@ -4,7 +4,10 @@ import { useRouter } from 'next/router';
 import Desktop from '@components/layout/desktop';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { closeCategories } from '@store/category/slices/category-slice';
-import { openModalLogin } from '@store/login/slices/login-slice';
+import {
+  closeModalLogin,
+  openModalLogin,
+} from '@store/login/slices/login-slice';
 import LoginButton from '../../components/login-button';
 import LoginMenu from '../../components/login-menu';
 import { LoginContainerDesktop, LoginInformation } from '../../styles';
@@ -18,8 +21,6 @@ const HeaderLoginDesktop = () => {
 
   const isLogged = shoppingCart?.loggedIn;
 
-  console.log('isLogged desde header-->', isLogged);
-
   const handleLogin = () => {
     if (isLogged) {
       return router.push({
@@ -32,10 +33,19 @@ const HeaderLoginDesktop = () => {
   };
 
   useEffect(() => {
+    console.log('ROUTER>', router);
     if (router?.pathname?.includes('/account') && isLogged === false) {
-      dispatch(openModalLogin());
+      setTimeout(() => {
+        dispatch(openModalLogin());
+      }, 0);
     }
   }, [router, isLogged]);
+
+  useEffect(() => {
+    if (router?.pathname === '/') {
+      dispatch(closeModalLogin());
+    }
+  }, []);
 
   return (
     <Desktop>
