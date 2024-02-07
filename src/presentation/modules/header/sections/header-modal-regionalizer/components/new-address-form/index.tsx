@@ -16,6 +16,7 @@ import { NewAddressFormContainer } from './styles';
 import { NewAddressFormType } from './types';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import { WindowsEvents } from '@events/index';
+import RegionalizerSkeleton from '../regionalizer-skeleton';
 
 interface Props {
   header?: React.ReactNode;
@@ -60,8 +61,6 @@ const NewAddress = ({ header }: Props) => {
     }
   };
 
-  if (!regions) return <div>No hay regiones</div>;
-
   return (
     <NewAddressFormContainer>
       {header}
@@ -71,12 +70,16 @@ const NewAddress = ({ header }: Props) => {
         seleccionados
       </p>
 
-      <NewAddressForm
-        regions={regions}
-        handleOnSubmit={handleOnSubmit}
-        isLoadingForm={isLoadingRegionalizer}
-        addressSelected={addressSelected}
-      />
+      {regions?.length ? (
+        <NewAddressForm
+          regions={regions}
+          handleOnSubmit={handleOnSubmit}
+          isLoadingForm={isLoadingRegionalizer}
+          addressSelected={addressSelected}
+        />
+      ) : (
+        <RegionalizerSkeleton />
+      )}
     </NewAddressFormContainer>
   );
 };
