@@ -10,6 +10,8 @@ import {
 import { createSlice } from '@reduxjs/toolkit';
 import getLoginMethods from '@use-cases/login/get-login-methods';
 
+type CreateAccountFlow = 'create account' | 'forgot password' | null;
+
 type LoginState = {
   isOpenModalLogin: boolean;
   isLoading: boolean;
@@ -20,6 +22,7 @@ type LoginState = {
   authCookies: AuthCookie[];
   userEmail: string;
   userPassword: string;
+  createAccountFlow: CreateAccountFlow;
   error: AppError | null;
 };
 
@@ -31,6 +34,7 @@ const initialState: LoginState = {
   authCookies: [],
   userEmail: '',
   userPassword: '',
+  createAccountFlow: null,
   error: null,
   loginMethods: [
     {
@@ -79,6 +83,12 @@ const loginSlice = createSlice({
     setLoginError: (state, { payload }: { payload: AppError | null }) => {
       state.error = payload;
     },
+    setCreateAccountFlow: (
+      state,
+      { payload }: { payload: CreateAccountFlow },
+    ) => {
+      state.createAccountFlow = payload;
+    },
   },
   // use cases
   extraReducers: (builder) => {
@@ -97,6 +107,7 @@ export const {
   setLogin,
   setAuthCookies,
   setLoginError,
+  setCreateAccountFlow,
 } = loginSlice.actions;
 
 export default loginSlice;

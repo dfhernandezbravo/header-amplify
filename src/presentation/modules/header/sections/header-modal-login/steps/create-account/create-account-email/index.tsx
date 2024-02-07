@@ -3,9 +3,10 @@ import InputText from '@components/atoms/inputs/input-text';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
 import { navigateTo, setEmail } from '@store/login/slices/login-slice';
 import { Container, InputContainer } from './styles';
+// import dynamic from 'next/dynamic';
 
 const schema = yup.object({
   email: yup
@@ -18,7 +19,20 @@ type EmailForm = {
   email: string;
 };
 
+// const TextField = dynamic(
+//   () =>
+//     import("@ccom-easy-design-system/atoms.textfield").then(
+//       (module) => module.Textfield
+//     ),
+//   { ssr: false, loading: () => <></> }
+// );
+
 const CreateAccountEmail = () => {
+  const { createAccountFlow } = useAppSelector((state) => state.login);
+  const title =
+    createAccountFlow === 'create account'
+      ? 'Crear cuenta'
+      : 'Recuperar contraseña';
   const dispatch = useAppDispatch();
 
   const {
@@ -39,7 +53,7 @@ const CreateAccountEmail = () => {
 
   return (
     <Container>
-      <p className="title">Crear cuenta</p>
+      <p className="title">{title}</p>
       <InputContainer>
         <Controller
           name="email"
