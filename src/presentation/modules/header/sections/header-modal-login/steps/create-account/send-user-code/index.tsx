@@ -1,8 +1,8 @@
-import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
 import { navigateTo } from '@store/login/slices/login-slice';
 import generateAccessKey from '@use-cases/login/generate-access-key';
 import { Container } from './styles';
+import Button from '@components/atoms/button-bit';
 
 const SendUserCode = () => {
   const { userEmail } = useAppSelector((state) => state.login);
@@ -23,11 +23,11 @@ const SendUserCode = () => {
         <p>
           Para confirmar tu identidad vamos a enviar un código de verificación a
         </p>
-        {/* <strong>{formValues.email}</strong> */}
-        <strong>jose.martinez.mayora@gmail.com</strong>
+        <strong>{userEmail}</strong>
       </div>
-      <ButtonPrimary
-        title="Enviar código"
+      <Button
+        label="Enviar código"
+        fullwidth={true}
         onClick={() => {
           handleOnClick();
         }}

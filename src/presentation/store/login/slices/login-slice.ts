@@ -15,7 +15,6 @@ type CreateAccountFlow = 'create account' | 'forgot password' | null;
 type LoginState = {
   isOpenModalLogin: boolean;
   isLoading: boolean;
-  isLogged: boolean;
   loginStep: keyof LoginStep;
   loginMethods: LoginMethods[];
   socialMethods: SocialLogin[];
@@ -29,7 +28,6 @@ type LoginState = {
 const initialState: LoginState = {
   isOpenModalLogin: false,
   isLoading: false,
-  isLogged: false,
   loginStep: 'Methods',
   authCookies: [],
   userEmail: '',
@@ -77,9 +75,6 @@ const loginSlice = createSlice({
     setAuthCookies: (state, { payload }: { payload: AuthCookie[] }) => {
       state.authCookies = [...state.authCookies, ...payload];
     },
-    setLogin: (state, { payload }: { payload: boolean }) => {
-      state.isLogged = payload;
-    },
     setLoginError: (state, { payload }: { payload: AppError | null }) => {
       state.error = payload;
     },
@@ -104,7 +99,6 @@ export const {
   navigateTo,
   setEmail,
   setPassword,
-  setLogin,
   setAuthCookies,
   setLoginError,
   setCreateAccountFlow,

@@ -11,6 +11,7 @@ import customerSlice from './customer/slices/customer-slice';
 import errorSlice from './error/slices/error-slice';
 import shoppingCartSlice from './shopping-cart/slices/shopping-cart-slice';
 import regionalizerSlice from './regionalizer/slices/regionalizer-slice';
+// import login from '@use-cases/login/login';
 
 const persistShoppingCartConfig = {
   key: 'shopping-cart-header',
@@ -22,10 +23,10 @@ const persistRegionalizerConfig = {
   storage,
 };
 
-const persistLoginConfig = {
-  key: 'login',
-  storage,
-};
+// const persistLoginConfig = {
+//   key: 'login',
+//   storage,
+// };
 
 const persistSearchConfig = {
   key: 'search',
@@ -42,7 +43,7 @@ const regionalizerReducer = persistReducer(
   regionalizerSlice.reducer,
 );
 
-const loginReducer = persistReducer(persistLoginConfig, loginSlice.reducer);
+// const loginReducer = persistReducer(persistLoginConfig, loginSlice.reducer);
 
 const searchReducer = persistReducer(persistSearchConfig, searchSlice.reducer);
 
@@ -51,7 +52,7 @@ const store = configureStore({
     cart: cartSlice.reducer,
     search: searchReducer,
     category: categorySlice.reducer,
-    login: loginReducer,
+    login: loginSlice.reducer,
     customer: customerSlice.reducer,
     error: errorSlice.reducer,
     shoppingCartHeader: shoppingCartReducer,

@@ -1,33 +1,14 @@
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import InputText from '@components/atoms/inputs/input-text';
-import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
 import { navigateTo, setEmail } from '@store/login/slices/login-slice';
 import { Container, InputContainer } from './styles';
-// import dynamic from 'next/dynamic';
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .required('El correo es requerido')
-    .email('El correo que ingresaste no es válido, intenta de nuevo'),
-});
-
-type EmailForm = {
-  email: string;
-};
-
-// const TextField = dynamic(
-//   () =>
-//     import("@ccom-easy-design-system/atoms.textfield").then(
-//       (module) => module.Textfield
-//     ),
-//   { ssr: false, loading: () => <></> }
-// );
+import { useState } from 'react';
+import TextField from '@components/atoms/textfield-bit';
+import Button from '@components/atoms/button-bit';
 
 const CreateAccountEmail = () => {
+  const [emailValue, setEmailValue] = useState('');
+  const [emailError, setEmailError] = useState(false);
+
   const { createAccountFlow } = useAppSelector((state) => state.login);
   const title =
     createAccountFlow === 'create account'
@@ -35,19 +16,16 @@ const CreateAccountEmail = () => {
       : 'Recuperar contraseña';
   const dispatch = useAppDispatch();
 
-  const {
-    handleSubmit,
-    control,
-    watch,
-    formState: { errors },
-  } = useForm<EmailForm>({
-    resolver: yupResolver(schema),
-  });
+  const handleOnClick = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(emailValue);
 
-  const emailValue = watch('email');
+    if (!isValidEmail) {
+      setEmailError(true);
+      return;
+    }
 
-  const handleOnClick: SubmitHandler<EmailForm> = (data) => {
-    dispatch(setEmail(data.email));
+    dispatch(setEmail(emailValue));
     dispatch(navigateTo('creadAccountUserPassword'));
   };
 
@@ -55,25 +33,25 @@ const CreateAccountEmail = () => {
     <Container>
       <p className="title">{title}</p>
       <InputContainer>
-        <Controller
-          name="email"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <InputText
-              {...field}
-              placeholder="Correo electrónico"
-              error={Boolean(errors.email)}
-              errorMessage={errors.email?.message}
-              ref={null}
-              className="input-text"
-            />
-          )}
+        <TextField
+          fullwidth={true}
+          value={emailValue}
+          label="Correo electrónico"
+          placeholder="Correo electrónico"
+          variant={emailError ? 'error' : 'default'}
+          helpertext={
+            emailError
+              ? 'El correo que ingresaste no es válido, intenta de nuevo'
+              : ''
+          }
+          className="input-text"
+          onChange={(e) => setEmailValue(e.target.value)}
+          onFocus={() => setEmailError(false)}
         />
       </InputContainer>
-      <ButtonPrimary
-        title="Continuar"
-        onClick={handleSubmit(handleOnClick)}
+      <Button
+        label="Continuar"
+        onClick={() => handleOnClick()}
         disabled={!emailValue}
       />
     </Container>

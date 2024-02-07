@@ -2,13 +2,13 @@ import React, { ChangeEvent, useMemo, useState } from 'react';
 import Link from 'next/link';
 import inputValidator from './hooks/inputValidator';
 import RequirePassword from './components/require-password';
-import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { useAppDispatch } from '@hooks/storeHooks';
 import { navigateTo, setPassword } from '@store/login/slices/login-slice';
 import { PasswordFormat, passwordFormat } from './types';
 import { ConditionContainer, Container, InputContainer } from './styles';
-import InputText from '@components/atoms/inputs/input-text';
-import InputCheckbox from '@components/atoms/inputs/input-checkbox';
+import TextField from '@components/atoms/textfield-bit';
+import Button from '@components/atoms/button-bit';
+import CheckBox from '@components/atoms/checkbox-bit';
 
 const CreateAccountUserPassword = () => {
   const [passwordInput, setPasswordInput] = useState('');
@@ -49,68 +49,69 @@ const CreateAccountUserPassword = () => {
     return allValueValid;
   }, [validateInput]);
 
+  const ShowPassword = ({
+    target,
+  }: {
+    target: 'passwordRepeated' | 'password';
+  }) => {
+    return (
+      <p
+        className="show-hide-input"
+        onClick={() =>
+          setShowInputTexts({
+            ...showInputTexts,
+            [target]: !showInputTexts[target],
+          })
+        }
+      >
+        {showInputTexts.passwordRepeated ? 'Esconder' : 'Mostrar'}
+      </p>
+    );
+  };
+
   return (
     <Container>
       <p className="title"> Crear contraseña</p>
       <InputContainer>
-        <InputText
-          className="input"
-          placeholder="Contraseña"
-          type={showInputTexts.password ? 'text' : 'password'}
+        <TextField
           value={passwordInput}
+          className="input"
+          fullwidth={true}
+          placeholder="Contraseña"
+          label="Contraseña"
+          type={showInputTexts.password ? 'text' : 'password'}
           onChange={handlePassword}
         />
-        <p
-          className="show-hide-input"
-          onClick={() =>
-            setShowInputTexts({
-              ...showInputTexts,
-              password: !showInputTexts.password,
-            })
-          }
-        >
-          {showInputTexts.password ? 'Esconder' : 'Mostrar'}
-        </p>
+        <ShowPassword target="password" />
       </InputContainer>
+
       <InputContainer>
-        <InputText
-          className="input"
-          placeholder="Repetir contraseña"
-          type={showInputTexts.passwordRepeated ? 'text' : 'password'}
+        <TextField
           value={passwordRepeated}
+          className="input"
+          fullwidth={true}
+          placeholder="Repetir contraseña"
+          label="Repetir contraseña"
+          type={showInputTexts.passwordRepeated ? 'text' : 'password'}
           onChange={(event) => setPasswordRepeated(event.target.value)}
+          variant={errorSamePassword ? 'error' : 'default'}
+          helpertext={errorSamePassword ? 'La contraseña no coincide' : ''}
+          onFocus={() => {
+            setErrorSamePassword(false);
+          }}
         />
-        {errorSamePassword && (
-          <p className="password-not-same">La contraseña no coincide</p>
-        )}
-        <p
-          className="show-hide-input"
-          onClick={() =>
-            setShowInputTexts({
-              ...showInputTexts,
-              passwordRepeated: !showInputTexts.passwordRepeated,
-            })
-          }
-        >
-          {showInputTexts.passwordRepeated ? 'Esconder' : 'Mostrar'}
-        </p>
+        <ShowPassword target="passwordRepeated" />
       </InputContainer>
+
       {!isValidInput && <RequirePassword validator={validateInput} />}
+
       <ConditionContainer>
-        <InputCheckbox
+        <CheckBox
           checked={termAndConditionAccepted}
-          onChange={(event) =>
-            setTermAndConditionAccepted(event.target.checked)
-          }
-          label=""
+          onChange={(event) => {
+            setTermAndConditionAccepted(event.target.checked);
+          }}
         />
-        {/* <input
-          className="checkbox"
-          type="checkbox"
-          onChange={(event) =>
-            setTermAndConditionAccepted(event.target.checked)
-          }
-        /> */}
         <p className="term-and-condition">
           acepto los{' '}
           <Link
@@ -121,12 +122,11 @@ const CreateAccountUserPassword = () => {
           </Link>
         </p>
       </ConditionContainer>
-      <ButtonPrimary
-        title="Continuar"
+      <Button
+        label="Continuar"
+        fullwidth={true}
         disabled={!isValidInput || !termAndConditionAccepted}
-        onClick={() => {
-          handleOnClick();
-        }}
+        onClick={() => handleOnClick()}
       />
     </Container>
   );

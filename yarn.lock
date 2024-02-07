@@ -58,10 +58,27 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@ccom-easy-design-system/atoms.textfield@^0.0.26":
-  version "0.0.26"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.26.tgz#f45fb16e8a3003cca232de4fecf3189cf7c5aec5"
-  integrity sha512-ZIn+jHTmU4gZbGIKuLF86hjZnRd72srXnZ65E0E51K9GYN5LuABeesOtSmOMULb3uW/icPoB69UBrY48TOiG5g==
+"@ccom-easy-design-system/atoms.button@0.0.5":
+  version "0.0.5"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.button/-/atoms.button-0.0.5.tgz#f47c4a4886be2e6837ee0e9f7d3c838386dfca87"
+  integrity sha512-Xt4abMU3cxzKFlWDPz/k+KnYRyVERzcbyKVOtg2N/XZyFNRRWsZBH356PyOx0/uoHMkNP1LivjQbOG/40rsKCA==
+  dependencies:
+    "@ccom-easy-design-system/theme.easy" "0.0.4"
+    styled-components "^6.1.6"
+
+"@ccom-easy-design-system/atoms.checkbox@0.0.6":
+  version "0.0.6"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.checkbox/-/atoms.checkbox-0.0.6.tgz#9ca5395bd9a17ba204e80fad3f01e6f731e9c6e6"
+  integrity sha512-L4KW8GDUJGxNkgpZbBkvNKNo6MPwPBZBKRnlObCrCJEDIX6M4X6KeIaUQvnNP8Ov+X1I7pk9YdawLJr+JAJQew==
+  dependencies:
+    "@ccom-easy-design-system/theme.easy" "0.0.4"
+    react-icons "^5.0.1"
+    styled-components "^6.1.6"
+
+"@ccom-easy-design-system/atoms.textfield@^0.0.28":
+  version "0.0.28"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.28.tgz#c4934eda43f98151dcb15cfb98070e347cb66ee5"
+  integrity sha512-SWKCbEQJalIJ7r+3qmk+YbOjPDtMyMXTXb+L8qJj7B2byB24cQwzKrlpKPYJbP8XLzCEbwT98NOVQfTJ9U8fZg==
   dependencies:
     "@ccom-easy-design-system/atoms.tooltip" "0.0.2"
     react-icons "^5.0.1"
