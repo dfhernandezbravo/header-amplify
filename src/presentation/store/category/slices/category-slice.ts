@@ -1,11 +1,14 @@
+import { Category } from '@entities/category/category.entity';
 import { createSlice } from '@reduxjs/toolkit';
 
 type CategoryState = {
   isOpenCategories: boolean;
+  categories: Category[];
 };
 
 const initialState: CategoryState = {
   isOpenCategories: false,
+  categories: [],
 };
 
 const categorySlice = createSlice({
@@ -18,8 +21,12 @@ const categorySlice = createSlice({
     closeCategories: (state) => {
       state.isOpenCategories = false;
     },
+    setCategories: (state, { payload }: { payload: Category[] }) => {
+      state.categories = payload;
+    },
   },
 });
 
-export const { openCategories, closeCategories } = categorySlice.actions;
+export const { openCategories, closeCategories, setCategories } =
+  categorySlice.actions;
 export default categorySlice;
