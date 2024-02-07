@@ -13,6 +13,7 @@ import HeaderModalLogin from '@modules/header/sections/header-modal-login';
 import HeaderSearchMobile from '@modules/header/sections/header-search-mobile';
 import { Modules } from '@modules/header/types';
 import { openResults } from '@store/search/slices/search-slice';
+import Image from 'next/image';
 import {
   FirsRowMobile,
   HeaderMobileContainer,
@@ -20,7 +21,6 @@ import {
   SearchInputContainer,
   SecondRowMobile,
 } from './styles';
-import Image from 'next/image';
 
 interface Props {
   modules: Modules;
