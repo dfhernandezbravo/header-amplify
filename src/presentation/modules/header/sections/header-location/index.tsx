@@ -25,6 +25,7 @@ const HeaderLocation = ({
     <ProvidersLayout>
       <HeaderLocationContext.Provider
         value={{
+          isOpenModal,
           orderFormId,
           customer,
           isUserLogged,
@@ -34,10 +35,7 @@ const HeaderLocation = ({
       >
         <HeaderLocationContainer addressSelected={addressSelected} />
 
-        <ModalRegionalizer
-          isOpen={isOpenModal}
-          onClose={() => setIsOpenModal(false)}
-        />
+        <ModalRegionalizer />
       </HeaderLocationContext.Provider>
     </ProvidersLayout>
   );

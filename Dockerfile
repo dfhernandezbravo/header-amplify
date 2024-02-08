@@ -27,9 +27,12 @@ RUN echo "NEXT_PUBLIC_API_KEY_BFF_WEB -- $NEXT_PUBLIC_API_KEY_BFF_WEB"
 RUN echo "NEXT_PUBLIC_VTEX_GRAPHQL -- $NEXT_PUBLIC_VTEX_GRAPHQL"
 
 RUN npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J
+RUN echo "npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J"
+
+RUN npm config set -- //node-registry.bit.cloud/:_authToken=f91ccd4c-0f9a-4ee7-ba17-40404dd9b05a
 
 RUN NODE_ENV='' yarn install && \
-yarn build
+    yarn build
 
 # CMD ["sh", "-c", "pm2-runtime dist/src/main.js"]
 EXPOSE 8081
