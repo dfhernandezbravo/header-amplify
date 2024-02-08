@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const ValidatorContainer = styled.div<ValidatorContainerProps>`
   display: flex;
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 5px;
   gap: 8px;
   background-color: ${({ isValid }) => (isValid ? '#BAF7DC' : '#FFE6E6')};

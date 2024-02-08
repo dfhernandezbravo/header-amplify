@@ -8,7 +8,7 @@ export const Container = styled.div`
   gap: 20px;
   align-items: center;
   & .title {
-    padding: 20px;
+    padding: 10px;
   }
 `;
 
