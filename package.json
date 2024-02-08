@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "rm -rf .next && next dev --port 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_OPTIONS='-r @newrelic/next' next start",
     "start:prod": "next build && next start -p 3001",
     "lint": "next lint",
     "prepare": "husky install",
