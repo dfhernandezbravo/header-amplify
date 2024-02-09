@@ -68,3 +68,20 @@ export const MenuItem = styled(Link)<MenuItemProps>`
     font-weight: 600;
   }
 `;
+
+export const LogoutItem = styled.a`
+  display: block;
+  color: #485760;
+  text-decoration: none;
+  cursor: pointer;
+  min-width: 158px;
+  font-size: 14px;
+  padding: 12px;
+  text-align: left;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #e1e6ea;
+    font-weight: 600;
+  }
+`;

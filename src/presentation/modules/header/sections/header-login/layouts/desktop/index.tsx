@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Desktop from '@components/layout/desktop';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { closeCategories } from '@store/category/slices/category-slice';
-import { openModalLogin } from '@store/login/slices/login-slice';
+import {
+  closeModalLogin,
+  openModalLogin,
+} from '@store/login/slices/login-slice';
 import LoginButton from '../../components/login-button';
 import LoginMenu from '../../components/login-menu';
 import { LoginContainerDesktop, LoginInformation } from '../../styles';
@@ -17,13 +20,32 @@ const HeaderLoginDesktop = () => {
   const router = useRouter();
 
   const isLogged = shoppingCart?.loggedIn;
+
   const handleLogin = () => {
     if (isLogged) {
-      return router.push('/account/profile');
+      return router.push({
+        pathname: '/account/[content]',
+        query: { content: 'profile' },
+      });
     }
     dispatch(closeCategories());
     dispatch(openModalLogin());
   };
+
+  useEffect(() => {
+    console.log('ROUTER>', router);
+    if (router?.pathname?.includes('/account') && isLogged === false) {
+      setTimeout(() => {
+        dispatch(openModalLogin());
+      }, 0);
+    }
+  }, [router, isLogged]);
+
+  useEffect(() => {
+    if (router?.pathname === '/') {
+      dispatch(closeModalLogin());
+    }
+  }, []);
 
   return (
     <Desktop>
