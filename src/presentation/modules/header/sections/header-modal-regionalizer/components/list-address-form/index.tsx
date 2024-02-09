@@ -21,6 +21,7 @@ import {
   ListAddressContainer,
   ListAddressFormContainer,
 } from './styles';
+import ListAddressSkeleton from '../list-address-skeleton';
 
 const ListAddressForm = () => {
   const dispatch = useAppDispatch();
@@ -96,22 +97,29 @@ const ListAddressForm = () => {
       dispatch(pendingAddNewAddress(false));
     }
   };
+
   return step === 'list-address' ? (
     <ListAddressFormContainer>
       <HeaderModalRegionalizer title="Ingresa tu ubicación" />
       <p>Cuéntanos dónde quieres recibir tu compra</p>
       <h3>Tus direcciones</h3>
       <ListAddressContainer>
-        {filterRepeatedAddress.map((address) => (
-          <RadioButtonAddress
-            checked={selectedAddress?.id === address.id}
-            text={`${address.street}, ${address.number}`}
-            state={`${address.neighborhood}, ${address.state}`}
-            key={address.id}
-            onChange={() => setSelectedAddress(address)}
-            value={address.id}
-          />
-        ))}
+        {filterRepeatedAddress?.length === 0 ? (
+          <ListAddressSkeleton />
+        ) : (
+          <>
+            {filterRepeatedAddress?.map((address) => (
+              <RadioButtonAddress
+                checked={selectedAddress?.id === address.id}
+                text={`${address.street}, ${address.number}`}
+                state={`${address.neighborhood}, ${address.state}`}
+                key={address.id}
+                onChange={() => setSelectedAddress(address)}
+                value={address.id}
+              />
+            ))}
+          </>
+        )}
       </ListAddressContainer>
 
       <ButtonNewAddress onClick={() => setStep('new-address')}>
