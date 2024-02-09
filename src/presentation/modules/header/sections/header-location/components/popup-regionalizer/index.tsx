@@ -7,6 +7,8 @@ import {
   PopupContainer,
   PopupDescription,
   PopupWrapper,
+  Title,
+  Subtitle,
 } from './styles';
 import { useCookies } from 'react-cookie';
 
@@ -35,14 +37,14 @@ const PopupRegionalizer = ({ onClick }: Props) => {
           <Arrow />
           <PopupDescription>
             <div className="header">
-              <p>Selecciona una ubicación</p>
+              <Title>Selecciona una ubicación</Title>
               <ModalIconButton onClick={handleOnClose}>
-                <AiOutlineClose size={20} />
+                <AiOutlineClose size={24} />
               </ModalIconButton>
             </div>
-            <span>Y conoce la disponibilidad de productos</span>
+            <Subtitle>Y conoce la disponibilidad de productos</Subtitle>
           </PopupDescription>
-          <ButtonPrimary title="Ingresa ubicación" onClick={onClick} />
+          <ButtonPrimary title="Ingresar ubicación" onClick={onClick} />
         </PopupWrapper>
       </PopupContainer>
     </Desktop>
