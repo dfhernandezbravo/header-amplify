@@ -1,27 +1,16 @@
-import Modal from '@components/atoms/modal';
-import HeaderModalRegionalizer from './components/header-modal-regionalizer';
-import ListAddressForm from './components/list-address-form';
-import NewAddressForm from './components/new-address-form';
 import { useAppSelector } from '@hooks/storeHooks';
-interface Props {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import ModalRegionalizerDesktop from './layouts/modal-regionalizer-desktop';
+import ModalRegionalizerMobile from './layouts/modal-regionalizer-mobile';
 
-const ModalRegionalizer = ({ isOpen, onClose }: Props) => {
+const ModalRegionalizer = () => {
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const isUserLogged = shoppingCart?.loggedIn;
 
   return (
-    <Modal onClose={onClose} isOpen={isOpen}>
-      {isUserLogged ? (
-        <ListAddressForm />
-      ) : (
-        <NewAddressForm
-          header={<HeaderModalRegionalizer title="Ingresa tu ubicación" />}
-        />
-      )}
-    </Modal>
+    <>
+      <ModalRegionalizerMobile isUserLogged={isUserLogged} />
+      <ModalRegionalizerDesktop isUserLogged={isUserLogged} />
+    </>
   );
 };
 

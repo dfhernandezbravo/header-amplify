@@ -2,6 +2,7 @@ import { Customer } from '@entities/customer/customer.entity';
 import { createContext } from 'react';
 
 interface ContextValues {
+  isOpenModal: boolean;
   orderFormId: string | null | undefined;
   customer: Customer | null;
   isUserLogged: boolean;
@@ -10,6 +11,7 @@ interface ContextValues {
 }
 
 const HeaderLocationContext = createContext<ContextValues>({
+  isOpenModal: false,
   orderFormId: null,
   customer: null,
   isUserLogged: false,
