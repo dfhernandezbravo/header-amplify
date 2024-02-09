@@ -12,6 +12,9 @@ const backSteps: Record<keyof LoginStep, keyof LoginStep | null> = {
   UserPassword: 'Methods',
   EmailSetPassword: 'UserPassword',
   SetPassword: 'EmailSetPassword',
+  createAccountEmail: 'Methods',
+  creadAccountUserPassword: 'createAccountEmail',
+  sendUserCode: 'creadAccountUserPassword',
 };
 
 const ModalHeader = () => {

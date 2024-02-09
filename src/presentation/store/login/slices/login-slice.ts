@@ -10,25 +10,29 @@ import {
 import { createSlice } from '@reduxjs/toolkit';
 import getLoginMethods from '@use-cases/login/get-login-methods';
 
+type CreateAccountFlow = 'create account' | 'forgot password' | null;
+
 type LoginState = {
   isOpenModalLogin: boolean;
   isLoading: boolean;
-  isLogged: boolean;
   loginStep: keyof LoginStep;
   loginMethods: LoginMethods[];
   socialMethods: SocialLogin[];
   authCookies: AuthCookie[];
   userEmail: string;
+  userPassword: string;
+  createAccountFlow: CreateAccountFlow;
   error: AppError | null;
 };
 
 const initialState: LoginState = {
   isOpenModalLogin: false,
   isLoading: false,
-  isLogged: false,
   loginStep: 'Methods',
   authCookies: [],
   userEmail: '',
+  userPassword: '',
+  createAccountFlow: null,
   error: null,
   loginMethods: [
     {
@@ -65,14 +69,20 @@ const loginSlice = createSlice({
     setEmail: (state, { payload }: { payload: string }) => {
       state.userEmail = payload;
     },
+    setPassword: (state, { payload }: { payload: string }) => {
+      state.userPassword = payload;
+    },
     setAuthCookies: (state, { payload }: { payload: AuthCookie[] }) => {
       state.authCookies = [...state.authCookies, ...payload];
     },
-    setLogin: (state, { payload }: { payload: boolean }) => {
-      state.isLogged = payload;
-    },
     setLoginError: (state, { payload }: { payload: AppError | null }) => {
       state.error = payload;
+    },
+    setCreateAccountFlow: (
+      state,
+      { payload }: { payload: CreateAccountFlow },
+    ) => {
+      state.createAccountFlow = payload;
     },
   },
   // use cases
@@ -88,9 +98,10 @@ export const {
   closeModalLogin,
   navigateTo,
   setEmail,
-  setLogin,
+  setPassword,
   setAuthCookies,
   setLoginError,
+  setCreateAccountFlow,
 } = loginSlice.actions;
 
 export default loginSlice;

@@ -7,14 +7,14 @@ import { Container, InstallmentContainer } from './styles';
 
 const HeaderInformation = () => {
   const { sendEventAnalytics } = useAnalytics();
-  const { isLogged } = useAppSelector((state) => state.login);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
 
   const handleLinkOnClick = () => {
     sendEventAnalytics({
       event: 'interaccion',
       category: 'Interacciones Header',
       action: 'Click horarios y tiendas',
-      tag: isLogged ? 'Usuario Logeado' : 'Usuario Guest',
+      tag: shoppingCart?.loggedIn ? 'Usuario Logeado' : 'Usuario Guest',
     });
   };
 
