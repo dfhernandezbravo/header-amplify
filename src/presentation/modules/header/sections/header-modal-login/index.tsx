@@ -12,7 +12,15 @@ const HeaderModalLogin = () => {
   const { isOpenModalLogin, loginStep } = useAppSelector(
     (state) => state.login,
   );
-  const showSocialLogin = loginStep !== 'EmailCode';
+
+  const dismissSteps = [
+    'EmailCode',
+    'createAccountEmail',
+    'creadAccountUserPassword',
+    'sendUserCode',
+  ];
+  const showSocialLogin = !dismissSteps.includes(loginStep);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

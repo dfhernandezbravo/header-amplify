@@ -7,9 +7,8 @@ import React from 'react';
 
 const HeaderFooter = () => {
   const { sendEventAnalytics } = useAnalytics();
-  const { isLogged } = useAppSelector((state) => state.login);
-
-  // const isCarth = isCartPath ? isCartPath : false
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
+  const isLogged = shoppingCart?.loggedIn;
 
   return (
     <HeaderBottom>

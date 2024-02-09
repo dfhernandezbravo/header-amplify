@@ -7,6 +7,9 @@ export type LoginStep = {
   EmailCode: ReactNode;
   EmailSetPassword: ReactNode;
   SetPassword: ReactNode;
+  createAccountEmail: ReactNode;
+  creadAccountUserPassword: ReactNode;
+  sendUserCode: ReactNode;
 };
 
 export enum LoginProviders {
