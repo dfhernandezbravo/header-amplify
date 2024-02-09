@@ -2,12 +2,39 @@ import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
 `;
 
 export const SocialLoginContainer = styled.div`
   border-left: 2px solid #b4c2cb;
   padding-left: 12px;
   margin-left: 12px;
+
+  @media (max-width: 720px) {
+    padding-left: 0;
+    margin-left: 0;
+    border-top: 2px solid #b4c2cb;
+    border-left: none;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    position: relative;
+
+    &:before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      content: 'o';
+      position: absolute;
+      top: -0.8rem;
+      width: 1rem;
+      color: #b4c2cb;
+      left: 47%;
+      background-color: #fff;
+    }
+  }
 `;
 
 export const ModalContent = styled.form`
