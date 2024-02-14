@@ -53,4 +53,7 @@ export const HeaderNewAddressContainer = styled.div`
   flex-direction: row;
   gap: 12px;
   align-items: center;
+  & .newaddress-title {
+    font-weight: 400;
+  }
 `;
