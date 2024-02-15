@@ -3,14 +3,27 @@ import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
 import { LoginMobileButton } from '../../styles';
 import Image from 'next/image';
 import { openModalLogin } from '@store/login/slices/login-slice';
+import { closeCategories } from '@store/category/slices/category-slice';
+import { useRouter } from 'next/router';
 
 const HeaderLoginMobile = () => {
   const { customer } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
+  const isUserLogged = shoppingCart?.loggedIn;
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const onClickLogin = () => {
+    if (isUserLogged) router.push('/account/profile');
+    else {
+      dispatch(openModalLogin());
+      dispatch(closeCategories());
+    }
+  };
 
   return (
     <Mobile>
-      <LoginMobileButton onClick={() => dispatch(openModalLogin())}>
+      <LoginMobileButton onClick={onClickLogin}>
         <Image
           src="/icons/header/user-icon.svg"
           width={24}
