@@ -58,10 +58,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@ccom-easy-design-system/atoms.bottom-sheet@^0.0.13":
-  version "0.0.13"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.bottom-sheet/-/atoms.bottom-sheet-0.0.13.tgz#c3a3888bd843f222f31ad84db23bb06e0613685b"
-  integrity sha512-JaqPcFoqwi4YSgOdbfhAFa9jBYqmlOCiC0KyWrKsqiTFEgTMLuBlSnstfaeP5vqQw4Vty4JxtMsr6vQRof6kTw==
+"@ccom-easy-design-system/atoms.bottom-sheet@^0.0.14":
+  version "0.0.14"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.bottom-sheet/-/atoms.bottom-sheet-0.0.14.tgz#148d6627c401af433d9a0f98373085f56ccbe958"
+  integrity sha512-pI3jQcmNKGBF4SdgVpUTY+wxVEV7zSZFwVvhNZwTyRlErRhCoPtWpd9HEQB9FFLvxYXmYQSa1CAXWo0tzbeZ1g==
   dependencies:
     styled-components "^6.1.6"
 
