@@ -12,12 +12,16 @@ export const PopupWrapper = styled.div`
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  padding: 12px;
-  width: 330px;
+  padding: 1rem;
+  width: 335px;
+  height: 150px;
   color: #4d4d4d;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
+  border: 1px solid #b4c2cb;
 `;
 
 export const PopupDescription = styled.div`
@@ -28,13 +32,30 @@ export const PopupDescription = styled.div`
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
-  font-family: ${({ theme: { fontFamily } }) => fontFamily.openSans};
+  font-family: 'Open Sans';
 
   & .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
   }
+`;
+
+export const Title = styled.p`
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+`;
+
+export const Subtitle = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
 `;
 
 export const Arrow = styled.div`

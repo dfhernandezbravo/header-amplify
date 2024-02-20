@@ -7,6 +7,7 @@ import { AUTH_EVENTS } from '@infra/events/auth';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import {
   navigateTo,
+  setCreateAccountFlow,
   setEmail,
   setLoginError,
 } from '@store/login/slices/login-slice';
@@ -64,6 +65,11 @@ const LoginUserPassword = () => {
   const watchEmail = watch('email');
   const watchPassword = watch('password');
 
+  const handleForgotPassword = () => {
+    dispatch(navigateTo('createAccountEmail'));
+    dispatch(setCreateAccountFlow('forgot password'));
+  };
+
   useEffect(() => {
     dispatch(setLoginError(null));
   }, []);
@@ -104,7 +110,7 @@ const LoginUserPassword = () => {
       <ResetPasswordContainer>
         <ButtonResetPassword
           type="button"
-          onClick={() => dispatch(navigateTo('EmailSetPassword'))}
+          onClick={() => handleForgotPassword()}
         >
           ¿Olvidaste tu contraseña?
         </ButtonResetPassword>

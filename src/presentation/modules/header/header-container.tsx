@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { setCategories } from '@store/category/slices/category-slice';
 import { closeResults } from '@store/search/slices/search-slice';
 import getCategories from '@use-cases/category/get-categories';
@@ -11,6 +11,11 @@ import CookiesProvider from './providers/cookies';
 import WindowsEventProvider from './providers/windows-event';
 import { HeaderContainerWrapper, Spacer } from './styles';
 import { HeaderProps } from './types';
+import { useRouter } from 'next/router';
+import {
+  closeModalLogin,
+  openModalLogin,
+} from '@store/login/slices/login-slice';
 
 const HeaderContainer = ({ modules }: HeaderProps) => {
   const dispatch = useAppDispatch();
@@ -24,6 +29,24 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
   }, [visible, dispatch]);
 
   if (categories) dispatch(setCategories(categories));
+
+  const router = useRouter();
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
+  const isLogged = shoppingCart?.loggedIn;
+
+  useEffect(() => {
+    if (router?.pathname?.includes('/account') && isLogged === false) {
+      setTimeout(() => {
+        dispatch(openModalLogin());
+      }, 0);
+    }
+  }, [router, isLogged]);
+
+  useEffect(() => {
+    if (router?.pathname === '/') {
+      dispatch(closeModalLogin());
+    }
+  }, []);
 
   const renderBody = useMemo(
     () => (

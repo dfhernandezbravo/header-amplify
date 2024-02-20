@@ -1,4 +1,4 @@
-import ButtonBack from '@components/atoms/button-back';
+// import ButtonBack from '@components/atoms/button-back';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { CustomerAddress } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
@@ -49,8 +49,8 @@ const ListAddressForm = () => {
 
   const HeaderNewAddress = () => (
     <HeaderNewAddressContainer>
-      <ButtonBack onClick={() => setStep('list-address')} />
-      <h3>Ingresa tu ubicación</h3>
+      {/* <ButtonBack onClick={() => setStep('list-address')} /> */}
+      <h3 className="newaddress-title">Ingresa tu ubicación</h3>
     </HeaderNewAddressContainer>
   );
 
