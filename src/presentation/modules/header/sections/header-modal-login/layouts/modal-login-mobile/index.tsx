@@ -41,11 +41,11 @@ const ModalLoginMobile = () => {
       <BottomSheet
         open={isOpenModalLogin}
         onClose={() => dispatch(closeModalLogin())}
-        height={550}
+        height={585}
       >
         <ModalHeader />
         <Container>
-          <div>{loginSteps[loginStep]}</div>
+          <>{loginSteps[loginStep]}</>
           {showSocialLogin && (
             <SocialLoginContainer>
               <SocialAccessKeyLogin />

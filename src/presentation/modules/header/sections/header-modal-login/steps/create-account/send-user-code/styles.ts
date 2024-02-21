@@ -8,5 +8,15 @@ export const Container = styled.div`
   & .header {
     padding: 3rem 4rem;
     text-align: center;
+
+    @media (max-width: 1024px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 0;
   }
 `;

@@ -10,6 +10,11 @@ export const Container = styled.div`
   & .title {
     padding: 10px;
   }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 export const InputContainer = styled.div`

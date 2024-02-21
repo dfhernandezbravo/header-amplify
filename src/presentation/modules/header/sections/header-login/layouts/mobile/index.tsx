@@ -17,10 +17,10 @@ const HeaderLoginMobile = () => {
   const softLoginName = cookies.softLogin;
 
   const onClickLogin = () => {
-    dispatch(openModalLogin());
+    dispatch(closeCategories());
     if (isUserLogged) router.push('/account/profile');
     else {
-      dispatch(closeCategories());
+      dispatch(openModalLogin());
     }
   };
 

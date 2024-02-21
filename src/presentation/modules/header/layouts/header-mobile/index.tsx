@@ -41,16 +41,16 @@ const HeaderMobile = ({ modules }: Props) => {
           {showModule(
             modules.search,
             <HeaderMobileSearchSection>
-              <SearchInputContainer
-                onClick={() => dispatch(openResults())}
-                placeholder="Buscar..."
-              />
               <Image
                 className="search-icon"
                 src="/icons/header/search-icon.svg"
                 width={18}
                 height={18}
                 alt="search-icon"
+              />
+              <SearchInputContainer
+                onClick={() => dispatch(openResults())}
+                placeholder="Buscar..."
               />
             </HeaderMobileSearchSection>,
           )}

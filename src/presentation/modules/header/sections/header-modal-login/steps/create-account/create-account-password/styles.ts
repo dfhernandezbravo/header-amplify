@@ -11,6 +11,11 @@ export const Container = styled.div`
     text-align: center;
     margin-bottom: 2rem;
   }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 export const InputContainer = styled.div`

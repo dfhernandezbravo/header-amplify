@@ -14,7 +14,7 @@ const CookiesProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (shoppingCart?.loggedIn) {
-      const { firstName } = shoppingCart.customer;
+      const firstName = shoppingCart?.customer?.firstName ?? '';
       setCookie('softLogin', firstName);
     } else {
       dispatch(setCustomer(null));
