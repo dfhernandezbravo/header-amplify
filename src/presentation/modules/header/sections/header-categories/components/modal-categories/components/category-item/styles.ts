@@ -32,4 +32,11 @@ export const CategoryTitle = styled.span`
   letter-spacing: 0px;
   text-align: left;
   color: #485760;
+
+  @media only screen and (min-width: 1024px) {
+    max-width: 247px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
