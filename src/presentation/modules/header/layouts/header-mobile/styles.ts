@@ -14,33 +14,25 @@ export const HeaderMobileSearchSection = styled.div`
   padding: 12px 16px;
   height: 65px;
   position: relative;
-  & ::placeholder {
-    padding-left: 1rem;
-  }
-  & .search-icon {
-    position: absolute;
-    top: 48%;
-    left: 24px;
-    transform: translate(0, -50%);
-
-    @media (min-width: 1024px) {
-      top: 45%;
-      width: 24px;
-      height: 24px;
-    }
-  }
+  margin-left: 0.75rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 28px;
+  height: 40px;
 `;
 
 export const SearchInputContainer = styled.input`
-  border-radius: 28px;
-  height: 40px;
-  padding: 1rem;
   border: none;
   width: 100%;
   color: #4d4d4d;
   font-size: 14px;
   font-weight: 400;
   background-color: white;
+  width: 100%;
+  border: none;
+  outline: none;
 `;
 
 export const IconSearchContainer = styled.div`
@@ -58,6 +50,7 @@ export const IconSearchContainer = styled.div`
 export const FirsRowMobile = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
+  align-items: center;
 `;
 
 export const SecondRowMobile = styled.div`
