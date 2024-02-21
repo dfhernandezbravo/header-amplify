@@ -8,6 +8,11 @@ export const Container = styled.div`
   & .custom-btn {
     margin-top: 2rem;
   }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    overflow-x: hidden;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -22,6 +27,12 @@ export const InputContainer = styled.div`
     text-align: center;
     border: 1px solid #aaaaaa;
     border-radius: 4px;
+
+    @media (max-width: 1024px) {
+      width: 46px;
+      height: 46px;
+      overflow-x: hidden;
+    }
   }
 
   & .input-text:focus {
