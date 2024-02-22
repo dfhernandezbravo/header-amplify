@@ -134,17 +134,14 @@ const HeaderSearch = React.memo(function Search() {
         type="search"
         placeholder="Buscar..."
         maxLength={30}
-        onFocus={() => {
-          setTimeout(() => {
-            dispatch(openResults());
-          }, 100);
-        }}
+        onFocus={() => setTimeout(() => dispatch(openResults()), 100)}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         onBlur={handleOnBlur}
         onChange={handleOnChange}
         onClick={handleOnClickSearch}
         value={search}
+        autoFocus
       />
       {search && (
         <ClearSearchButton setSearch={setSearch} inputRef={inputRef} />
