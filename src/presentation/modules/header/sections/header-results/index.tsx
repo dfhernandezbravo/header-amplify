@@ -61,7 +61,7 @@ const HeaderResults = () => {
           </HeaderResultSpinnerContainer>
           <TextContent>
             <h4>Buscando artículos</h4>
-            <p>Espera un segundo...</p>
+            <p>Espera un momento...</p>
           </TextContent>
         </LoadingContainer>
       )}
