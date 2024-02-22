@@ -1,6 +1,8 @@
 import Desktop from '@components/layout/desktop';
 import { Category } from '@entities/category/category.entity';
+import { useAppDispatch } from '@hooks/storeHooks';
 import useCategoriesAnalytics from '@modules/header/sections/header-categories/analytics/categories-analytics';
+import { closeCategories } from '@store/category/slices/category-slice';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import CategoryDetailItem from '../../components/category-detail-item-desktop';
@@ -13,8 +15,6 @@ import {
   CategoriesDetailTitleLink,
   CategoriesItemsContainer,
 } from './styles';
-import { closeCategories } from '@store/category/slices/category-slice';
-import { useAppDispatch } from '@hooks/storeHooks';
 
 interface Props {
   categories: Category[];
@@ -39,35 +39,40 @@ const CategoriesDesktop = ({ categories }: Props) => {
   const closeModal = () => dispatch(closeCategories());
 
   const handleClickN1 = (category: Category) => {
-    if (router.asPath === `/${category.url}`) return;
+    const redirectUrl = `/${category.url}`;
 
-    eventOnClickCategoryN1(category.name);
-    closeModal();
-    router.push('/' + category.url);
+    if (router.asPath !== redirectUrl) {
+      eventOnClickCategoryN1(category.name);
+      closeModal();
+      router.push(redirectUrl);
+    }
   };
 
   const handleClickN2 = (category: Category) => {
-    if (router.asPath === `/${category.url}`) return;
+    const redirectUrl = `/${category.url}`;
 
-    eventOnClickCategoryN2(category.name);
-    closeModal();
-    router.push('/' + category.url);
+    if (router.asPath !== redirectUrl) {
+      eventOnClickCategoryN2(category.name);
+      closeModal();
+    }
   };
 
   const handleClickN3 = (category: Category) => {
-    if (router.asPath === `/${category.url}`) return;
+    const redirectUrl = `/${category.url}`;
 
-    eventOnClickCategoryN3(category.name);
-    closeModal();
-    router.push('/' + category.url);
+    if (router.asPath !== redirectUrl) {
+      eventOnClickCategoryN3(category.name);
+      closeModal();
+    }
   };
 
   const handleOnClickShowAll = (category: Category) => {
-    if (router.asPath === `/${category.url}`) return;
+    const redirectUrl = `/${category.url}`;
 
-    eventOnClickShowAll(category.name);
-    closeModal();
-    router.push('/' + category.url);
+    if (router.asPath !== redirectUrl) {
+      eventOnClickShowAll(category.name);
+      closeModal();
+    }
   };
 
   return (
@@ -91,7 +96,7 @@ const CategoriesDesktop = ({ categories }: Props) => {
               <h2>{categorySelected?.name}</h2>
 
               <CategoriesDetailTitleLink
-                href={categorySelected?.url}
+                href={`/${categorySelected.url}`}
                 onClick={() => handleOnClickShowAll(categorySelected)}
               >
                 Mostrar todo

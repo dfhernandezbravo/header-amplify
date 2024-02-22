@@ -39,3 +39,4 @@ nerelic_agent.log
 # pages
 
 /src/pages
+.vscode/settings.json
