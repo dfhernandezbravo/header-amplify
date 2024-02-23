@@ -83,6 +83,10 @@ const HeaderSearch = React.memo(function Search() {
     };
   }, []);
 
+  useEffect(() => {
+    if (device === 'Phone') inputRef?.current?.focus();
+  }, [device]);
+
   const handleOnClickSearch = () => {
     dispatch(closeCategories());
     sendEventAnalytics({
@@ -141,7 +145,6 @@ const HeaderSearch = React.memo(function Search() {
         onChange={handleOnChange}
         onClick={handleOnClickSearch}
         value={search}
-        autoFocus
       />
       {search && (
         <ClearSearchButton setSearch={setSearch} inputRef={inputRef} />
