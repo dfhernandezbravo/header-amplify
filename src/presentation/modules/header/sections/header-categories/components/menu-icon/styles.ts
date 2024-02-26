@@ -13,6 +13,7 @@ export const MenuContainer = styled.button`
   position: relative;
   display: flex;
   margin-left: 0.3rem;
+  font-family: 'Open Sans', sans-serif;
 
   div {
     display: flex;
@@ -75,5 +76,23 @@ export const OpenedCategoriesHeader = styled.div`
       letter-spacing: 0em;
       text-align: left;
     }
+  }
+`;
+
+export const CategoriesContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 16px;
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 40px;
+  }
+  &:hover {
+    background-color: #670000;
+    border-radius: 24px;
   }
 `;
