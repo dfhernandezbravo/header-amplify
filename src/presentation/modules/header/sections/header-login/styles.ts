@@ -49,4 +49,5 @@ export const LoginMobileButton = styled.button`
   letter-spacing: 0px;
   text-align: left;
   color: #485760;
+  cursor: pointer;
 `;
