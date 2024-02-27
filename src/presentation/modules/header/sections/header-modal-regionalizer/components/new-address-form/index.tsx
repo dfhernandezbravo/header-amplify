@@ -12,17 +12,24 @@ import { useQuery } from 'react-query';
 import sendAnalyticNewAddressForm from './analytics';
 import NewAddressForm from './form';
 import { mapFormData } from './map-form-data';
-import { NewAddressFormContainer } from './styles';
+import {
+  ButtonArrowLeftBackContainer,
+  MobileBackButton,
+  NewAddressFormContainer,
+} from './styles';
 import { NewAddressFormType } from './types';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import { WindowsEvents } from '@events/index';
 import RegionalizerSkeleton from '../regionalizer-skeleton';
-
+import ButtonArrowLeftBack from '@components/atoms/button-arrow-left-back';
+import { useResponsive } from '@modules/header/hooks/useResponsive';
 interface Props {
+  changeStep?: (step: 'list-address' | 'new-address') => void;
   header?: React.ReactNode;
 }
 
-const NewAddress = ({ header }: Props) => {
+const NewAddress = ({ changeStep, header }: Props) => {
+  const { isSm } = useResponsive();
   const dispatch = useAppDispatch();
   const { data: regions } = useQuery(['get-regions'], getRegionalizerRegions);
   const { isLoadingRegionalizer, addressSelected } = useAppSelector(
@@ -60,11 +67,17 @@ const NewAddress = ({ header }: Props) => {
       dispatch(pendingAddNewAddress(false));
     }
   };
+  const setListAddress = () => changeStep && changeStep('list-address');
 
   return (
     <NewAddressFormContainer>
-      {header}
-
+      {header || ''}
+      {isSm && (
+        <ButtonArrowLeftBackContainer>
+          {changeStep && <ButtonArrowLeftBack onClick={setListAddress} />}
+          <span>Ingresa tu ubicación</span>
+        </ButtonArrowLeftBackContainer>
+      )}
       <p className="description">
         Te mostraremos los productos disponibles para la región y comuna
         seleccionados
@@ -79,6 +92,11 @@ const NewAddress = ({ header }: Props) => {
         />
       ) : (
         <RegionalizerSkeleton />
+      )}
+      {changeStep && (
+        <MobileBackButton onClick={setListAddress}>
+          Volver atrás
+        </MobileBackButton>
       )}
     </NewAddressFormContainer>
   );
