@@ -41,6 +41,7 @@ export const LoginMobileButton = styled.button`
   border: none;
   background-color: transparent;
   display: flex;
+  height: 48px;
   align-items: center;
   gap: 1rem;
   font-size: 16px;

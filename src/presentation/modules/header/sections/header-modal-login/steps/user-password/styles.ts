@@ -14,4 +14,5 @@ export const ButtonResetPassword = styled.button`
   color: rgb(77, 77, 77);
   font-size: 12px;
   font-weight: 600;
+  font-family: 'Open Sans';
 `;

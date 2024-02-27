@@ -1,3 +1,4 @@
+import ContainerProvider from '@modules/header/providers/container';
 import store, { persistor } from '@store/index';
 import dynamic from 'next/dynamic';
 import React from 'react';
@@ -32,7 +33,9 @@ const ProvidersLayout = ({ children }: Props) => {
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <CookiesProvider>
-            <EasyThemeProvider>{children}</EasyThemeProvider>
+            <ContainerProvider>
+              <EasyThemeProvider>{children}</EasyThemeProvider>
+            </ContainerProvider>
           </CookiesProvider>
         </PersistGate>
       </Provider>

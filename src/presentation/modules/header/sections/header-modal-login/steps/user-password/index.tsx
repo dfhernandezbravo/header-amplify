@@ -1,6 +1,6 @@
+import { useEffect } from 'react';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import InputPassword from '@components/atoms/inputs/input-password';
-import InputText from '@components/atoms/inputs/input-text';
+import TextField from '@components/atoms/textfield-bit';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch } from '@hooks/storeHooks';
 import { AUTH_EVENTS } from '@infra/events/auth';
@@ -11,7 +11,6 @@ import {
   setEmail,
   setLoginError,
 } from '@store/login/slices/login-slice';
-import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import LoginErrors from '../../components/login-errors';
@@ -82,11 +81,13 @@ const LoginUserPassword = () => {
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <InputText
+          <TextField
             {...field}
+            fullwidth={true}
+            label="Correo electrónico"
             placeholder="Correo electrónico"
-            error={Boolean(errors.email)}
-            errorMessage={errors.email?.message}
+            variant={errors.email ? 'error' : 'default'}
+            helpertext={errors.email ? errors.email.message : ''}
             ref={null}
           />
         )}
@@ -97,11 +98,12 @@ const LoginUserPassword = () => {
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <InputPassword
+          <TextField
             {...field}
+            fullwidth={true}
+            label="Contraseña"
             placeholder="Contraseña"
-            error={Boolean(errors.password)}
-            errorMessage={errors.password?.message}
+            type="password"
             ref={null}
           />
         )}

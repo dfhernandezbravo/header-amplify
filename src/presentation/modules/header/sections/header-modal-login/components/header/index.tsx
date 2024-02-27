@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import { LoginStep } from '@entities/login/login.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import React from 'react';
 import { ModalHeaderContainer, ModalIconButton } from './style';
-import { AiOutlineClose, AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { closeModalLogin, navigateTo } from '@store/login/slices/login-slice';
 
 const backSteps: Record<keyof LoginStep, keyof LoginStep | null> = {
@@ -33,7 +33,12 @@ const ModalHeader = () => {
         <p className="title">Ingresa a tu cuenta de Easy.cl</p>
       )}
       <ModalIconButton onClick={() => dispatch(closeModalLogin())}>
-        <AiOutlineClose size={20} />
+        <Image
+          src="/icons/general/close-icon-gray.svg"
+          width={16}
+          height={16}
+          alt="close-icon"
+        />
       </ModalIconButton>
     </ModalHeaderContainer>
   );
