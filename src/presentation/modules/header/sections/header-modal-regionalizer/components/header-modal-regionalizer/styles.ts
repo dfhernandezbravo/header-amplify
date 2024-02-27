@@ -12,6 +12,9 @@ export const HeaderModalRegionalizerContainer = styled.div`
     width: 100%;
     justify-content: space-between;
     margin-bottom: 0.5rem;
+    &.center {
+      justify-content: center;
+    }
   }
 
   & .title {
