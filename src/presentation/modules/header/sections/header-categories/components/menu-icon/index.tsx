@@ -13,6 +13,7 @@ import {
   IconCloseContainer,
   MenuContainer,
   OpenedCategoriesHeader,
+  CategoriesContainer,
 } from './styles';
 
 const MenuIcon = () => {
@@ -32,7 +33,7 @@ const MenuIcon = () => {
 
   return (
     <MenuContainer onClick={(e) => handleOnClick(e)}>
-      <div>
+      <CategoriesContainer>
         {isOpenCategories ? (
           <OpenedCategoriesHeader>
             {device === 'Desktop' && (
@@ -52,7 +53,7 @@ const MenuIcon = () => {
           </IconCloseContainer>
         )}
         <span>{device === 'Desktop' ? 'Categorías' : 'Menú'}</span>
-      </div>
+      </CategoriesContainer>
 
       {device === 'Desktop' && <OfferLink />}
     </MenuContainer>
