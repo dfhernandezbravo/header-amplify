@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import TextField from '@components/atoms/textfield-bit';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -41,19 +41,28 @@ const LoginUserPassword = () => {
     resolver: yupResolver(schema),
   });
 
+  const [buttonLoading, setButtonLoading] = useState(false);
+
   const dispatch = useAppDispatch();
+
   const { loginSuccess, loginError } = useResponseLogin();
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+    setButtonLoading(true);
     dispatch(setLoginError(null));
     dispatch(setEmail(data.email));
-
     customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
   };
 
   useEffect(() => {
-    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, loginSuccess);
-    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, (event) => {
+      setButtonLoading(false);
+      loginSuccess(event);
+    });
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, (event) => {
+      setButtonLoading(false);
+      loginError(event);
+    });
 
     return () => {
       document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginSuccess);
@@ -117,10 +126,12 @@ const LoginUserPassword = () => {
           ¿Olvidaste tu contraseña?
         </ButtonResetPassword>
       </ResetPasswordContainer>
+
       <ButtonPrimary
         type="submit"
-        title="Ingresar a mi cuenta"
+        title={buttonLoading ? '' : 'Ingresar a mi cuenta'}
         disabled={!watchEmail || !watchPassword}
+        isLoading={buttonLoading}
       />
     </ModalForm>
   );
