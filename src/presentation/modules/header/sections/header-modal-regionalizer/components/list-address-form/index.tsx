@@ -1,4 +1,3 @@
-// import ButtonBack from '@components/atoms/button-back';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { CustomerAddress } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
@@ -17,7 +16,6 @@ import RadioButtonAddress from '../radio-input-address';
 import mapDataListAddressForm from './map-data-request';
 import {
   ButtonNewAddress,
-  HeaderNewAddressContainer,
   ListAddressContainer,
   ListAddressFormContainer,
 } from './styles';
@@ -26,6 +24,8 @@ import ListAddressSkeleton from '../list-address-skeleton';
 const ListAddressForm = () => {
   const dispatch = useAppDispatch();
   const { addresses } = useAppSelector((state) => state.customer);
+  console.log('addresses-->', addresses);
+
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
@@ -46,13 +46,6 @@ const ListAddressForm = () => {
   useEffect(() => {
     if (customer) dispatch(getAddressCustomer());
   }, [customer, dispatch]);
-
-  const HeaderNewAddress = () => (
-    <HeaderNewAddressContainer>
-      {/* <ButtonBack onClick={() => setStep('list-address')} /> */}
-      <h3 className="newaddress-title">Ingresa tu ubicación</h3>
-    </HeaderNewAddressContainer>
-  );
 
   const filterRepeatedAddress = addresses.reduceRight(
     (acc: CustomerAddress[], address) => {
@@ -133,7 +126,7 @@ const ListAddressForm = () => {
       />
     </ListAddressFormContainer>
   ) : (
-    <NewAddressForm header={<HeaderNewAddress />} />
+    <NewAddressForm changeStep={setStep} />
   );
 };
 

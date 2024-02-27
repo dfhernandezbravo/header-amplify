@@ -1,6 +1,5 @@
 import Desktop from '@components/layout/desktop';
 import Modal from '@components/atoms/modal';
-import HeaderModalRegionalizer from '../../components/header-modal-regionalizer';
 import ListAddressForm from '../../components/list-address-form';
 import NewAddressForm from '../../components/new-address-form';
 import { useContext } from 'react';
@@ -16,13 +15,7 @@ const ModalRegionalizerDesktop = ({ isUserLogged }: Props) => {
   return (
     <Desktop>
       <Modal onClose={onCloseModal} isOpen={isOpenModal}>
-        {isUserLogged ? (
-          <ListAddressForm />
-        ) : (
-          <NewAddressForm
-            header={<HeaderModalRegionalizer title="Ingresa tu ubicación" />}
-          />
-        )}
+        {isUserLogged ? <ListAddressForm /> : <NewAddressForm />}
       </Modal>
     </Desktop>
   );
