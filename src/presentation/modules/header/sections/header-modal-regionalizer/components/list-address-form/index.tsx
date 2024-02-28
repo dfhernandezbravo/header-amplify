@@ -1,4 +1,3 @@
-// import ButtonBack from '@components/atoms/button-back';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { CustomerAddress } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
@@ -17,11 +16,12 @@ import RadioButtonAddress from '../radio-input-address';
 import mapDataListAddressForm from './map-data-request';
 import {
   ButtonNewAddress,
-  HeaderNewAddressContainer,
   ListAddressContainer,
   ListAddressFormContainer,
 } from './styles';
 import ListAddressSkeleton from '../list-address-skeleton';
+import useBreakpoints from '@hooks/useBreakpoints';
+import HeaderNewAddress from './components/header-new-address';
 
 const ListAddressForm = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +30,8 @@ const ListAddressForm = () => {
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );
+
+  const { isXs, isSm } = useBreakpoints();
 
   const { sendEventAnalytics } = useAnalytics();
   const { orderFormId, customer, onCloseModal } = useContext(
@@ -46,13 +48,6 @@ const ListAddressForm = () => {
   useEffect(() => {
     if (customer) dispatch(getAddressCustomer());
   }, [customer, dispatch]);
-
-  const HeaderNewAddress = () => (
-    <HeaderNewAddressContainer>
-      {/* <ButtonBack onClick={() => setStep('list-address')} /> */}
-      <h3 className="newaddress-title">Ingresa tu ubicación</h3>
-    </HeaderNewAddressContainer>
-  );
 
   const filterRepeatedAddress = addresses.reduceRight(
     (acc: CustomerAddress[], address) => {
@@ -97,12 +92,13 @@ const ListAddressForm = () => {
       dispatch(pendingAddNewAddress(false));
     }
   };
-
   return step === 'list-address' ? (
     <ListAddressFormContainer>
-      <HeaderModalRegionalizer title="Ingresa tu ubicación" />
+      <HeaderModalRegionalizer
+        title="Ingresa tu ubicación"
+        renderIcon={isXs || isSm ? false : true}
+      />
       <p>Cuéntanos dónde quieres recibir tu compra</p>
-      <h3>Tus direcciones</h3>
       <ListAddressContainer>
         {filterRepeatedAddress?.length === 0 ? (
           <ListAddressSkeleton />
@@ -133,7 +129,14 @@ const ListAddressForm = () => {
       />
     </ListAddressFormContainer>
   ) : (
-    <NewAddressForm header={<HeaderNewAddress />} />
+    <NewAddressForm
+      header={
+        <HeaderNewAddress
+          onCloseModal={() => onCloseModal()}
+          setStep={(value) => setStep(value)}
+        />
+      }
+    />
   );
 };
 

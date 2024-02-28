@@ -1,25 +1,36 @@
-import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
 import { useContext } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import Image from 'next/image';
+import HeaderLocationContext from '@modules/header/sections/header-location/context/header-location-context';
 import { HeaderModalRegionalizerContainer, ModalIconButton } from './styles';
 import { useAppSelector } from '@hooks/storeHooks';
 import ErrorMessage from '@components/atoms/error-message-tooltip';
 
 interface Props {
   title?: string;
+  renderIcon?: boolean;
 }
 
-const HeaderModalRegionalizer = ({ title }: Props) => {
+const HeaderModalRegionalizer = ({ title, renderIcon = true }: Props) => {
   const { onCloseModal } = useContext(HeaderLocationContext);
   const { errorSetLocation } = useAppSelector((state) => state.regionalizer);
+
+  const Icon = () =>
+    renderIcon ? (
+      <ModalIconButton onClick={onCloseModal}>
+        <Image
+          src="/icons/general/close-icon-gray.svg"
+          width={16}
+          height={16}
+          alt="close-icon"
+        />
+      </ModalIconButton>
+    ) : null;
 
   return (
     <HeaderModalRegionalizerContainer>
       <div className="modal-header">
         <p className="title">{title}</p>
-        <ModalIconButton onClick={onCloseModal}>
-          <AiOutlineClose size={20} />
-        </ModalIconButton>
+        <Icon />
       </div>
       {errorSetLocation && (
         <ErrorMessage
