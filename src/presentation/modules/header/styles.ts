@@ -14,9 +14,9 @@ export const HeaderContainerWrapper = styled.div<{ visible: boolean }>`
 
 export const Spacer = styled.div`
   width: 100%;
-  height: 162.5px;
+  height: 158px;
 
   @media screen and (max-width: 968px) {
-    height: 132.5px;
+    height: 116px;
   }
 `;
