@@ -34,9 +34,9 @@ const HeaderLocationContainer = ({ addressSelected }: Props) => {
     <RegionalizerContainer>
       <ButtonRegionalizer onClick={handleOnClickRegionalizer}>
         <Image
-          src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
-          width={19}
-          height={25}
+          src="/icons/header/location-icon.svg"
+          width={18}
+          height={22}
           alt="Location Icon"
         />
         <AddressSelected address={addressSelected} />
