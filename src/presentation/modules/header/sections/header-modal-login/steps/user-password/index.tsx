@@ -16,7 +16,11 @@ import * as yup from 'yup';
 import LoginErrors from '../../components/login-errors';
 import useResponseLogin from '../../hooks/use-response-login';
 import { ModalForm } from '../../styles';
-import { ButtonResetPassword, ResetPasswordContainer } from './styles';
+import {
+  ButtonResetPassword,
+  ResetPasswordContainer,
+  TexFieldContainer,
+} from './styles';
 
 type LoginForm = {
   email: string;
@@ -42,6 +46,7 @@ const LoginUserPassword = () => {
   });
 
   const [buttonLoading, setButtonLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -107,14 +112,22 @@ const LoginUserPassword = () => {
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <TextField
-            {...field}
-            fullwidth={true}
-            label="Contraseña"
-            placeholder="Contraseña"
-            type="password"
-            ref={null}
-          />
+          <TexFieldContainer>
+            <TextField
+              {...field}
+              fullwidth={true}
+              label="Contraseña"
+              placeholder="Contraseña"
+              type={!showPassword ? 'password' : 'text'}
+              ref={null}
+            />
+            <p
+              className="show-hide-text"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {!showPassword ? 'Mostrar' : 'Ocultar'}
+            </p>
+          </TexFieldContainer>
         )}
       />
 
