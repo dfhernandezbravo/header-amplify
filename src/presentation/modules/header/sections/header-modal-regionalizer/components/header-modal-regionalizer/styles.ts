@@ -7,6 +7,11 @@ export const HeaderModalRegionalizerContainer = styled.div`
   align-items: center;
   width: 100%;
 
+  & .title {
+    font-size: 18px;
+    color: #485760;
+  }
+
   & .modal-header {
     display: flex;
     width: 100%;
@@ -15,11 +20,6 @@ export const HeaderModalRegionalizerContainer = styled.div`
     @media only screen and (max-width: 780px) {
       justify-content: center;
     }
-  }
-
-  & .title {
-    font-size: 18px;
-    color: #485760;
   }
 
   @media (max-width: 720px) {

@@ -16,6 +16,7 @@ import {
   closeModalLogin,
   openModalLogin,
 } from '@store/login/slices/login-slice';
+import getCustomer from '@use-cases/customer/get-customer';
 
 const HeaderContainer = ({ modules }: HeaderProps) => {
   const dispatch = useAppDispatch();
@@ -47,6 +48,11 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
       dispatch(closeModalLogin());
     }
   }, []);
+
+  const { customer } = useAppSelector((state) => state.customer);
+  useEffect(() => {
+    if (!customer) dispatch(getCustomer());
+  }, [customer]);
 
   const renderBody = useMemo(
     () => (

@@ -28,7 +28,7 @@ const HeaderModalRegionalizer = ({ title, renderIcon = true }: Props) => {
 
   return (
     <HeaderModalRegionalizerContainer>
-      <div className="modal-header">
+      <div className="modal-header center">
         <p className="title">{title}</p>
         <Icon />
       </div>

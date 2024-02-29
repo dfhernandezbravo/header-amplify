@@ -68,5 +68,6 @@ export const HeaderNewAddressContainer = styled.div`
   }
   & .newaddress-title {
     font-weight: 400;
+    font-size: 18px;
   }
 `;
