@@ -98,7 +98,7 @@ const ListAddressForm = () => {
         title="Ingresa tu ubicación"
         renderIcon={isXs || isSm ? false : true}
       />
-      <p>Cuéntanos dónde quieres recibir tu compra</p>
+      <p className="title">Cuéntanos dónde quieres recibir tu compra</p>
       <ListAddressContainer>
         {filterRepeatedAddress?.length === 0 ? (
           <ListAddressSkeleton />

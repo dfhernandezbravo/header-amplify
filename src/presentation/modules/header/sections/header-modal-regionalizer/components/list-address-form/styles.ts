@@ -7,6 +7,9 @@ export const ListAddressFormContainer = styled.div`
   gap: 20px;
   padding: 20px;
   color: #000;
+  & .title {
+    color: #485760;
+  }
   @media only screen and (max-width: 768px) {
     width: auto;
   }
