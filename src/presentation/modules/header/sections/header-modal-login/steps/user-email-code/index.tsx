@@ -99,7 +99,6 @@ const LoginUserEmailCode = () => {
   };
 
   const handleError = (event: Event) => {
-    console.log('event', event);
     const customEvent = event as CustomEvent<{
       error: AxiosError;
     }>;
