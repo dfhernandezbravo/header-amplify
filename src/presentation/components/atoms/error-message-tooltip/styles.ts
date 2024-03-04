@@ -8,9 +8,8 @@ export const Container = styled.div`
   background-color: #f8bcba;
   padding: 4px;
   border-radius: 8px;
-
+  font-size: 14px;
   & .title {
-    font-size: 14px;
     font-weight: 600;
     color: #363f45;
   }

@@ -11,6 +11,10 @@ export const NewAddressFormContainer = styled.div`
     font-size: ${({ theme: { fontSize } }) => fontSize[200]};
     color: #485760;
   }
+
+  @media only screen and (max-width: 780px) {
+    max-width: 100%;
+  }
 `;
 
 export const SelectWrapper = styled.div`

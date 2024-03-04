@@ -19,15 +19,18 @@ import {
   ListAddressFormContainer,
 } from './styles';
 import ListAddressSkeleton from '../list-address-skeleton';
+import useBreakpoints from '@hooks/useBreakpoints';
+import HeaderNewAddress from './components/header-new-address';
 
 const ListAddressForm = () => {
   const dispatch = useAppDispatch();
   const { addresses } = useAppSelector((state) => state.customer);
-
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );
+
+  const { isXs, isSm } = useBreakpoints();
 
   const { sendEventAnalytics } = useAnalytics();
   const { orderFormId, onCloseModal } = useContext(HeaderLocationContext);
@@ -94,12 +97,13 @@ const ListAddressForm = () => {
       dispatch(pendingAddNewAddress(false));
     }
   };
-
   return step === 'list-address' ? (
     <ListAddressFormContainer>
-      <HeaderModalRegionalizer title="Ingresa tu ubicación" />
-      <p>Cuéntanos dónde quieres recibir tu compra</p>
-      <h3>Tus direcciones</h3>
+      <HeaderModalRegionalizer
+        title="Ingresa tu ubicación"
+        renderIcon={isXs || isSm ? false : true}
+      />
+      <p className="title">Cuéntanos dónde quieres recibir tu compra</p>
       <ListAddressContainer>
         {filterAddress?.length === 0 ? (
           <ListAddressSkeleton />
@@ -130,7 +134,14 @@ const ListAddressForm = () => {
       />
     </ListAddressFormContainer>
   ) : (
-    <NewAddressForm changeStep={setStep} />
+    <NewAddressForm
+      header={
+        <HeaderNewAddress
+          onCloseModal={() => onCloseModal()}
+          setStep={(value) => setStep(value)}
+        />
+      }
+    />
   );
 };
 

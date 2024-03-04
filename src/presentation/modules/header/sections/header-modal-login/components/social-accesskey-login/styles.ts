@@ -19,6 +19,7 @@ export const ButtonNewAccount = styled.button`
   display: flex;
   flex-direction: row;
   gap: 4px;
+  font-family: 'Open Sans';
 `;
 
 export const LinkNewAccountText = styled.span`

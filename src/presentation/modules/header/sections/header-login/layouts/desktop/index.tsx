@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Desktop from '@components/layout/desktop';
@@ -8,17 +8,15 @@ import { openModalLogin } from '@store/login/slices/login-slice';
 import LoginButton from '../../components/login-button';
 import LoginMenu from '../../components/login-menu';
 import { LoginContainerDesktop, LoginInformation } from '../../styles';
-import getCustomer from '@use-cases/customer/get-customer';
 
 const HeaderLoginDesktop = () => {
   const { customer } = useAppSelector((state) => state.customer);
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const dispatch = useAppDispatch();
   const router = useRouter();
-
   const isLogged = shoppingCart?.loggedIn;
+
+  const dispatch = useAppDispatch();
 
   const handleLogin = () => {
     if (isLogged) {
@@ -30,10 +28,6 @@ const HeaderLoginDesktop = () => {
     dispatch(closeCategories());
     dispatch(openModalLogin());
   };
-
-  useEffect(() => {
-    if (!customer) dispatch(getCustomer());
-  }, [customer]);
 
   return (
     <Desktop>

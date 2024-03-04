@@ -43,7 +43,12 @@ const ModalRegionalizerMobile = ({ isUserLogged }: Props) => {
             <ListAddressForm />
           ) : (
             <NewAddressForm
-              header={<HeaderModalRegionalizer title="Ingresa tu ubicación" />}
+              header={
+                <HeaderModalRegionalizer
+                  title="Ingresa tu ubicación"
+                  renderIcon={false}
+                />
+              }
             />
           )}
         </Container>
