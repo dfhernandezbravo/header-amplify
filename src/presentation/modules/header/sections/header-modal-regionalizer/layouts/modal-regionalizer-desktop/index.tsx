@@ -4,6 +4,7 @@ import ListAddressForm from '../../components/list-address-form';
 import NewAddressForm from '../../components/new-address-form';
 import { useContext } from 'react';
 import HeaderLocationContext from '../../../header-location/context/header-location-context';
+import { useAppSelector } from '@hooks/storeHooks';
 
 type Props = {
   isUserLogged?: boolean;
@@ -11,11 +12,16 @@ type Props = {
 
 const ModalRegionalizerDesktop = ({ isUserLogged }: Props) => {
   const { onCloseModal, isOpenModal } = useContext(HeaderLocationContext);
+  const { addresses } = useAppSelector((state) => state.customer);
 
   return (
     <Desktop>
       <Modal onClose={onCloseModal} isOpen={isOpenModal}>
-        {isUserLogged ? <ListAddressForm /> : <NewAddressForm />}
+        {isUserLogged && addresses?.length ? (
+          <ListAddressForm />
+        ) : (
+          <NewAddressForm />
+        )}
       </Modal>
     </Desktop>
   );
