@@ -4,8 +4,10 @@ import ListAddressForm from '../../components/list-address-form';
 import NewAddressForm from '../../components/new-address-form';
 import dynamic from 'next/dynamic';
 import { BlockScroll, Container } from './styles';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import HeaderLocationContext from '../../../header-location/context/header-location-context';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import getAddressCustomer from '@use-cases/customer/get-address-customer';
 
 type Props = {
   isUserLogged?: boolean;
@@ -21,6 +23,13 @@ const BottomSheet = dynamic(
 
 const ModalRegionalizerMobile = ({ isUserLogged }: Props) => {
   const { onCloseModal, isOpenModal } = useContext(HeaderLocationContext);
+  const { addresses, customer } = useAppSelector((state) => state.customer);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (customer) dispatch(getAddressCustomer());
+  }, [customer, dispatch]);
+
   return (
     <Mobile>
       <BlockScroll isOpen={isOpenModal} />
@@ -30,7 +39,7 @@ const ModalRegionalizerMobile = ({ isUserLogged }: Props) => {
         height={isUserLogged ? 550 : undefined}
       >
         <Container>
-          {isUserLogged ? (
+          {isUserLogged && addresses?.length ? (
             <ListAddressForm />
           ) : (
             <NewAddressForm

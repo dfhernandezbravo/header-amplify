@@ -71,7 +71,7 @@ export default async function handler(
       searches: searches.map((search) => ({
         value: search.term,
       })),
-      categories: searches[0].attributes || [],
+      categories: searches?.[0]?.attributes || [],
     };
     res.json(dataResponse);
   } catch (error) {

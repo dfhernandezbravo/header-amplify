@@ -33,6 +33,8 @@ const HeaderDesktop = ({ modules }: Props) => {
   const { isOpenCategories } = useAppSelector((state) => state.category);
   const { showModule } = useShowModules();
 
+  const hasSecondRow = modules.categories || modules.footerHeader;
+
   return (
     <Desktop>
       {showModule(modules.topBrands, <HeaderTopBrands />)}
@@ -58,10 +60,12 @@ const HeaderDesktop = ({ modules }: Props) => {
           {showModule(modules.login, <HeaderLogin />)}
           {showModule(modules.cart, <HeaderCart />)}
         </FirstRow>
-        <SecondRow>
-          {showModule(modules.categories, <MenuCategories />)}
-          {showModule(modules.footerHeader, <HeaderInformation />)}
-        </SecondRow>
+        {hasSecondRow && (
+          <SecondRow>
+            {showModule(modules.categories, <MenuCategories />)}
+            {showModule(modules.footerHeader, <HeaderInformation />)}
+          </SecondRow>
+        )}
       </HeaderDesktopContainer>
       <HeaderModalLogin />
       {isOpenCategories && <ModalCategories />}
