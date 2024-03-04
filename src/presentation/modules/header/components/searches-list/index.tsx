@@ -64,7 +64,7 @@ const SearchList = () => {
 
   return (
     <SearchListContainer>
-      {searches.map((search) => (
+      {searches?.map((search) => (
         <SearchItem
           href={`/search/${search.value}`}
           key={search.value}
@@ -80,9 +80,10 @@ const SearchList = () => {
         </SearchItem>
       ))}
 
-      <SearchCategoriesTitle>Categorías</SearchCategoriesTitle>
-
-      {categories.map((category) => (
+      {categories?.length && (
+        <SearchCategoriesTitle>Categorías</SearchCategoriesTitle>
+      )}
+      {categories?.map((category) => (
         <SearchItemCategory
           onClick={(e) => {
             e.stopPropagation();

@@ -27,7 +27,7 @@ const HeaderSearch = React.memo(function Search() {
   const debouncedSearch = useDebounce(search, 500);
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
-  const { searches } = useAppSelector((state) => state.search);
+  const { searches, isOpenResults } = useAppSelector((state) => state.search);
   const inputRef = useRef<HTMLInputElement>(null);
   const { device } = useBreakpoints();
 
@@ -74,9 +74,7 @@ const HeaderSearch = React.memo(function Search() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      handleResizeSearchResults();
-    }, 300);
+    setTimeout(() => handleResizeSearchResults(), 300);
     window.addEventListener('resize', handleResizeSearchResults);
     return () => {
       window.removeEventListener('resize', handleResizeSearchResults);
@@ -129,6 +127,7 @@ const HeaderSearch = React.memo(function Search() {
       '',
     );
     setSearch(updatedValue);
+    if (!isOpenResults) dispatch(openResults());
   };
 
   return (

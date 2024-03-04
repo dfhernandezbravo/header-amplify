@@ -1,30 +1,33 @@
 /* eslint-disable no-undef */
-import Spinner from '@components/atoms/spinner';
 import { useAppSelector } from '@hooks/storeHooks';
 import EmptySearch from '@modules/header/components/empty-searches-list';
 import PopularSearchesList from '@modules/header/components/initial-searches-list';
 import SearchList from '@modules/header/components/searches-list';
 import HeaderSuggestions from '../header-suggestions';
 import {
-  HeaderResultSpinnerContainer,
   HeaderResultsContainer,
-  TextContent,
-  LoadingContainer,
   SearchContainerResults,
   NoContentContainer,
 } from './styles';
 import { useEffect, useState } from 'react';
 import NoContentResults from './components/no-content-results';
 import RecentResultsList from '@modules/header/components/initial-searches-list/recent-results-list';
+import LoadingContent from './components/loading-content';
 
 const HeaderResults = () => {
   const [showPopularResults, setShowPopularResults] = useState(true);
   const [showNoContent, setShowNoContent] = useState(false);
-  const { isLoading, isEmptySearch, popularSearches, searches, searchWidth } =
-    useAppSelector((state) => state.search);
+  const {
+    isLoading,
+    isEmptySearch,
+    popularSearches,
+    searches,
+    searchWidth,
+    term,
+  } = useAppSelector((state) => state.search);
 
   useEffect(() => {
-    if (!isLoading && (!searches || searches?.length === 0))
+    if (!isLoading && (!searches || searches?.length === 0 || !term))
       setShowPopularResults(true);
     else setShowPopularResults(false);
   }, [isLoading, searches]);
@@ -54,24 +57,14 @@ const HeaderResults = () => {
 
   return (
     <HeaderResultsContainer width={`${searchWidth}px` || '100%'}>
-      {isLoading && !showNoContent && (
-        <LoadingContainer>
-          <HeaderResultSpinnerContainer>
-            <Spinner />
-          </HeaderResultSpinnerContainer>
-          <TextContent>
-            <h4>Buscando artículos</h4>
-            <p>Espera un momento...</p>
-          </TextContent>
-        </LoadingContainer>
-      )}
+      <LoadingContent isLoading={isLoading} showNoContent={showNoContent} />
       {showNoContent && (
         <NoContentContainer>
           <RecentResultsList />
           <NoContentResults />
         </NoContentContainer>
       )}
-      {searches?.length > 0 && (
+      {!showPopularResults && searches?.length > 0 && (
         <SearchContainerResults>
           <SearchList />
           <HeaderSuggestions />
