@@ -14,12 +14,12 @@ interface Props {
 
 const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
   const cookies = new Cookies();
-  const softLoginName = cookies.get('softLogin');
+  const softLoginName = cookies.get('SoftLogin');
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const onClickLogout = () => {
-    cookies.remove('softLogin');
+    cookies.remove('SoftLogin');
     customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
     dispatch(getCustomer());
     if (router?.pathname?.includes('/account')) {

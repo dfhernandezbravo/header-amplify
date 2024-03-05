@@ -13,8 +13,8 @@ const HeaderLoginMobile = () => {
   const isUserLogged = shoppingCart?.loggedIn;
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [cookies] = useCookies(['softLogin']);
-  const softLoginName = cookies.softLogin;
+  const [cookies] = useCookies(['SoftLogin']);
+  const softLoginName = cookies.SoftLogin;
 
   const onClickLogin = () => {
     dispatch(closeCategories());

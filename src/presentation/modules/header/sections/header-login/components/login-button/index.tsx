@@ -8,21 +8,22 @@ interface Props {
 }
 
 const LoginButton = ({ customer }: Props) => {
-  const [cookies] = useCookies(['softLogin']);
-  const softLoginName = cookies.softLogin;
+  const [cookies] = useCookies(['SoftLogin']);
+  const softLoginName = cookies.SoftLogin;
+
+  const loginText =
+    customer?.firstName === '' || softLoginName === ''
+      ? ''
+      : customer?.firstName || softLoginName || 'Inicia Sesión';
+
+  const isTwoParagraph = loginText.length > 0;
 
   return (
-    <LoginUser className="login-user">
+    <LoginUser className="login-user" isTwoParagraph={isTwoParagraph}>
       <span>Hola</span>
       <LoginButtonContainerDesktop>
-        <strong>
-          {customer
-            ? ` ${customer?.firstName}`
-            : softLoginName
-            ? `${softLoginName}`
-            : 'Inicia Sesión'}
-        </strong>
-        {(customer || softLoginName) && <IoIosArrowDown />}
+        {loginText && <strong>{loginText}</strong>}
+        {loginText !== 'Inicia Sesión' && <IoIosArrowDown />}
       </LoginButtonContainerDesktop>
     </LoginUser>
   );

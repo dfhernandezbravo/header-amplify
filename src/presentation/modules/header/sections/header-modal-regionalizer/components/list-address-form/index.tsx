@@ -24,7 +24,6 @@ import ListAddressSkeleton from '../list-address-skeleton';
 const ListAddressForm = () => {
   const dispatch = useAppDispatch();
   const { addresses } = useAppSelector((state) => state.customer);
-  console.log('addresses-->', addresses);
 
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer } = useAppSelector(

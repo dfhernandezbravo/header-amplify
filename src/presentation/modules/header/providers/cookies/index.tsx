@@ -10,15 +10,17 @@ interface Props {
 const CookiesProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
-  const [_cookie, setCookie, removeCookie] = useCookies(['softLogin']);
+  const [_cookie, setCookie, removeCookie] = useCookies(['SoftLogin']);
 
   useEffect(() => {
     if (shoppingCart?.loggedIn) {
-      const firstName = shoppingCart?.customer?.firstName ?? '';
-      setCookie('softLogin', firstName);
+      const firstName = shoppingCart?.customer?.firstName || '';
+      setCookie('SoftLogin', firstName, {
+        maxAge: 31536000,
+      });
     } else {
       dispatch(setCustomer(null));
-      removeCookie('softLogin');
+      removeCookie('SoftLogin');
     }
   }, [shoppingCart]);
 

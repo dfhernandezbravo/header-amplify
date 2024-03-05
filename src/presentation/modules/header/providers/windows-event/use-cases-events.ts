@@ -1,5 +1,6 @@
 import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 import { useAppDispatch } from '@hooks/storeHooks';
+import { setCustomer } from '@store/customer/slices/customer-slice';
 import {
   setCartId,
   setShoppingCart,
@@ -26,6 +27,19 @@ export const useCaseEvents = () => {
       detail: { shoppingCart },
     } = customEvent;
     dispatch(setShoppingCart(shoppingCart));
+    dispatch(
+      setCustomer({
+        id: shoppingCart.customer.userId,
+        firstName: shoppingCart.customer.firstName,
+        lastName: shoppingCart.customer.lastName,
+        email: shoppingCart.customer.email,
+        phone: shoppingCart.customer.phone,
+        document: shoppingCart.customer.document,
+        userId: shoppingCart.customer.userId,
+        documentType: shoppingCart.customer.documentType,
+        isEmployee: shoppingCart.customer.isEmployee,
+      }),
+    );
   };
 
   return {
