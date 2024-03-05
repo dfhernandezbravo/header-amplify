@@ -82,6 +82,22 @@
     react-icons "^5.0.1"
     styled-components "^6.1.6"
 
+"@ccom-easy-design-system/atoms.select@^0.0.19":
+  version "0.0.19"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.select/-/atoms.select-0.0.19.tgz#939c614b323566d97568e6efb4afac9541d85c85"
+  integrity sha512-S8ItLvldZHYyXtpgjSCaf9CHGBCPeeNASOoOCqQxSvyKqzGdDQkqHpm4R8XCCqgVLUiC7OcRFy9oUN/oC91JeQ==
+  dependencies:
+    react-icons "^5.0.1"
+    react-select "5.8.0"
+    styled-components "^6.1.6"
+
+"@ccom-easy-design-system/atoms.skeleton@0.0.2":
+  version "0.0.2"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.skeleton/-/atoms.skeleton-0.0.2.tgz#3a229915a854d26983331dcef3e5d68762873e39"
+  integrity sha512-kMFfn3O4UH/xKjbr95sx0L2jqy2BcrFTJGkSnP4W5Sxug23prpapkA7PVb1fBfFScp991rjLOxGhNQazsg2ASA==
+  dependencies:
+    styled-components "^6.1.6"
+
 "@ccom-easy-design-system/atoms.textfield@^0.0.28":
   version "0.0.28"
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.28.tgz#c4934eda43f98151dcb15cfb98070e347cb66ee5"
@@ -4411,6 +4427,21 @@ react-redux@^8.0.5:
     hoist-non-react-statics "^3.3.2"
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
+
+react-select@5.8.0:
+  version "5.8.0"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.8.0.tgz#bd5c467a4df223f079dd720be9498076a3f085b5"
+  integrity sha512-TfjLDo58XrhP6VG5M/Mi56Us0Yt8X7xD6cDybC7yoRMUNm7BGO7qk8J0TLQOua/prb8vUOtsfnXZwfm30HGsAA==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
+    "@emotion/cache" "^11.4.0"
+    "@emotion/react" "^11.8.1"
+    "@floating-ui/dom" "^1.0.1"
+    "@types/react-transition-group" "^4.4.0"
+    memoize-one "^6.0.0"
+    prop-types "^15.6.0"
+    react-transition-group "^4.3.0"
+    use-isomorphic-layout-effect "^1.1.2"
 
 react-select@^5.7.7:
   version "5.7.7"

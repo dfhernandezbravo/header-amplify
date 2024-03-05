@@ -1,10 +1,9 @@
 import { Customer } from '@entities/customer/customer.entity';
 import { LoginMenuContainer, LogoutItem, MenuItem } from './style';
-import { customDispatchEvent } from '@store/events/dispatchEvents';
 import { useAppDispatch } from '@hooks/storeHooks';
 import getCustomer from '@use-cases/customer/get-customer';
 import { Cookies } from 'react-cookie';
-import { useRouter } from 'next/router';
+import useHandleLogout from '@modules/header/hooks/use-handle-logout';
 
 interface Props {
   isMenuOpen: boolean;
@@ -16,16 +15,13 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
   const cookies = new Cookies();
   const softLoginName = cookies.get('SoftLogin');
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const { onClickLogout } = useHandleLogout();
 
-  const onClickLogout = () => {
-    cookies.remove('SoftLogin');
-    customDispatchEvent({ name: 'DISPATCH_LOGOUT', detail: {} });
+  const handleLogout = () => {
+    onClickLogout();
     dispatch(getCustomer());
-    if (router?.pathname?.includes('/account')) {
-      router.push('/');
-    }
   };
+
   if (!customer && softLoginName) {
     return (
       <LoginMenuContainer isVisible={isMenuOpen}>
@@ -46,7 +42,7 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
           <MenuItem href="/account/addresses">Mis Direcciones</MenuItem>
           <MenuItem href="/account/purchases">Mis Compras</MenuItem>
           <MenuItem href="/account/favorites">Mis Favoritos</MenuItem>
-          <LogoutItem onClick={onClickLogout}>Cerrar sesión</LogoutItem>
+          <LogoutItem onClick={() => handleLogout()}>Cerrar sesión</LogoutItem>
         </LoginMenuContainer>
       )}
     </>

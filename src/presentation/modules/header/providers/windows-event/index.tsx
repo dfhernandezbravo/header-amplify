@@ -38,11 +38,11 @@ const WindowsEventProvider = ({ children }: Props) => {
   useEffect(() => {
     customDispatchEvent({
       name: WindowsEvents.DISPATCH_GET_CART_ID,
-      detail: {},
+      detail: { origin: 'HEADER' },
     });
     customDispatchEvent({
       name: WindowsEvents.DISPATCH_GET_CART,
-      detail: {},
+      detail: { origin: 'HEADER' },
     });
   }, []);
 

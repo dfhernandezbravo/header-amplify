@@ -7,6 +7,9 @@ export const ListAddressFormContainer = styled.div`
   gap: 20px;
   padding: 20px;
   color: #000;
+  & .title {
+    color: #485760;
+  }
   @media only screen and (max-width: 768px) {
     width: auto;
   }
@@ -51,9 +54,20 @@ export const ButtonNewAddress = styled.button`
 export const HeaderNewAddressContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 12px;
   align-items: center;
+  color: #485760;
+  & img {
+    cursor: pointer;
+  }
+  & .image-title-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   & .newaddress-title {
     font-weight: 400;
+    font-size: 18px;
   }
 `;

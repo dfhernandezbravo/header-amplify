@@ -5,8 +5,9 @@ const SearchListContainer = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
-  width: 219px;
+  width: 220px;
   padding-top: 24px;
+  margin: 0 6px;
 `;
 
 const SearchItem = styled(Link)`
@@ -16,8 +17,7 @@ const SearchItem = styled(Link)`
   color: #4d4d4d;
   align-items: center;
   text-transform: capitalize;
-  padding: 0px 10px 20px 20px;
-  display: block;
+  padding: 10px;
   &:hover {
     background-color: #eee;
     border-radius: 12px 0px 0px 12px;
@@ -32,7 +32,7 @@ const SearchCategoriesTitle = styled.div`
   color: #6e8391;
   font-weight: 700;
   font-size: 12px;
-  padding: 0px 10px 20px 20px;
+  padding: 10px;
 `;
 
 export {

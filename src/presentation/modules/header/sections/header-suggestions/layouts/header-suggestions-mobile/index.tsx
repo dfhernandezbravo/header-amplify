@@ -7,6 +7,7 @@ import {
   SuggestionName,
 } from '../header-suggestions-desktop/styles';
 import {
+  SuggestionSpinnerContainer,
   SuggestionsMobileContainer,
   SuggestionsMobileDetail,
   SuggestionsMobileItem,
@@ -15,9 +16,12 @@ import {
   setRecentSearches,
   closeResults,
 } from '@store/search/slices/search-slice';
+import Spinner from '@components/atoms/spinner';
 
 const HeaderSuggestionsMobile = () => {
-  const { productSuggestions } = useAppSelector((state) => state.search);
+  const { productSuggestions, isLoadingSuggestions } = useAppSelector(
+    (state) => state.search,
+  );
   const { sendEventAnalytics } = useAnalytics();
   const dispatch = useAppDispatch();
 
@@ -38,7 +42,11 @@ const HeaderSuggestionsMobile = () => {
     <Mobile>
       <SuggestionsMobileContainer>
         <h5>Resultados de productos</h5>
-
+        {isLoadingSuggestions && (
+          <SuggestionSpinnerContainer>
+            <Spinner />
+          </SuggestionSpinnerContainer>
+        )}
         {productSuggestions?.map((product) => (
           <SuggestionsMobileItem
             key={product.productId}
