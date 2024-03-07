@@ -1,26 +1,29 @@
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '@hooks/storeHooks';
+import { useAppSelector } from '@hooks/storeHooks';
 import { useCookies } from 'react-cookie';
-import { setCustomer } from '@store/customer/slices/customer-slice';
+import { LOGIN_COOKIES } from '@infra/cookies';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const CookiesProvider = ({ children }: Props) => {
-  const dispatch = useAppDispatch();
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
-  const [_cookie, setCookie, removeCookie] = useCookies(['softLogin']);
+  const { customer } = useAppSelector((state) => state.customer);
+  const [_cookie, setCookie, removeCookie] = useCookies([
+    LOGIN_COOKIES.SOFT_LOGIN,
+  ]);
 
   useEffect(() => {
-    if (shoppingCart?.loggedIn) {
-      const firstName = shoppingCart?.customer?.firstName ?? '';
-      setCookie('softLogin', firstName);
-    } else {
-      dispatch(setCustomer(null));
-      removeCookie('softLogin');
+    if (customer && shoppingCart?.loggedIn) {
+      const { firstName } = customer;
+      setCookie(LOGIN_COOKIES.SOFT_LOGIN, firstName, {
+        maxAge: 31536000,
+      });
+      return;
     }
-  }, [shoppingCart]);
+    if (!shoppingCart?.loggedIn) removeCookie(LOGIN_COOKIES.SOFT_LOGIN);
+  }, [customer, shoppingCart]);
 
   return <>{children}</>;
 };

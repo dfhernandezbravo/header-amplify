@@ -7,6 +7,7 @@ import {
 import { closeResults } from '@store/search/slices/search-slice';
 import getCategories from '@use-cases/category/get-categories';
 import getCustomer from '@use-cases/customer/get-customer';
+import { setCustomer } from '@store/customer/slices/customer-slice';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
@@ -26,7 +27,6 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
   const router = useRouter();
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const isLogged = shoppingCart?.loggedIn;
-  const { customer } = useAppSelector((state) => state.customer);
   const { visible, positionScroll } = useScroll({ heightHeader });
 
   if (categories) dispatch(setCategories(categories));
@@ -52,8 +52,12 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
   }, []);
 
   useEffect(() => {
-    if (!customer) dispatch(getCustomer());
-  }, [customer]);
+    if (isLogged) {
+      dispatch(getCustomer());
+    } else {
+      dispatch(setCustomer(null));
+    }
+  }, [isLogged, dispatch]);
 
   const renderBody = useMemo(
     () => (

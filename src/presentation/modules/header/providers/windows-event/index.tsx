@@ -11,10 +11,12 @@ interface Props {
 
 const WindowsEventProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
-  const { handleGetShoppingCart, handleGetCartId } = useCaseEvents();
+  const { handleGetShoppingCart, handleGetCartId, handleGetProfile } =
+    useCaseEvents();
 
   useEffect(() => {
     document.addEventListener(WindowsEvents.GET_CART_ID, handleGetCartId);
+    document.addEventListener(WindowsEvents.UPDATE_PROFILE, handleGetProfile);
 
     window.addEventListener(
       WindowsEvents.GET_SHOPPING_CART,
