@@ -2,9 +2,10 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { LoginButtonContainerDesktop, LoginUser } from './style';
 import { useCookies } from 'react-cookie';
 import { useAppSelector } from '@hooks/storeHooks';
+import { LOGIN_COOKIES } from '@infra/cookies';
 
 const LoginButton = () => {
-  const [cookies] = useCookies(['SoftLogin']);
+  const [cookies] = useCookies([LOGIN_COOKIES.SOFT_LOGIN]);
   const softLoginName = cookies.SoftLogin;
   const { customer, isLoadingCustomer } = useAppSelector(
     (state) => state.customer,

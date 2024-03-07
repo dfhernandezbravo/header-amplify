@@ -4,6 +4,7 @@ import { useAppDispatch } from '@hooks/storeHooks';
 import getCustomer from '@use-cases/customer/get-customer';
 import { Cookies } from 'react-cookie';
 import useHandleLogout from '@modules/header/hooks/use-handle-logout';
+import { LOGIN_COOKIES } from '@infra/cookies';
 
 interface Props {
   isMenuOpen: boolean;
@@ -13,7 +14,7 @@ interface Props {
 
 const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
   const cookies = new Cookies();
-  const softLoginName = cookies.get('SoftLogin');
+  const softLoginName = cookies.get(LOGIN_COOKIES.SOFT_LOGIN);
   const dispatch = useAppDispatch();
   const { onClickLogout } = useHandleLogout();
 
