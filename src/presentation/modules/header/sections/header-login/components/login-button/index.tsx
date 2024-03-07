@@ -1,29 +1,45 @@
-import { Customer } from '@entities/customer/customer.entity';
 import { IoIosArrowDown } from 'react-icons/io';
 import { LoginButtonContainerDesktop, LoginUser } from './style';
 import { useCookies } from 'react-cookie';
+import { useAppSelector } from '@hooks/storeHooks';
 
-interface Props {
-  customer: Customer | null;
-}
-
-const LoginButton = ({ customer }: Props) => {
+const LoginButton = () => {
   const [cookies] = useCookies(['SoftLogin']);
   const softLoginName = cookies.SoftLogin;
+  const { customer, isLoadingCustomer } = useAppSelector(
+    (state) => state.customer,
+  );
 
-  const loginText =
-    customer?.firstName === '' || softLoginName === ''
-      ? ''
-      : customer?.firstName || softLoginName || 'Inicia Sesión';
+  const getText = () => {
+    if (isLoadingCustomer && !customer) {
+      return { displayName: ' ', isTwoParagraph: false };
+    }
+    if (customer?.firstName) {
+      return {
+        displayName: customer.firstName,
+        isTwoParagraph: customer.firstName.length > 0,
+      };
+    }
+    if (customer?.firstName === '') {
+      return { isTwoParagraph: false };
+    }
+    if (typeof softLoginName === 'string') {
+      return { displayName: softLoginName, isTwoParagraph: true };
+    }
+    return { displayName: 'Inicia Sesión', isTwoParagraph: true };
+  };
 
-  const isTwoParagraph = loginText.length > 0;
+  const textResult = getText();
 
   return (
-    <LoginUser className="login-user" isTwoParagraph={isTwoParagraph}>
+    <LoginUser
+      className="login-user"
+      isTwoParagraph={textResult.isTwoParagraph}
+    >
       <span>Hola</span>
       <LoginButtonContainerDesktop>
-        {loginText && <strong>{loginText}</strong>}
-        {loginText !== 'Inicia Sesión' && <IoIosArrowDown />}
+        {textResult?.displayName && <strong>{textResult.displayName}</strong>}
+        {typeof customer?.firstName === 'string' && <IoIosArrowDown />}
       </LoginButtonContainerDesktop>
     </LoginUser>
   );

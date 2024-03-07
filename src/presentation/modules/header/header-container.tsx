@@ -17,6 +17,7 @@ import {
   openModalLogin,
 } from '@store/login/slices/login-slice';
 import getCustomer from '@use-cases/customer/get-customer';
+import { setCustomer } from '@store/customer/slices/customer-slice';
 
 const HeaderContainer = ({ modules }: HeaderProps) => {
   const dispatch = useAppDispatch();
@@ -49,10 +50,13 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
     }
   }, []);
 
-  const { customer } = useAppSelector((state) => state.customer);
   useEffect(() => {
-    if (!customer) dispatch(getCustomer());
-  }, [customer]);
+    if (isLogged) {
+      dispatch(getCustomer());
+    } else {
+      dispatch(setCustomer(null));
+    }
+  }, [isLogged]);
 
   const renderBody = useMemo(
     () => (
