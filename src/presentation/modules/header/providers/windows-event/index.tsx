@@ -16,7 +16,7 @@ const WindowsEventProvider = ({ children }: Props) => {
 
   useEffect(() => {
     document.addEventListener(WindowsEvents.GET_CART_ID, handleGetCartId);
-    document.addEventListener(WindowsEvents.GET_PROFILE, handleGetProfile);
+    document.addEventListener(WindowsEvents.UPDATE_PROFILE, handleGetProfile);
 
     window.addEventListener(
       WindowsEvents.GET_SHOPPING_CART,
