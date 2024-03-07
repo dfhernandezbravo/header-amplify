@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 
-const useScroll = () => {
+interface Props {
+  heightHeader: number;
+}
+
+const useScroll = ({ heightHeader }: Props) => {
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -8,7 +12,9 @@ const useScroll = () => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
-      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 60);
+      setVisible(
+        prevScrollPos > currentScrollPos || currentScrollPos < heightHeader,
+      );
       setPrevScrollPos(currentScrollPos);
     };
 
@@ -21,6 +27,7 @@ const useScroll = () => {
 
   return {
     visible,
+    positionScroll: prevScrollPos,
   };
 };
 
