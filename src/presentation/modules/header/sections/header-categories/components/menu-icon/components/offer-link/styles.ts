@@ -4,7 +4,6 @@ export const OfferContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 0 16px;
   .text {
     font-size: 14px;
     font-weight: 500;
