@@ -134,6 +134,7 @@ const HeaderSearch = React.memo(function Search() {
     <SearchContainer ref={searchRef}>
       <SearchIcon search={search} />
       <SearchInput
+        data-testid="search-bar"
         type="search"
         placeholder="Buscar..."
         maxLength={30}
