@@ -15,11 +15,11 @@ import HeaderDesktop from './layouts/header-desktop';
 import HeaderMobile from './layouts/header-mobile';
 import CookiesProvider from './providers/cookies';
 import WindowsEventProvider from './providers/windows-event';
-import { HeaderContainerWrapper } from './styles';
+import { HeaderContainerWrapper, Spacer } from './styles';
 import { HeaderProps } from './types';
 import useScroll from './hooks/use-scroll';
 
-const heightHeader = 170;
+const heightHeader = 60;
 
 const HeaderContainer = ({ modules }: HeaderProps) => {
   const dispatch = useAppDispatch();
@@ -70,6 +70,7 @@ const HeaderContainer = ({ modules }: HeaderProps) => {
           <HeaderMobile modules={modules} />
           <HeaderDesktop modules={modules} />
         </HeaderContainerWrapper>
+        {positionScroll > 0 && <Spacer />}
       </>
     ),
     [visible, positionScroll],

@@ -12,9 +12,7 @@ const useScroll = ({ heightHeader }: Props) => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
-      setVisible(
-        prevScrollPos > currentScrollPos || currentScrollPos < heightHeader,
-      );
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 60);
       setPrevScrollPos(currentScrollPos);
     };
 

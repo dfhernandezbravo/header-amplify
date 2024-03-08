@@ -5,8 +5,8 @@ export const HeaderContainerWrapper = styled.div<{
   $positionScroll: number;
   $heightHeader: number;
 }>`
-  position: ${({ $positionScroll, $heightHeader }) =>
-    $positionScroll > $heightHeader ? 'fixed' : 'relative'};
+  position: ${({ $positionScroll }) =>
+    $positionScroll > 0 ? 'fixed' : 'relative'};
   z-index: 999;
   top: 0;
   left: 0;
