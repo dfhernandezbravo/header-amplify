@@ -11,10 +11,12 @@ interface Props {
 
 const WindowsEventProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
-  const { handleGetShoppingCart, handleGetCartId } = useCaseEvents();
+  const { handleGetShoppingCart, handleGetCartId, handleGetProfile } =
+    useCaseEvents();
 
   useEffect(() => {
     document.addEventListener(WindowsEvents.GET_CART_ID, handleGetCartId);
+    document.addEventListener(WindowsEvents.UPDATE_PROFILE, handleGetProfile);
 
     window.addEventListener(
       WindowsEvents.GET_SHOPPING_CART,
@@ -38,11 +40,11 @@ const WindowsEventProvider = ({ children }: Props) => {
   useEffect(() => {
     customDispatchEvent({
       name: WindowsEvents.DISPATCH_GET_CART_ID,
-      detail: {},
+      detail: { origin: 'HEADER' },
     });
     customDispatchEvent({
       name: WindowsEvents.DISPATCH_GET_CART,
-      detail: {},
+      detail: { origin: 'HEADER' },
     });
   }, []);
 

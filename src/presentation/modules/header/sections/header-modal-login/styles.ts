@@ -47,8 +47,9 @@ export const ModalContent = styled.form`
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   width: 400px;
+  min-height: 200px;
 
   & .text {
     font-size: 12px;

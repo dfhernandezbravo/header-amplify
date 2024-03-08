@@ -7,9 +7,8 @@ import {
   pendingAddNewAddress,
   successAddNewAddress,
 } from '@store/regionalizer/slices/regionalizer-slice';
-import getAddressCustomer from '@use-cases/customer/get-address-customer';
 import addNewAddress from '@use-cases/shopping-cart/add-new-address';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import HeaderModalRegionalizer from '../header-modal-regionalizer';
 import NewAddressForm from '../new-address-form';
 import RadioButtonAddress from '../radio-input-address';
@@ -20,21 +19,21 @@ import {
   ListAddressFormContainer,
 } from './styles';
 import ListAddressSkeleton from '../list-address-skeleton';
+import useBreakpoints from '@hooks/useBreakpoints';
+import HeaderNewAddress from './components/header-new-address';
 
 const ListAddressForm = () => {
   const dispatch = useAppDispatch();
   const { addresses } = useAppSelector((state) => state.customer);
-  console.log('addresses-->', addresses);
-
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );
 
+  const { isXs, isSm } = useBreakpoints();
+
   const { sendEventAnalytics } = useAnalytics();
-  const { orderFormId, customer, onCloseModal } = useContext(
-    HeaderLocationContext,
-  );
+  const { orderFormId, onCloseModal } = useContext(HeaderLocationContext);
   const isUserLogged = shoppingCart?.loggedIn;
 
   const [selectedAddress, setSelectedAddress] =
@@ -43,18 +42,26 @@ const ListAddressForm = () => {
     'list-address',
   );
 
-  useEffect(() => {
-    if (customer) dispatch(getAddressCustomer());
-  }, [customer, dispatch]);
+  const sameAddress = (
+    address1: CustomerAddress,
+    address2: CustomerAddress,
+  ) => {
+    const address1Str = `${address1.street} ${address1.number} ${address1.neighborhood} ${address1.state}`;
+    const address2Str = `${address2.street} ${address2.number} ${address2.neighborhood} ${address2.state}`;
+    return address1Str === address2Str;
+  };
 
-  const filterRepeatedAddress = addresses.reduceRight(
+  const filterAddress = addresses.reduceRight(
     (acc: CustomerAddress[], address) => {
+      // clean repeated address and address without street
       if (
         !acc.some(
           (item) =>
-            item.geoCoordinate[0] === address.geoCoordinate[0] &&
-            item.geoCoordinate[1] === address.geoCoordinate[1],
-        )
+            (item.geoCoordinate[0] === address.geoCoordinate[0] &&
+              item.geoCoordinate[1] === address.geoCoordinate[1]) ||
+            sameAddress(item, address),
+        ) &&
+        address.street
       ) {
         acc.push(address);
       }
@@ -90,18 +97,19 @@ const ListAddressForm = () => {
       dispatch(pendingAddNewAddress(false));
     }
   };
-
   return step === 'list-address' ? (
     <ListAddressFormContainer>
-      <HeaderModalRegionalizer title="Ingresa tu ubicación" />
-      <p>Cuéntanos dónde quieres recibir tu compra</p>
-      <h3>Tus direcciones</h3>
+      <HeaderModalRegionalizer
+        title="Ingresa tu ubicación"
+        renderIcon={isXs || isSm ? false : true}
+      />
+      <p className="title">Cuéntanos dónde quieres recibir tu compra</p>
       <ListAddressContainer>
-        {filterRepeatedAddress?.length === 0 ? (
+        {filterAddress?.length === 0 ? (
           <ListAddressSkeleton />
         ) : (
           <>
-            {filterRepeatedAddress?.map((address) => (
+            {filterAddress?.map((address) => (
               <RadioButtonAddress
                 checked={selectedAddress?.id === address.id}
                 text={`${address.street}, ${address.number}`}
@@ -126,7 +134,14 @@ const ListAddressForm = () => {
       />
     </ListAddressFormContainer>
   ) : (
-    <NewAddressForm changeStep={setStep} />
+    <NewAddressForm
+      header={
+        <HeaderNewAddress
+          onCloseModal={() => onCloseModal()}
+          setStep={(value) => setStep(value)}
+        />
+      }
+    />
   );
 };
 

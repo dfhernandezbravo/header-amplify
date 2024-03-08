@@ -1,5 +1,7 @@
 import { ShoppingCart } from '@cencosud-ds/easy-design-system';
+import { Customer } from '@entities/customer/customer.entity';
 import { useAppDispatch } from '@hooks/storeHooks';
+import { setCustomer } from '@store/customer/slices/customer-slice';
 import {
   setCartId,
   setShoppingCart,
@@ -27,9 +29,16 @@ export const useCaseEvents = () => {
     } = customEvent;
     dispatch(setShoppingCart(shoppingCart));
   };
+  const handleGetProfile = (event: Event) => {
+    event.preventDefault();
+    const customEvent = event as CustomEvent<Customer>;
+    const { detail } = customEvent;
+    dispatch(setCustomer(detail));
+  };
 
   return {
     handleGetCartId,
     handleGetShoppingCart,
+    handleGetProfile,
   };
 };

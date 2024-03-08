@@ -1,9 +1,68 @@
-import React from 'react';
+import { useRouter } from 'next/router';
 import HeaderLoginMobile from '../../../../../../../header-login/layouts/mobile';
-import { UserMenuContainer } from './styles';
+import { closeCategories } from '@store/category/slices/category-slice';
 import UserMenuItem from '../user-menu-item';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import { accountOptionsLogged } from './account-options-logged';
+import { UserMenuContainer } from './styles';
+import useHandleLogout from '@modules/header/hooks/use-handle-logout';
+import getCustomer from '@use-cases/customer/get-customer';
 
 const UserMenu = () => {
+  const { customer } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
+  const isLogged = shoppingCart?.loggedIn;
+
+  const { onClickLogout } = useHandleLogout();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const closeSession = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
+    onClickLogout();
+    dispatch(getCustomer());
+    dispatch(closeCategories());
+  };
+
+  const handleMenuLink = (link: string) => {
+    router.push(link);
+    dispatch(closeCategories());
+  };
+
+  if (isLogged) {
+    return (
+      <>
+        <UserMenuContainer>
+          <p className="greating">
+            ¡Hola!{' '}
+            <span className="greating-user-name">
+              {customer?.firstName ?? ''}
+            </span>
+          </p>
+        </UserMenuContainer>
+        <UserMenuContainer>
+          {accountOptionsLogged.map((menu, index) => (
+            <UserMenuItem
+              key={index}
+              text={menu.text}
+              image={menu.image}
+              link={menu.link}
+              handleOnClick={() => handleMenuLink(menu.link)}
+            />
+          ))}
+          <UserMenuItem
+            text="Cerrar sesión"
+            image="/icons/header/close-session-gray.svg"
+            link="#"
+            handleOnClick={(event) => closeSession(event)}
+          />
+        </UserMenuContainer>
+      </>
+    );
+  }
+
   return (
     <UserMenuContainer>
       <UserMenuItem

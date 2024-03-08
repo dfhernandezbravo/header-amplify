@@ -11,7 +11,25 @@ export const ButtonResetPassword = styled.button`
   background-color: transparent;
   text-decoration: underline;
   cursor: pointer;
-  color: rgb(77, 77, 77);
+  color: #485760;
   font-size: 12px;
   font-weight: 600;
+  font-family: 'Open Sans';
+  height: 32px;
+`;
+
+export const TexFieldContainer = styled.div`
+  display: flex;
+  position: relative;
+  & .show-hide-text {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    text-decoration: underline;
+    color: #485760;
+    font-size: 14px;
+    font-weight: 600;
+  }
 `;

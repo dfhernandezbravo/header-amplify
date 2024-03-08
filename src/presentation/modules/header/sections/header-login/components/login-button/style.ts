@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-export const LoginUser = styled.div`
+export const LoginUser = styled.div<{ isTwoParagraph: boolean }>`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: ${({ isTwoParagraph }) =>
+    isTwoParagraph ? 'column' : 'row'};
+  align-items: ${({ isTwoParagraph }) =>
+    isTwoParagraph ? 'flex-start' : 'center'};
+  gap: ${({ isTwoParagraph }) => (isTwoParagraph ? '0' : '0.09375rem')};
 
   span {
     font-size: 12px;

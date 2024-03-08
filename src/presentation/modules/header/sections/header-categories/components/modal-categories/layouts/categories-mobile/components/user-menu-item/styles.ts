@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const UserMenuItemContainer = styled.div`
+  height: 48px;
+  display: flex;
   a {
     display: flex;
     align-items: center;

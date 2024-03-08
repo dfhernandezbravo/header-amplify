@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const SuggestionSpinnerContainer = styled.div`
   diplay: flex;
+  justify-content: center;
   height: 300px;
   width: 100%;
 `;
@@ -15,6 +16,7 @@ export const SuggestionsContainer = styled.div`
   padding: 0px 12px;
   max-width: 1000px;
   overflow-y: auto;
+  width: 100%;
   & > h4 {
     color: #363f45;
     font-size: 20px;
@@ -26,7 +28,7 @@ export const SuggestionsContainer = styled.div`
 export const SuggestionsListContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: start;
 `;
 
 export const SuggestionsItemContainer = styled(Link)`

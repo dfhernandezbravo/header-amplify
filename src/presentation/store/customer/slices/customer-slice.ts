@@ -6,10 +6,12 @@ import getCustomer from '@use-cases/customer/get-customer';
 type CustomerState = {
   customer: Customer | null;
   addresses: CustomerAddress[];
+  isLoadingCustomer: boolean;
 };
 
 const initialState: CustomerState = {
   customer: null,
+  isLoadingCustomer: false,
   addresses: [],
 };
 
@@ -23,8 +25,12 @@ const customerSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getCustomer.pending, (state) => {
+        state.isLoadingCustomer = true;
+      })
       .addCase(getCustomer.fulfilled, (state, { payload }) => {
         state.customer = payload;
+        state.isLoadingCustomer = false;
       })
       .addCase(getAddressCustomer.fulfilled, (state, { payload }) => {
         state.addresses = payload;

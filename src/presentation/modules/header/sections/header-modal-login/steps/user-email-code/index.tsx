@@ -1,7 +1,10 @@
 /* eslint-disable max-lines */
 import { useEffect, useState, useRef } from 'react';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import { ValidateAccessKeyRequest } from '@entities/login/login.request';
+import {
+  SignUpRequest,
+  ValidateAccessKeyRequest,
+} from '@entities/login/login.request';
 import { useAppSelector } from '@hooks/storeHooks';
 import { AUTH_EVENTS } from '@infra/events/auth';
 import useResponseLogin from '../../hooks/use-response-login';
@@ -20,20 +23,35 @@ const LoginUserEmailCode = () => {
   const [loading, setLoading] = useState(false);
   const [activeInputBox, setActiveInputBox] = useState(0);
   const [error, setError] = useState(false);
-  const { userEmail } = useAppSelector((state) => state.login);
+  const { userEmail, createAccountFlow, userPassword } = useAppSelector(
+    (state) => state.login,
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const { loginSuccess } = useResponseLogin();
 
   const onSubmit = async () => {
-    const dataForm: ValidateAccessKeyRequest = {
-      email: userEmail,
-      accessKey: inputsBox.join(''),
-    };
     setLoading(true);
-    customDispatchEvent({
-      name: AUTH_EVENTS.DISPATCH_ACCESS_KEY_VALIDATION,
-      detail: dataForm,
-    });
+
+    if (createAccountFlow === 'create account') {
+      const dataForm: SignUpRequest = {
+        email: userEmail,
+        accessKey: inputsBox.join(''),
+        password: userPassword,
+      };
+      customDispatchEvent({
+        name: AUTH_EVENTS.DISPATCH_SIGNUP,
+        detail: dataForm,
+      });
+    } else {
+      const dataForm: ValidateAccessKeyRequest = {
+        email: userEmail,
+        accessKey: inputsBox.join(''),
+      };
+      customDispatchEvent({
+        name: AUTH_EVENTS.DISPATCH_ACCESS_KEY_VALIDATION,
+        detail: dataForm,
+      });
+    }
   };
 
   const handleForm = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -12,24 +12,17 @@ import { useQuery } from 'react-query';
 import sendAnalyticNewAddressForm from './analytics';
 import NewAddressForm from './form';
 import { mapFormData } from './map-form-data';
-import {
-  ButtonArrowLeftBackContainer,
-  MobileBackButton,
-  NewAddressFormContainer,
-} from './styles';
+import { MobileBackButton, NewAddressFormContainer } from './styles';
 import { NewAddressFormType } from './types';
 import { customDispatchEvent } from '@store/events/dispatchEvents';
 import { WindowsEvents } from '@events/index';
 import RegionalizerSkeleton from '../regionalizer-skeleton';
-import ButtonArrowLeftBack from '@components/atoms/button-arrow-left-back';
-import { useResponsive } from '@modules/header/hooks/useResponsive';
 interface Props {
   changeStep?: (step: 'list-address' | 'new-address') => void;
   header?: React.ReactNode;
 }
 
 const NewAddress = ({ changeStep, header }: Props) => {
-  const { isSm } = useResponsive();
   const dispatch = useAppDispatch();
   const { data: regions } = useQuery(['get-regions'], getRegionalizerRegions);
   const { isLoadingRegionalizer, addressSelected } = useAppSelector(
@@ -56,7 +49,7 @@ const NewAddress = ({ changeStep, header }: Props) => {
       onCloseModal();
       customDispatchEvent({
         name: WindowsEvents.UPDATE_SHIPPING_CART,
-        detail: null,
+        detail: { origin: 'HEADER' },
       });
     } catch (error) {
       dispatch(setErrorSetLocation(true));
@@ -71,13 +64,7 @@ const NewAddress = ({ changeStep, header }: Props) => {
 
   return (
     <NewAddressFormContainer>
-      {header || ''}
-      {isSm && (
-        <ButtonArrowLeftBackContainer>
-          {changeStep && <ButtonArrowLeftBack onClick={setListAddress} />}
-          <span>Ingresa tu ubicación</span>
-        </ButtonArrowLeftBackContainer>
-      )}
+      {header}
       <p className="description">
         Te mostraremos los productos disponibles para la región y comuna
         seleccionados

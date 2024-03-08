@@ -23,3 +23,11 @@ export const SuggestionsMobileDetail = styled.div`
   width: 100%;
   height: 50px;
 `;
+
+export const SuggestionSpinnerContainer = styled.div`
+  diplay: flex;
+  justify-content: center;
+  align-items: start;
+  height: 50px;
+  width: 100%;
+`;

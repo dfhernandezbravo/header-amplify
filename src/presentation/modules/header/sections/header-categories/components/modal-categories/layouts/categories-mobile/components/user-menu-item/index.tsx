@@ -7,12 +7,19 @@ type Props = {
   image: string;
   text: string;
   link: string;
+  handleOnClick?: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => void;
 };
 
-const UserMenuItem = ({ image, text, link }: Props) => {
+const UserMenuItem = ({ image, text, link, handleOnClick }: Props) => {
   return (
     <UserMenuItemContainer>
-      <Link href={link} className="text">
+      <Link
+        href={link}
+        className="text"
+        onClick={(event) => handleOnClick && handleOnClick(event)}
+      >
         <Image src={image} width={24} height={24} alt={text} />
         {text}
       </Link>
