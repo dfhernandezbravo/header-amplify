@@ -14,8 +14,8 @@ export const ButtonResetPassword = styled.button`
   color: #485760;
   font-size: 12px;
   font-weight: 600;
-  font-family: 'Open Sans';
   height: 32px;
+  font-family: inherit;
 `;
 
 export const TexFieldContainer = styled.div`
@@ -23,7 +23,7 @@ export const TexFieldContainer = styled.div`
   position: relative;
   & .show-hide-text {
     position: absolute;
-    right: 5px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;

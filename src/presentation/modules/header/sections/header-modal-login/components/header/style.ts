@@ -6,7 +6,7 @@ export const ModalHeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  padding: 12px 0px;
+  margin-bottom: 20px;
 
   & .title,
   .back-button {
