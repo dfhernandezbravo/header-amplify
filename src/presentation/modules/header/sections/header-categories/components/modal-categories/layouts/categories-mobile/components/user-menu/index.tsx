@@ -1,12 +1,12 @@
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
+import useHandleLogout from '@modules/header/hooks/use-handle-logout';
+import { closeCategories } from '@store/category/slices/category-slice';
 import { useRouter } from 'next/router';
 import HeaderLoginMobile from '../../../../../../../header-login/layouts/mobile';
-import { closeCategories } from '@store/category/slices/category-slice';
 import UserMenuItem from '../user-menu-item';
-import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { accountOptionsLogged } from './account-options-logged';
 import { UserMenuContainer } from './styles';
-import useHandleLogout from '@modules/header/hooks/use-handle-logout';
-import getCustomer from '@use-cases/customer/get-customer';
+import { setCustomer } from '@store/customer/slices/customer-slice';
 
 const UserMenu = () => {
   const { customer } = useAppSelector((state) => state.customer);
@@ -22,7 +22,7 @@ const UserMenu = () => {
   ) => {
     event.preventDefault();
     onClickLogout();
-    dispatch(getCustomer());
+    dispatch(setCustomer(null));
     dispatch(closeCategories());
   };
 
