@@ -6,7 +6,6 @@ export const LoginContainer = styled.button`
   background-color: transparent;
   border: none;
   color: white;
-  font-family: Roboto, sans-serif;
   position: relative;
 `;
 
@@ -18,7 +17,6 @@ export const LoginContainerDesktop = styled.div`
   background-color: transparent;
   border: none;
   color: white;
-  font-family: Roboto, sans-serif;
   position: relative;
 `;
 

@@ -99,7 +99,6 @@ const LoginUserPassword = () => {
             {...field}
             fullwidth={true}
             label="Correo electrónico"
-            placeholder="Correo electrónico"
             variant={errors.email ? 'error' : 'default'}
             helpertext={errors.email ? errors.email.message : ''}
             ref={null}
@@ -117,7 +116,6 @@ const LoginUserPassword = () => {
               {...field}
               fullwidth={true}
               label="Contraseña"
-              placeholder="Contraseña"
               type={!showPassword ? 'password' : 'text'}
               ref={null}
             />
