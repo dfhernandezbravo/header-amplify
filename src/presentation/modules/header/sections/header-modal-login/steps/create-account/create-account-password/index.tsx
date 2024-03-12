@@ -111,12 +111,12 @@ const CreateAccountUserPassword = () => {
           }}
         />
         <p className="term-and-condition">
-          acepto los{' '}
+          Acepto los{' '}
           <Link
             className="link"
             href={'https://www.easy.cl/terminos-y-condiciones'}
           >
-            Terminos y condiciones
+            Términos y Condiciones
           </Link>
         </p>
       </ConditionContainer>
