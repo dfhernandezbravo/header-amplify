@@ -39,9 +39,10 @@ const SocialAccessKeyLogin = () => {
           color="default"
         />
       </LoginEmailContainer>
-      {socialMethods.map((method) => (
-        <ButtonSocialLogin method={method} key={method.providerName} />
-      ))}
+      {socialMethods &&
+        socialMethods?.map((method) => (
+          <ButtonSocialLogin method={method} key={method?.providerName} />
+        ))}
       <NewAccountContainer>
         <ButtonNewAccount onClick={() => handleCreteAccount()}>
           <LinkNewAccountText>¿No tienes cuenta?</LinkNewAccountText>
