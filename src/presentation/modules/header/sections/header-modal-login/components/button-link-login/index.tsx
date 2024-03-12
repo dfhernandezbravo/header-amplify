@@ -22,7 +22,10 @@ const ButtonLinkLogin: React.FC<Props> = ({
     <ButtonLinkContainer
       href={''}
       color={color}
-      onClick={() => dispacth(navigateTo(nextStep))}
+      onClick={(e) => {
+        e.preventDefault();
+        dispacth(navigateTo(nextStep));
+      }}
     >
       {icon}
       <p>
