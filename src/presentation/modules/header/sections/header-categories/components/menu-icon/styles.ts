@@ -83,6 +83,7 @@ export const CategoriesContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  padding: 0 16px;
   span {
     font-size: 14px;
     font-weight: 500;

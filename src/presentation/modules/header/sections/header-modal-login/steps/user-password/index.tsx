@@ -141,7 +141,7 @@ const LoginUserPassword = () => {
       <ButtonPrimary
         type="submit"
         title={buttonLoading ? '' : 'Ingresar a mi cuenta'}
-        disabled={!watchEmail || !watchPassword}
+        disabled={!watchEmail || !watchPassword || buttonLoading}
         isLoading={buttonLoading}
       />
     </ModalForm>

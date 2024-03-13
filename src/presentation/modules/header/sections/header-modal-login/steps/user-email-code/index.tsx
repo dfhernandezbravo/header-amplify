@@ -29,28 +29,54 @@ const LoginUserEmailCode = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { loginSuccess } = useResponseLogin();
 
+  function createAccount() {
+    const dataForm: SignUpRequest = {
+      email: userEmail,
+      accessKey: inputsBox.join(''),
+      password: userPassword,
+    };
+    customDispatchEvent({
+      name: AUTH_EVENTS.DISPATCH_SIGNUP,
+      detail: dataForm,
+    });
+  }
+
+  function validateAccessKey() {
+    const dataForm: ValidateAccessKeyRequest = {
+      email: userEmail,
+      accessKey: inputsBox.join(''),
+    };
+    customDispatchEvent({
+      name: AUTH_EVENTS.DISPATCH_ACCESS_KEY_VALIDATION,
+      detail: dataForm,
+    });
+  }
+
+  function forgotPassword() {
+    const dataForm = {
+      email: userEmail,
+      accessKey: inputsBox.join(''),
+      newPassword: userPassword,
+    };
+    customDispatchEvent({
+      name: AUTH_EVENTS.DISPATCH_SET_PASSWORD,
+      detail: dataForm,
+    });
+  }
+
   const onSubmit = async () => {
     setLoading(true);
 
-    if (createAccountFlow === 'create account') {
-      const dataForm: SignUpRequest = {
-        email: userEmail,
-        accessKey: inputsBox.join(''),
-        password: userPassword,
-      };
-      customDispatchEvent({
-        name: AUTH_EVENTS.DISPATCH_SIGNUP,
-        detail: dataForm,
-      });
-    } else {
-      const dataForm: ValidateAccessKeyRequest = {
-        email: userEmail,
-        accessKey: inputsBox.join(''),
-      };
-      customDispatchEvent({
-        name: AUTH_EVENTS.DISPATCH_ACCESS_KEY_VALIDATION,
-        detail: dataForm,
-      });
+    switch (createAccountFlow) {
+      case 'create account':
+        createAccount();
+        break;
+      case 'forgot password':
+        forgotPassword();
+        break;
+      default:
+        validateAccessKey();
+        break;
     }
   };
 
