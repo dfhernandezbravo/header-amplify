@@ -27,17 +27,22 @@ const HeaderSearch = React.memo(function Search() {
   const debouncedSearch = useDebounce(search, 500);
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
-  const { searches, isOpenResults } = useAppSelector((state) => state.search);
+  const { isOpenResults } = useAppSelector((state) => state.search);
   const inputRef = useRef<HTMLInputElement>(null);
   const { device } = useBreakpoints();
 
   const sendQuery = useCallback(() => {
-    dispatch(setTerm(search));
-    dispatch(getSearches(search));
-    dispatch(
-      getProductsSuggestions({ fullText: search, selectedFacets: null }),
-    );
-  }, [dispatch, search]);
+    if (typeof debouncedSearch === 'string') {
+      dispatch(setTerm(debouncedSearch));
+      dispatch(getSearches(debouncedSearch));
+      dispatch(
+        getProductsSuggestions({
+          fullText: debouncedSearch,
+          selectedFacets: null,
+        }),
+      );
+    }
+  }, [dispatch, debouncedSearch]);
 
   useEffect(() => {
     dispatch(getPopularSearch());
@@ -46,25 +51,6 @@ const HeaderSearch = React.memo(function Search() {
   useEffect(() => {
     if (debouncedSearch) sendQuery();
   }, [debouncedSearch, sendQuery]);
-
-  useEffect(() => {
-    if (searches.length && search !== '') {
-      sendEventAnalytics({
-        event: 'interaccion',
-        category: 'Búsqueda',
-        action: 'Con resultados',
-        tag: search,
-      });
-    }
-    if (!searches.length && search !== '') {
-      sendEventAnalytics({
-        event: 'interaccion',
-        category: 'Búsqueda',
-        action: 'Sin resultados',
-        tag: search,
-      });
-    }
-  }, [searches, sendEventAnalytics, search]);
 
   const handleResizeSearchResults = () => {
     if (searchRef?.current) {
