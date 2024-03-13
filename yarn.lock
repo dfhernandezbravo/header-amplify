@@ -98,19 +98,19 @@
   dependencies:
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/atoms.textfield@^0.0.28":
-  version "0.0.28"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.28.tgz#c4934eda43f98151dcb15cfb98070e347cb66ee5"
-  integrity sha512-SWKCbEQJalIJ7r+3qmk+YbOjPDtMyMXTXb+L8qJj7B2byB24cQwzKrlpKPYJbP8XLzCEbwT98NOVQfTJ9U8fZg==
+"@ccom-easy-design-system/atoms.textfield@^0.0.39":
+  version "0.0.39"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.39.tgz#81253d8e2d37960e74199cb2710292b194a0cd89"
+  integrity sha512-zPCawcDLviVGodOAcqmQTZuS+vfo0/DhJYN4KspRi1zKKpZ2qKjn6KkiaCD7De37gzNkgTlt3RC1ZQQWgirWLw==
   dependencies:
-    "@ccom-easy-design-system/atoms.tooltip" "0.0.2"
+    "@ccom-easy-design-system/atoms.tooltip" "0.0.3"
     react-icons "^5.0.1"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/atoms.tooltip@0.0.2":
-  version "0.0.2"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.2.tgz#ba64fe7fd4e768d4005422fb53a73a7b3dc9a98a"
-  integrity sha512-gBcm4kt555IJzcDWq0ypTkNPrYlD2YEpY79yJd9pQRvZNYXXrPmxjSqKcO7Sqwt8FW03CdQlxEcsAKr/4IxObg==
+"@ccom-easy-design-system/atoms.tooltip@0.0.3":
+  version "0.0.3"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.3.tgz#66972a3ceef4bf049f1426f36514f79fd54cb3a0"
+  integrity sha512-jEd65RP+gfIqmZ7rVToX5vXhHAdlcYwxDiJOWHURW3Or6AFhk9rKxVC+217Zj7KTvVPjr/PMg6lm0JJwqAtcJQ==
   dependencies:
     styled-components "^6.1.6"
 

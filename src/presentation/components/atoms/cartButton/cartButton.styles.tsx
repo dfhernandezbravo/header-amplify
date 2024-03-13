@@ -29,15 +29,18 @@ export const CartContainer = styled.div`
 export const BadgeQuantity = styled.div`
   background-color: #dfffff;
   border: 1px solid #cc1414;
-  border-radius: 24px;
+  border-radius: 50%;
   color: #ae1311;
   font-weight: 700;
-  padding: 0;
   position: relative;
-  left: 52px;
-  top: -10px;
+  left: 55px;
+  top: -15px;
   min-width: 16px;
   text-align: center;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 8px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -10,7 +10,6 @@ const spin = keyframes`
 `;
 
 export const Button = styled.button`
-  font-family: 'Open Sans';
   background-color: #ae1311;
   color: white;
   padding: 12px 8px;
@@ -21,6 +20,7 @@ export const Button = styled.button`
   width: 100%;
   border: none;
   cursor: pointer;
+  font-family: inherit;
 
   &:disabled {
     background-color: #e1e6ea;
@@ -32,7 +32,6 @@ export const Button = styled.button`
 
 export const ButtonContainer = styled.div<ButtonProps>`
   width: 100%;
-  font-family: 'Open Sans';
   & .custom-btn {
     position: relative;
     min-height: 42px;

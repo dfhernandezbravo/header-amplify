@@ -77,7 +77,6 @@ const CreateAccountUserPassword = () => {
           value={passwordInput}
           className="input"
           fullwidth={true}
-          placeholder="Contraseña"
           label="Contraseña"
           type={showInputTexts.password ? 'text' : 'password'}
           onChange={handlePassword}
@@ -90,7 +89,6 @@ const CreateAccountUserPassword = () => {
           value={passwordRepeated}
           className="input"
           fullwidth={true}
-          placeholder="Repetir contraseña"
           label="Repetir contraseña"
           type={showInputTexts.passwordRepeated ? 'text' : 'password'}
           onChange={(event) => setPasswordRepeated(event.target.value)}
@@ -113,12 +111,12 @@ const CreateAccountUserPassword = () => {
           }}
         />
         <p className="term-and-condition">
-          acepto los{' '}
+          Acepto los{' '}
           <Link
             className="link"
             href={'https://www.easy.cl/terminos-y-condiciones'}
           >
-            Terminos y condiciones
+            Términos y Condiciones
           </Link>
         </p>
       </ConditionContainer>

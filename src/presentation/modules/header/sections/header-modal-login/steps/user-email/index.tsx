@@ -60,7 +60,6 @@ const LoginUserEmail = ({ nextStep }: Props) => {
             {...field}
             fullwidth={true}
             label="Correo electrónico"
-            placeholder="Correo electrónico"
             variant={errors.email ? 'error' : 'default'}
             helpertext={errors.email ? errors.email.message : ''}
             ref={null}

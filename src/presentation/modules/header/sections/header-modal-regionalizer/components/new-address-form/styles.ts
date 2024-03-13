@@ -9,7 +9,7 @@ export const NewAddressFormContainer = styled.div`
   color: black;
   & .description {
     font-size: ${({ theme: { fontSize } }) => fontSize[200]};
-    color: #485760;
+    color: #363f45;
   }
 
   @media only screen and (max-width: 780px) {

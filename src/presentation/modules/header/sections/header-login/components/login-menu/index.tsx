@@ -1,10 +1,10 @@
 import { Customer } from '@entities/customer/customer.entity';
-import { LoginMenuContainer, LogoutItem, MenuItem } from './style';
 import { useAppDispatch } from '@hooks/storeHooks';
-import getCustomer from '@use-cases/customer/get-customer';
-import { Cookies } from 'react-cookie';
-import useHandleLogout from '@modules/header/hooks/use-handle-logout';
 import { LOGIN_COOKIES } from '@infra/cookies';
+import useHandleLogout from '@modules/header/hooks/use-handle-logout';
+import { setCustomer } from '@store/customer/slices/customer-slice';
+import { Cookies } from 'react-cookie';
+import { LoginMenuContainer, LogoutItem, MenuItem } from './style';
 
 interface Props {
   isMenuOpen: boolean;
@@ -20,7 +20,7 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
 
   const handleLogout = () => {
     onClickLogout();
-    dispatch(getCustomer());
+    dispatch(setCustomer(null));
   };
 
   if (!customer && softLoginName) {
