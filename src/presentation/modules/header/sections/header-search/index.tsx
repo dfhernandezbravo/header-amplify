@@ -52,6 +52,10 @@ const HeaderSearch = React.memo(function Search() {
     if (debouncedSearch) sendQuery();
   }, [debouncedSearch, sendQuery]);
 
+  useEffect(() => {
+    if (search === '') dispatch(cleanResults());
+  }, [search]);
+
   const handleResizeSearchResults = () => {
     if (searchRef?.current) {
       const width = searchRef?.current?.offsetWidth;
