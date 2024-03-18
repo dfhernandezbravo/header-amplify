@@ -59,19 +59,26 @@ const LoginUserPassword = () => {
     customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
   };
 
+  const handleError = (event: Event) => {
+    setButtonLoading(false);
+    loginError(event);
+  };
+
   useEffect(() => {
     document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, (event) => {
       setButtonLoading(false);
       loginSuccess(event);
     });
     document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, (event) => {
-      setButtonLoading(false);
-      loginError(event);
+      handleError(event);
     });
 
     return () => {
-      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginSuccess);
-      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+        loginSuccess,
+      );
+      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, handleError);
     };
   }, []);
 
@@ -105,7 +112,6 @@ const LoginUserPassword = () => {
           />
         )}
       />
-
       <Controller
         name="password"
         control={control}
@@ -128,7 +134,6 @@ const LoginUserPassword = () => {
           </TexFieldContainer>
         )}
       />
-
       <ResetPasswordContainer>
         <ButtonResetPassword
           type="button"
@@ -137,7 +142,6 @@ const LoginUserPassword = () => {
           ¿Olvidaste tu contraseña?
         </ButtonResetPassword>
       </ResetPasswordContainer>
-
       <ButtonPrimary
         type="submit"
         title={buttonLoading ? '' : 'Ingresar a mi cuenta'}
