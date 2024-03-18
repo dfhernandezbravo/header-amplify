@@ -16,13 +16,22 @@ import ErrorMessage from '@components/atoms/error-message';
 import { AxiosError } from 'axios';
 import EmailCodeHeader from './component/header';
 
+enum ErrorType {
+  USER,
+  CODE,
+}
+interface ErrorData {
+  errorCode?: string;
+  message?: string;
+}
+
 let currentIndex = 0;
 const LoginUserEmailCode = () => {
   const [countdown, setCountdown] = useState(120);
   const [inputsBox, setinputsBox] = useState<string[]>(new Array(6).fill(''));
   const [loading, setLoading] = useState(false);
   const [activeInputBox, setActiveInputBox] = useState(0);
-  const [error, setError] = useState(false);
+  const [errorCode, setErrorCode] = useState<ErrorType | undefined>();
   const { userEmail, createAccountFlow, userPassword } = useAppSelector(
     (state) => state.login,
   );
@@ -110,7 +119,7 @@ const LoginUserEmailCode = () => {
   const resendAccessKey = () => {
     generateAccessKey({ email: userEmail });
     setCountdown(120);
-    setError(false);
+    setErrorCode(undefined);
     setinputsBox(new Array(6).fill(''));
   };
 
@@ -133,10 +142,13 @@ const LoginUserEmailCode = () => {
         error: { response },
       },
     } = customEvent;
-    if (response?.status) {
-      setError(true);
-    }
+    const data = response?.data as ErrorData;
     setLoading(false);
+    if (response?.status === 400 && data.errorCode === 'MSSSM0003') {
+      setErrorCode(ErrorType.USER);
+    } else {
+      setErrorCode(ErrorType.CODE);
+    }
   };
 
   useEffect(() => {
@@ -164,12 +176,17 @@ const LoginUserEmailCode = () => {
       loginSuccess(event);
     });
     document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, handleError);
+    document.addEventListener(
+      AUTH_EVENTS.GET_CREATE_ACCOUNT_ERROR,
+      handleError,
+    );
+
     return () => {
       document.removeEventListener(
         AUTH_EVENTS.GET_SIGNUP_SUCCESS,
         loginSuccess,
       );
-      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, handleError);
+      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, handleError);
     };
   }, []);
 
@@ -193,8 +210,11 @@ const LoginUserEmailCode = () => {
           );
         })}
       </InputContainer>
-      {error && (
+      {errorCode === ErrorType.CODE && (
         <ErrorMessage message="El código es incorrecto. Por favor, vuelve a intentarlo" />
+      )}
+      {errorCode === ErrorType.USER && (
+        <ErrorMessage message="Ha ocurrido un error. El email ingresado ya existe o es inválido." />
       )}
       <ButtonPrimary
         title={`Reenviar código   ${
