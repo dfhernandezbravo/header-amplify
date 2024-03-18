@@ -121,6 +121,13 @@ const searchSlice = createSlice({
         state.productSuggestions = [];
         state.isEmptySearch = false;
       })
+      .addCase(getSearches.rejected, (state) => {
+        state.isEmptySearch = true;
+        state.searches = [];
+        state.categories = [];
+        state.productSuggestions = [];
+        state.isLoading = false;
+      })
       .addCase(getProductsSuggestions.fulfilled, (state, { payload }) => {
         state.isLoadingSuggestions = false;
         state.productSuggestions = payload || [];

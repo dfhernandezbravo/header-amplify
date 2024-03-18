@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import { useAppSelector } from '@hooks/storeHooks';
-import EmptySearch from '@modules/header/components/empty-searches-list';
 import PopularSearchesList from '@modules/header/components/initial-searches-list';
 import SearchList from '@modules/header/components/searches-list';
 import HeaderSuggestions from '../header-suggestions';
@@ -58,7 +57,7 @@ const HeaderResults = () => {
   return (
     <HeaderResultsContainer width={`${searchWidth}px` || '100%'}>
       <LoadingContent isLoading={isLoading} showNoContent={showNoContent} />
-      {showNoContent && (
+      {(showNoContent || isEmptySearch) && (
         <NoContentContainer>
           <RecentResultsList />
           <NoContentResults />
@@ -70,8 +69,7 @@ const HeaderResults = () => {
           <HeaderSuggestions />
         </SearchContainerResults>
       )}
-      {isEmptySearch && <EmptySearch />}
-      {showPopularResults && popularSearches?.length > 0 && (
+      {showPopularResults && popularSearches?.length > 0 && !isEmptySearch && (
         <PopularSearchesList />
       )}
     </HeaderResultsContainer>
