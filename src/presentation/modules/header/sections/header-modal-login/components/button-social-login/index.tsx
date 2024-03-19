@@ -40,7 +40,10 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
   const dispatch = useAppDispatch();
   const variant = buttonsVariants[method.providerName];
 
-  const handleSocialLogin = async () => {
+  const handleSocialLogin = async (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
     const callback = window.location.href;
     const providerName = method.providerName;
     const response = await dispatch(socialLogin({ providerName, callback }));
@@ -52,7 +55,7 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
     <ButtonSocialLoginContainer
       color={variant.color}
       href={''}
-      onClick={() => handleSocialLogin()}
+      onClick={(event) => handleSocialLogin(event)}
     >
       {variant.icon} {variant.title}
     </ButtonSocialLoginContainer>

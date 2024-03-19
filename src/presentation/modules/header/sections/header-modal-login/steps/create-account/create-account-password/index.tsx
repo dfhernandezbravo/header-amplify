@@ -64,7 +64,7 @@ const CreateAccountUserPassword = () => {
           })
         }
       >
-        {showInputTexts.passwordRepeated ? 'Esconder' : 'Mostrar'}
+        {showInputTexts[target] ? 'Esconder' : 'Mostrar'}
       </p>
     );
   };
