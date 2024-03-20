@@ -29,6 +29,7 @@ export const ButtonSocialLoginContainer = styled(Link)<{
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-bottom: 0.5rem;
 
   &:hover {
     opacity: 0.7;

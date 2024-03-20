@@ -18,7 +18,7 @@ export type CustomerAddress = {
   state: string;
   neighborhood: string;
   street: string;
-  number: string;
+  number: number;
   postalCode: string;
   receiverName: string;
   reference: string;

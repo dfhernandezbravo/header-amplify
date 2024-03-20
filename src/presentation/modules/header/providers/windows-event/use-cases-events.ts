@@ -1,7 +1,9 @@
 import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 import { Customer } from '@entities/customer/customer.entity';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { setCustomer } from '@store/customer/slices/customer-slice';
+import { setAddressSelected } from '@store/regionalizer/slices/regionalizer-slice';
 import {
   setCartId,
   setShoppingCart,
@@ -9,6 +11,7 @@ import {
 
 export const useCaseEvents = () => {
   const dispatch = useAppDispatch();
+  const { addressSelected } = useAppSelector((state) => state.regionalizer);
 
   const handleGetCartId = (event: Event) => {
     event.preventDefault();
@@ -28,6 +31,13 @@ export const useCaseEvents = () => {
       detail: { shoppingCart },
     } = customEvent;
     dispatch(setShoppingCart(shoppingCart));
+    if (shoppingCart?.shipping?.selectedAddresses?.length && !addressSelected) {
+      dispatch(
+        setAddressSelected(
+          shoppingCart.shipping.selectedAddresses[0] as AddressShoppingCart,
+        ),
+      );
+    }
   };
   const handleGetProfile = (event: Event) => {
     event.preventDefault();
