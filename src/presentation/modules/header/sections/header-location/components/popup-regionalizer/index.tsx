@@ -32,33 +32,31 @@ const PopupRegionalizer = ({ onClick }: Props) => {
   if (cookie['popup-regionalizer']) return null;
 
   return (
-    <>
-      <PopupContainer>
-        <PopupWrapper>
-          <Arrow />
-          <PopupDescription>
-            <div className="header">
-              <Title>
-                <Desktop>Selecciona una ubicación</Desktop>
-                <Mobile>
-                  Selecciona tu ubicación para conocer la disponibilidad de
-                  productos
-                </Mobile>
-              </Title>
-              <ModalIconButton onClick={handleOnClose}>
-                <AiOutlineClose size={24} />
-              </ModalIconButton>
-            </div>
-            <Desktop>
-              <Subtitle>Y conoce la disponibilidad de productos</Subtitle>
-            </Desktop>
-          </PopupDescription>
+    <PopupContainer>
+      <PopupWrapper>
+        <Arrow />
+        <PopupDescription>
+          <div className="header">
+            <Title>
+              <Desktop>Selecciona una ubicación</Desktop>
+              <Mobile>
+                Selecciona tu ubicación para conocer la disponibilidad de
+                productos
+              </Mobile>
+            </Title>
+            <ModalIconButton onClick={handleOnClose}>
+              <AiOutlineClose size={24} />
+            </ModalIconButton>
+          </div>
           <Desktop>
-            <ButtonPrimary title="Ingresar ubicación" onClick={onClick} />
+            <Subtitle>Y conoce la disponibilidad de productos</Subtitle>
           </Desktop>
-        </PopupWrapper>
-      </PopupContainer>
-    </>
+        </PopupDescription>
+        <Desktop>
+          <ButtonPrimary title="Ingresar ubicación" onClick={onClick} />
+        </Desktop>
+      </PopupWrapper>
+    </PopupContainer>
   );
 };
 
