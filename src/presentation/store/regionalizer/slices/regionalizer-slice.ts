@@ -30,9 +30,9 @@ const regionalizerSlice = createSlice({
     },
     setAddressSelected: (
       state,
-      { payload }: { payload: AddressShoppingCart },
+      { payload }: { payload: AddressShoppingCart | null },
     ) => {
-      state.addressSelected = payload;
+      state.addressSelected = payload || null;
     },
     successAddNewAddress: (
       state,
