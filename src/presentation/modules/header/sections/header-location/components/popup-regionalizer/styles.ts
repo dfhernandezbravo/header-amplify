@@ -5,17 +5,7 @@ export const PopupContainer = styled.div`
   top: 107%;
   z-index: 999;
   width: 150%;
-  &:before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    right: -180px;
-    border-style: solid;
-    border-width: 0 15px 15px;
-    border-color: #ffffff transparent;
-    z-index: 9999;
-  }
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 100%;
     top: 84px;
     left: -306px;
@@ -38,7 +28,7 @@ export const PopupWrapper = styled.div`
   justify-content: center;
   gap: 12px;
   border: 1px solid #b4c2cb;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     position: relative;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -104,6 +94,16 @@ export const Arrow = styled.div`
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid #fff;
+  @media (max-width: 1024px) {
+    top: -8px;
+    left: 85%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+  }
 `;
 
 export const ModalIconButton = styled.button`

@@ -33,40 +33,31 @@ const PopupRegionalizer = ({ onClick }: Props) => {
 
   return (
     <>
-      <Desktop>
-        <PopupContainer>
-          <PopupWrapper>
-            <Arrow />
-            <PopupDescription>
-              <div className="header">
-                <Title>Selecciona una ubicación</Title>
-                <ModalIconButton onClick={handleOnClose}>
-                  <AiOutlineClose size={24} />
-                </ModalIconButton>
-              </div>
-              <Subtitle>Y conoce la disponibilidad de productos</Subtitle>
-            </PopupDescription>
-            <ButtonPrimary title="Ingresar ubicación" onClick={onClick} />
-          </PopupWrapper>
-        </PopupContainer>
-      </Desktop>
-      <Mobile>
-        <PopupContainer>
-          <PopupWrapper>
-            <PopupDescription>
-              <div className="header">
-                <Title>
+      <PopupContainer>
+        <PopupWrapper>
+          <Arrow />
+          <PopupDescription>
+            <div className="header">
+              <Title>
+                <Desktop>Selecciona una ubicación</Desktop>
+                <Mobile>
                   Selecciona tu ubicación para conocer la disponibilidad de
                   productos
-                </Title>
-                <ModalIconButton onClick={handleOnClose}>
-                  <AiOutlineClose size={24} />
-                </ModalIconButton>
-              </div>
-            </PopupDescription>
-          </PopupWrapper>
-        </PopupContainer>
-      </Mobile>
+                </Mobile>
+              </Title>
+              <ModalIconButton onClick={handleOnClose}>
+                <AiOutlineClose size={24} />
+              </ModalIconButton>
+            </div>
+            <Desktop>
+              <Subtitle>Y conoce la disponibilidad de productos</Subtitle>
+            </Desktop>
+          </PopupDescription>
+          <Desktop>
+            <ButtonPrimary title="Ingresar ubicación" onClick={onClick} />
+          </Desktop>
+        </PopupWrapper>
+      </PopupContainer>
     </>
   );
 };
