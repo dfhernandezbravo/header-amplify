@@ -97,12 +97,6 @@ export const Arrow = styled.div`
   @media (max-width: 1024px) {
     top: -8px;
     left: 85%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #fff;
   }
 `;
 
