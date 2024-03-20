@@ -5,6 +5,22 @@ export const PopupContainer = styled.div`
   top: 107%;
   z-index: 999;
   width: 150%;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: -180px;
+    border-style: solid;
+    border-width: 0 15px 15px;
+    border-color: #ffffff transparent;
+    z-index: 9999;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    top: 84px;
+    left: -306px;
+    transform: translate(100%, -50%);
+  }
 `;
 
 export const PopupWrapper = styled.div`
@@ -22,6 +38,22 @@ export const PopupWrapper = styled.div`
   justify-content: center;
   gap: 12px;
   border: 1px solid #b4c2cb;
+  @media (max-width: 768px) {
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 1rem;
+    width: 314px;
+    height: auto;
+    color: #4d4d4d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid #b4c2cb;
+  }
 `;
 
 export const PopupDescription = styled.div`
@@ -48,6 +80,10 @@ export const Title = styled.p`
   line-height: 20px;
   letter-spacing: 0px;
   text-align: left;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 19px;
+  }
 `;
 
 export const Subtitle = styled.p`
