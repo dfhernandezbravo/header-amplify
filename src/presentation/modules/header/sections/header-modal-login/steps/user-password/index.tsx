@@ -26,7 +26,6 @@ type LoginForm = {
   email: string;
   password: string;
 };
-
 const schema = yup.object({
   email: yup
     .string()
@@ -34,7 +33,6 @@ const schema = yup.object({
     .email('El correo que ingresaste no es válido, intenta de nuevo'),
   password: yup.string().required('La Contraseña es requerida'),
 });
-
 const LoginUserPassword = () => {
   const {
     handleSubmit,
@@ -47,11 +45,10 @@ const LoginUserPassword = () => {
 
   const [buttonLoading, setButtonLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const watchEmail = watch('email');
+  const watchPassword = watch('password');
   const dispatch = useAppDispatch();
-
   const { loginSuccess, loginError } = useResponseLogin();
-
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     setButtonLoading(true);
     dispatch(setLoginError(null));
@@ -59,7 +56,16 @@ const LoginUserPassword = () => {
     customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
   };
 
-  const handleError = (event: Event) => {
+  const handleForgotPassword = () => {
+    dispatch(navigateTo('createAccountEmail'));
+    dispatch(setCreateAccountFlow('forgot password'));
+  };
+
+  const handleSuccessLogin = (event: Event) => {
+    setButtonLoading(false);
+    loginSuccess(event);
+  };
+  const handleLoginError = (event: Event) => {
     setButtonLoading(false);
     loginError(event);
   };
@@ -67,28 +73,23 @@ const LoginUserPassword = () => {
   useEffect(() => {
     document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, (event) => {
       setButtonLoading(false);
-      loginSuccess(event);
+      handleSuccessLogin(event);
     });
     document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, (event) => {
-      handleError(event);
+      handleLoginError(event);
     });
 
     return () => {
       document.removeEventListener(
         AUTH_EVENTS.GET_SIGNUP_SUCCESS,
-        loginSuccess,
+        handleSuccessLogin,
       );
-      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, handleError);
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_ERROR,
+        handleLoginError,
+      );
     };
   }, []);
-
-  const watchEmail = watch('email');
-  const watchPassword = watch('password');
-
-  const handleForgotPassword = () => {
-    dispatch(navigateTo('createAccountEmail'));
-    dispatch(setCreateAccountFlow('forgot password'));
-  };
 
   useEffect(() => {
     dispatch(setLoginError(null));
@@ -151,5 +152,4 @@ const LoginUserPassword = () => {
     </ModalForm>
   );
 };
-
 export default LoginUserPassword;

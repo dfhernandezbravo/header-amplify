@@ -10,8 +10,6 @@ const useResponseLogin = () => {
   const dispatch = useAppDispatch();
 
   const loginSuccess = (event: Event) => {
-    event.stopImmediatePropagation();
-
     const customEvent = event as CustomEvent<{
       success: boolean;
     }>;
@@ -27,8 +25,6 @@ const useResponseLogin = () => {
   };
 
   const loginError = (event: Event) => {
-    event.stopImmediatePropagation();
-
     const customEvent = event as CustomEvent<{
       error: AxiosError;
     }>;
