@@ -62,7 +62,6 @@ const HeaderMobile = ({ modules }: Props) => {
           {showModule(
             modules.location,
             <HeaderLocation
-              addressSelected={null}
               orderFormId={orderFormId}
               customer={customer}
               isUserLogged={isUserLogged}
