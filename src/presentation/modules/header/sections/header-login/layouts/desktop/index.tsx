@@ -15,7 +15,10 @@ const HeaderLoginDesktop = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleLogin = () => {
+  const handleLogin = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
     if (isLogged) return;
     dispatch(closeCategories());
     dispatch(openModalLogin());
@@ -27,7 +30,7 @@ const HeaderLoginDesktop = () => {
         onMouseOver={() => setIsMenuOpen(true)}
         onMouseLeave={() => setIsMenuOpen(false)}
       >
-        <LoginInformation onClick={() => handleLogin()}>
+        <LoginInformation href="" onClick={(event) => handleLogin(event)}>
           <Image
             src="/icons/header/user-circle.svg"
             width={25}
@@ -40,7 +43,7 @@ const HeaderLoginDesktop = () => {
           <LoginMenu
             isMenuOpen={isMenuOpen}
             customer={customer}
-            handleLogin={() => handleLogin()}
+            handleLogin={(event) => handleLogin(event)}
           />
         )}
       </LoginContainerDesktop>
