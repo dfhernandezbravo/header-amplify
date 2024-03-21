@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Link from 'next/link';
 
 export const LoginContainer = styled.button`
   cursor: pointer;
@@ -21,7 +20,7 @@ export const LoginContainerDesktop = styled.div`
   position: relative;
 `;
 
-export const LoginInformation = styled(Link)`
+export const LoginInformation = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
