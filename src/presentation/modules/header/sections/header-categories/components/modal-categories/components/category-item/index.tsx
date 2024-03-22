@@ -18,6 +18,7 @@ const CategoryItem = ({
 }: Props) => {
   return (
     <CategoryItemContainer
+      data-id={`category-${category.name.toLowerCase().replace(' ', '-')}`}
       onClick={(e) => {
         e.stopPropagation();
         onClick(category);

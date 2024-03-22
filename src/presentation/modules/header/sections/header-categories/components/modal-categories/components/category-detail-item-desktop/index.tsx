@@ -27,6 +27,7 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
     <CategoryDetailItemContainer>
       <CategoryDetailTitleContainer>
         <CategoryDetailItemTitle
+          data-id={`sub-category-${name.toLowerCase().replace(' ', '-')}`}
           href={`/${category.url}`}
           onClick={() => {
             closeModal();
