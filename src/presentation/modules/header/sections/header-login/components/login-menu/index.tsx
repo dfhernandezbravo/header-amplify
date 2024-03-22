@@ -9,7 +9,7 @@ import { LoginMenuContainer, LogoutItem, MenuItem } from './style';
 interface Props {
   isMenuOpen: boolean;
   customer: Customer | null;
-  handleLogin: () => void;
+  handleLogin: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
@@ -26,7 +26,7 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
   if (!customer && softLoginName) {
     return (
       <LoginMenuContainer isVisible={isMenuOpen}>
-        <MenuItem href="" onClick={() => handleLogin()}>
+        <MenuItem href="" onClick={(event) => handleLogin(event)}>
           Inicia sesión
         </MenuItem>
       </LoginMenuContainer>

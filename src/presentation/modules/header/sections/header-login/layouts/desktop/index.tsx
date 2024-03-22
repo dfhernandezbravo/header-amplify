@@ -15,7 +15,10 @@ const HeaderLoginDesktop = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleLogin = () => {
+  const handleLogin = (
+    event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event?.preventDefault();
     if (isLogged) return;
     dispatch(closeCategories());
     dispatch(openModalLogin());
@@ -40,7 +43,7 @@ const HeaderLoginDesktop = () => {
           <LoginMenu
             isMenuOpen={isMenuOpen}
             customer={customer}
-            handleLogin={() => handleLogin()}
+            handleLogin={(event) => handleLogin(event)}
           />
         )}
       </LoginContainerDesktop>
