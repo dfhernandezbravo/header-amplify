@@ -47,7 +47,9 @@ const SuggestionPrice: React.FC<Props> = ({ sellers }) => {
   return (
     <div>
       <SuggestionPriceContainer>
-        <SuggestionAmount>{formattedCLP(Price)}</SuggestionAmount>
+        <SuggestionAmount data-id="discount-price">
+          {formattedCLP(Price)}
+        </SuggestionAmount>
 
         {discountPercentage > 0 && (
           <SuggestionDiscount>{discountPercentage}%</SuggestionDiscount>
@@ -56,7 +58,7 @@ const SuggestionPrice: React.FC<Props> = ({ sellers }) => {
 
       {discountPercentage > 0 && (
         <SuggestionListPrice>
-          Normal: {formattedCLP(ListPrice)}
+          Normal: <span data-id="normal-price">{formattedCLP(ListPrice)}</span>
         </SuggestionListPrice>
       )}
     </div>

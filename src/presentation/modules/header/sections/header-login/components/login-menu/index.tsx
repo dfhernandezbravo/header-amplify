@@ -10,8 +10,8 @@ import { AccountLinks } from '@entities/customer/account-links';
 interface Props {
   isMenuOpen: boolean;
   customer: Customer | null;
-  handleLogin: () => void;
   menuOptions?: AccountLinks[];
+  handleLogin: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 const LoginMenu = ({
@@ -33,7 +33,7 @@ const LoginMenu = ({
   if (!customer && softLoginName) {
     return (
       <LoginMenuContainer isVisible={isMenuOpen}>
-        <MenuItem href="" onClick={() => handleLogin()}>
+        <MenuItem href="" onClick={(event) => handleLogin(event)}>
           Inicia sesión
         </MenuItem>
       </LoginMenuContainer>
