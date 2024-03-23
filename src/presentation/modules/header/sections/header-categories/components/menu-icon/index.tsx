@@ -32,7 +32,7 @@ const MenuIcon = () => {
   };
 
   return (
-    <MenuContainer onClick={(e) => handleOnClick(e)}>
+    <MenuContainer data-id="categories-btn" onClick={(e) => handleOnClick(e)}>
       <CategoriesContainer>
         {isOpenCategories ? (
           <OpenedCategoriesHeader>

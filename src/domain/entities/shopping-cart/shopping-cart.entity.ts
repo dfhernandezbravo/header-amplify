@@ -10,7 +10,7 @@ export type AddressShoppingCart = {
   state?: string;
   neighborhood?: string;
   street?: string;
-  number?: string;
+  number?: number;
   receiverName?: string;
   addressId?: string;
   postalCode?: string;

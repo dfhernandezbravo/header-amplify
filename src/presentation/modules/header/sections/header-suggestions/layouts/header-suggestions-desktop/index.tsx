@@ -37,13 +37,18 @@ const HeaderSuggestionsDesktop = () => {
           )}
           {productSuggestions.map((product) => (
             <SuggestionsItemContainer
+              data-id="product-suggestion"
               key={product.productId}
               href={product.link}
               onClick={() => handleClick(product.productName)}
             >
               <SuggestionImage images={product.items[0].images} />
-              <SuggestionBrand>{product.brand} </SuggestionBrand>
-              <SuggestionName>{product.productName}</SuggestionName>
+              <SuggestionBrand data-id="product-brand">
+                {product.brand}
+              </SuggestionBrand>
+              <SuggestionName data-id="product-name">
+                {product.productName}
+              </SuggestionName>
               <SuggestionPrice sellers={product.items[0].sellers} />
             </SuggestionsItemContainer>
           ))}

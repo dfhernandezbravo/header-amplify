@@ -6,6 +6,7 @@ import { SocialLogin, SocialProviders } from '@entities/login/login.entity';
 import { FcGoogle } from 'react-icons/fc';
 import { MdFacebook } from 'react-icons/md';
 import { closeModalLogin } from '@store/login/slices/login-slice';
+import { useResponsiveSize } from '../../hooks/use-windows-size';
 
 const sizeIcon = 24;
 
@@ -39,20 +40,25 @@ const buttonsVariants: ButtonVariants = {
 const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
   const dispatch = useAppDispatch();
   const variant = buttonsVariants[method.providerName];
+  const windowSize = useResponsiveSize();
 
-  const handleSocialLogin = async () => {
+  const handleSocialLogin = async (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
     const callback = window.location.href;
     const providerName = method.providerName;
     const response = await dispatch(socialLogin({ providerName, callback }));
     dispatch(closeModalLogin());
-    window.location.assign(response?.payload as string);
+
+    window.open(response?.payload as string, '_blank', windowSize);
   };
 
   return (
     <ButtonSocialLoginContainer
       color={variant.color}
       href={''}
-      onClick={() => handleSocialLogin()}
+      onClick={(event) => handleSocialLogin(event)}
     >
       {variant.icon} {variant.title}
     </ButtonSocialLoginContainer>
