@@ -7,6 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { MdFacebook } from 'react-icons/md';
 import { closeModalLogin } from '@store/login/slices/login-slice';
 import { useResponsiveSize } from '../../hooks/use-windows-size';
+import { useRouter } from 'next/router';
 
 const sizeIcon = 24;
 
@@ -41,6 +42,7 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
   const dispatch = useAppDispatch();
   const variant = buttonsVariants[method.providerName];
   const windowSize = useResponsiveSize();
+  const router = useRouter();
 
   const handleSocialLogin = async (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -51,7 +53,37 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
     const response = await dispatch(socialLogin({ providerName, callback }));
     dispatch(closeModalLogin());
 
-    window.open(response?.payload as string, '_blank', windowSize);
+    const windowOpen = window.open(
+      response?.payload as string,
+      '_blank',
+      windowSize,
+    );
+    if (windowOpen) {
+      const originalUrl = windowOpen.location.href;
+
+      const urlChangeDetector = setInterval(() => {
+        if (windowOpen.closed) {
+          clearInterval(urlChangeDetector);
+        } else if (windowOpen.location.href !== originalUrl) {
+          const url = new URL(windowOpen.location.href);
+          const params = new URLSearchParams(url.search);
+          const authParams =
+            params.get('authStatus') === 'success' && params.get('accessToken');
+          if (authParams) {
+            // se envian los params recibidos a la ventana principal para hacer el login y actualizacion del carro correspondiente
+            const newRoute = new URL(window.location.href);
+            newRoute.searchParams.append('authStatus', 'success');
+            newRoute.searchParams.append(
+              'accessToken',
+              params.get('accessToken') as string,
+            );
+            router.push(newRoute.href);
+            clearInterval(urlChangeDetector);
+            windowOpen.close();
+          }
+        }
+      }, 1000); // Check every second
+    }
   };
 
   return (
