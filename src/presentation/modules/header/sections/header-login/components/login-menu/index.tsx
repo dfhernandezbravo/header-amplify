@@ -5,14 +5,21 @@ import useHandleLogout from '@modules/header/hooks/use-handle-logout';
 import { setCustomer } from '@store/customer/slices/customer-slice';
 import { Cookies } from 'react-cookie';
 import { LoginMenuContainer, LogoutItem, MenuItem } from './style';
+import { AccountLinks } from '@entities/customer/account-links';
 
 interface Props {
   isMenuOpen: boolean;
   customer: Customer | null;
-  handleLogin: () => void;
+  menuOptions?: AccountLinks[];
+  handleLogin: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
+const LoginMenu = ({
+  isMenuOpen,
+  customer,
+  handleLogin,
+  menuOptions,
+}: Props) => {
   const cookies = new Cookies();
   const softLoginName = cookies.get(LOGIN_COOKIES.SOFT_LOGIN);
   const dispatch = useAppDispatch();
@@ -26,7 +33,7 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
   if (!customer && softLoginName) {
     return (
       <LoginMenuContainer isVisible={isMenuOpen}>
-        <MenuItem href="" onClick={() => handleLogin()}>
+        <MenuItem href="" onClick={(event) => handleLogin(event)}>
           Inicia sesión
         </MenuItem>
       </LoginMenuContainer>
@@ -37,12 +44,23 @@ const LoginMenu = ({ isMenuOpen, customer, handleLogin }: Props) => {
     <>
       {customer && (
         <LoginMenuContainer isVisible={isMenuOpen}>
-          <MenuItem href="/account/profile">Mis Datos</MenuItem>
-          <MenuItem href="/account/cards">Mis Tarjetas</MenuItem>
-          <MenuItem href="/account/bank-account">Mi cuenta bancaria</MenuItem>
-          <MenuItem href="/account/addresses">Mis Direcciones</MenuItem>
-          <MenuItem href="/account/purchases">Mis Compras</MenuItem>
-          <MenuItem href="/account/favorites">Mis Favoritos</MenuItem>
+          {menuOptions &&
+            menuOptions.map(
+              (item) =>
+                item.isActive && (
+                  <MenuItem
+                    key={item.id}
+                    href={
+                      item.redirect.target === '_blank'
+                        ? item.redirect.url
+                        : `/account/${item.redirect.url}`
+                    }
+                    target={item.redirect.target || ''}
+                  >
+                    {item.label}
+                  </MenuItem>
+                ),
+            )}
           <LogoutItem onClick={() => handleLogout()}>Cerrar sesión</LogoutItem>
         </LoginMenuContainer>
       )}

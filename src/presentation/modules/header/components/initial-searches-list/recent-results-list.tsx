@@ -36,54 +36,52 @@ const RecentResultsList = () => {
     dispatch(removeRecentSearch(term));
   };
 
+  if (!recentSearches.length) return null;
+
   return (
-    <>
-      {recentSearches?.length > 0 ? (
-        <ContainerRecents>
-          <h4>Búsquedas recientes</h4>
-          {recentSearches.map((result, index) => (
-            <RecentSearchItem key={result + index}>
-              <IconLeftContainer
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleOnClick(result);
-                  router.push(`/search/${result}`);
-                }}
-              >
-                <Image
-                  src="/icons/categories/icon-recent.svg"
-                  alt={result}
-                  width={20}
-                  height={20}
-                  priority
-                />
-              </IconLeftContainer>
-              <ItemRecentResult
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleOnClick(result);
-                  router.push(`/search/${result}`);
-                }}
-              >
-                {result}
-              </ItemRecentResult>
-              <RemoveIconButton
-                id="remove-recent-search"
-                onClick={() => handleRemoveTerm(result)}
-              >
-                <Image
-                  src="/icons/categories/icon-cross.svg"
-                  alt={result}
-                  width={16}
-                  height={16}
-                  priority
-                />
-              </RemoveIconButton>
-            </RecentSearchItem>
-          ))}
-        </ContainerRecents>
-      ) : null}
-    </>
+    <ContainerRecents>
+      <h4>Búsquedas recientes</h4>
+      {recentSearches.map((result, index) => (
+        <RecentSearchItem key={result + index}>
+          <IconLeftContainer
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOnClick(result);
+              router.push(`/search/${result}`);
+            }}
+          >
+            <Image
+              src="/icons/categories/icon-recent.svg"
+              alt={result}
+              width={20}
+              height={20}
+              priority
+            />
+          </IconLeftContainer>
+          <ItemRecentResult
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOnClick(result);
+              router.push(`/search/${result}`);
+            }}
+          >
+            {result}
+          </ItemRecentResult>
+          <RemoveIconButton
+            id="remove-recent-search"
+            onClick={() => handleRemoveTerm(result)}
+          >
+            <Image
+              src="/icons/categories/icon-cross.svg"
+              alt={result}
+              width={16}
+              height={16}
+              priority
+            />
+          </RemoveIconButton>
+        </RecentSearchItem>
+      ))}
+    </ContainerRecents>
   );
 };
 
