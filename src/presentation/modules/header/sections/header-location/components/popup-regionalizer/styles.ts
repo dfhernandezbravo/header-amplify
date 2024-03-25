@@ -109,4 +109,7 @@ export const ModalIconButton = styled.button`
   flex-direction: row;
   align-items: center;
   gap: 12px;
+  @media (max-width: 1024px) {
+    padding: 8px;
+  }
 `;

@@ -45,7 +45,12 @@ const PopupRegionalizer = ({ onClick }: Props) => {
               </Mobile>
             </Title>
             <ModalIconButton onClick={handleOnClose}>
-              <AiOutlineClose size={24} />
+              <Desktop>
+                <AiOutlineClose size={24} />
+              </Desktop>
+              <Mobile>
+                <AiOutlineClose size={12.7} />
+              </Mobile>
             </ModalIconButton>
           </div>
           <Desktop>
