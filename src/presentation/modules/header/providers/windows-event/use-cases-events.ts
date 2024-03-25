@@ -31,12 +31,14 @@ export const useCaseEvents = () => {
       detail: { shoppingCart },
     } = customEvent;
     dispatch(setShoppingCart(shoppingCart));
-    if (shoppingCart?.shipping?.selectedAddresses?.length && !addressSelected) {
-      dispatch(
-        setAddressSelected(
-          shoppingCart.shipping.selectedAddresses[0] as AddressShoppingCart,
-        ),
-      );
+
+    const addressShoppingCart = shoppingCart?.shipping?.selectedAddresses?.[0];
+    if (
+      addressShoppingCart &&
+      !addressSelected &&
+      !addressShoppingCart.neighborhood.includes('*')
+    ) {
+      dispatch(setAddressSelected(addressShoppingCart as AddressShoppingCart));
     }
   };
   const handleGetProfile = (event: Event) => {
