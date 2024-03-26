@@ -25,7 +25,7 @@ const ModalRegionalizerDesktop = ({ isUserLogged }: Props) => {
             header={
               <HeaderModalRegionalizer
                 title="Ingresa tu ubicación"
-                renderIcon={false}
+                renderIcon={true}
               />
             }
           />
