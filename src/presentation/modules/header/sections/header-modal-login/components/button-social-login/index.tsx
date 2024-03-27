@@ -76,7 +76,6 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
           clearInterval(urlChangeDetector);
         } else if (windowOpen.location.href !== originalUrl) {
           const normalizedUrl = normalizeUrl(windowOpen.location.href);
-          console.log(normalizedUrl);
           const url = new URL(normalizedUrl);
           const params = new URLSearchParams(url.search);
           const authParams =
@@ -84,11 +83,6 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
           if (authParams) {
             // se envian los params recibidos a la ventana principal para hacer el login y actualizacion del carro correspondiente
             const newRoute = new URL(normalizedUrl);
-            // newRoute.searchParams.append('authStatus', 'success');
-            // newRoute.searchParams.append(
-            //   'accessToken',
-            //   params.get('accessToken') as string,
-            // );
             router.push(newRoute.href);
             clearInterval(urlChangeDetector);
             windowOpen.close();
