@@ -106,6 +106,18 @@ const RemoveIconButton = styled.button`
   cursor: pointer;
 `;
 
+export const ClearRecentSearchesButton = styled.div`
+  button {
+    font-size: 12px;
+    padding: 2px 8px 0 4px;
+    width: fit-content;
+    color: #000;
+    background-color: transparent;
+    border: none;
+    font-family: ${({ theme: { fontFamily } }) => fontFamily.openSans};
+  }
+`;
+
 export {
   SearchListContainer,
   PopularSearchItem,

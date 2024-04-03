@@ -5,14 +5,17 @@ import {
   RecentSearchItem,
   ItemRecentResult,
   ContainerRecents,
+  ClearRecentSearchesButton,
 } from './styles';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import {
+  clearRecentSearches,
   closeResults,
   removeRecentSearch,
 } from '@store/search/slices/search-slice';
+import Button from '@components/atoms/button-bit';
 
 const RecentResultsList = () => {
   const { sendEventAnalytics } = useAnalytics();
@@ -36,11 +39,25 @@ const RecentResultsList = () => {
     dispatch(removeRecentSearch(term));
   };
 
+  const handleClearHistory = () => {
+    dispatch(clearRecentSearches());
+  };
+
   if (!recentSearches.length) return null;
 
   return (
     <ContainerRecents>
-      <h4>Búsquedas recientes</h4>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <h4>Búsquedas recientes</h4>
+        <ClearRecentSearchesButton>
+          <Button
+            type="button"
+            variant="link"
+            onClick={handleClearHistory}
+            label="Borrar historial"
+          />
+        </ClearRecentSearchesButton>
+      </div>
       {recentSearches.map((result, index) => (
         <RecentSearchItem key={result + index}>
           <IconLeftContainer
