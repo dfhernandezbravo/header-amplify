@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import ButtonSocialLogin from '../../components/button-social-login';
 import ButtonLinkLogin from '../button-link-login';
 import {
@@ -26,18 +25,7 @@ const SocialAccessKeyLogin = () => {
   return (
     <>
       <LoginEmailContainer>
-        <ButtonLinkLogin
-          icon={
-            <Image
-              src="/icons/header/login-key.svg"
-              width={24}
-              height={24}
-              alt="login-key"
-            />
-          }
-          nextStep="Email"
-          color="default"
-        />
+        <ButtonLinkLogin />
       </LoginEmailContainer>
       {socialMethods &&
         socialMethods?.map((method) => (
