@@ -2,7 +2,6 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 export const CategoryDetailItemContainer = styled.div`
-  overflow-y: scroll;
   max-height: 82dvh;
 `;
 

@@ -5,7 +5,6 @@ import { closeCategories } from '@store/category/slices/category-slice';
 import {
   CategoryDetailItemContainer,
   CategoryDetailItemLink,
-  CategoryDetailItemLinkAll,
   CategoryDetailItemTitle,
   CategoryDetailTitleContainer,
 } from './styles';
@@ -28,7 +27,7 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
       <CategoryDetailTitleContainer>
         <CategoryDetailItemTitle
           data-id={`sub-category-${name.toLowerCase().replace(' ', '-')}`}
-          href={`/${category.url}`}
+          href={`/${url}`}
           onClick={() => {
             closeModal();
             onClickN2(category);
@@ -36,9 +35,6 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
         >
           {name}
         </CategoryDetailItemTitle>
-        <CategoryDetailItemLinkAll onClick={closeModal} href={`/${url}`}>
-          Mostrar todo
-        </CategoryDetailItemLinkAll>
       </CategoryDetailTitleContainer>
 
       {sub_categories &&

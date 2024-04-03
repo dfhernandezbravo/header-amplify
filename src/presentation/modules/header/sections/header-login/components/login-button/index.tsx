@@ -1,4 +1,3 @@
-import { IoIosArrowDown } from 'react-icons/io';
 import { LoginButtonContainerDesktop, LoginUser } from './style';
 import { useCookies } from 'react-cookie';
 import { useAppSelector } from '@hooks/storeHooks';
@@ -40,7 +39,6 @@ const LoginButton = () => {
       <span>Hola</span>
       <LoginButtonContainerDesktop>
         {textResult?.displayName && <strong>{textResult.displayName}</strong>}
-        {typeof customer?.firstName === 'string' && <IoIosArrowDown />}
       </LoginButtonContainerDesktop>
     </LoginUser>
   );
