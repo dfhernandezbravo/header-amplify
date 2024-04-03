@@ -90,6 +90,9 @@ const searchSlice = createSlice({
 
       state.recentSearches = updatedRecentSearches;
     },
+    clearRecentSearches: (state) => {
+      state.recentSearches = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -147,5 +150,6 @@ export const {
   setSearchWidth,
   setRecentSearches,
   removeRecentSearch,
+  clearRecentSearches,
 } = searchSlice.actions;
 export default searchSlice;
