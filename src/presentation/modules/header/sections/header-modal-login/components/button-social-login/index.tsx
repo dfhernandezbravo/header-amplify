@@ -71,7 +71,7 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
     if (windowOpen) {
       const originalUrl = windowOpen.location.href;
 
-      const urlChangeDetector = setInterval(() => {
+      const urlChangeDetector = setInterval(async () => {
         if (windowOpen.closed) {
           clearInterval(urlChangeDetector);
         } else if (windowOpen.location.href !== originalUrl) {
@@ -83,12 +83,12 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
           if (authParams) {
             // se envian los params recibidos a la ventana principal para hacer el login y actualizacion del carro correspondiente
             const newRoute = new URL(normalizedUrl);
-            router.push(newRoute.href);
+            await router.push(newRoute.href);
             clearInterval(urlChangeDetector);
             windowOpen.close();
           }
         }
-      }, 1000); // Check every second
+      }, 300);
     }
   };
 
