@@ -53,6 +53,16 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
     const response = await dispatch(socialLogin({ providerName, callback }));
     dispatch(closeModalLogin());
 
+    // esta funcion se quitara cuando backend resuelva su problema de agregar el simbolo ? en la url cuando ya tiene parametros.
+    const normalizeUrl = (url: string) => {
+      const parts = url.split('?');
+      if (parts.length > 2) {
+        return [parts[0], parts.slice(1).join('&')].join('?');
+      } else {
+        return url;
+      }
+    };
+
     const windowOpen = window.open(
       response?.payload as string,
       '_blank',
@@ -65,18 +75,14 @@ const ButtonSocialLogin: React.FC<Props> = ({ method }) => {
         if (windowOpen.closed) {
           clearInterval(urlChangeDetector);
         } else if (windowOpen.location.href !== originalUrl) {
-          const url = new URL(windowOpen.location.href);
+          const normalizedUrl = normalizeUrl(windowOpen.location.href);
+          const url = new URL(normalizedUrl);
           const params = new URLSearchParams(url.search);
           const authParams =
             params.get('authStatus') === 'success' && params.get('accessToken');
           if (authParams) {
             // se envian los params recibidos a la ventana principal para hacer el login y actualizacion del carro correspondiente
-            const newRoute = new URL(window.location.href);
-            newRoute.searchParams.append('authStatus', 'success');
-            newRoute.searchParams.append(
-              'accessToken',
-              params.get('accessToken') as string,
-            );
+            const newRoute = new URL(normalizedUrl);
             router.push(newRoute.href);
             clearInterval(urlChangeDetector);
             windowOpen.close();
