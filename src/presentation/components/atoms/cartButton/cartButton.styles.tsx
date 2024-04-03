@@ -5,7 +5,6 @@ export const CartContainer = styled.div`
   align-items: center;
   cursor: pointer;
   color: #ffffff;
-  border-left: 1px solid #ffffff;
   padding: 4px;
   & .shoppingcart-icon {
     height: 40px;
