@@ -1,5 +1,4 @@
-import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
-import { useAppDispatch } from '@hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
 import { closeCategories } from '@store/category/slices/category-slice';
 import Image from 'next/image';
@@ -10,14 +9,11 @@ import HeaderLocationContext from './context/header-location-context';
 import { ButtonRegionalizer, RegionalizerContainer } from './styles';
 import AddressSelectedMobile from './components/address-selected/address-selected-mobile';
 
-interface Props {
-  addressSelected: AddressShoppingCart | null;
-}
-
-const HeaderLocationContainer = ({ addressSelected }: Props) => {
+const HeaderLocationContainer = () => {
   const { sendEventAnalytics } = useAnalytics();
   const dispatch = useAppDispatch();
   const { isUserLogged, onOpenModal } = useContext(HeaderLocationContext);
+  const { addressSelected } = useAppSelector((state) => state.regionalizer);
 
   const handleOnClickRegionalizer = () => {
     dispatch(closeCategories());
@@ -34,9 +30,9 @@ const HeaderLocationContainer = ({ addressSelected }: Props) => {
     <RegionalizerContainer>
       <ButtonRegionalizer onClick={handleOnClickRegionalizer}>
         <Image
-          src="https://easycl.vtexassets.com/arquivos/white-location-icon.svg"
-          width={19}
-          height={25}
+          src="/icons/header/location-icon.svg"
+          width={18}
+          height={22}
           alt="Location Icon"
         />
         <AddressSelected address={addressSelected} />

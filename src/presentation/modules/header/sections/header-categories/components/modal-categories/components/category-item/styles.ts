@@ -8,6 +8,7 @@ export const CategoryItemContainer = styled.button`
   font-size: 15px;
   color: #1a1a1a;
   width: 100%;
+  height: 48px;
   border: none;
   background-color: transparent;
   cursor: pointer;

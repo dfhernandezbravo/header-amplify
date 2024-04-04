@@ -1,11 +1,10 @@
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { Commune, Regions } from '@entities/regionalizer/regionalizer.entity';
 import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
-import { useEffect, useMemo, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import Select from 'react-select';
+import { FormEvent, useState } from 'react';
 import { FormComtainer, SelectWrapper } from './styles';
 import { NewAddressFormType } from './types';
+import dynamic from 'next/dynamic';
 
 interface Props {
   regions: Regions[];
@@ -14,94 +13,66 @@ interface Props {
   addressSelected: AddressShoppingCart | null;
 }
 
-const getCommuneDefault = (
-  communes: Commune[],
-  addressSelected: AddressShoppingCart | null,
-) =>
-  addressSelected &&
-  communes.find((commune) => commune.name === addressSelected.city);
+const Select = dynamic(
+  () =>
+    import('@ccom-easy-design-system/atoms.select').then(
+      (module) => module.Select,
+    ),
+  { ssr: false },
+);
 
-const NewAddressForm = ({
-  regions,
-  handleOnSubmit,
-  isLoadingForm,
-  addressSelected,
-}: Props) => {
-  const {
-    control,
-    handleSubmit,
-    formState: { isValid },
-    watch,
-    setValue,
-  } = useForm<NewAddressFormType>();
+const NewAddressForm = ({ regions, handleOnSubmit, isLoadingForm }: Props) => {
   const [communes, setCommunes] = useState<Commune[]>([]);
-  const region = watch('regionSelected');
+  const [regionSelected, setRegionSelected] = useState<Regions | null>(null);
+  const [communeSelected, setCommuneSelected] = useState<Commune | null>(null);
 
-  const regionDefault = useMemo(() => {
-    const regionSelected =
-      regions.find((region) => region.name === addressSelected?.state) ||
-      regions[0];
-    if (addressSelected) {
-      setValue('regionSelected', regionSelected);
-      return regionSelected;
-    }
-    return undefined;
-  }, [addressSelected]);
+  const handleChangeRegion = (value: string) => {
+    const regionSelected = regions.filter((region) => region.name === value)[0];
+    const arrayCommunes = regions.filter((region) => region.name === value)[0]
+      .comunas;
+    const arrayCommunesOrdered = arrayCommunes?.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+    setRegionSelected(regionSelected);
+    setCommunes(arrayCommunesOrdered);
+  };
 
-  const communeDefault =
-    regionDefault && getCommuneDefault(regionDefault?.comunas, addressSelected);
+  const handleOnChangeCommune = (value: string) => {
+    const commune = communes?.filter((commune) => commune.name === value)[0];
+    setCommuneSelected(commune as Commune);
+  };
 
-  useEffect(() => {
-    if (region) {
-      const newCommunes = region.comunas.sort((a, b) =>
-        a.name.localeCompare(b.name),
-      );
-      setCommunes(newCommunes);
-      setValue('communeSelected', null);
-    }
-  }, [region]);
+  const handleOnClick = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data: NewAddressFormType = {
+      regionSelected: regionSelected as Regions,
+      communeSelected: communeSelected,
+    };
+    handleOnSubmit(data);
+  };
 
   return (
-    <FormComtainer onSubmit={handleSubmit(handleOnSubmit)}>
+    <FormComtainer onSubmit={(event) => handleOnClick(event)}>
       <SelectWrapper>
-        <Controller
-          name="regionSelected"
-          control={control}
-          defaultValue={regionDefault}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <Select
-              placeholder="Región"
-              {...field}
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.id}
-              options={regions}
-              isDisabled={isLoadingForm}
-            />
-          )}
+        <Select
+          label="Región"
+          options={regions.map((region) => region.name)}
+          onChange={(event) => {
+            handleChangeRegion(event.value);
+          }}
         />
       </SelectWrapper>
       <SelectWrapper>
-        <Controller
-          name="communeSelected"
-          control={control}
-          rules={{ required: true }}
-          defaultValue={communeDefault}
-          render={({ field }) => (
-            <Select
-              placeholder="Comuna"
-              {...field}
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.id}
-              options={communes}
-              isDisabled={!region || isLoadingForm}
-            />
-          )}
+        <Select
+          label="Comuna"
+          options={communes.map((commune) => commune.name)}
+          onChange={(event) => handleOnChangeCommune(event.value)}
+          disabled={!communes.length}
         />
       </SelectWrapper>
       <ButtonPrimary
         type="submit"
-        disabled={!isValid || isLoadingForm}
+        disabled={!communeSelected || isLoadingForm}
         title={isLoadingForm ? '' : 'Guardar Ubicación'}
         isLoading={isLoadingForm}
       />

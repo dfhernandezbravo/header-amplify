@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import Desktop from '@components/layout/desktop';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import { closeCategories } from '@store/category/slices/category-slice';
@@ -8,31 +7,32 @@ import { openModalLogin } from '@store/login/slices/login-slice';
 import LoginButton from '../../components/login-button';
 import LoginMenu from '../../components/login-menu';
 import { LoginContainerDesktop, LoginInformation } from '../../styles';
-import getCustomer from '@use-cases/customer/get-customer';
+import { useQuery } from 'react-query';
+import { getAccountLinks } from '@use-cases/customer/get-account-links';
 
 const HeaderLoginDesktop = () => {
   const { customer } = useAppSelector((state) => state.customer);
   const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
-
+  const isLogged = shoppingCart?.loggedIn;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const { data: links, refetch } = useQuery(
+    ['get-account-links'],
+    getAccountLinks,
+    { enabled: false },
+  );
 
-  const isLogged = shoppingCart?.loggedIn;
-
-  const handleLogin = () => {
-    if (isLogged) {
-      return router.push({
-        pathname: '/account/[content]',
-        query: { content: 'profile' },
-      });
-    }
+  const handleLogin = (
+    event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event?.preventDefault();
+    if (isLogged) return;
     dispatch(closeCategories());
     dispatch(openModalLogin());
   };
 
   useEffect(() => {
-    if (!customer) dispatch(getCustomer());
+    if (customer) refetch();
   }, [customer]);
 
   return (
@@ -48,13 +48,14 @@ const HeaderLoginDesktop = () => {
             height={25}
             alt="User Icon"
           />
-          <LoginButton customer={customer} />
+          <LoginButton />
         </LoginInformation>
         {isMenuOpen && (
           <LoginMenu
             isMenuOpen={isMenuOpen}
             customer={customer}
-            handleLogin={() => handleLogin()}
+            menuOptions={links}
+            handleLogin={(event) => handleLogin(event)}
           />
         )}
       </LoginContainerDesktop>

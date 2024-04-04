@@ -1,4 +1,3 @@
-import Newsletter from '@components/organisms/newsletterForm';
 import { FooterData } from '@entities/footer/footer.entity';
 import getFooterData from '@use-cases/footer/get-footer-data';
 import { useEffect, useState } from 'react';
@@ -30,7 +29,7 @@ const Footer = () => {
     <>
       <HelpDataFooter helpData={footerData['help-data']} />
       <FooterBlackContainer>
-        <Newsletter />
+        {/* <Newsletter /> */}
         <SectionLinksContainer>
           <SiteMapLinksFooter data={footerData['site-map']} />
           <FooterSocialContainer>

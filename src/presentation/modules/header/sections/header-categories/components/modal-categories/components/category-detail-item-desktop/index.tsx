@@ -1,14 +1,13 @@
 /* eslint-disable camelcase */
 import { Category } from '@entities/category/category.entity';
+import { useAppDispatch } from '@hooks/storeHooks';
+import { closeCategories } from '@store/category/slices/category-slice';
 import {
   CategoryDetailItemContainer,
   CategoryDetailItemLink,
-  CategoryDetailItemLinkAll,
   CategoryDetailItemTitle,
   CategoryDetailTitleContainer,
 } from './styles';
-import { useAppDispatch } from '@hooks/storeHooks';
-import { closeCategories } from '@store/category/slices/category-slice';
 
 interface Props {
   category: Category;
@@ -27,7 +26,8 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
     <CategoryDetailItemContainer>
       <CategoryDetailTitleContainer>
         <CategoryDetailItemTitle
-          href=""
+          data-id={`sub-category-${name.toLowerCase().replace(' ', '-')}`}
+          href={`/${url}`}
           onClick={() => {
             closeModal();
             onClickN2(category);
@@ -35,14 +35,12 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
         >
           {name}
         </CategoryDetailItemTitle>
-        <CategoryDetailItemLinkAll onClick={closeModal} href={url}>
-          Mostrar todo
-        </CategoryDetailItemLinkAll>
       </CategoryDetailTitleContainer>
+
       {sub_categories &&
         sub_categories.map((item) => (
           <CategoryDetailItemLink
-            href={item.url}
+            href={`/${item.url}`}
             key={item.id}
             onClick={() => {
               closeModal();

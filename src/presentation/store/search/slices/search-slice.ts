@@ -90,6 +90,9 @@ const searchSlice = createSlice({
 
       state.recentSearches = updatedRecentSearches;
     },
+    clearRecentSearches: (state) => {
+      state.recentSearches = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -121,6 +124,13 @@ const searchSlice = createSlice({
         state.productSuggestions = [];
         state.isEmptySearch = false;
       })
+      .addCase(getSearches.rejected, (state) => {
+        state.isEmptySearch = true;
+        state.searches = [];
+        state.categories = [];
+        state.productSuggestions = [];
+        state.isLoading = false;
+      })
       .addCase(getProductsSuggestions.fulfilled, (state, { payload }) => {
         state.isLoadingSuggestions = false;
         state.productSuggestions = payload || [];
@@ -140,5 +150,6 @@ export const {
   setSearchWidth,
   setRecentSearches,
   removeRecentSearch,
+  clearRecentSearches,
 } = searchSlice.actions;
 export default searchSlice;

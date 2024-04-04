@@ -26,11 +26,12 @@ const SuggestionImage: React.FC<Props> = ({ images }) => {
       onMouseLeave={onMouseOut}
     >
       <Image
+        data-id="product-image-suggestion"
         src={image.imageUrl}
         alt={image.imageTag}
         aria-label={image.imageLabel}
-        width={160}
-        height={160}
+        width={140}
+        height={140}
       />
     </SuggestionImageContainer>
   );

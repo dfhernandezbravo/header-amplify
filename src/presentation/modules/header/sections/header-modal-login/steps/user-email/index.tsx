@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import InputText from '@components/atoms/inputs/input-text';
+import TextField from '@components/atoms/textfield-bit';
 import { LoginStep } from '@entities/login/login.entity';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch } from '@hooks/storeHooks';
@@ -33,14 +34,17 @@ const LoginUserEmail = ({ nextStep }: Props) => {
     resolver: yupResolver(schema),
   });
   const dispatch = useAppDispatch();
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const onSubmit: SubmitHandler<EmailForm> = async (data) => {
+    setButtonLoading(true);
     try {
       dispatch(setEmail(data.email));
-
       await generateAccessKey(data);
+      setButtonLoading(false);
       dispatch(navigateTo(nextStep));
     } catch (error) {
+      setButtonLoading(false);
       throw new Error('Oh no!!');
     }
   };
@@ -52,11 +56,12 @@ const LoginUserEmail = ({ nextStep }: Props) => {
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <InputText
+          <TextField
             {...field}
-            placeholder="Correo electrónico"
-            error={Boolean(errors.email)}
-            errorMessage={errors.email?.message}
+            fullwidth={true}
+            label="Correo electrónico"
+            variant={errors.email ? 'error' : 'default'}
+            helpertext={errors.email ? errors.email.message : ''}
             ref={null}
             className="input-text"
           />
@@ -67,7 +72,12 @@ const LoginUserEmail = ({ nextStep }: Props) => {
         electrónico
       </p>
 
-      <ButtonPrimary title="Continuar" type="submit" />
+      <ButtonPrimary
+        title={buttonLoading ? '' : 'Continuar'}
+        type="submit"
+        isLoading={buttonLoading}
+        disabled={buttonLoading}
+      />
     </ModalForm>
   );
 };

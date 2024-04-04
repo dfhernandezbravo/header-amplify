@@ -6,6 +6,7 @@ import { openModalLogin } from '@store/login/slices/login-slice';
 import { closeCategories } from '@store/category/slices/category-slice';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
+import { LOGIN_COOKIES } from '@infra/cookies';
 
 const HeaderLoginMobile = () => {
   const { customer } = useAppSelector((state) => state.customer);
@@ -13,8 +14,8 @@ const HeaderLoginMobile = () => {
   const isUserLogged = shoppingCart?.loggedIn;
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [cookies] = useCookies(['softLogin']);
-  const softLoginName = cookies.softLogin;
+  const [cookies] = useCookies([LOGIN_COOKIES.SOFT_LOGIN]);
+  const softLoginName = cookies.SoftLogin;
 
   const onClickLogin = () => {
     dispatch(closeCategories());

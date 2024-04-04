@@ -57,7 +57,7 @@ export const MenuItem = styled(Link)<MenuItemProps>`
   color: #485760;
   text-decoration: none;
   cursor: pointer;
-  min-width: 158px;
+  min-width: 165px;
   font-size: 14px;
   padding: 12px;
   text-align: left;

@@ -27,3 +27,9 @@ export type SocialLoginRequest = {
   providerName: string;
   callback: string;
 };
+
+export type SignUpRequest = {
+  email: string;
+  password: string;
+  accessKey: string;
+};

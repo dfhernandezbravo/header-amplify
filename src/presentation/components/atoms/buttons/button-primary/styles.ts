@@ -20,6 +20,7 @@ export const Button = styled.button`
   width: 100%;
   border: none;
   cursor: pointer;
+  font-family: inherit;
 
   &:disabled {
     background-color: #e1e6ea;

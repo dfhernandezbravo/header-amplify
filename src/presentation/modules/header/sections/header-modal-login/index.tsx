@@ -1,5 +1,5 @@
-import ModalLoginDesktop from './layouts/modal-login-mobile';
-import ModalLoginMobile from './layouts/modal-login-desktop';
+import ModalLoginDesktop from './layouts/modal-login-desktop';
+import ModalLoginMobile from './layouts/modal-login-mobile';
 
 const HeaderModalLogin = () => {
   return (

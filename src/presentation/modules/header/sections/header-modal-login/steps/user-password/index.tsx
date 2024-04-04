@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
-import InputPassword from '@components/atoms/inputs/input-password';
-import InputText from '@components/atoms/inputs/input-text';
+import TextField from '@components/atoms/textfield-bit';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch } from '@hooks/storeHooks';
 import { AUTH_EVENTS } from '@infra/events/auth';
@@ -11,19 +11,21 @@ import {
   setEmail,
   setLoginError,
 } from '@store/login/slices/login-slice';
-import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import LoginErrors from '../../components/login-errors';
 import useResponseLogin from '../../hooks/use-response-login';
 import { ModalForm } from '../../styles';
-import { ButtonResetPassword, ResetPasswordContainer } from './styles';
+import {
+  ButtonResetPassword,
+  ResetPasswordContainer,
+  TexFieldContainer,
+} from './styles';
 
 type LoginForm = {
   email: string;
   password: string;
 };
-
 const schema = yup.object({
   email: yup
     .string()
@@ -31,7 +33,6 @@ const schema = yup.object({
     .email('El correo que ingresaste no es válido, intenta de nuevo'),
   password: yup.string().required('La Contraseña es requerida'),
 });
-
 const LoginUserPassword = () => {
   const {
     handleSubmit,
@@ -42,33 +43,53 @@ const LoginUserPassword = () => {
     resolver: yupResolver(schema),
   });
 
-  const dispatch = useAppDispatch();
-  const { loginSuccess, loginError } = useResponseLogin();
-
-  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
-    dispatch(setLoginError(null));
-    dispatch(setEmail(data.email));
-
-    customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
-  };
-
-  useEffect(() => {
-    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, loginSuccess);
-    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
-
-    return () => {
-      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginSuccess);
-      document.removeEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, loginError);
-    };
-  }, []);
-
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const watchEmail = watch('email');
   const watchPassword = watch('password');
+  const dispatch = useAppDispatch();
+  const { loginSuccess, loginError } = useResponseLogin();
+  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+    setButtonLoading(true);
+    dispatch(setLoginError(null));
+    dispatch(setEmail(data.email));
+    customDispatchEvent({ name: AUTH_EVENTS.DISPATCH_SIGNIN, detail: data });
+  };
 
   const handleForgotPassword = () => {
     dispatch(navigateTo('createAccountEmail'));
     dispatch(setCreateAccountFlow('forgot password'));
   };
+
+  const handleSuccessLogin = (event: Event) => {
+    setButtonLoading(false);
+    loginSuccess(event);
+  };
+  const handleLoginError = (event: Event) => {
+    setButtonLoading(false);
+    loginError(event);
+  };
+
+  useEffect(() => {
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_SUCCESS, (event) => {
+      setButtonLoading(false);
+      handleSuccessLogin(event);
+    });
+    document.addEventListener(AUTH_EVENTS.GET_SIGNUP_ERROR, (event) => {
+      handleLoginError(event);
+    });
+
+    return () => {
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+        handleSuccessLogin,
+      );
+      document.removeEventListener(
+        AUTH_EVENTS.GET_SIGNUP_ERROR,
+        handleLoginError,
+      );
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(setLoginError(null));
@@ -82,31 +103,38 @@ const LoginUserPassword = () => {
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <InputText
+          <TextField
             {...field}
-            placeholder="Correo electrónico"
-            error={Boolean(errors.email)}
-            errorMessage={errors.email?.message}
+            fullwidth={true}
+            label="Correo electrónico"
+            variant={errors.email ? 'error' : 'default'}
+            helpertext={errors.email ? errors.email.message : ''}
             ref={null}
           />
         )}
       />
-
       <Controller
         name="password"
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <InputPassword
-            {...field}
-            placeholder="Contraseña"
-            error={Boolean(errors.password)}
-            errorMessage={errors.password?.message}
-            ref={null}
-          />
+          <TexFieldContainer>
+            <TextField
+              {...field}
+              fullwidth={true}
+              label="Contraseña"
+              type={!showPassword ? 'password' : 'text'}
+              ref={null}
+            />
+            <p
+              className="show-hide-text"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {!showPassword ? 'Mostrar' : 'Ocultar'}
+            </p>
+          </TexFieldContainer>
         )}
       />
-
       <ResetPasswordContainer>
         <ButtonResetPassword
           type="button"
@@ -117,11 +145,11 @@ const LoginUserPassword = () => {
       </ResetPasswordContainer>
       <ButtonPrimary
         type="submit"
-        title="Ingresar a mi cuenta"
-        disabled={!watchEmail || !watchPassword}
+        title={buttonLoading ? '' : 'Ingresar a mi cuenta'}
+        disabled={!watchEmail || !watchPassword || buttonLoading}
+        isLoading={buttonLoading}
       />
     </ModalForm>
   );
 };
-
 export default LoginUserPassword;

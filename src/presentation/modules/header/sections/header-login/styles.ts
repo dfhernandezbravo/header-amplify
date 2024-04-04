@@ -6,7 +6,6 @@ export const LoginContainer = styled.button`
   background-color: transparent;
   border: none;
   color: white;
-  font-family: Roboto, sans-serif;
   position: relative;
 `;
 
@@ -18,7 +17,6 @@ export const LoginContainerDesktop = styled.div`
   background-color: transparent;
   border: none;
   color: white;
-  font-family: Roboto, sans-serif;
   position: relative;
 `;
 
@@ -41,6 +39,7 @@ export const LoginMobileButton = styled.button`
   border: none;
   background-color: transparent;
   display: flex;
+  height: 48px;
   align-items: center;
   gap: 1rem;
   font-size: 16px;
@@ -49,4 +48,5 @@ export const LoginMobileButton = styled.button`
   letter-spacing: 0px;
   text-align: left;
   color: #485760;
+  cursor: pointer;
 `;

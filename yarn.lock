@@ -58,10 +58,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@ccom-easy-design-system/atoms.bottom-sheet@^0.0.14":
-  version "0.0.14"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.bottom-sheet/-/atoms.bottom-sheet-0.0.14.tgz#148d6627c401af433d9a0f98373085f56ccbe958"
-  integrity sha512-pI3jQcmNKGBF4SdgVpUTY+wxVEV7zSZFwVvhNZwTyRlErRhCoPtWpd9HEQB9FFLvxYXmYQSa1CAXWo0tzbeZ1g==
+"@ccom-easy-design-system/atoms.bottom-sheet@^0.0.18":
+  version "0.0.18"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.bottom-sheet/-/atoms.bottom-sheet-0.0.18.tgz#f564569fcc525d9d2f977bb98e132876420e9238"
+  integrity sha512-TGd3YtdO23oYGsN6ntlQAqlGPJImu67DOimii/3Coi2jxKPzszZTLuHhkNZXXB30OA9XRRbMOjmu7ZMtGO2a6g==
   dependencies:
     styled-components "^6.1.6"
 
@@ -82,19 +82,35 @@
     react-icons "^5.0.1"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/atoms.textfield@^0.0.28":
-  version "0.0.28"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.28.tgz#c4934eda43f98151dcb15cfb98070e347cb66ee5"
-  integrity sha512-SWKCbEQJalIJ7r+3qmk+YbOjPDtMyMXTXb+L8qJj7B2byB24cQwzKrlpKPYJbP8XLzCEbwT98NOVQfTJ9U8fZg==
+"@ccom-easy-design-system/atoms.select@^0.0.19":
+  version "0.0.19"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.select/-/atoms.select-0.0.19.tgz#939c614b323566d97568e6efb4afac9541d85c85"
+  integrity sha512-S8ItLvldZHYyXtpgjSCaf9CHGBCPeeNASOoOCqQxSvyKqzGdDQkqHpm4R8XCCqgVLUiC7OcRFy9oUN/oC91JeQ==
   dependencies:
-    "@ccom-easy-design-system/atoms.tooltip" "0.0.2"
+    react-icons "^5.0.1"
+    react-select "5.8.0"
+    styled-components "^6.1.6"
+
+"@ccom-easy-design-system/atoms.skeleton@0.0.2":
+  version "0.0.2"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.skeleton/-/atoms.skeleton-0.0.2.tgz#3a229915a854d26983331dcef3e5d68762873e39"
+  integrity sha512-kMFfn3O4UH/xKjbr95sx0L2jqy2BcrFTJGkSnP4W5Sxug23prpapkA7PVb1fBfFScp991rjLOxGhNQazsg2ASA==
+  dependencies:
+    styled-components "^6.1.6"
+
+"@ccom-easy-design-system/atoms.textfield@^0.0.39":
+  version "0.0.39"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.textfield/-/atoms.textfield-0.0.39.tgz#81253d8e2d37960e74199cb2710292b194a0cd89"
+  integrity sha512-zPCawcDLviVGodOAcqmQTZuS+vfo0/DhJYN4KspRi1zKKpZ2qKjn6KkiaCD7De37gzNkgTlt3RC1ZQQWgirWLw==
+  dependencies:
+    "@ccom-easy-design-system/atoms.tooltip" "0.0.3"
     react-icons "^5.0.1"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/atoms.tooltip@0.0.2":
-  version "0.0.2"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.2.tgz#ba64fe7fd4e768d4005422fb53a73a7b3dc9a98a"
-  integrity sha512-gBcm4kt555IJzcDWq0ypTkNPrYlD2YEpY79yJd9pQRvZNYXXrPmxjSqKcO7Sqwt8FW03CdQlxEcsAKr/4IxObg==
+"@ccom-easy-design-system/atoms.tooltip@0.0.3":
+  version "0.0.3"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.3.tgz#66972a3ceef4bf049f1426f36514f79fd54cb3a0"
+  integrity sha512-jEd65RP+gfIqmZ7rVToX5vXhHAdlcYwxDiJOWHURW3Or6AFhk9rKxVC+217Zj7KTvVPjr/PMg6lm0JJwqAtcJQ==
   dependencies:
     styled-components "^6.1.6"
 
@@ -1177,6 +1193,11 @@
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/@tyriar/fibonacci-heap/-/fibonacci-heap-2.0.9.tgz#df3dcbdb1b9182168601f6318366157ee16666e9"
   integrity sha512-bYuSNomfn4hu2tPiDN+JZtnzCpSpbJ/PNeulmocDy3xN2X5OkJL65zo6rPZp65cPPhLF9vfT/dgE+RtFRCSxOA==
+
+"@uidotdev/usehooks@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@uidotdev/usehooks/-/usehooks-2.4.1.tgz#4b733eaeae09a7be143c6c9ca158b56cc1ea75bf"
+  integrity sha512-1I+RwWyS+kdv3Mv0Vmc+p0dPYH0DTRAo04HLyXReYBL9AeseDWUJyi4THuksBJcu9F0Pih69Ak150VDnqbVnXg==
 
 "@webassemblyjs/ast@1.11.5", "@webassemblyjs/ast@^1.11.5":
   version "1.11.5"
@@ -4406,6 +4427,21 @@ react-redux@^8.0.5:
     hoist-non-react-statics "^3.3.2"
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
+
+react-select@5.8.0:
+  version "5.8.0"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.8.0.tgz#bd5c467a4df223f079dd720be9498076a3f085b5"
+  integrity sha512-TfjLDo58XrhP6VG5M/Mi56Us0Yt8X7xD6cDybC7yoRMUNm7BGO7qk8J0TLQOua/prb8vUOtsfnXZwfm30HGsAA==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
+    "@emotion/cache" "^11.4.0"
+    "@emotion/react" "^11.8.1"
+    "@floating-ui/dom" "^1.0.1"
+    "@types/react-transition-group" "^4.4.0"
+    memoize-one "^6.0.0"
+    prop-types "^15.6.0"
+    react-transition-group "^4.3.0"
+    use-isomorphic-layout-effect "^1.1.2"
 
 react-select@^5.7.7:
   version "5.7.7"

@@ -8,6 +8,8 @@ export const CategoriesMobileContainer = styled.div`
   height: 100vh;
   width: 100dvw;
   margin-top: 109px;
+  overflow-y: scroll;
+  padding-bottom: 109px;
 
   @media only screen and (min-device-width: 768px) {
     width: 50vw;
@@ -16,11 +18,6 @@ export const CategoriesMobileContainer = styled.div`
 
 export const CategoriesMobileList = styled.div`
   padding: 20px 10px;
-
-  @media screen and (max-width: 1024px) {
-    overflow-y: scroll;
-    max-height: 62vh;
-  }
 `;
 
 export const CategoriesMobileTitle = styled.h2`

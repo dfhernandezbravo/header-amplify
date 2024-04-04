@@ -15,6 +15,7 @@ export const ButtonRegionalizer = styled.button`
   color: #fff;
   text-align: left;
   padding: 0.5rem 1rem;
+  align-items: center;
   &:hover {
     padding: 0.5rem 1rem;
     background-color: #670000;

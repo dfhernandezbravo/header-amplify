@@ -37,7 +37,6 @@ const CreateAccountEmail = () => {
           fullwidth={true}
           value={emailValue}
           label="Correo electrónico"
-          placeholder="Correo electrónico"
           variant={emailError ? 'error' : 'default'}
           helpertext={
             emailError

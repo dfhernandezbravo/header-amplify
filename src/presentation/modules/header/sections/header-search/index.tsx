@@ -27,17 +27,22 @@ const HeaderSearch = React.memo(function Search() {
   const debouncedSearch = useDebounce(search, 500);
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
-  const { searches } = useAppSelector((state) => state.search);
+  const { isOpenResults } = useAppSelector((state) => state.search);
   const inputRef = useRef<HTMLInputElement>(null);
   const { device } = useBreakpoints();
 
   const sendQuery = useCallback(() => {
-    dispatch(setTerm(search));
-    dispatch(getSearches(search));
-    dispatch(
-      getProductsSuggestions({ fullText: search, selectedFacets: null }),
-    );
-  }, [dispatch, search]);
+    if (typeof debouncedSearch === 'string') {
+      dispatch(setTerm(debouncedSearch));
+      dispatch(getSearches(debouncedSearch));
+      dispatch(
+        getProductsSuggestions({
+          fullText: debouncedSearch,
+          selectedFacets: null,
+        }),
+      );
+    }
+  }, [dispatch, debouncedSearch]);
 
   useEffect(() => {
     dispatch(getPopularSearch());
@@ -48,23 +53,8 @@ const HeaderSearch = React.memo(function Search() {
   }, [debouncedSearch, sendQuery]);
 
   useEffect(() => {
-    if (searches.length && search !== '') {
-      sendEventAnalytics({
-        event: 'interaccion',
-        category: 'Búsqueda',
-        action: 'Con resultados',
-        tag: search,
-      });
-    }
-    if (!searches.length && search !== '') {
-      sendEventAnalytics({
-        event: 'interaccion',
-        category: 'Búsqueda',
-        action: 'Sin resultados',
-        tag: search,
-      });
-    }
-  }, [searches, sendEventAnalytics, search]);
+    if (search === '') dispatch(cleanResults());
+  }, [search]);
 
   const handleResizeSearchResults = () => {
     if (searchRef?.current) {
@@ -74,14 +64,16 @@ const HeaderSearch = React.memo(function Search() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      handleResizeSearchResults();
-    }, 300);
+    setTimeout(() => handleResizeSearchResults(), 300);
     window.addEventListener('resize', handleResizeSearchResults);
     return () => {
       window.removeEventListener('resize', handleResizeSearchResults);
     };
   }, []);
+
+  useEffect(() => {
+    if (device === 'Phone') inputRef?.current?.focus();
+  }, [device]);
 
   const handleOnClickSearch = () => {
     dispatch(closeCategories());
@@ -125,20 +117,18 @@ const HeaderSearch = React.memo(function Search() {
       '',
     );
     setSearch(updatedValue);
+    if (!isOpenResults) dispatch(openResults());
   };
 
   return (
     <SearchContainer ref={searchRef}>
       <SearchIcon search={search} />
       <SearchInput
+        data-id="search-bar"
         type="search"
         placeholder="Buscar..."
         maxLength={30}
-        onFocus={() => {
-          setTimeout(() => {
-            dispatch(openResults());
-          }, 100);
-        }}
+        onFocus={() => setTimeout(() => dispatch(openResults()), 100)}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         onBlur={handleOnBlur}

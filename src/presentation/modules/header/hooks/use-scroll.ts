@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 
-const useScroll = () => {
+interface Props {
+  heightHeader: number;
+}
+
+const useScroll = ({ heightHeader }: Props) => {
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -21,6 +25,7 @@ const useScroll = () => {
 
   return {
     visible,
+    positionScroll: prevScrollPos,
   };
 };
 
