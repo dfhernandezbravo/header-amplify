@@ -16,7 +16,7 @@ const searchService: SearchService = {
     return bffWebInstance.get<GetPopularSearchesResponse>('/search/popular');
   },
   getSearches(params: GetSearchesRequest) {
-    return axios.get<GetSearchesResponse>('/api/products/search/autocomplete', {
+    return bffWebInstance.get<GetSearchesResponse>('/search/autocomplete', {
       params,
     });
   },
