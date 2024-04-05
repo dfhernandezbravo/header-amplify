@@ -7,6 +7,7 @@ import {
   SearchItem,
   SearchItemCategory,
   SearchListContainer,
+  SearchViewAll,
 } from './styles';
 import React from 'react';
 import SuggestionsHighlight from '@modules/header/sections/header-suggestions/components/suggestions-highlights';
@@ -97,6 +98,9 @@ const SearchList = () => {
           {category.labelValue}
         </SearchItemCategory>
       ))}
+      <SearchViewAll href={`/search/${term}`}>
+        Ver todos los productos
+      </SearchViewAll>
     </SearchListContainer>
   );
 };
