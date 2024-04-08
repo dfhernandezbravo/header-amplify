@@ -1,9 +1,5 @@
 import PopularSearch from '@entities/search/popular-search.entity';
-import {
-  CategoriesSearch,
-  Product,
-  Search,
-} from '@entities/search/searches.entity';
+import { ItemSearch, Product, Search } from '@entities/search/searches.entity';
 import { createSlice } from '@reduxjs/toolkit';
 import { getPopularSearch } from '@use-cases/search/get-popular-search';
 import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
@@ -17,16 +13,18 @@ type SearchState = {
   term: string;
   popularSearches: PopularSearch[];
   searches: Search[];
-  categories: CategoriesSearch[];
+  categories: ItemSearch[];
   productSuggestions: Product[];
   searchWidth: null | number;
   recentSearches: string[];
+  brands: ItemSearch[];
 };
 
 const initialState: SearchState = {
   popularSearches: [],
   searches: [],
   categories: [],
+  brands: [],
   productSuggestions: [],
   term: '',
   isLoading: false,
@@ -61,21 +59,16 @@ const searchSlice = createSlice({
     },
     setRecentSearches: (state, { payload }) => {
       if (!payload) return;
-
       const MAX_ITEMS = 7;
       const recentSearches = state.recentSearches;
-
       if (recentSearches.length === 0) {
         state.recentSearches.push(payload);
         return;
       }
-
       if (recentSearches.includes(payload)) return;
-
       if (recentSearches.length === MAX_ITEMS) {
         recentSearches.pop();
       }
-
       recentSearches.unshift(payload);
       state.term = '';
       state.searches = [];
@@ -83,11 +76,9 @@ const searchSlice = createSlice({
     removeRecentSearch: (state, { payload }) => {
       const recentSearches = state.recentSearches;
       if (recentSearches.length === 0) return;
-
       const updatedRecentSearches = recentSearches.filter(
         (recentSearch) => recentSearch !== payload,
       );
-
       state.recentSearches = updatedRecentSearches;
     },
     clearRecentSearches: (state) => {
@@ -105,21 +96,23 @@ const searchSlice = createSlice({
       })
       .addCase(getSearches.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-
         if (!payload) {
           state.isEmptySearch = true;
           state.searches = [];
           state.categories = [];
           state.productSuggestions = [];
+          state.brands = [];
         } else {
           state.searches = payload.searches;
           state.categories = payload.categories;
+          state.brands = payload.brands;
           state.isEmptySearch = false;
         }
       })
       .addCase(getSearches.pending, (state) => {
         state.isLoading = true;
         state.categories = [];
+        state.brands = [];
         state.searches = [];
         state.productSuggestions = [];
         state.isEmptySearch = false;
@@ -128,6 +121,7 @@ const searchSlice = createSlice({
         state.isEmptySearch = true;
         state.searches = [];
         state.categories = [];
+        state.brands = [];
         state.productSuggestions = [];
         state.isLoading = false;
       })
