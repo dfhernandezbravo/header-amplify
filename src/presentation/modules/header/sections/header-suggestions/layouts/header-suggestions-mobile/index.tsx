@@ -17,6 +17,7 @@ import {
   closeResults,
 } from '@store/search/slices/search-slice';
 import Spinner from '@components/atoms/spinner';
+import NoContentResults from '@modules/header/sections/header-results/components/no-content-results';
 
 const HeaderSuggestionsMobile = () => {
   const { productSuggestions, isLoadingSuggestions } = useAppSelector(
@@ -46,6 +47,9 @@ const HeaderSuggestionsMobile = () => {
           <SuggestionSpinnerContainer>
             <Spinner />
           </SuggestionSpinnerContainer>
+        )}
+        {productSuggestions.length === 0 && !isLoadingSuggestions && (
+          <NoContentResults />
         )}
         {productSuggestions?.map((product) => (
           <SuggestionsMobileItem
