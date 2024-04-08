@@ -5,18 +5,11 @@ type GetSearchesResponse = {
   searches: Search[];
   categories: ItemSearch[];
   brands: ItemSearch[];
+  products: Product[];
 };
 
 type GetPopularSearchesResponse = {
   searches: PopularSearch[];
 };
 
-type ProductSuggestionsResponse = {
-  products: Product[];
-};
-
-export type {
-  GetSearchesResponse,
-  GetPopularSearchesResponse,
-  ProductSuggestionsResponse,
-};
+export type { GetSearchesResponse, GetPopularSearchesResponse };

@@ -30,11 +30,37 @@ export type ProductItems = {
   sellers: ProductSeller[];
 };
 
+export type ProductVariant = {
+  id: string;
+  specifications: {
+    name: string;
+    values: string[];
+  }[];
+  images: ProductImage[];
+};
+
+export type Adjustments = {
+  id: string;
+  priceType: string;
+  name: string;
+  percentDiscount: string;
+  value: number;
+};
+
+export type Prices = {
+  normalPrice: number;
+  offerPrice: number;
+  brandPrice: number;
+  currency: string;
+};
+
 export type Product = {
   productId: string;
   productName: string;
   brand: string;
-  description: string;
-  items: ProductItems[];
-  link: string;
+  linkText: string;
+  availableQuantity: number;
+  variants: ProductVariant[];
+  prices: Prices;
+  adjustments: Adjustments[];
 };
