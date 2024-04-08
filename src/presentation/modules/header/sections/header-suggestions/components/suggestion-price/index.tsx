@@ -1,15 +1,7 @@
 import React from 'react';
 import { SuggestionPriceContainer } from './styles';
 import { Product } from '@entities/search/searches.entity';
-import dynamic from 'next/dynamic';
-
-const Price = dynamic(
-  () =>
-    import('@ccom-easy-design-system/atoms.price').then(
-      (module) => module.Price,
-    ),
-  { ssr: false },
-);
+import Price from '@components/atoms/prices/Price';
 interface Props {
   product: Product;
 }

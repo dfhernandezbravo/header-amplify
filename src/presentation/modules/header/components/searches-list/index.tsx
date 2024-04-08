@@ -78,7 +78,7 @@ const SearchList = () => {
         <SearchItem
           href={`/search/${search.value}`}
           key={search.value}
-          onMouseOver={(e) => onMouseOverSearch(search)}
+          onMouseOver={() => onMouseOverSearch(search)}
           onClick={(e) => {
             handleOnClickItemSearch(e, search.value, 'Término Sugerido');
             dispatch(setRecentSearches(search.value));
