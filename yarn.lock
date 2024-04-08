@@ -87,10 +87,10 @@
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.icons/-/atoms.icons-0.0.5.tgz#ab31a7342ac7d0b673c42c4ddfdad3dda52d118d"
   integrity sha512-OblhosOZp8VrywOTLx6jEGoMxtoFHWalb1+ZeiEzfJui19wY6tL0mcV/24F+5q9ZkJS6frp2X3reWU9YCIu1tw==
 
-"@ccom-easy-design-system/atoms.price@^0.0.51":
-  version "0.0.51"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.price/-/atoms.price-0.0.51.tgz#072ddb8389f06b48381c67dc2ddc4fa81126dfb4"
-  integrity sha512-rMM6T+2aXlYdQJv0gHMcIE78XGmJwa0WFTUTdWJ2TleMSPFveY8C7PYrGT/FW2va8YtrVRiUWeivlS4JfhxWqQ==
+"@ccom-easy-design-system/atoms.price@0.0.49":
+  version "0.0.49"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.price/-/atoms.price-0.0.49.tgz#e761a8bb1c307d50f45a65e4668cfad24cabb592"
+  integrity sha512-tsdBQwaYgMSOdRtwTkLVua70EXOruHj/9n5SvOJg31F69xSoWLV36qj7h3N3lTnQgJKv6RnOrjABIQVrnP/7BQ==
   dependencies:
     "@ccom-easy-design-system/atoms.icons" "0.0.5"
     "@ccom-easy-design-system/theme.easy" "0.0.9"
