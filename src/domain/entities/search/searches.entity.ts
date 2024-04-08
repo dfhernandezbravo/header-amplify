@@ -3,10 +3,10 @@ export type Search = {
   quantity: number;
 };
 
-export type CategoriesSearch = {
-  key: string;
+export type ItemSearch = {
+  query: string;
   value: string;
-  labelValue: string;
+  filter: string;
 };
 
 export type ProductImage = {

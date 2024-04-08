@@ -1,9 +1,10 @@
 import PopularSearch from './popular-search.entity';
-import { CategoriesSearch, Product, Search } from './searches.entity';
+import { ItemSearch, Product, Search } from './searches.entity';
 
 type GetSearchesResponse = {
   searches: Search[];
-  categories: CategoriesSearch[];
+  categories: ItemSearch[];
+  brands: ItemSearch[];
 };
 
 type GetPopularSearchesResponse = {
