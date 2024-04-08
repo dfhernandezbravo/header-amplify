@@ -93,9 +93,6 @@ const SearchList = () => {
           {category.value}
         </SearchItemCategory>
       ))}
-      <SearchViewAll href={`/search/${term}`}>
-        Ver todos los productos
-      </SearchViewAll>
 
       {brands?.length ? (
         <>
@@ -114,6 +111,10 @@ const SearchList = () => {
           ))}
         </>
       ) : null}
+
+      <SearchViewAll href={`/search/${term}`}>
+        Ver todos los productos
+      </SearchViewAll>
     </SearchListContainer>
   );
 };
