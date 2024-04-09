@@ -6,10 +6,8 @@ import {
 import {
   GetPopularSearchesResponse,
   GetSearchesResponse,
-  ProductSuggestionsResponse,
 } from '@entities/search/searches.response';
 import SearchService from '@interfaces/search-service.interface';
-import axios from 'axios';
 
 const searchService: SearchService = {
   getPopularSearches() {
@@ -21,11 +19,9 @@ const searchService: SearchService = {
     });
   },
   getProductSuggestions(params: ProductSuggestionsRequest) {
-    return axios.post<ProductSuggestionsResponse>(
-      '/api/products/search/suggestions',
-      { selectedFacets: params.selectedFacets },
-      { params: { fullText: params.fullText } },
-    );
+    return bffWebInstance.get<GetSearchesResponse>('/search/autocomplete', {
+      params: { query: params.fullText },
+    });
   },
 };
 export default searchService;

@@ -17,6 +17,7 @@ import {
   closeResults,
 } from '@store/search/slices/search-slice';
 import Spinner from '@components/atoms/spinner';
+import NoContentResults from '@modules/header/sections/header-results/components/no-content-results';
 
 const HeaderSuggestionsMobile = () => {
   const { productSuggestions, isLoadingSuggestions } = useAppSelector(
@@ -47,20 +48,23 @@ const HeaderSuggestionsMobile = () => {
             <Spinner />
           </SuggestionSpinnerContainer>
         )}
+        {productSuggestions.length === 0 && !isLoadingSuggestions && (
+          <NoContentResults />
+        )}
         {productSuggestions?.map((product) => (
           <SuggestionsMobileItem
             key={product.productId}
-            href={product.link}
+            href={product.linkText}
             onClick={(e) => {
               e.stopPropagation();
               handleOnClick(product.productName);
             }}
           >
             <Image
-              src={product?.items[0]?.images[0]?.imageUrl}
+              src={product?.variants[0]?.images[0]?.imageUrl}
               width={60}
               height={60}
-              alt={product?.items[0]?.images[0]?.imageLabel}
+              alt={product?.variants[0]?.images[0]?.imageLabel}
             />
 
             <SuggestionsMobileDetail>

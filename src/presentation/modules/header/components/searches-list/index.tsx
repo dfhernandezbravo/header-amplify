@@ -1,7 +1,6 @@
 import { ItemSearch, Search } from '@entities/search/searches.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
-import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
 import {
   SearchCategoriesTitle,
   SearchItem,
@@ -9,12 +8,14 @@ import {
   SearchListContainer,
   SearchViewAll,
 } from './styles';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SuggestionsHighlight from '@modules/header/sections/header-suggestions/components/suggestions-highlights';
 import {
   closeResults,
   setRecentSearches,
 } from '@store/search/slices/search-slice';
+import { getProductsSuggestions } from '@use-cases/search/get-products-suggestions';
+import useDebounce from '@hooks/useDebounce';
 
 const SearchList = () => {
   const { searches, categories, term, brands } = useAppSelector(
@@ -24,25 +25,30 @@ const SearchList = () => {
   const dispatch = useAppDispatch();
   const { sendEventAnalytics } = useAnalytics();
 
+  const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 500);
+
+  const sendQuery = useCallback(() => {
+    if (typeof debouncedSearch === 'string') {
+      dispatch(
+        getProductsSuggestions({
+          fullText: search,
+          selectedFacets: null,
+        }),
+      );
+    }
+  }, [dispatch, debouncedSearch]);
+
   const onMouseOverSearch = (searchSelected: Search) => {
-    dispatch(
-      getProductsSuggestions({
-        fullText: searchSelected.value,
-        selectedFacets: null,
-      }),
-    );
+    if (searchSelected?.value) {
+      setSearch(searchSelected.value);
+    }
   };
 
   const onMouseOverItemSearch = (itemSelected: ItemSearch) => {
-    dispatch(
-      getProductsSuggestions({
-        fullText: '',
-        selectedFacets: {
-          key: itemSelected.query,
-          value: itemSelected.value,
-        },
-      }),
-    );
+    if (itemSelected?.value) {
+      setSearch(itemSelected.value);
+    }
   };
 
   const handleOnClickItemSearch = (
@@ -61,6 +67,10 @@ const SearchList = () => {
       dispatch(closeResults());
     }, 1000);
   };
+
+  useEffect(() => {
+    if (debouncedSearch) sendQuery();
+  }, [debouncedSearch, sendQuery]);
 
   return (
     <SearchListContainer>
