@@ -23,6 +23,10 @@ export const CategoryDetailItemTitle = styled(Link)`
   text-align: left;
   text-decoration: none;
   color: #af1212;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  white-space: nowrap;
 
   &:hover {
     text-decoration: underline;
