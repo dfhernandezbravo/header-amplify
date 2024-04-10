@@ -8,6 +8,7 @@ import {
   CategoryDetailItemTitle,
   CategoryDetailTitleContainer,
 } from './styles';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 interface Props {
   category: Category;
@@ -33,7 +34,7 @@ const CategoryDetailItem = ({ category, onClickN2, onClickN3 }: Props) => {
             onClickN2(category);
           }}
         >
-          {name}
+          {name} <MdKeyboardArrowRight size={30} />
         </CategoryDetailItemTitle>
       </CategoryDetailTitleContainer>
 
