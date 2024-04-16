@@ -1,3 +1,8 @@
+import {
+  AdjustmentType,
+  PriceType,
+} from '@ccom-easy-design-system/atoms.price/dist/types';
+
 export type Search = {
   value: string;
   quantity: number;
@@ -39,21 +44,6 @@ export type ProductVariant = {
   images: ProductImage[];
 };
 
-export type Adjustments = {
-  id: string;
-  priceType: string;
-  name: string;
-  percentDiscount: string;
-  value: number;
-};
-
-export type Prices = {
-  normalPrice: number;
-  offerPrice: number;
-  brandPrice: number;
-  currency: string;
-};
-
 export type Product = {
   productId: string;
   productName: string;
@@ -61,6 +51,7 @@ export type Product = {
   linkText: string;
   availableQuantity: number;
   variants: ProductVariant[];
-  prices: Prices;
-  adjustments: Adjustments[];
+  prices: PriceType;
+  pricesM2: PriceType;
+  adjustments: AdjustmentType[];
 };

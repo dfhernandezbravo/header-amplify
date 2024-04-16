@@ -16,7 +16,7 @@
     "@ccom-easy-design-system/atoms.bottom-sheet": "^0.0.18",
     "@ccom-easy-design-system/atoms.button": "0.0.5",
     "@ccom-easy-design-system/atoms.checkbox": "0.0.6",
-    "@ccom-easy-design-system/atoms.price": "0.0.49",
+    "@ccom-easy-design-system/atoms.price": "0.0.41",
     "@ccom-easy-design-system/atoms.select": "^0.0.19",
     "@ccom-easy-design-system/atoms.skeleton": "0.0.2",
     "@ccom-easy-design-system/atoms.textfield": "^0.0.39",
