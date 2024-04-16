@@ -39,6 +39,7 @@ const HeaderSuggestionsMobile = () => {
     dispatch(closeResults());
   };
 
+  if (!productSuggestions) return null;
   return (
     <Mobile>
       <SuggestionsMobileContainer>

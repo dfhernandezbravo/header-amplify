@@ -6,6 +6,7 @@ import {
 import {
   GetPopularSearchesResponse,
   GetSearchesResponse,
+  GetSuggestionsResponse,
 } from '@entities/search/searches.response';
 import SearchService from '@interfaces/search-service.interface';
 
@@ -19,9 +20,12 @@ const searchService: SearchService = {
     });
   },
   getProductSuggestions(params: ProductSuggestionsRequest) {
-    return bffWebInstance.get<GetSearchesResponse>('/search/autocomplete', {
-      params: { query: params.fullText },
-    });
+    return bffWebInstance.get<GetSuggestionsResponse>(
+      '/search/product-suggestions',
+      {
+        params: { query: params.fullText },
+      },
+    );
   },
 };
 export default searchService;

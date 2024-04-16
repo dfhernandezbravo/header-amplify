@@ -25,6 +25,7 @@ const HeaderSuggestionsDesktop = () => {
     if (term) dispatch(setRecentSearches(term.toLowerCase()));
   };
 
+  if (!productSuggestions) return null;
   return (
     <Desktop>
       <SuggestionsContainer>

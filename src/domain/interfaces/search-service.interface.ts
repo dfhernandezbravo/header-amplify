@@ -5,6 +5,7 @@ import {
 import {
   GetPopularSearchesResponse,
   GetSearchesResponse,
+  GetSuggestionsResponse,
 } from '@entities/search/searches.response';
 import { AxiosResponse } from 'axios';
 
@@ -15,7 +16,7 @@ interface SearchService {
   ): Promise<AxiosResponse<GetSearchesResponse>>;
   getProductSuggestions(
     params: ProductSuggestionsRequest,
-  ): Promise<AxiosResponse<GetSearchesResponse>>;
+  ): Promise<AxiosResponse<GetSuggestionsResponse>>;
 }
 
 export default SearchService;

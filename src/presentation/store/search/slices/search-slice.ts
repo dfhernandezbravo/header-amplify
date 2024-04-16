@@ -106,7 +106,6 @@ const searchSlice = createSlice({
           state.searches = payload.searches;
           state.categories = payload.categories;
           state.brands = payload.brands;
-          state.productSuggestions = payload.products;
           state.isEmptySearch = false;
           state.isLoadingSuggestions = false;
         }
@@ -116,7 +115,6 @@ const searchSlice = createSlice({
         state.categories = [];
         state.brands = [];
         state.searches = [];
-        state.productSuggestions = [];
         state.isEmptySearch = false;
         state.isLoadingSuggestions = true;
       })
@@ -125,7 +123,6 @@ const searchSlice = createSlice({
         state.searches = [];
         state.categories = [];
         state.brands = [];
-        state.productSuggestions = [];
         state.isLoading = false;
       })
       .addCase(getProductsSuggestions.fulfilled, (state, { payload }) => {
