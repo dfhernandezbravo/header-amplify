@@ -82,19 +82,19 @@
     react-icons "^5.0.1"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/atoms.icons@0.0.4":
-  version "0.0.4"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.icons/-/atoms.icons-0.0.4.tgz#b9dd7359703914585cb675fcf253956caf5350be"
-  integrity sha512-WWgU0DynviJXamDhsQqm70rTt1+4NZsKKlGi8N/4brZjxw1uey1ItqRrHDcsiuqjFdTQWBfCzklmz4snDqZamw==
+"@ccom-easy-design-system/atoms.icons@0.0.5":
+  version "0.0.5"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.icons/-/atoms.icons-0.0.5.tgz#ab31a7342ac7d0b673c42c4ddfdad3dda52d118d"
+  integrity sha512-OblhosOZp8VrywOTLx6jEGoMxtoFHWalb1+ZeiEzfJui19wY6tL0mcV/24F+5q9ZkJS6frp2X3reWU9YCIu1tw==
 
-"@ccom-easy-design-system/atoms.price@0.0.41":
-  version "0.0.41"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.price/-/atoms.price-0.0.41.tgz#80f6c19b1b170daedd7001878fa56dc881585dc3"
-  integrity sha512-/gntA2eHfDLG4mHtqifWmI/oGoPeubUQv0bVq+gc58i1miAVBCcuuwGgzh3tHl36NI8ZLCLss5F0I+dgKFQNuw==
+"@ccom-easy-design-system/atoms.price@0.0.49":
+  version "0.0.49"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.price/-/atoms.price-0.0.49.tgz#e761a8bb1c307d50f45a65e4668cfad24cabb592"
+  integrity sha512-tsdBQwaYgMSOdRtwTkLVua70EXOruHj/9n5SvOJg31F69xSoWLV36qj7h3N3lTnQgJKv6RnOrjABIQVrnP/7BQ==
   dependencies:
-    "@ccom-easy-design-system/atoms.icons" "0.0.4"
+    "@ccom-easy-design-system/atoms.icons" "0.0.5"
     "@ccom-easy-design-system/theme.easy" "0.0.9"
-    "@ccom-easy-design-system/utils.format-currency" "0.0.6"
+    "@ccom-easy-design-system/utils.format-currency" "0.0.7"
     styled-components "^6.1.6"
 
 "@ccom-easy-design-system/atoms.select@^0.0.19":
@@ -174,10 +174,10 @@
     "@ccom-easy-design-system/theme.easy" "0.0.4"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/utils.format-currency@0.0.6":
-  version "0.0.6"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/utils.format-currency/-/utils.format-currency-0.0.6.tgz#261d6f6b212a3b4475508efb0fc9b2e4875cf276"
-  integrity sha512-dmC7qqEnCguJlgdhX31x3Yaf4pE19ZzoIBLg/50r7rHEZ6FPAcOl1un6okQls35HNNBIy7iDAMuObawxA6uKjQ==
+"@ccom-easy-design-system/utils.format-currency@0.0.7":
+  version "0.0.7"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/utils.format-currency/-/utils.format-currency-0.0.7.tgz#d0afb7e3d81fe4fac00320d53bfa0e00333a394f"
+  integrity sha512-HarnVwXMGn4/Fes9MJ5lj9Fr/UP0xwcws5ZJM8RiLkJkD/ILQTSCGFbHVDnyvfUG7VMJ88z54HUB1DlOnLzGwQ==
   dependencies:
     number-currency-format-2 "^1.1.1"
 
