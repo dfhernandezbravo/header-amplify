@@ -100,15 +100,12 @@ const searchSlice = createSlice({
           state.isEmptySearch = true;
           state.searches = [];
           state.categories = [];
-          state.productSuggestions = [];
           state.brands = [];
         } else {
           state.searches = payload.searches;
           state.categories = payload.categories;
           state.brands = payload.brands;
-          state.productSuggestions = payload.products;
           state.isEmptySearch = false;
-          state.isLoadingSuggestions = false;
         }
       })
       .addCase(getSearches.pending, (state) => {
@@ -116,16 +113,13 @@ const searchSlice = createSlice({
         state.categories = [];
         state.brands = [];
         state.searches = [];
-        state.productSuggestions = [];
         state.isEmptySearch = false;
-        state.isLoadingSuggestions = true;
       })
       .addCase(getSearches.rejected, (state) => {
         state.isEmptySearch = true;
         state.searches = [];
         state.categories = [];
         state.brands = [];
-        state.productSuggestions = [];
         state.isLoading = false;
       })
       .addCase(getProductsSuggestions.fulfilled, (state, { payload }) => {

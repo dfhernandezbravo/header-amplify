@@ -7,6 +7,8 @@ export const SuggestionPriceContainer = styled.div`
   align-items: center;
   div:first-child {
     padding: 0;
-    font-size: 0.8rem;
+  }
+  span:first-child {
+    font-size: 1rem;
   }
 `;
