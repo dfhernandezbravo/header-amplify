@@ -1,6 +1,5 @@
 import Desktop from '@components/layout/desktop';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
-import SuggestionPrice from '../../components/suggestion-price';
 import SuggestionImage from '../../components/suggestions-image';
 import {
   SuggestionBrand,
@@ -12,6 +11,8 @@ import {
 } from './styles';
 import { setRecentSearches } from '@store/search/slices/search-slice';
 import Spinner from '@components/atoms/spinner';
+import SuggestionPrice from '../../components/suggestion-price';
+import NoContentResults from '@modules/header/sections/header-results/components/no-content-results';
 
 const HeaderSuggestionsDesktop = () => {
   const { productSuggestions, isLoadingSuggestions } = useAppSelector(
@@ -24,6 +25,7 @@ const HeaderSuggestionsDesktop = () => {
     if (term) dispatch(setRecentSearches(term.toLowerCase()));
   };
 
+  if (!productSuggestions) return null;
   return (
     <Desktop>
       <SuggestionsContainer>
@@ -35,21 +37,24 @@ const HeaderSuggestionsDesktop = () => {
               <Spinner />
             </SuggestionSpinnerContainer>
           )}
+          {productSuggestions.length === 0 && !isLoadingSuggestions && (
+            <NoContentResults />
+          )}
           {productSuggestions.map((product) => (
             <SuggestionsItemContainer
               data-id="product-suggestion"
               key={product.productId}
-              href={product.link}
+              href={product.linkText}
               onClick={() => handleClick(product.productName)}
             >
-              <SuggestionImage images={product.items[0].images} />
+              <SuggestionImage images={product.variants[0].images} />
               <SuggestionBrand data-id="product-brand">
                 {product.brand}
               </SuggestionBrand>
               <SuggestionName data-id="product-name">
                 {product.productName}
               </SuggestionName>
-              <SuggestionPrice sellers={product.items[0].sellers} />
+              <SuggestionPrice product={product} />
             </SuggestionsItemContainer>
           ))}
         </SuggestionsListContainer>

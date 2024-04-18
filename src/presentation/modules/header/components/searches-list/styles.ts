@@ -35,9 +35,21 @@ const SearchCategoriesTitle = styled.div`
   padding: 10px;
 `;
 
+const SearchViewAll = styled(Link)`
+  font-size: 12px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  &:hover {
+    background-color: #eee;
+    border-radius: 12px 0px 0px 12px;
+  }
+`;
+
 export {
   SearchListContainer,
   SearchItem,
   SearchCategoriesTitle,
   SearchItemCategory,
+  SearchViewAll,
 };

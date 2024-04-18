@@ -6,25 +6,25 @@ import {
 import {
   GetPopularSearchesResponse,
   GetSearchesResponse,
-  ProductSuggestionsResponse,
+  GetSuggestionsResponse,
 } from '@entities/search/searches.response';
 import SearchService from '@interfaces/search-service.interface';
-import axios from 'axios';
 
 const searchService: SearchService = {
   getPopularSearches() {
     return bffWebInstance.get<GetPopularSearchesResponse>('/search/popular');
   },
   getSearches(params: GetSearchesRequest) {
-    return axios.get<GetSearchesResponse>('/api/products/search/autocomplete', {
+    return bffWebInstance.get<GetSearchesResponse>('/search/autocomplete', {
       params,
     });
   },
   getProductSuggestions(params: ProductSuggestionsRequest) {
-    return axios.post<ProductSuggestionsResponse>(
-      '/api/products/search/suggestions',
-      { selectedFacets: params.selectedFacets },
-      { params: { fullText: params.fullText } },
+    return bffWebInstance.get<GetSuggestionsResponse>(
+      '/search/product-suggestions',
+      {
+        params: { query: params.fullText },
+      },
     );
   },
 };

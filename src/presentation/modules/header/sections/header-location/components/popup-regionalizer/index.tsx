@@ -1,7 +1,7 @@
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import Desktop from '@components/layout/desktop';
 import Mobile from '@components/layout/mobile';
-import { AiOutlineClose } from 'react-icons/ai';
+import Image from 'next/image';
 import {
   Arrow,
   ModalIconButton,
@@ -46,10 +46,20 @@ const PopupRegionalizer = ({ onClick }: Props) => {
             </Title>
             <ModalIconButton onClick={handleOnClose}>
               <Desktop>
-                <AiOutlineClose size={24} />
+                <Image
+                  src="/icons/general/close-icon-gray.svg"
+                  width={16}
+                  height={16}
+                  alt="close-icon"
+                />
               </Desktop>
               <Mobile>
-                <AiOutlineClose size={12.7} />
+                <Image
+                  src="/icons/general/close-icon-gray.svg"
+                  width={10}
+                  height={10}
+                  alt="close-icon"
+                />
               </Mobile>
             </ModalIconButton>
           </div>

@@ -36,8 +36,9 @@ export const SuggestionsItemContainer = styled(Link)`
   flex-direction: column;
   gap: 12px;
   padding: 8px;
-  margin: 15px;
-  max-width: 160px;
+  margin: 15px 0;
+  min-width: 200px;
+  max-width: 220px;
   text-decoration: none;
   color: black;
 `;
