@@ -26,6 +26,7 @@ const HeaderSuggestionsDesktop = () => {
   };
 
   if (!productSuggestions) return null;
+
   return (
     <Desktop>
       <SuggestionsContainer>
@@ -44,7 +45,7 @@ const HeaderSuggestionsDesktop = () => {
             <SuggestionsItemContainer
               data-id="product-suggestion"
               key={product.productId}
-              href={product.linkText}
+              href={`/${product.linkText}/p`}
               onClick={() => handleClick(product.productName)}
             >
               <SuggestionImage images={product.variants[0].images} />
