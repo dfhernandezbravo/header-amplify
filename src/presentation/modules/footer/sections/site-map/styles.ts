@@ -10,11 +10,17 @@ export const SiteMapLinkContainer = styled.div`
 export const SiteMapLinkItem = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 14px;
 `;
 
 export const SiteMapLink = styled(Link)`
   text-decoration: none;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
+`;
+
+export const SiteMapSubtitles = styled.p`
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
 `;
