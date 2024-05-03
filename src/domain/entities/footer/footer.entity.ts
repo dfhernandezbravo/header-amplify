@@ -1,5 +1,6 @@
 export type FooterLink = {
   title: string;
+  subtitle?: string;
   link: string;
 };
 

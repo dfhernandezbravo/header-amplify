@@ -58,3 +58,9 @@ export const Content = styled.div`
     text-decoration: none;
   }
 `;
+
+export const Subtitle = styled.p`
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+`;

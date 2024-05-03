@@ -2,7 +2,12 @@ import { FooterLink } from '@entities/footer/footer.entity';
 import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { AccordionContainer, Content, Title } from './accordion.styles';
+import {
+  AccordionContainer,
+  Content,
+  Subtitle,
+  Title,
+} from './accordion.styles';
 
 interface AccordionProps {
   title: string;
@@ -40,7 +45,10 @@ const Accordion = ({ title, links }: AccordionProps) => {
       {links.map((link) => (
         <ContentWrapper maxHeight={contentHeight} key={link.title}>
           <Content ref={contentRef}>
-            <Link href={link.link}>{link.title}</Link>
+            <Link href={link.link}>
+              {link.title}
+              <Subtitle>{link.subtitle}</Subtitle>
+            </Link>
           </Content>
         </ContentWrapper>
       ))}
