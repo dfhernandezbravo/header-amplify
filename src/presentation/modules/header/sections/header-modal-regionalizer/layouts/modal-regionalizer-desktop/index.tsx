@@ -1,6 +1,6 @@
 import Desktop from '@components/layout/desktop';
 import Modal from '@components/atoms/modal';
-import ListAddressForm from '../../components/list-address-form';
+import ListAddressForm from '../../components/list-address';
 import NewAddressForm from '../../components/new-address-form';
 import { useContext } from 'react';
 import HeaderLocationContext from '../../../header-location/context/header-location-context';

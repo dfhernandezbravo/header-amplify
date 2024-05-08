@@ -51,6 +51,7 @@
     "sharp": "^0.32.1",
     "styled-components": "^6.1.8",
     "typescript": "5.0.4",
+    "use-indexeddb": "^2.0.2",
     "webpack": "^5.80.0",
     "yup": "^1.2.0"
   },

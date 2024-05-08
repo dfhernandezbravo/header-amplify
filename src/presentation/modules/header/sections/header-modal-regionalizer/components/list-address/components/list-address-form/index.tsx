@@ -1,4 +1,14 @@
+import { useContext, useState } from 'react';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
+import HeaderModalRegionalizer from '../../../header-modal-regionalizer';
+import RadioButtonAddress from '../../../radio-input-address';
+import {
+  ButtonNewAddress,
+  ListAddressContainer,
+  ListAddressFormContainer,
+} from './styles';
+import ListAddressSkeleton from '../../../list-address-skeleton';
+import useBreakpoints from '@hooks/useBreakpoints';
 import { CustomerAddress } from '@entities/customer/customer.entity';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useAnalytics from '@hooks/useAnalytics';
@@ -8,39 +18,27 @@ import {
   successAddNewAddress,
 } from '@store/regionalizer/slices/regionalizer-slice';
 import addNewAddress from '@use-cases/shopping-cart/add-new-address';
-import { useContext, useState } from 'react';
-import HeaderModalRegionalizer from '../header-modal-regionalizer';
-import NewAddressForm from '../new-address-form';
-import RadioButtonAddress from '../radio-input-address';
-import mapDataListAddressForm from './map-data-request';
-import {
-  ButtonNewAddress,
-  ListAddressContainer,
-  ListAddressFormContainer,
-} from './styles';
-import ListAddressSkeleton from '../list-address-skeleton';
-import useBreakpoints from '@hooks/useBreakpoints';
-import HeaderNewAddress from './components/header-new-address';
+import mapDataListAddressForm from '../../map-data-request';
+import { customDispatchEvent } from '@store/events/dispatchEvents';
+import { WindowsEvents } from '@events/index';
 
-const ListAddressForm = () => {
-  const dispatch = useAppDispatch();
-  const { addresses } = useAppSelector((state) => state.customer);
-  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
+type ListAddressFormProps = {
+  setStep: (value: 'list-address' | 'new-address') => void;
+};
+
+const ListAddressForm = ({ setStep }: ListAddressFormProps) => {
   const { isLoadingRegionalizer } = useAppSelector(
     (state) => state.regionalizer,
   );
-
   const { isXs, isSm } = useBreakpoints();
-
+  const dispatch = useAppDispatch();
+  const { addresses } = useAppSelector((state) => state.customer);
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCartHeader);
   const { sendEventAnalytics } = useAnalytics();
   const { orderFormId, onCloseModal } = useContext(HeaderLocationContext);
   const isUserLogged = shoppingCart?.loggedIn;
-
   const [selectedAddress, setSelectedAddress] =
     useState<CustomerAddress | null>(null);
-  const [step, setStep] = useState<'list-address' | 'new-address'>(
-    'list-address',
-  );
 
   const sameAddress = (
     address1: CustomerAddress,
@@ -89,7 +87,13 @@ const ListAddressForm = () => {
         region: selectedAddress.state,
         comuna: selectedAddress.city,
       });
-
+      customDispatchEvent({
+        name: WindowsEvents.UPDATE_SHIPPING_CART,
+        detail: {
+          origin: 'HEADER',
+          location: selectedAddress?.neighborhood ?? selectedAddress?.city,
+        },
+      });
       onCloseModal();
     } catch (error) {
       throw new Error('Error');
@@ -97,7 +101,7 @@ const ListAddressForm = () => {
       dispatch(pendingAddNewAddress(false));
     }
   };
-  return step === 'list-address' ? (
+  return (
     <ListAddressFormContainer>
       <HeaderModalRegionalizer
         title="Ingresa tu ubicación"
@@ -133,15 +137,6 @@ const ListAddressForm = () => {
         isLoading={isLoadingRegionalizer}
       />
     </ListAddressFormContainer>
-  ) : (
-    <NewAddressForm
-      header={
-        <HeaderNewAddress
-          onCloseModal={() => onCloseModal()}
-          setStep={(value) => setStep(value)}
-        />
-      }
-    />
   );
 };
 

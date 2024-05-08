@@ -49,7 +49,7 @@ const NewAddress = ({ changeStep, header }: Props) => {
       onCloseModal();
       customDispatchEvent({
         name: WindowsEvents.UPDATE_SHIPPING_CART,
-        detail: { origin: 'HEADER' },
+        detail: { origin: 'HEADER', location: communeSelected?.name },
       });
     } catch (error) {
       dispatch(setErrorSetLocation(true));

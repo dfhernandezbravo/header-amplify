@@ -1,10 +1,11 @@
 import ProvidersLayout from '@components/layout/providers';
 import { Customer } from '@entities/customer/customer.entity';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ModalRegionalizer from '../header-modal-regionalizer';
 import HeaderLocationContext from './context/header-location-context';
 import HeaderLocationContainer from './header-location';
-
+import { useEvent } from '@hooks/useEvent';
+import { WindowsEvents } from '@events/index';
 interface Props {
   orderFormId?: string;
   customer: Customer | null;
@@ -12,7 +13,18 @@ interface Props {
 }
 
 const HeaderLocation = ({ orderFormId, customer, isUserLogged }: Props) => {
+  const { consumeEvent, removeEventListener } = useEvent();
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  useEffect(() => {
+    consumeEvent(WindowsEvents.OPEN_LOCATION_MODAL, () => {
+      setIsOpenModal(true);
+    });
+
+    return () => {
+      removeEventListener(WindowsEvents.OPEN_LOCATION_MODAL);
+    };
+  }, []);
 
   return (
     <ProvidersLayout>
