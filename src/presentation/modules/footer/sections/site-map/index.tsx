@@ -3,7 +3,12 @@ import Desktop from '@components/layout/desktop';
 import Mobile from '@components/layout/mobile';
 import { FooterSiteMap } from '@entities/footer/footer.entity';
 import { VerticalDivider } from '@modules/footer/styles';
-import { SiteMapLink, SiteMapLinkContainer, SiteMapLinkItem } from './styles';
+import {
+  SiteMapLink,
+  SiteMapLinkContainer,
+  SiteMapLinkItem,
+  SiteMapSubtitles,
+} from './styles';
 
 interface Props {
   data: FooterSiteMap[];
@@ -20,6 +25,7 @@ const SiteMapLinksFooter = ({ data }: Props) => {
               {site.links.map((link) => (
                 <SiteMapLink href={link.link} key={link.title}>
                   {link.title}
+                  <SiteMapSubtitles>{link.subtitle}</SiteMapSubtitles>
                 </SiteMapLink>
               ))}
             </SiteMapLinkItem>
