@@ -1,19 +1,18 @@
-import { useRouter } from 'next/router';
-import OfferLink from './components/offer-link';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import useBreakpoints from '@hooks/useBreakpoints';
 import {
   closeCategories,
   openCategories,
 } from '@store/category/slices/category-slice';
+import { useRouter } from 'next/router';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiMenu2Fill } from 'react-icons/ri';
 import useCategoriesAnalytics from '../../analytics/categories-analytics';
 import {
+  CategoriesContainer,
   IconCloseContainer,
   MenuContainer,
   OpenedCategoriesHeader,
-  CategoriesContainer,
 } from './styles';
 
 const MenuIcon = () => {
@@ -55,7 +54,7 @@ const MenuIcon = () => {
         <span>{device === 'Desktop' ? 'Categorías' : 'Menú'}</span>
       </CategoriesContainer>
 
-      {device === 'Desktop' && <OfferLink />}
+      {/* {device === 'Desktop' && <OfferLink />} */}
     </MenuContainer>
   );
 };
