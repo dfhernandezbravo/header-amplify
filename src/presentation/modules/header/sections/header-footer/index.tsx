@@ -14,7 +14,7 @@ const HeaderFooter = () => {
     <HeaderBottom>
       <div>
         <Link
-          href="https://www.easy.cl/tiendas"
+          href="/stores"
           onClick={() =>
             sendEventAnalytics({
               event: 'interaccion',
