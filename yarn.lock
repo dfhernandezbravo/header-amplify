@@ -106,10 +106,10 @@
     "@ccom-easy-design-system/utils.format-currency" "0.0.7"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/atoms.select@^0.0.43":
-  version "0.0.43"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.select/-/atoms.select-0.0.43.tgz#4046fcdf08ce450c31bd45bd44f151ad1281c74f"
-  integrity sha512-h2MTmxSppd+SOQa7W9lW274C4wHjosYZfXQufm8TP/g7eFQPiU0judlMqoB28iH6TQx643yt05ZWjv8HxzTaYw==
+"@ccom-easy-design-system/atoms.select@^0.0.44":
+  version "0.0.44"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.select/-/atoms.select-0.0.44.tgz#b563885a378fd2402b912ad4c041b3a79d9a384a"
+  integrity sha512-wjIsxOiFP0K07F/3/kX+CPJeyFDhbV9pOFtll5X+yli7JN4RpfDFrbn/jdyR1+pFh1svh8KbAkprG8GUfZkKaA==
   dependencies:
     "@ccom-easy-design-system/atoms.checkbox" "0.0.17"
     react-icons "^5.0.1"
