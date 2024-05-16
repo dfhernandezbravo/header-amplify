@@ -4,7 +4,7 @@ import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entit
 import { FormEvent, useState } from 'react';
 import { FormComtainer, SelectWrapper } from './styles';
 import { NewAddressFormType } from './types';
-import dynamic from 'next/dynamic';
+import Select, { OptionsSelect } from '@components/atoms/select-bit';
 
 interface Props {
   regions: Regions[];
@@ -13,32 +13,30 @@ interface Props {
   addressSelected: AddressShoppingCart | null;
 }
 
-const Select = dynamic(
-  () =>
-    import('@ccom-easy-design-system/atoms.select').then(
-      (module) => module.Select,
-    ),
-  { ssr: false },
-);
-
 const NewAddressForm = ({ regions, handleOnSubmit, isLoadingForm }: Props) => {
   const [communes, setCommunes] = useState<Commune[]>([]);
   const [regionSelected, setRegionSelected] = useState<Regions | null>(null);
   const [communeSelected, setCommuneSelected] = useState<Commune | null>(null);
 
-  const handleChangeRegion = (value: string) => {
-    const regionSelected = regions.filter((region) => region.name === value)[0];
-    const arrayCommunes = regions.filter((region) => region.name === value)[0]
-      .comunas;
+  const handleChangeRegion = (optionSelected: OptionsSelect) => {
+    const regionSelected = regions.filter(
+      (region) => region.name === optionSelected.value,
+    )[0];
+    const arrayCommunes = regions.filter(
+      (region) => region.name === optionSelected.value,
+    )[0].comunas;
     const arrayCommunesOrdered = arrayCommunes?.sort((a, b) => {
       return a.name.localeCompare(b.name);
     });
     setRegionSelected(regionSelected);
     setCommunes(arrayCommunesOrdered);
+    setCommuneSelected(null);
   };
 
-  const handleOnChangeCommune = (value: string) => {
-    const commune = communes?.filter((commune) => commune.name === value)[0];
+  const handleOnChangeCommune = (optionSelected: OptionsSelect) => {
+    const commune = communes?.filter(
+      (commune) => commune.name === optionSelected.value,
+    )[0];
     setCommuneSelected(commune as Commune);
   };
 
@@ -57,19 +55,35 @@ const NewAddressForm = ({ regions, handleOnSubmit, isLoadingForm }: Props) => {
         <Select
           label="Región"
           options={regions.map((region) => region.name)}
+          value={
+            regionSelected
+              ? { value: regionSelected.name, label: regionSelected.name }
+              : undefined
+          }
           onChange={(event) => {
-            handleChangeRegion(event.value);
+            handleChangeRegion(event as OptionsSelect);
           }}
         />
       </SelectWrapper>
       <SelectWrapper>
         <Select
           label="Comuna"
-          options={communes.map((commune) => commune.name)}
-          onChange={(event) => handleOnChangeCommune(event.value)}
+          options={communes.map((commune) => ({
+            value: commune.name,
+            label: commune.name,
+          }))}
+          onChange={(event) => {
+            handleOnChangeCommune(event as OptionsSelect);
+          }}
+          value={
+            communeSelected
+              ? { value: communeSelected.name, label: communeSelected.name }
+              : undefined
+          }
           disabled={!communes.length}
         />
       </SelectWrapper>
+
       <ButtonPrimary
         type="submit"
         disabled={!communeSelected || isLoadingForm}
