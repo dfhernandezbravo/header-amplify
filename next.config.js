@@ -21,6 +21,7 @@ const nextConfig = {
   compiler: {
     // Enables the styled-components SWC transform
     styledComponents: true,
+    removeConsole: true,
   },
   webpack(config, options) {
     config.plugins.push(
