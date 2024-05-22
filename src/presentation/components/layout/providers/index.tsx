@@ -5,7 +5,7 @@ import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { EasyThemeProvider } from '@ccom-easy-design-system/theme.theme-provider';
+import { EasyThemeProvider } from '@cencosud-cencommerce/eds';
 
 interface Props {
   children: React.ReactNode;
