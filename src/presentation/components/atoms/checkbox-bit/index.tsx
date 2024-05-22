@@ -1,11 +1,3 @@
-import dynamic from 'next/dynamic';
-
-const CheckBox = dynamic(
-  () =>
-    import('@ccom-easy-design-system/atoms.checkbox').then(
-      (module) => module.Checkbox,
-    ),
-  { ssr: false, loading: () => <></> },
-);
+import { Checkbox as CheckBox } from '@cencosud-cencommerce/eds';
 
 export default CheckBox;
