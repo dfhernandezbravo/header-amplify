@@ -8,15 +8,7 @@ import { loginSteps } from '../../steps';
 import { Container, SocialLoginContainer } from '../../styles';
 import { BlockScroll } from './styles';
 import SocialAccessKeyLogin from '../../components/social-accesskey-login';
-import dynamic from 'next/dynamic';
-
-const BottomSheet = dynamic(
-  () =>
-    import('@ccom-easy-design-system/atoms.bottom-sheet').then(
-      (module) => module.BottomSheet,
-    ),
-  { ssr: false },
-);
+import { BottomSheet } from '@cencosud-cencommerce/eds';
 
 const ModalLoginMobile = () => {
   const { isOpenModalLogin, loginStep } = useAppSelector(

@@ -31,7 +31,7 @@ const HeaderInformation = () => {
       </InstallmentContainer>
       <Link
         className="stores-link"
-        href="https://www.easy.cl/tiendas"
+        href="/stores"
         onClick={() => handleLinkOnClick()}
       >
         Horarios y tiendas

@@ -1,10 +1,11 @@
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { Commune, Regions } from '@entities/regionalizer/regionalizer.entity';
 import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';
+import dynamic from 'next/dynamic';
 import { FormEvent, useState } from 'react';
 import { FormComtainer, SelectWrapper } from './styles';
 import { NewAddressFormType } from './types';
-import Select, { OptionsSelect } from '@components/atoms/select-bit';
+
 
 interface Props {
   regions: Regions[];

@@ -1,25 +1,17 @@
 import Mobile from '@components/layout/mobile';
 import HeaderModalRegionalizer from '../../components/header-modal-regionalizer';
-import ListAddressForm from '../../components/list-address-form';
+import ListAddressForm from '../../components/list-address';
 import NewAddressForm from '../../components/new-address-form';
-import dynamic from 'next/dynamic';
 import { BlockScroll, Container } from './styles';
 import { useContext, useEffect } from 'react';
 import HeaderLocationContext from '../../../header-location/context/header-location-context';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import getAddressCustomer from '@use-cases/customer/get-address-customer';
+import { BottomSheet } from '@cencosud-cencommerce/eds';
 
 type Props = {
   isUserLogged?: boolean;
 };
-
-const BottomSheet = dynamic(
-  () =>
-    import('@ccom-easy-design-system/atoms.bottom-sheet').then(
-      (module) => module.BottomSheet,
-    ),
-  { ssr: false },
-);
 
 const ModalRegionalizerMobile = ({ isUserLogged }: Props) => {
   const { onCloseModal, isOpenModal } = useContext(HeaderLocationContext);
