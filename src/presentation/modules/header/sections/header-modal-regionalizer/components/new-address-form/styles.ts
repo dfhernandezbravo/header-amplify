@@ -8,7 +8,7 @@ export const NewAddressFormContainer = styled.div`
   max-width: 385px;
   color: black;
   & .description {
-    font-size: ${({ theme: { fontSize } }) => fontSize[200]};
+    font-size: 16px;
     color: #363f45;
   }
 

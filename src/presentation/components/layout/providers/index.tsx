@@ -1,11 +1,12 @@
 import ContainerProvider from '@modules/header/providers/container';
 import store, { persistor } from '@store/index';
+import { themeStyled } from '@theme/index';
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { EasyThemeProvider } from '@cencosud-cencommerce/eds';
+import { ThemeProvider } from 'styled-components';
 
 interface Props {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ const ProvidersLayout = ({ children }: Props) => {
         <PersistGate persistor={persistor} loading={null}>
           <CookiesProvider>
             <ContainerProvider>
-              <EasyThemeProvider>{children}</EasyThemeProvider>
+              <ThemeProvider theme={themeStyled}>{children}</ThemeProvider>
             </ContainerProvider>
           </CookiesProvider>
         </PersistGate>
