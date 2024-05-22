@@ -1056,6 +1056,15 @@
     "@ccom-easy-design-system/theme.easy" "0.0.4"
     styled-components "^6.1.6"
 
+"@ccom-easy-design-system/atoms.checkbox@0.0.17":
+  version "0.0.17"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.checkbox/-/atoms.checkbox-0.0.17.tgz#fb831e8017bcf4882cf304ab6e1e7f242beb5300"
+  integrity sha512-vjKuawm+1Dq++E9FwNjjdyOZGyBJLnzctlsSVNWkC6XGveM7tVCVkyefqgqDwfuqsiI2I5xCMPRM+cnzmwoTQQ==
+  dependencies:
+    "@ccom-easy-design-system/theme.easy" "0.0.12"
+    react-icons "^5.0.1"
+    styled-components "6.1.6"
+
 "@ccom-easy-design-system/atoms.checkbox@0.0.6":
   version "0.0.6"
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.checkbox/-/atoms.checkbox-0.0.6.tgz#9ca5395bd9a17ba204e80fad3f01e6f731e9c6e6"
@@ -1080,14 +1089,15 @@
     "@ccom-easy-design-system/utils.format-currency" "0.0.7"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/atoms.select@^0.0.19":
-  version "0.0.19"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.select/-/atoms.select-0.0.19.tgz#939c614b323566d97568e6efb4afac9541d85c85"
-  integrity sha512-S8ItLvldZHYyXtpgjSCaf9CHGBCPeeNASOoOCqQxSvyKqzGdDQkqHpm4R8XCCqgVLUiC7OcRFy9oUN/oC91JeQ==
+"@ccom-easy-design-system/atoms.select@^0.0.44":
+  version "0.0.44"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.select/-/atoms.select-0.0.44.tgz#b563885a378fd2402b912ad4c041b3a79d9a384a"
+  integrity sha512-wjIsxOiFP0K07F/3/kX+CPJeyFDhbV9pOFtll5X+yli7JN4RpfDFrbn/jdyR1+pFh1svh8KbAkprG8GUfZkKaA==
   dependencies:
+    "@ccom-easy-design-system/atoms.checkbox" "0.0.17"
     react-icons "^5.0.1"
     react-select "5.8.0"
-    styled-components "^6.1.6"
+    styled-components "6.1.6"
 
 "@ccom-easy-design-system/atoms.skeleton@0.0.2":
   version "0.0.2"
@@ -1133,6 +1143,13 @@
   version "0.0.1"
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/hooks.use-media-query/-/hooks.use-media-query-0.0.1.tgz#e6f293dd7f5f67b1eff75cf2772c5b258bd0c932"
   integrity sha512-Cc13qhra7SUGGwSlJvJrbxk0O+p5YPIjWqeuTrUSr5FwfB5+4AyHY6tEH9gdZ3+GQ4D+x4orjS1ooSc/QvVy6g==
+
+"@ccom-easy-design-system/theme.easy@0.0.12":
+  version "0.0.12"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/theme.easy/-/theme.easy-0.0.12.tgz#d95e16217c95b6fb3573d0004d9ac89c3b7d387c"
+  integrity sha512-JpdpeuEavLc7iuR0RLXIy02zXahS/X5nviGYEoOXKCJ998HeDoWDrUpyyKk383IsnmwSbQOc7eyxHY5Mz16ebg==
+  dependencies:
+    styled-components "6.1.6"
 
 "@ccom-easy-design-system/theme.easy@0.0.4":
   version "0.0.4"
@@ -10401,21 +10418,6 @@ react-select@5.8.0:
     react-transition-group "^4.3.0"
     use-isomorphic-layout-effect "^1.1.2"
 
-react-select@^5.7.7:
-  version "5.7.7"
-  resolved "https://registry.npmjs.org/react-select/-/react-select-5.7.7.tgz"
-  integrity sha512-HhashZZJDRlfF/AKj0a0Lnfs3sRdw/46VJIRd8IbB9/Ovr74+ZIwkAdSBjSPXsFMG+u72c5xShqwLSKIJllzqw==
-  dependencies:
-    "@babel/runtime" "^7.12.0"
-    "@emotion/cache" "^11.4.0"
-    "@emotion/react" "^11.8.1"
-    "@floating-ui/dom" "^1.0.1"
-    "@types/react-transition-group" "^4.4.0"
-    memoize-one "^6.0.0"
-    prop-types "^15.6.0"
-    react-transition-group "^4.3.0"
-    use-isomorphic-layout-effect "^1.1.2"
-
 react-svg@^16.1.32:
   version "16.1.32"
   resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-16.1.32.tgz#af1cba5be3171f104bc3d7acd81946917a9fcccd"
@@ -11858,6 +11860,7 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz"
   integrity sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==
+
 
 style-inject@^0.3.0:
   version "0.3.0"
