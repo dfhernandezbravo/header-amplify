@@ -1,6 +1,6 @@
 import Mobile from '@components/layout/mobile';
 import HeaderModalRegionalizer from '../../components/header-modal-regionalizer';
-import ListAddressForm from '../../components/list-address-form';
+import ListAddressForm from '../../components/list-address';
 import NewAddressForm from '../../components/new-address-form';
 import { BlockScroll, Container } from './styles';
 import { useContext, useEffect } from 'react';
