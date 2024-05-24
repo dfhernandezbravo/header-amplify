@@ -1,4 +1,4 @@
-import { OptionsSelect, Select } from '@cencosud-cencommerce/eds';
+import { OptionsSelect, Select } from '@ccom-eds-composer/composer';
 import ButtonPrimary from '@components/atoms/buttons/button-primary';
 import { Commune, Regions } from '@entities/regionalizer/regionalizer.entity';
 import { AddressShoppingCart } from '@entities/shopping-cart/shopping-cart.entity';

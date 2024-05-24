@@ -1,3 +1,3 @@
-import { Price } from '@cencosud-cencommerce/eds';
+import { Price } from '@ccom-eds-composer/composer';
 
 export default Price;

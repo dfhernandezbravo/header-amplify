@@ -8,7 +8,7 @@ import { loginSteps } from '../../steps';
 import { Container, SocialLoginContainer } from '../../styles';
 import { BlockScroll } from './styles';
 import SocialAccessKeyLogin from '../../components/social-accesskey-login';
-import { BottomSheet } from '@cencosud-cencommerce/eds';
+import { BottomSheet } from '@ccom-eds-composer/composer';
 
 const ModalLoginMobile = () => {
   const { isOpenModalLogin, loginStep } = useAppSelector(

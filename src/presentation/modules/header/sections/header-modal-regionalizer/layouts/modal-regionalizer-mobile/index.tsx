@@ -7,7 +7,7 @@ import { useContext, useEffect } from 'react';
 import HeaderLocationContext from '../../../header-location/context/header-location-context';
 import { useAppDispatch, useAppSelector } from '@hooks/storeHooks';
 import getAddressCustomer from '@use-cases/customer/get-address-customer';
-import { BottomSheet } from '@cencosud-cencommerce/eds';
+import { BottomSheet } from '@ccom-eds-composer/composer';
 
 type Props = {
   isUserLogged?: boolean;

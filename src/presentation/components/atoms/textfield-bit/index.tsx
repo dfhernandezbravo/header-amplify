@@ -1,3 +1,3 @@
-import { Textfield as TextField } from '@cencosud-cencommerce/eds';
+import { Textfield as TextField } from '@ccom-eds-composer/composer';
 
 export default TextField;
