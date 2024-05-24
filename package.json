@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && rm -rf .next && next dev --port 3001",
     "build": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && npm config set -- //npm.pkg.github.com/:_authToken=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 && next build",
-    "install": "npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J && npm config set -- //npm.pkg.github.com/:_authToken=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",
     "start": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && NODE_OPTIONS='-r @newrelic/next' next start",
     "start:prod": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && next build && next start -p 3001",
     "lint": "next lint",
