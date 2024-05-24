@@ -5,7 +5,7 @@
   "proxy": "https://cl-ccom-easy-host-headless.ecomm-stg.cencosud.com",
   "scripts": {
     "dev": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && rm -rf .next && next dev --port 3001",
-    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true && next build",
+    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
     "start": "NEXT_PRIVATE_LOCAL_WEBPACK=true && NODE_OPTIONS='-r @newrelic/next' next start",
     "start:prod": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && next build && next start -p 3001",
     "lint": "next lint",

@@ -6,13 +6,3 @@ applications:
         preBuild:
           commands:
             - npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J && npm config set -- //npm.pkg.github.com/:_authToken=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
-        build:
-          commands:
-            - yarn build
-      artifacts:
-        baseDirectory: build
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
