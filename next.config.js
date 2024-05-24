@@ -22,6 +22,19 @@ const nextConfig = {
     // Enables the styled-components SWC transform
     styledComponents: true,
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=59',
+          },
+        ],
+      },
+    ];
+  },
   webpack(config, options) {
     config.plugins.push(
       new NextFederationPlugin({
